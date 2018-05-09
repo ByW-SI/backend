@@ -82,7 +82,15 @@ class UserController extends Controller
         // $campos['verified']=User::USUARIO_NO_VERIFICADO;
         // $campos['admin'] =User::USUARIO_REGULAR;
         // $campos['verification_token'] = User::generarVerificationToken();
-        $usuario = User::create($campos);
+        $usuario = User::create([
+            "name"  => $campos['nombre'],
+            "appaterno" => $campos['apaterno'],
+            "apmaterno" => $campos['amaterno'],
+            "nacimiento" => $campos['fechanac'],
+            "numero_telefono" => $campos['telefono'],
+            "email" => $campos['email'],
+            "password" => $campos['password']
+        ]);
         if ($usuario){
             return response()->json(['usuario'=>$usuario], 200);
         }
