@@ -219,4 +219,24 @@ class UserController extends Controller
         return $request->user();
     }
 
+    public function changePassword(Request $request){
+        $user = $request->user();
+        $data = $request->all();
+        if(Hash::check($data['password'], $user->password)){
+            
+            $rules= [
+                'password_new'=> 'required|min:6|confirmed',
+            ];
+            $this->validate($request, $rules);
+            $user->password = bcrypt($data['password_new']);
+            $user->save();
+            return response()->json(['message'=>"Tu contraseña a sido actualizada"],200);
+        }
+        else{
+            return response()->json(["error"=>"Tu contraseña no es correcta."],401);
+            
+        }
+
+    }
+
 }

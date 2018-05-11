@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user','User\UserController@getUser');
+Route::middleware('auth:api')->post('/password','User\UserController@changePassword');
 
 Route::resource('users', 'User\UserController', ['except'=>['create', 'edit']]);
 
