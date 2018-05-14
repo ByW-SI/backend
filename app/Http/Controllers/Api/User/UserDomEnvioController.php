@@ -43,54 +43,49 @@ class UserDomEnvioController extends Controller
         //
         $user = $request->user();
         $data = $request->all();
-        if ($user->domEnvio == null) {
-            # code...
-             // Validation datas
-            $rules = [
-                "pais" => "required",
-                "estado" => "required",
-                "municipio" => "required",
-                "ciudad" => "required",
-                "colonia" => "required",
-                "calle" => "required",
-                "numext" => "required"
-            ];
-            $this->validate($request, $rules);
+        
+         // Validation datas
+        $rules = [
+            "pais" => "required",
+            "estado" => "required",
+            "municipio" => "required",
+            "ciudad" => "required",
+            "colonia" => "required",
+            "calle" => "required",
+            "numext" => "required"
+        ];
+        $this->validate($request, $rules);
 
-            // Create Domicilio Fiscal
-            $domicilio = DomEnvio::create([
-                "user_id" => $user->id,
-                "pais" => $data['pais'],
-                "estado" => $data['estado'],
-                "municipio" => $data['municipio'],
-                "ciudad" => $data['ciudad'],
-                "colonia" => $data['colonia'],
-                "calle" => $data['calle'],
-                "numext" => $data['numext'],
-                "numint" => ($data['numint'] == null ? "1" : $data['numint'] )
-            ]);
+        // Create Domicilio Fiscal
+        $domicilio = DomEnvio::create([
+            "user_id" => $user->id,
+            "pais" => $data['pais'],
+            "estado" => $data['estado'],
+            "municipio" => $data['municipio'],
+            "ciudad" => $data['ciudad'],
+            "colonia" => $data['colonia'],
+            "calle" => $data['calle'],
+            "numext" => $data['numext'],
+            "numint" => ($data['numint'] == null ? "1" : $data['numint'] )
+        ]);
 
-            return response()->json([$domicilio],200);
+        return response()->json([$domicilio],200);
 
-        }
-        else{
-            
-            return response()->json(['message'=>"Ya tienes tu dirección fiscal"],200);
-        }
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\DomEnvio  $domEnvio
+     * @param  \App\DomEnvio  $domicilio
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, DomEnvio $domEnvio)
+    public function show(Request $request,DomEnvio $domicilio)
     {
         //
         $user = $request->user();
-        // dd($user);
-        $domicilio = $user->domEnvio->where('id', $domEnvio);
+        // dd($domicilio);
+        // $domicilio = $user->domEnvio->where('id', $domEnvio);
 
         if ($domicilio == null) {
             # code...
@@ -107,15 +102,15 @@ class UserDomEnvioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DomEnvio  $domEnvio
+     * @param  \App\DomEnvio  $domicilio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DomEnvio $domEnvio)
+    public function update(Request $request, DomEnvio $domicilio)
     {
         //
         $user = $request->user();
         // dd($user);
-        $domicilio = $user->domEnvio->where('id', $domEnvio);
+        $domicilio = $user->domEnvio->where('id', $domicilio);
         $data = $request->all();
         // dd($request->all());
         // dd($domicilio);
@@ -145,6 +140,8 @@ class UserDomEnvioController extends Controller
                 "calle" => $data['calle'],
                 "numext" => $data['numext'],
                 "numint" => ($data['numint'] == null ? "1" : $data['numint'] )
+                "entre1" => $data["entre1"],
+                "entre2" => $data["entre2"],
             ]);
             return response()->json([$domicilio],200);
 
@@ -155,15 +152,15 @@ class UserDomEnvioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\DomEnvio  $domEnvio
+     * @param  \App\DomEnvio  $domicilio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, DomEnvio $domEnvio)
+    public function destroy(Request $request, DomEnvio $domicilio)
     {
         //
         $user = $request->user();
         // dd($user);
-        $domicilio = $user->domEnvio->where('id', $domEnvio);
+        $domicilio = $user->domEnvio->where('id', $domicilio);
         if ($domicilio == null) {
 
             return response()->json(['message'=>"Necesitas crear una direccion fiscal"],200);

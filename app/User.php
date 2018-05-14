@@ -36,14 +36,14 @@ class User extends Authenticatable
 
     public function domEnvio(){
 
-        return $this->hasOne('App\DomEnvio', 'user_id', 'id');
+        return $this->hasMany('App\DomEnvio', 'user_id', 'id');
 
     }
 
     public function tarjetas(){
 
-        return $this->hasOne('App\Tarjetas', 'user_id', 'id');
-        
+        return $this->hasMany('App\Tarjetas', 'user_id', 'id');
+
     }
 
 
