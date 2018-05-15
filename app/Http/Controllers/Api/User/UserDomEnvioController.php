@@ -110,7 +110,7 @@ class UserDomEnvioController extends Controller
         //
         $user = $request->user();
         // dd($user);
-        $domicilio = $user->domEnvio->where('id', $domicilio);
+        // $domicilio = $user->domEnvio->where('id', $domicilio);
         $data = $request->all();
         // dd($request->all());
         // dd($domicilio);
@@ -159,16 +159,10 @@ class UserDomEnvioController extends Controller
     public function destroy(Request $request, DomEnvio $domicilio)
     {
         //
+        
         $user = $request->user();
-        // dd($user);
-        $domicilio = $user->domEnvio->where('id', $domicilio);
-        if ($domicilio == null) {
-
-            return response()->json(['message'=>"Necesitas crear una direccion fiscal"],200);
-        }
-        else{
-            $domicilio->delete();
-            return response()->json(['message'=>"Direccion fiscal eliminada con éxito"],200);
-        }
+        // find user
+        $domicilio->delete();
+        return response()->json(['message'=>"Direccion fiscal eliminada con éxito"],200);
     }
 }
