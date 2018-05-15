@@ -110,7 +110,7 @@ class UserDomEnvioController extends Controller
         //
         $user = $request->user();
         // dd($user);
-        $domicilio = $user->domEnvio->where('id', $domicilio);
+        // $domicilio = $user->domEnvio->where('id', $domicilio);
         $data = $request->all();
         // dd($request->all());
         // dd($domicilio);
