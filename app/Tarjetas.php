@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class Tarjetas extends Model
 {
     //
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, softDeletes;
 
     protected $table = "tarjetas";
 

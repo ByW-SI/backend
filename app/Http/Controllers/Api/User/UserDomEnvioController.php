@@ -22,7 +22,7 @@ class UserDomEnvioController extends Controller
         // return response()->json(['domicilio' => $domicilios],200);
         if ($domicilios == null) {
             # code...
-            return response()->json(['message'=>"No hay registro"],200);
+            return response()->json(['message'=>"No hay registro"],404);
         }
         else{
             
@@ -66,7 +66,10 @@ class UserDomEnvioController extends Controller
             "colonia" => $data['colonia'],
             "calle" => $data['calle'],
             "numext" => $data['numext'],
-            "numint" => ($data['numint'] == null ? "1" : $data['numint'] )
+            "numint" => ($data['numint'] == null ? "1" : $data['numint'] ),
+            "entre1" => $data["entre1"],
+            "entre2" => $data["entre2"],
+            "referencia" => $data['referencia']
         ]);
 
         return response()->json([$domicilio],200);
@@ -89,11 +92,17 @@ class UserDomEnvioController extends Controller
 
         if ($domicilio == null) {
             # code...
-            return response()->json(['message'=>"No hay registro"],200);
+            return response()->json(['message'=>"No hay registro"],404);
         }
         else{
+            if ($domicilio->user_id == $user->id) {
+                # code...
+                return response()->json(['domicilio' => $domicilio],200);
+            } else {
+                # code...
+                return response()->json(['message'=>"No hay registro"],404);
+            }
             
-            return response()->json(['domicilio' => $domicilio],200);
         }
     }
 
@@ -114,39 +123,46 @@ class UserDomEnvioController extends Controller
         $data = $request->all();
         // dd($request->all());
         // dd($domicilio);
-        if ($domicilio == null) {
+        if ($domicilio->user_id == $user->id) {
+            # code...
+            if ($domicilio == null) {
 
-            return response()->json(['message'=>"Necesitas crear una direccion fiscal"],200);
+                return response()->json(['message'=>"Necesitas crear una direccion fiscal"],200);
+            }
+            else{
+
+                $rules = [
+                    "pais" => "required",
+                    "estado" => "required",
+                    "municipio" => "required",
+                    "ciudad" => "required",
+                    "colonia" => "required",
+                    "calle" => "required",
+                    "numext" => "required"
+                ];
+                $this->validate($request, $rules);
+
+                $domicilio->update([
+                    "pais" => $data['pais'],
+                    "estado" => $data['estado'],
+                    "municipio" => $data['municipio'],
+                    "ciudad" => $data['ciudad'],
+                    "colonia" => $data['colonia'],
+                    "calle" => $data['calle'],
+                    "numext" => $data['numext'],
+                    "numint" => ($data['numint'] == null ? "1" : $data['numint'] ),
+                    "entre1" => $data["entre1"],
+                    "entre2" => $data["entre2"],
+                    "referencia" => $data['referencia']
+                ]);
+                return response()->json([$domicilio],200);
+
+            }
+        } else {
+            # code...
+            return response()->json(['message'=>"No hay registro"],404);
         }
-        else{
-
-            $rules = [
-                "pais" => "required",
-                "estado" => "required",
-                "municipio" => "required",
-                "ciudad" => "required",
-                "colonia" => "required",
-                "calle" => "required",
-                "numext" => "required"
-            ];
-            $this->validate($request, $rules);
-
-            $domicilio->update([
-                "pais" => $data['pais'],
-                "estado" => $data['estado'],
-                "municipio" => $data['municipio'],
-                "ciudad" => $data['ciudad'],
-                "colonia" => $data['colonia'],
-                "calle" => $data['calle'],
-                "numext" => $data['numext'],
-                "numint" => ($data['numint'] == null ? "1" : $data['numint'] ),
-                "entre1" => $data["entre1"],
-                "entre2" => $data["entre2"],
-                "referencia" => $data['referencia']
-            ]);
-            return response()->json([$domicilio],200);
-
-        }
+        
 
     }
 
@@ -160,9 +176,17 @@ class UserDomEnvioController extends Controller
     {
         //
         
+
         $user = $request->user();
         // find user
-        $domicilio->delete();
-        return response()->json(['message'=>"Direccion fiscal eliminada con éxito"],200);
+        if ($domicilio->user_id == $user->id) {
+            # code...
+            $domicilio->delete();
+            return response()->json(['message'=>"Direccion fiscal eliminada con éxito"],200);
+        } else {
+            # code...
+            return response()->json(['message'=>"No hay registro"],404);
+        }
+        
     }
 }

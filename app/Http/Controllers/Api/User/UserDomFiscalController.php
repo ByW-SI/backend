@@ -24,7 +24,7 @@ class UserDomFiscalController extends Controller
         // return response()->json(['domicilio' => $domicilio_fiscal],200);
         if ($domicilio_fiscal == null) {
             # code...
-            return response()->json(['message'=>"No hay registro"],200);
+            return response()->json(['message'=>"No hay registro"],404);
         }
         else{
             
@@ -106,7 +106,7 @@ class UserDomFiscalController extends Controller
         // dd($domicilio_fiscal);
         if ($domicilio_fiscal == null) {
 
-            return response()->json(['message'=>"Necesitas crear una direccion fiscal"],200);
+            return response()->json(['message'=>"Necesitas crear una direccion fiscal"],404);
         }
         else{
 
@@ -152,7 +152,7 @@ class UserDomFiscalController extends Controller
 
         if ($domicilio_fiscal == null) {
 
-            return response()->json(['message'=>"Necesitas crear una direccion fiscal"],200);
+            return response()->json(['message'=>"Necesitas crear una direccion fiscal"],404);
         }
         else{
             $domicilio_fiscal->delete();
