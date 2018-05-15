@@ -139,9 +139,10 @@ class UserDomEnvioController extends Controller
                 "colonia" => $data['colonia'],
                 "calle" => $data['calle'],
                 "numext" => $data['numext'],
-                "numint" => ($data['numint'] == null ? "1" : $data['numint'] )
+                "numint" => ($data['numint'] == null ? "1" : $data['numint'] ),
                 "entre1" => $data["entre1"],
                 "entre2" => $data["entre2"],
+                "referencia" => $data['referencia']
             ]);
             return response()->json([$domicilio],200);
 
