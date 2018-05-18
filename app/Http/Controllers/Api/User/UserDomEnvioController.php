@@ -20,7 +20,7 @@ class UserDomEnvioController extends Controller
         // dd($user);
         $domicilios = $user->domEnvio;
         // return response()->json(['domicilio' => $domicilios],200);
-        if ($domicilios == null) {
+        if ($domicilios->count() == 0) {
             # code...
             return response()->json(['message'=>"No hay registro"],404);
         }
