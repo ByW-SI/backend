@@ -1721,6 +1721,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  *
  * ------------------------------------------------------------------- */
 .s-pageheader {
+   margin-bottom: 20px;
    min-height: 174px;
    background-image: url(../images/fondo.jpg);
    background-repeat: repeat;
@@ -2126,7 +2127,7 @@ body.search-is-visible {
  * ## main navigation
  * ------------------------------------------------------------------- */
 .header__nav-wrap {
-   margin-top: 15px;
+   margin-top: 0px;
    border-top: 1px solid rgba(255, 255, 255, 0.04);
    padding-top: 15px;
 }
