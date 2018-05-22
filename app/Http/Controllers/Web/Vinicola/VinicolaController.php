@@ -16,6 +16,7 @@ class VinicolaController extends Controller
     public function index()
     {
         //
+        return view('vinicola.index');
     }
 
     /**
@@ -26,6 +27,7 @@ class VinicolaController extends Controller
     public function create()
     {
         //
+        return view('vinicola.form');
     }
 
     /**
@@ -48,6 +50,7 @@ class VinicolaController extends Controller
     public function show(Vinicola $vinicola)
     {
         //
+        return view('vinicola.show');
     }
 
     /**
@@ -59,6 +62,7 @@ class VinicolaController extends Controller
     public function edit(Vinicola $vinicola)
     {
         //
+        return view('vinicola.form');
     }
 
     /**

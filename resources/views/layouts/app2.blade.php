@@ -109,7 +109,7 @@
                             <a href="#0" title="">Productores</a>
                             <ul class="sub-menu">
                             <li><a href="#">¿Quieres registrar tu vinicola?</a></li>
-                            <li><a href="#">Agregar vinicola</a></li>
+                            <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
                             <li><a href="#">Nuestros vinicultores</a></li>
                             <li><a href="#">Standard Post</a></li>
                             </ul>
