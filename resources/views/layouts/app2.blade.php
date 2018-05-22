@@ -17,7 +17,7 @@
     ================================================== -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"> --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
@@ -220,23 +220,6 @@
                     <div class="s-footer__copyright">
                         <span>© Copyright B&W 2018</span> 
                       
-                    </div>
-
-                    <div class="go-top">
-                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end s-footer__bottom -->
-
-    </footer> <!-- end s-footer -->
-
-        <div class="s-footer__bottom">
-            <div class="row">
-                <div class="col-full">
-                    <div class="s-footer__copyright">
-                        <span>© Copyright Philosophy 2018</span> 
-                        <span>Site Template by <a href="https://colorlib.com/">Colorlib</a></span>
                     </div>
 
                     <div class="go-top">
