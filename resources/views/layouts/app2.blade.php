@@ -5,9 +5,11 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Contact - Philosophy</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- mobile specific metas
     ================================================== -->
@@ -32,6 +34,10 @@
     ================================================== -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -72,7 +78,7 @@
                     <form role="search" method="get" class="header__search-form" action="#">
                         <label>
                             <span class="hide-content">Buscar:</span>
-                            <input type="search" class="search-field" placeholder="¿Qué deseas buscar?" value="" name="s" title="Search for:" autocomplete="off">
+                            <input type="search" class="search-field "  placeholder="¿Qué deseas buscar?" value="" name="s" title="Search for:" autocomplete="off">
                         </label>
                         <input type="submit" class="search-submit" value="Search">
                     </form>
@@ -93,31 +99,44 @@
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
-                            <li><a href="category.html">Agregar Uva</a></li>
-                            <li><a href="category.html">Variedad de uvas</a></li>
-                            <li><a href="category.html">Viajes</a></li>
+                            <li><a href="#">Agregar Uva</a></li>
+                            <li><a href="#">Variedad de uvas</a></li>
+                            <li><a href="#">Viajes</a></li>
                             
                             </ul>
                         </li>
                         <li class="has-children">
                             <a href="#0" title="">Productores</a>
                             <ul class="sub-menu">
-                            <li><a href="single-video.html">¿Quieres registrar tu vinicola?</a></li>
-                            <li><a href="single-audio.html">Agregar vinicola</a></li>
-                            <li><a href="single-gallery.html">Nuestros vinicultores</a></li>
-                            <li><a href="single-standard.html">Standard Post</a></li>
+                            <li><a href="#">¿Quieres registrar tu vinicola?</a></li>
+                            <li><a href="#">Agregar vinicola</a></li>
+                            <li><a href="#">Nuestros vinicultores</a></li>
+                            <li><a href="#">Standard Post</a></li>
                             </ul>
                         </li>
-                        @if (Route::has("login"))
-                            {{-- expr --}}
-                            @auth
-                            <li><a href="#">{{Auth::user()->name}}</a></li>
-                            @else
-                            <li><a href="{{ url('login') }}" title="">Iniciar Sesión</a></li>
-                            <li><a href="{{ url('register') }}" title="">Registrate</a></li>
-                            @endauth
+                        @guest
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registrate') }}</a></li>
+                        @else
+                            <li class="has-children">
+                                <a href="#0">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                        @endif
+                                <ul class="sub-menu">
+                                    <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a></li>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </li>
+                        @endguest
+            
                         <li><a href="#">Acerca de nosotros</a></li>
                         <li><a href="#" title="">Contactanos</a></li>
                     </ul> <!-- end header__nav -->
@@ -136,7 +155,7 @@
     ================================================== -->
     <section class="s-content s-content--narrow">
 
-        <main class="py-4">
+        <main class="py-4" id="app">
             @yield('content')
         </main>
 
