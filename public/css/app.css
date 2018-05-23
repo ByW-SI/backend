@@ -10858,7 +10858,7 @@ button {
 
 .header__search-form input[type="search"] {
   background-color: transparent;
-  color: #000000;
+  color: #ffff;
   height: auto;
   width: 100%;
   font-family: "metropolis-semibold", sans-serif;
