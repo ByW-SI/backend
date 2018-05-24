@@ -27,6 +27,7 @@ class VinicolaController extends Controller
     public function create()
     {
         //
+        $edit = true;
         return view('vinicola.form');
     }
 

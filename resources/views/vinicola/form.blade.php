@@ -20,7 +20,7 @@
 						</li>
 					</ul>
 					<div class="card-body">
-						<form method="POST" action="{{-- {{ $edit == true ? route('name') : route('') }} --}}">
+						<form method="POST" action="{{ $edit == true ? route('vinicolas.store') : route('vinicolas.update',$vinicola) }}">
 							@csrf
 
 							<div class="form-group row">
@@ -84,7 +84,7 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="enologo" class="col-md-4 col-form-label text-md-right">Enologo del viñedo:</label>
+								<label for="enologo" class="col-md-4 col-form-label text-md-right">Enologo:</label>
 								<div class="col-md-6">
 									<input id="enologo" type="text" class="form-control {{ $errors->has('enologo') ? ' is-invalid' : ''  }}" name="enologo" value="{{ old('enologo') }}" required>
 									@if ($errors->has('enologo'))
@@ -166,7 +166,7 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono del viñedo:</label>
+								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de la bodega:</label>
 								<div class="col-md-6">
 									<input id="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : ''  }}" name="telefono" value="{{ old('telefono') }}">
 									@if ($errors->has('telefono'))
@@ -178,13 +178,20 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="calificacion" class="col-md-4 col-form-label text-md-right">Calificación del viñedo:</label>
+								<label for="observacion" class="col-md-4 col-form-label text-md-right">Calificación del viñedo:</label>
 								<div class="col-md-6">
-									<input id="calificacion" type="number" min="0" max="10" class="form-control {{ $errors->has('calificacion') ? ' is-invalid' : ''  }}" name="calificacion" value="{{ old('calificacion') }}">
-									@if ($errors->has('calificacion'))
+									<input type="date" class="form-control {{$errors->has('fecha_observacion') ? ' is-invalid' : ''  }}" name="fecha_observacion" value="{{old('fecha_observacion')}}" style="margin-bottom: 3px;">
+									@if ($errors->has('observacion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
-											<strong>{{ $errors->first("calificacion")}}</strong>
+											<strong>{{ $errors->first("observacion")}}</strong>
+										</span>
+									@endif
+									<textarea id="observacion" class="form-control {{$errors->has('observacion') ? ' is-invalid' : ''  }}" name="observacion" value="{{ old('observacion') }}"></textarea>
+									@if ($errors->has('observacion'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("observacion")}}</strong>
 										</span>
 									@endif
 								</div>
