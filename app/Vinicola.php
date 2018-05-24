@@ -33,4 +33,12 @@ class Vinicola extends Model
     	'updated_at'
     ];
 
+    public function marcas(){
+        return $this->hasMany('App\Marcas', 'vinicola_id','id');
+    }
+
+    public function uvas(){
+        return $this->hasMany('App\UvaVinicola','vinicola_id','id');
+    }
+
 }

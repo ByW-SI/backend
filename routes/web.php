@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
+Route::resource('vinicolas.marcas','Web\Vinicola\VinicolaMarcasController');
+Route::resource('vinicolas.uvas','Web\Vinicola\VinicolaUvasController');

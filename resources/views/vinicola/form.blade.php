@@ -6,14 +6,25 @@
 			<div class="col-md-8">
 				<div class="card">
 					<div class="card-header">
-						Viñedo
+						Vinicola/Bodega
 					</div>
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Nueva bodega</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" onclick="disabled('marcas')">Marcas de la bodega</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" onclick="disabled('uvas')">Tipo de uvas</a>
+						</li>
+					</ul>
 					<div class="card-body">
 						<form method="POST" action="{{-- {{ $edit == true ? route('name') : route('') }} --}}">
 							@csrf
 
 							<div class="form-group row">
-								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre del viñedo:</label>
+								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre de la bodega:</label>
 								<div class="col-md-6">
 									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ old('nombre') }}" required autofocus="">
 									@if ($errors->has('nombre'))
@@ -37,7 +48,7 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="inicio" class="col-md-4 col-form-label text-md-right">Fecha de inicio:</label>
+								<label for="inicio" class="col-md-4 col-form-label text-md-right">Año de inicio:</label>
 								<div class="col-md-6">
 									<input id="inicio" type="number" min="1500" max="{{date("Y")}}" class="form-control {{ $errors->has('inicio') ? ' is-invalid' : ''  }}" name="inicio" value="{{ old('inicio') }}" required>
 									@if ($errors->has('inicio'))
@@ -182,7 +193,7 @@
 						<div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Registrar viñedo
+                                    Registrar bodega
                                 </button>
                             </div>
                         </div>
@@ -192,4 +203,13 @@
 			</div>
 		</div>
 	</div>
+@endsection
+@section('script')
+	{{-- expr --}}
+	<script type="text/javascript">
+		function disabled(text) {
+			// body...
+			alert("Por favor registrar la bodega antes de agregar las "+text);
+		}
+	</script>
 @endsection
