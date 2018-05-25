@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Web\Vinicola;
 
-use App\Marca;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Marca;
+use App\Vinicola;
+use Illuminate\Http\Request;
 
 class VinicolaMarcasController extends Controller
 {
@@ -23,9 +24,11 @@ class VinicolaMarcasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Vinicola $vinicola)
     {
         //
+        $edit = false;
+        return view('vinicola.marcas.create',['edit'=>$edit,'vinicola'=>$vinicola]);
     }
 
     /**
@@ -34,9 +37,16 @@ class VinicolaMarcasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Vinicola $vinicola,Request $request)
     {
         //
+        $rules=[
+            'vinicola_id'=>"required|number"
+            'nombre'=>"required|unique:marcas_vinicola"
+        ];
+         $validater = $this->validate($request,$rules);
+         $marca = Marca::create($request->all());
+         return redirect()->route('vinicola.marcas.index',["vinicola"=>$vinicola, 'marcas'=>$vinicola->marcas]);
     }
 
     /**
