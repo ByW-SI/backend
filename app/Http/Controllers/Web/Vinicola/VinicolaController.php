@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Vinicola;
 use App\Vinicola;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class VinicolaController extends Controller
 {
@@ -27,7 +28,8 @@ class VinicolaController extends Controller
     public function create()
     {
         //
-        return view('vinicola.form');
+        $edit = false;
+        return view('vinicola.form',['edit'=>$edit]);
     }
 
     /**
@@ -39,6 +41,18 @@ class VinicolaController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        $rules = [
+            'nombre'=> 'required|unique:vinicola',
+            'inicio'=> 'required',
+            'filosofia'=> 'required',
+            'locacion'=> 'required',
+            'enologo'=> 'required',
+            'telefono'=> 'required'
+        ];
+        $validater = $this->validate($request,$rules);
+        $vinicola = Vinicola::create($request->all());
+        return redirect()->route('vinicolas.marcas.create',['vinicola'=>$vinicola]);
     }
 
     /**
@@ -50,7 +64,8 @@ class VinicolaController extends Controller
     public function show(Vinicola $vinicola)
     {
         //
-        return view('vinicola.show');
+        // dd($vinicola);
+        return view('vinicola.show',['vinicola'=>$vinicola]);
     }
 
     /**
@@ -62,7 +77,8 @@ class VinicolaController extends Controller
     public function edit(Vinicola $vinicola)
     {
         //
-        return view('vinicola.form');
+        $edit = true;
+        return view('vinicola.form',['vinicola'=>$vinicola,'edit'=>$edit]);
     }
 
     /**

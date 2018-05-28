@@ -25,12 +25,21 @@ class Vinicola extends Model
     	'correo',
     	'celular',
     	'telefono',
-    	'calificacion'
+    	'observacion',
+        'fecha_observacion'
     ];
 
     protected $hidden=[
     	'created_at',
     	'updated_at'
     ];
+
+    public function marcas(){
+        return $this->hasMany('App\Marca', 'vinicola_id','id');
+    }
+
+    public function uvas(){
+        return $this->hasMany('App\UvaVinicola','vinicola_id','id');
+    }
 
 }

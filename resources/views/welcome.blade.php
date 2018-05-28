@@ -92,7 +92,6 @@
                             <li><a href="{{ route('vinicolas.create') }}">¿Quieres registrar tu vinicola?</a></li>
                             <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
                             <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
-                            <li><a href="#">Standard Post</a></li>
                             </ul>
                         </li>
                         @if (Route::has("login"))
