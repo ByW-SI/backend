@@ -25,7 +25,8 @@ class Vinicola extends Model
     	'correo',
     	'celular',
     	'telefono',
-    	'calificacion'
+    	'observacion',
+        'fecha_observacion'
     ];
 
     protected $hidden=[
@@ -34,7 +35,7 @@ class Vinicola extends Model
     ];
 
     public function marcas(){
-        return $this->hasMany('App\Marcas', 'vinicola_id','id');
+        return $this->hasMany('App\Marca', 'vinicola_id','id');
     }
 
     public function uvas(){

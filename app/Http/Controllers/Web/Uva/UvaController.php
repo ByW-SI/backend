@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Web\Vinicola;
+namespace App\Http\Controllers\Web\Uva;
 
-use App\Vinicola;
+use App\Uva;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
 
-class VinicolaController extends Controller
+class UvaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,6 @@ class VinicolaController extends Controller
     public function index()
     {
         //
-        return view('vinicola.index');
     }
 
     /**
@@ -29,7 +27,7 @@ class VinicolaController extends Controller
     {
         //
         $edit = false;
-        return view('vinicola.form',['edit'=>$edit]);
+        return view('uvas.form',['edit'=>$edit]);
     }
 
     /**
@@ -41,54 +39,38 @@ class VinicolaController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
-        $rules = [
-            'nombre'=> 'required|unique:vinicola',
-            'inicio'=> 'required',
-            'filosofia'=> 'required',
-            'locacion'=> 'required',
-            'enologo'=> 'required',
-            'telefono'=> 'required'
-        ];
-        $validater = $this->validate($request,$rules);
-        $vinicola = Vinicola::create($request->all());
-        return redirect()->route('vinicolas.marcas.create',['vinicola'=>$vinicola]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Vinicola  $vinicola
+     * @param  \App\Uva  $uva
      * @return \Illuminate\Http\Response
      */
-    public function show(Vinicola $vinicola)
+    public function show(Uva $uva)
     {
         //
-        // dd($vinicola);
-        return view('vinicola.show',['vinicola'=>$vinicola]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vinicola  $vinicola
+     * @param  \App\Uva  $uva
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vinicola $vinicola)
+    public function edit(Uva $uva)
     {
         //
-        $edit = true;
-        return view('vinicola.form',['vinicola'=>$vinicola,'edit'=>$edit]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vinicola  $vinicola
+     * @param  \App\Uva  $uva
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vinicola $vinicola)
+    public function update(Request $request, Uva $uva)
     {
         //
     }
@@ -96,10 +78,10 @@ class VinicolaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vinicola  $vinicola
+     * @param  \App\Uva  $uva
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vinicola $vinicola)
+    public function destroy(Uva $uva)
     {
         //
     }

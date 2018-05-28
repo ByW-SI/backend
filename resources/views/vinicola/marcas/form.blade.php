@@ -12,7 +12,7 @@
 							<a class="nav-link" href="{{ route('vinicolas.show',$vinicola) }}">{{$vinicola->nombre}}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="#">Marcas de la bodega</a>
+							<a class="nav-link active" href="{{ route('vinicolas.marcas.index',$vinicola) }}">Marcas de la bodega</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#" >Tipo de uvas</a>

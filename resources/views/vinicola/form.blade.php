@@ -14,10 +14,24 @@
 							<a class="nav-link active" href="#">Nueva bodega</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link disabled" href="#" onclick="disabled('marcas')">Marcas de la bodega</a>
+							<a class="nav-link {{$edit ? '' : 'disabled'}}" @if ($edit = true)
+								{{-- true expr --}}
+								href="{{ route('vinicolas.marcas.index',['vinicola'=>$vinicola]) }}" 
+							@else
+								{{-- false expr --}}
+								href="#" 
+								onclick="disabled('marcas')"
+							@endif>Marcas de la bodega</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link disabled" href="#" onclick="disabled('uvas')">Tipo de uvas</a>
+							<a class="nav-link {{$edit ? '' : 'disabled'}}" @if ($edit = true)
+								{{-- true expr --}}
+								href="{{ route('vinicolas.uvas.index',['vinicola'=>$vinicola]) }}" 
+							@else
+								{{-- false expr --}}
+								href="#" 
+								onclick="disabled('uvas')"
+							@endif>Tipo de uvas</a>
 						</li>
 					</ul>
 					<div class="card-body">
@@ -32,7 +46,7 @@
 							<div class="form-group row">
 								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre de la bodega:</label>
 								<div class="col-md-6">
-									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ old('nombre') }}" required autofocus="">
+									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $vinicola->nombre : old('nombre') }}" required autofocus="">
 									@if ($errors->has('nombre'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -44,7 +58,7 @@
 							<div class="form-group row">
 								<label for="distinciones" class="col-md-4 col-form-label text-md-right">Distinciones:</label>
 								<div class="col-md-6">
-									<textarea id="distinciones" type="text" class="form-control {{ $errors->has('distinciones') ? ' is-invalid' : ''  }}" name="distinciones" value="{{ old('distinciones') }}" >{{ old('distinciones') }}</textarea>
+									<textarea id="distinciones" type="text" class="form-control {{ $errors->has('distinciones') ? ' is-invalid' : ''  }}" name="distinciones" value="{{ $edit ? $vinicola->distinciones : old('distinciones') }}" >{{ $edit ? $vinicola->distinciones : old('distinciones') }}</textarea>
 									@if ($errors->has('distinciones'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -56,7 +70,7 @@
 							<div class="form-group row">
 								<label for="inicio" class="col-md-4 col-form-label text-md-right">Año de inicio:</label>
 								<div class="col-md-6">
-									<input id="inicio" type="number" min="1500" max="{{date("Y")}}" class="form-control {{ $errors->has('inicio') ? ' is-invalid' : ''  }}" name="inicio" value="{{ old('inicio') }}" required>
+									<input id="inicio" type="number" min="1500" max="{{date("Y")}}" class="form-control {{ $errors->has('inicio') ? ' is-invalid' : ''  }}" name="inicio" value="{{ $edit ? $vinicola->inicio : old('inicio') }}" required>
 									@if ($errors->has('inicio'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -68,7 +82,7 @@
 							<div class="form-group row">		
 								<label for="filosofia" class="col-md-4 col-form-label text-md-right">Filosofía:</label>
 								<div class="col-md-6">
-									<textarea id="filosofia" type="text" class="form-control {{ $errors->has('filosofia') ? ' is-invalid' : ''  }}" name="filosofia" value="{{ old('filosofia') }}" required>{{ old('filosofia') }}</textarea>
+									<textarea id="filosofia" type="text" class="form-control {{ $errors->has('filosofia') ? ' is-invalid' : ''  }}" name="filosofia" value="{{ old('filosofia') }}" required>{{ $edit ? $vinicola->filosofia : old('filosofia') }}</textarea>
 									@if ($errors->has('filosofia'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -78,9 +92,9 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del viñedo:</label>
+								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del bodega:</label>
 								<div class="col-md-6">
-									<input id="locacion" type="text" class="form-control {{ $errors->has('locacion') ? ' is-invalid' : ''  }}" name="locacion" value="{{ old('locacion') }}" required>
+									<input id="locacion" type="text" class="form-control {{ $errors->has('locacion') ? ' is-invalid' : ''  }}" name="locacion" value="{{ $edit ? $vinicola->locacion : old('locacion') }}" required>
 									@if ($errors->has('locacion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -88,11 +102,12 @@
 										</span>
 									@endif
 								</div>
+								<div id="map" style="height: 400px;width: 90%;margin-left: 30px;"></div>
 							</div>
 							<div class="form-group row">
 								<label for="enologo" class="col-md-4 col-form-label text-md-right">Enologo:</label>
 								<div class="col-md-6">
-									<input id="enologo" type="text" class="form-control {{ $errors->has('enologo') ? ' is-invalid' : ''  }}" name="enologo" value="{{ old('enologo') }}" required>
+									<input id="enologo" type="text" class="form-control {{ $errors->has('enologo') ? ' is-invalid' : ''  }}" name="enologo" value="{{ $edit ? $vinicola->enologo : old('enologo') }}" required>
 									@if ($errors->has('enologo'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -104,7 +119,7 @@
 							<div class="form-group row">
 								<label for="wine_maker" class="col-md-4 col-form-label text-md-right">Wine Maker:</label>
 								<div class="col-md-6">
-									<input id="wine_maker" type="text" class="form-control {{ $errors->has('wine_maker') ? ' is-invalid' : ''  }}" name="wine_maker" value="{{ old('wine_maker') }}">
+									<input id="wine_maker" type="text" class="form-control {{ $errors->has('wine_maker') ? ' is-invalid' : ''  }}" name="wine_maker" value="{{ $edit ? $vinicola->wine_maker : old('wine_maker') }}">
 									@if ($errors->has('wine_maker'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -116,7 +131,7 @@
 							<div class="form-group row">
 								<label for="contacto" class="col-md-4 col-form-label text-md-right">Nombre completo del contacto:</label>
 								<div class="col-md-6">
-									<input id="contacto" type="text" class="form-control {{ $errors->has('contacto') ? ' is-invalid' : ''  }}" name="contacto" value="{{ old('contacto') }}">
+									<input id="contacto" type="text" class="form-control {{ $errors->has('contacto') ? ' is-invalid' : ''  }}" name="contacto" value="{{ $edit ? $vinicola->contacto : old('contacto') }}">
 									@if ($errors->has('contacto'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -128,7 +143,7 @@
 							<div class="form-group row">
 								<label for="puesto" class="col-md-4 col-form-label text-md-right">Puesto del contacto:</label>
 								<div class="col-md-6">
-									<input id="puesto" type="text" class="form-control {{ $errors->has('puesto') ? ' is-invalid' : ''  }}" name="puesto" value="{{ old('puesto') }}">
+									<input id="puesto" type="text" class="form-control {{ $errors->has('puesto') ? ' is-invalid' : ''  }}" name="puesto" value="{{ $edit ? $vinicola->puesto : old('puesto') }}">
 									@if ($errors->has('puesto'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -140,7 +155,7 @@
 							<div class="form-group row">
 								<label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico del contacto:</label>
 								<div class="col-md-6">
-									<input id="correo" type="text" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ old('correo') }}">
+									<input id="correo" type="text" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ $edit ? $vinicola->correo : old('correo') }}">
 									@if ($errors->has('correo'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -150,7 +165,7 @@
 								</div>
 								<label for="celular" class="col-md-4 col-form-label text-md-right">Telefono celular del contacto:</label>
 								<div class="col-md-6">
-									<input id="celular" type="text" class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}" name="celular" value="{{ old('celular') }}">
+									<input id="celular" type="text" class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}" name="celular" value="{{ $edit ? $vinicola->celular : old('celular') }}">
 									@if ($errors->has('celular'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -162,7 +177,7 @@
 							<div class="form-group row">
 								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de la bodega:</label>
 								<div class="col-md-6">
-									<input id="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : ''  }}" name="telefono" value="{{ old('telefono') }}">
+									<input id="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : ''  }}" name="telefono" value="{{ $edit ? $vinicola->telefono : old('telefono') }}">
 									@if ($errors->has('telefono'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -172,16 +187,16 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="observacion" class="col-md-4 col-form-label text-md-right">Calificación del viñedo:</label>
+								<label for="observacion" class="col-md-4 col-form-label text-md-right">Observación de la bodega:</label>
 								<div class="col-md-6">
-									<input type="date" class="form-control {{$errors->has('fecha_observacion') ? ' is-invalid' : ''  }}" name="fecha_observacion" value="{{old('fecha_observacion')}}" style="margin-bottom: 3px;">
+									<input type="date" class="form-control {{$errors->has('fecha_observacion') ? ' is-invalid' : ''  }}" name="fecha_observacion" value="{{$edit ? $vinicola->fecha_observacion : old('fecha_observacion')}}" style="margin-bottom: 3px;">
 									@if ($errors->has('observacion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
 											<strong>{{ $errors->first("observacion")}}</strong>
 										</span>
 									@endif
-									<textarea id="observacion" class="form-control {{$errors->has('observacion') ? ' is-invalid' : ''  }}" name="observacion" value="{{ old('observacion') }}">{{ old('observacion') }}</textarea>
+									<textarea id="observacion" class="form-control {{$errors->has('observacion') ? ' is-invalid' : ''  }}" name="observacion" value="{{ old('observacion') }}">{{ $edit ? $vinicola->observacion : old('observacion') }}</textarea>
 									@if ($errors->has('observacion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -201,8 +216,7 @@
                         </div>
 						</form>
 
-						<div id="map" style="height: 400px;
-        width: 100%;"></div>
+						
 					</div>
 				</div>
 			</div>

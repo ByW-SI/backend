@@ -21,13 +21,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"> --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fileinput.css') }}">
 
 
-    <!-- script
-    ================================================== -->
-   <script src="{{ asset('js/modernizr.js') }}"></script>
-    <script src="{{ asset('js/pace.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
 
     <!-- favicons
@@ -268,9 +264,21 @@
 
     
    <!-- JavaScripts -->
+   <!-- script
+    ================================================== -->
+   <script src="{{ asset('js/modernizr.js') }}"></script>
+    <script src="{{ asset('js/pace.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/fileinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/plugins/piexif.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/plugins/purify.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/plugins/sortable.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/locales/es.js') }}"></script>
     @yield('script')
 </body>
 

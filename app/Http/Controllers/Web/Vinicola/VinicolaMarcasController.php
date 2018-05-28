@@ -14,9 +14,14 @@ class VinicolaMarcasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Vinicola $vinicola)
     {
         //
+        $marcas = $vinicola->marcas;
+        return view('vinicola.marcas.index',['vinicola'=>$vinicola, 'marcas'=>$marcas]);
+        // dd($vinicola->marcas);
+        
+
     }
 
     /**
@@ -28,7 +33,7 @@ class VinicolaMarcasController extends Controller
     {
         //
         $edit = false;
-        return view('vinicola.marcas.create',['edit'=>$edit,'vinicola'=>$vinicola]);
+        return view('vinicola.marcas.form',['edit'=>$edit,'vinicola'=>$vinicola]);
     }
 
     /**
@@ -41,12 +46,12 @@ class VinicolaMarcasController extends Controller
     {
         //
         $rules=[
-            'vinicola_id'=>"required|number",
+            'vinicola_id'=>"required|integer",
             'nombre'=>"required|unique:marcas_vinicola"
         ];
          $validater = $this->validate($request,$rules);
          $marca = Marca::create($request->all());
-         return redirect()->route('vinicola.marcas.index',["vinicola"=>$vinicola, 'marcas'=>$vinicola->marcas]);
+         return redirect()->route('vinicolas.marcas.index',["vinicola"=>$vinicola, 'marcas'=>$vinicola->marcas]);
     }
 
     /**

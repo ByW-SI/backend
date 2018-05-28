@@ -10669,7 +10669,7 @@ button {
 .s-pageheader {
   margin-bottom: 0px;
   min-height: 174px;
-  background-image: url(../images/fondo.jpg?689ba95f3366460d1ea7187acb394418);
+  background-image: url(/images/fondo.jpg?689ba95f3366460d1ea7187acb394418);
   background-repeat: repeat;
   background-position: center center;
   position: relative;
@@ -10858,7 +10858,7 @@ button {
 
 .header__search-form input[type="search"] {
   background-color: transparent;
-  color: #ffff;
+  color: #000000;
   height: auto;
   width: 100%;
   font-family: "metropolis-semibold", sans-serif;
@@ -10929,7 +10929,7 @@ body.search-is-visible {
   position: absolute;
   right: 20px;
   top: 15px;
-  background-image: url(../images/icon-search.svg);
+  background-image: url(/images/icon-search.svg?0d7fd903c0aec99007bdd8f583d4203d);
   background-repeat: no-repeat;
   background-position: right center;
   background-size: contain;
@@ -11943,7 +11943,7 @@ footer h4::after {
   height: 5.4rem;
   font-size: 1.5rem;
   padding: 1.2rem 100px 1.2rem 60px;
-  background: url(../images/icon-mail.svg) 20px center no-repeat, rgba(0, 0, 0, 0.1);
+  background: url(/images/icon-mail.svg?53c60fd80c7fd29a0fdd36eca16c0030) 20px center no-repeat, rgba(0, 0, 0, 0.1);
   background-size: 24px 16px, auto;
   margin-bottom: 1.8rem;
   color: rgba(255, 255, 255, 0.5);
@@ -12045,7 +12045,7 @@ footer h4::after {
   width: 5.4rem;
   line-height: 5.4rem;
   text-align: center;
-  background-image: url(../images/icon-arrow-up.svg);
+  background-image: url(/images/icon-arrow-up.svg?d8381aa4139543c49d5590acec5e9af1);
   background-color: #000000;
   background-repeat: no-repeat;
   background-position: center center;
