@@ -33,7 +33,7 @@
 
                 <div class="header__logo">
                     <a class="logo" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="Homepage">
+                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}" alt="Homepage">
                     </a>
                 </div> <!-- end header__logo -->
 
@@ -80,19 +80,19 @@
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
-                            <li><a href="category.html">Agregar Uva</a></li>
-                            <li><a href="category.html">Variedad de uvas</a></li>
-                            <li><a href="category.html">Viajes</a></li>
+                            <li><a href="#">Agregar Uva</a></li>
+                            <li><a href="#">Variedad de uvas</a></li>
+                            <li><a href="#">Viajes</a></li>
                             
                             </ul>
                         </li>
                         <li class="has-children">
                             <a href="#0" title="">Productores</a>
                             <ul class="sub-menu">
-                            <li><a href="single-video.html">¿Quieres registrar tu vinicola?</a></li>
-                            <li><a href="single-audio.html">Agregar vinicola</a></li>
-                            <li><a href="single-gallery.html">Nuestros vinicultores</a></li>
-                            <li><a href="single-standard.html">Standard Post</a></li>
+                            <li><a href="{{ route('vinicolas.create') }}">¿Quieres registrar tu vinicola?</a></li>
+                            <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
+                            <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
+                            <li><a href="#">Standard Post</a></li>
                             </ul>
                         </li>
                         @if (Route::has("login"))
