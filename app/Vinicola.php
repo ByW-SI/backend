@@ -24,6 +24,8 @@ class Vinicola extends Model
     	'puesto',
     	'correo',
     	'celular',
+        'long',
+        'lat',
     	'telefono',
     	'observacion',
         'fecha_observacion'
@@ -41,5 +43,7 @@ class Vinicola extends Model
     public function uvas(){
         return $this->hasMany('App\UvaVinicola','vinicola_id','id');
     }
-
+    public function getMapLink(){
+        return 'https://www.google.com.mx/maps?q=' . $this->lat . ',' . $this->long;
+    }
 }
