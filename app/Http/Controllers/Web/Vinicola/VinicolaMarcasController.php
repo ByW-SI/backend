@@ -41,7 +41,7 @@ class VinicolaMarcasController extends Controller
     {
         //
         $rules=[
-            'vinicola_id'=>"required|number"
+            'vinicola_id'=>"required|number",
             'nombre'=>"required|unique:marcas_vinicola"
         ];
          $validater = $this->validate($request,$rules);

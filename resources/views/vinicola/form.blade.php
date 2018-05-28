@@ -1,6 +1,7 @@
 @extends('layouts.app2')
 @section('content')
 	{{-- expr --}}
+	
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
@@ -189,6 +190,7 @@
 									@endif
 								</div>
 							</div>
+							
 
 						<div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -198,6 +200,9 @@
                             </div>
                         </div>
 						</form>
+
+						<div id="map" style="height: 400px;
+        width: 100%;"></div>
 					</div>
 				</div>
 			</div>
@@ -211,5 +216,45 @@
 			// body...
 			alert("Por favor registrar la bodega antes de agregar las "+text);
 		}
+	</script>
+    <script>
+	  function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 6
+        });
+        var infoWindow = new google.maps.InfoWindow({map: map});
+        geocoder = new google.maps.Geocoder();
+        alert(geocode);
+        console.log(geocode);
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+	</script>
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBkjIOXvW9lhje369JKSdGpjoJwTXlBCE&callback=initMap">
 	</script>
 @endsection

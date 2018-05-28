@@ -89,9 +89,9 @@
                         <li class="has-children">
                             <a href="#0" title="">Productores</a>
                             <ul class="sub-menu">
-                            <li><a href="single-video.html">¿Quieres registrar tu vinicola?</a></li>
-                            <li><a href="single-audio.html">Agregar vinicola</a></li>
-                            <li><a href="single-gallery.html">Nuestros vinicultores</a></li>
+                            <li><a href="{{ route('vinicolas.create') }}">¿Quieres registrar tu vinicola?</a></li>
+                            <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
+                            <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
                             <li><a href="single-standard.html">Standard Post</a></li>
                             </ul>
                         </li>
