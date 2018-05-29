@@ -15,13 +15,13 @@ class CreateUvasTable extends Migration
     {
         Schema::create('uvas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('subtilte');
+            $table->string('title')->unique();
+            $table->string('subtitle')->nullable();
             $table->string('image');
-            $table->text('olfato');
-            $table->string('gusto');
-            $table->string('vista');
-            $table->string('maridaje');
+            $table->text('olfato')->nullable();
+            $table->text('gusto')->nullable();
+            $table->text('vista')->nullable();
+            $table->text('maridaje')->nullable();
             $table->timestamps();
         });
     }

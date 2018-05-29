@@ -9,7 +9,7 @@
 						{{$edit ? $uva->nombre : "Nueva uva"}}
 					</div>
 					<div class="card-body">
-						<form method="POST" action="{{ $edit ? route('uvas.update',['uva'=>$uva]) : route('uvas.store') }}">
+						<form method="POST" enctype="multipart/form-data" action="{{ $edit ? route('uvas.update',['uva'=>$uva]) : route('uvas.store') }}">
 							@csrf
 							@if ($edit)
 								<input type="hidden" name="_method" value="PUT">
@@ -91,6 +91,13 @@
 								<label for="image" class="col-md-4 col-form-label text-md-right">Imagen de la uva:</label>
 								<input type="file" id="image" name="image" class="file">
 							</div>
+							<div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
+                        </div>
 						</form>
 					</div>
 				</div>

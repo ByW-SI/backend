@@ -16,6 +16,8 @@ class UvaController extends Controller
     public function index()
     {
         //
+        $uvas = Uva::paginate(5);
+        return view('uvas.index',['uvas'=>$uvas]);
     }
 
     /**
@@ -39,6 +41,33 @@ class UvaController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->image['-originalName']);
+        $rules = [
+            'title'=>'required|unique:uvas',
+            'image'=>'required',
+        ];
+        $this->validate($request, $rules);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            //
+            // dd("valido");
+
+            $path = $request->image->storeAs('images', $request->title.".jpg", 'public');
+            $uva = Uva::create([
+                'title'=> $request->title,
+                'subtitle'=>$request->subtitle,
+                'image' => "storage/$path",
+                'olfato' => $request->olfato,
+                'gusto'=>$request->gusto,
+                'vista'=>$request->vista,
+                'maridaje'=>$request->maridaje
+            ]);
+            return redirect()->route('uvas.index');
+            // dd($path);
+        }
+        else{
+            dd("invalid");
+        }
+
     }
 
     /**

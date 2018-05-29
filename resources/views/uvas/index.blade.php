@@ -1,0 +1,46 @@
+@extends('layouts.app2')
+@section('content')
+	{{-- expr --}}
+	<div class="container-fluid">
+		<div class="col-6 input-group input-group-lg mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+		  </div>
+		  <input type="text" class="form-control" placeholder="Buscar.." aria-label="Buscar.." aria-describedby="basic-addon1">
+		</div>
+		<br>
+		<br>
+		<div class="container-fluid">
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Nombre de la uva</th>
+						<th scope="col">Otros nombres</th>
+						<th scope="col">Al olfato</th>
+						<th scope="col">Al gusto</th>
+						<th scope="col">A la vista</th>
+						<th scope="col">Maridajes</th>
+					</tr>
+				</thead>
+				<tbody>
+					@forelse ($uvas as $uva)
+						{{-- expr --}}
+					<tr>
+						<th scope="row">{{$uva->title}}</th>
+						<th>{{$uva->subtitle}}</th>
+						<th>{{$uva->olfato}}</th>
+						<th>{{$uva->gusto}}</th>
+						<th>{{$uva->vista}}</th>
+						<th>{{$uva->maridaje}}</th>
+					</tr>
+					@empty
+						{{-- empty expr --}}
+						No hay uvas 
+					@endforelse
+					
+				</tbody>
+			</table>
+			{{ $uvas->links() }}
+		</div>
+	</div>
+@endsection
