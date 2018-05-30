@@ -24,4 +24,7 @@ class Uva extends Model
    		'updated_at'
    	];
 
+   	public function uvasVinicolas(){
+   		return $this->hasMany('App\UvaVinicola', 'uva_id','id');
+   	}
 }

@@ -8,6 +8,9 @@
 		  </div>
 		  <input type="text" class="form-control" placeholder="Buscar.." aria-label="Buscar.." aria-describedby="basic-addon1">
 		</div>
+		<div class="col-3 input-group input-group-lg mb-3">
+		  <a href="{{ route('uvas.create') }}" class="btn btn-primary">Agregar Nueva Uva</a>
+		</div>
 		<br>
 		<br>
 		<div class="container-fluid">

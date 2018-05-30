@@ -18,6 +18,8 @@ class CreateUvasVinicolaTable extends Migration
             $table->integer('vinicola_id')->unsigned();
             $table->foreign('vinicola_id')->references('id')->on('vinicola');
             $table->string('nombre');
+            $table->integer('uva_id')->unsigned()->nullable();
+            $table->foreign('uva_id')->references('id')->on('uvas');
             $table->double('hectareas',5,2);
             $table->timestamps();
         });

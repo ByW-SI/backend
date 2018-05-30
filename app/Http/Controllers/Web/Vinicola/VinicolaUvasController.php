@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Web\Vinicola;
 
-use App\UvaVinicola;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Uva;
+use App\UvaVinicola;
+use App\Vinicola;
+use Illuminate\Http\Request;
 
 class VinicolaUvasController extends Controller
 {
@@ -13,9 +15,11 @@ class VinicolaUvasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Vinicola $vinicola)
     {
         //
+        $uvas = $vinicola->uvas;
+        return view('vinicola.uvas.index',['vinicola'=>$vinicola,'uvas'=>$uvas]);
     }
 
     /**
@@ -23,9 +27,12 @@ class VinicolaUvasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Vinicola $vinicola)
     {
         //
+        $uvas = Uva::get();
+        $edit = false;
+        return view('vinicola.uvas.form',['edit'=>$edit,'vinicola'=>$vinicola,'uvas'=>$uvas]);
     }
 
     /**
@@ -34,9 +41,24 @@ class VinicolaUvasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Vinicola $vinicola,Request $request)
     {
         //
+        $rules =[
+            'vinicola_id'=>"required|integer",
+            'uva_id' => "required|integer",
+            'hectareas' => "required|integer",
+        ];
+        $this->validate($request, $rules);
+        $uva = Uva::find($request->uva_id);
+        // dd($uva);
+        UvaVinicola::create([
+            'vinicola_id' => $request->vinicola_id,
+            'nombre' => $uva->title,
+            'uva_id' => $request->uva_id,
+            'hectareas' => $request->hectareas,
+        ]);
+        return redirect()->route('vinicolas.uvas.index',['vinicola'=>$vinicola]);
     }
 
     /**

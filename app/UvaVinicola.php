@@ -12,6 +12,7 @@ class UvaVinicola extends Model
     protected $fillable=[
     	'id',
     	'vinicola_id',
+        'uva_id',
     	'nombre',
     	'hectareas',
     ];
@@ -23,5 +24,8 @@ class UvaVinicola extends Model
 
     public function vinicola(){
     	return $this->hasMany('App\Vinicola','vinicola_id');
+    }
+    public function uva(){
+        return $this->belongsTo('App\Uva','uva_id');
     }
 }
