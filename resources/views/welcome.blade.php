@@ -33,7 +33,7 @@
 
                 <div class="header__logo">
                     <a class="logo" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}" alt="Homepage">
+                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}"  alt="Homepage">
                     </a>
                 </div> <!-- end header__logo -->
 
