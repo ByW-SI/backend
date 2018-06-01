@@ -24,7 +24,7 @@ Route::middleware('auth:api')->resource('domicilios', 'Api\User\UserDomEnvioCont
 
 Route::middleware('auth:api')->resource('cards', 'Api\User\UserTarjetasController', ['except'=>['create','update','edit']]);
 Route::resource('uvas', 'Api\Uva\UvaController',['only'=>'index']);
-Route::resource('vinicolas','Api\Vinicola',['only'=>'index']);
+Route::resource('vinicolas','Api\Vinicola\VinicolaController',['only'=>'index']);
 // Route::middleware('auth:api')->put('fiscales', 'Api\User\UserDomFiscalController@update');
 
 Route::post('login', 'User\UserController@login')->name('login');
