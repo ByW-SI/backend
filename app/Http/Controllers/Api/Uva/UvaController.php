@@ -17,13 +17,8 @@ class UvaController extends Controller
     {
         //
         $uvas = Uva::get();
-        if ($uvas->count() == 0) {
-            # code...
-            return response()->json(['message'=>'No hay registro'],404);
-        } else {
-            # code...
-            return response()->json(['uvas'=>$uvas],202);
-        }
+        
+        return response()->json(['uvas'=>$uvas],202);
         
 
     }
