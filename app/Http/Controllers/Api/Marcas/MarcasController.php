@@ -29,8 +29,8 @@ class MarcasController extends Controller
     public function show(Marca $marca)
     {
         //
-        $vinicola = $marca->vinicola;
-        return response()->json(['marca'=>$marca,'vinicola'=>$vinicola],202);
+        // $vinicola = $marca->vinicola
+        return response()->json(['marca'=>$marca],202);
 
     }
 }
