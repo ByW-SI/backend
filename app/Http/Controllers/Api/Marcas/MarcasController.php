@@ -29,7 +29,7 @@ class MarcasController extends Controller
     public function show(Marca $marca)
     {
         //
-        return response()->json(['marca'=>$marca],202);
+        return response()->json(['marca'=>$marca->with('vinicola')],202);
 
     }
 }
