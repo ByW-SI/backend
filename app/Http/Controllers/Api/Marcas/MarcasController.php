@@ -16,7 +16,7 @@ class MarcasController extends Controller
     public function index()
     {
         //
-        $marcas = Marca::get();
+        $marcas = Marca::with('vinicola')->get();
         return response()->json(['marcas'=>$marcas],202);
 
     }
