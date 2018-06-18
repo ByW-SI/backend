@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user','User\UserController@getUser');
 Route::middleware('auth:api')->post('/password','User\UserController@changePassword');
 
 Route::resource('users', 'User\UserController', ['except'=>['create', 'edit','update']]);
-Route::middleware('auth:api')->put('users/{user}', 'User\UserController')->name('users.update');
+Route::middleware('auth:api')->put('users/{user}', 'User\UserController@update')->name('users.update');
 Route::middleware('auth:api')->resource('fiscales', 'Api\User\UserDomFiscalController', ['except'=>['create','show','edit']]);
 
 Route::middleware('auth:api')->resource('domicilios', 'Api\User\UserDomEnvioController', ['except'=>['create','edit']]);
