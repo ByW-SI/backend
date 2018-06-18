@@ -152,7 +152,7 @@ class UserController extends Controller
             $user->update([
                 'name' =>$inputs['nombre'],
                 'appaterno' => $inputs['apaterno'],
-                'amaterno' => $inputs['apmaterno'],
+                'apmaterno' => $inputs['amaterno'],
                 'nacimiento' =>$inputs['fechanac'],
                 'numero_telefono' =>$inputs['telefono']
             ]);
