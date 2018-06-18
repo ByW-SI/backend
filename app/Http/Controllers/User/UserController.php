@@ -146,7 +146,7 @@ class UserController extends Controller
                 'nombre'=>"required",
                 'apaterno'=>"required",
                 'fechanac' => "required|date",
-                'telefono' => "nullable|number"
+                'telefono' => "nullable|numeric"
             ];
             $this->validate($request,$rules);
             $user->update([
