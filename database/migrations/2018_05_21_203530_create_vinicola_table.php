@@ -23,7 +23,7 @@ class CreateVinicolaTable extends Migration
             $table->string('locacion');
             $table->double('long',20,17)->default(0.00000);
             $table->double('lat',20,17)->default(0.00000);
-            $table->string('enologo');
+            $table->string('enologo')->nullable();
             $table->string('wine_maker')->nullable();
             // $table->string('vinas')->nullable();
             $table->string('contacto')->nullable();
