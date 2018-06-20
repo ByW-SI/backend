@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('appaterno');
-            $table->string('apmaterno');
+            $table->string('apmaterno')->nullable();
             $table->date('nacimiento');
             $table->string('numero_telefono')->nullable();
             $table->string('email')->unique();

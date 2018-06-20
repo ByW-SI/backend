@@ -138,46 +138,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = User::findOrFail($id);
-        $rules = [
-            'email'=> 'email|unique:users,email,' . $usuario->id,
-            // 'username'=> 'required|unique:users',
-            'password'=> 'min:6|confirmed',
-            
-        ];
-
-        $this->validate($request, $rules);
-
-        if ($request->has('name')) {
-            $usuario->name = $request->name;
+        $user = $request->user();
+        if ($user->id == $id) {
+            # code...
+            $inputs = $request->all();
+            $rules = [
+                'nombre'=>"required",
+                'apaterno'=>"required",
+                'fechanac' => "required|date",
+                'telefono' => "nullable|numeric"
+            ];
+            $this->validate($request,$rules);
+            $user->update([
+                'name' =>$inputs['nombre'],
+                'appaterno' => $inputs['apaterno'],
+                'apmaterno' => $inputs['amaterno'],
+                'nacimiento' =>$inputs['fechanac'],
+                'numero_telefono' =>$inputs['telefono']
+            ]);
+            return response()->json(['message'=>"Usuario actualizado"],201);
+        } else {
+            # code...
+            return response()->json(['error'=>"No tienes permiso para actualizar"],401);
         }
-
-        if ($request->has('email') && $usuario->email != $request->email){
-            // $usuario->verified = User::USUARIO_NO_VERIFICADO;
-            // $usuario->verification_token = User::generarVerificationToken();
-            $usuario->email = $request->email;
-        }
-        if ($request->has('password')) {
-            $usuario->password = bcrypt($request->password);
-        }
-        // if ($request->has('admin')) {
-        //     if(!$usuario->esVerificado()){
-        //         // return $this->errorResponse('Error al Actualizar. Se necesita ser Administrador para actualizar', 409);
-        //         response()->json(['message'=>'Error al actualizar', 'codigo'=>409],409);
-        //     }
-        //     else{
-        //         $usuario->admin = $request->admin;
-        //     }
-        // }
-        // var_dump($usuario);
-        if (!$usuario->isDirty()) {
-            // return $this->errorResponse('Error. Se debe de especificar al menos un valor diferente para actualizar', 422);
-          return response()->json(['message'=>'Error. Se debe de especificar al menos un valor diferente para actualizar', 'code'=>422], 422);
-        }
-
-        $usuario->save();
-        // return $this->showOne($usuario);
-        return response()->json(['usuario'=>$usuario],200);
+        
+        
     }
 
     /**
