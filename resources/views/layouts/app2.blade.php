@@ -95,8 +95,8 @@
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
-                            <li><a href="#">Agregar Uva</a></li>
-                            <li><a href="#">Variedad de uvas</a></li>
+                            <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
+                            <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
                             <li><a href="#">Viajes</a></li>
                             
                             </ul>
