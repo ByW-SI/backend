@@ -23,9 +23,12 @@ class UvaVinicola extends Model
     ];
 
     public function vinicola(){
-    	return $this->hasMany('App\Vinicola','vinicola_id');
+    	return $this->belongsTo('App\Vinicola','vinicola_id');
     }
     public function uva(){
         return $this->belongsTo('App\Uva','uva_id');
+    }
+    public function barrica(){
+        return $this->hasMany('App\Barrica','uva_vinicola_id','id');
     }
 }

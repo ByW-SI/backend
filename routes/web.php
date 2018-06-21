@@ -22,3 +22,4 @@ Route::resource('uvas','Web\Uva\UvaController');
 Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
 Route::resource('vinicolas.marcas','Web\Vinicola\VinicolaMarcasController');
 Route::resource('vinicolas.uvas','Web\Vinicola\VinicolaUvasController');
+Route::resource('vinicolas.barricas','Web\Vinicola\VinicolaBarricasController');

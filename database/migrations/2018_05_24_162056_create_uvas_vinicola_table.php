@@ -21,6 +21,7 @@ class CreateUvasVinicolaTable extends Migration
             $table->integer('uva_id')->unsigned()->nullable();
             $table->foreign('uva_id')->references('id')->on('uvas');
             $table->double('hectareas',5,2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

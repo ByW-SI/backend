@@ -18,6 +18,9 @@
 						<li class="nav-item">
 							<a class="nav-link active" href="{{ route('vinicolas.uvas.index',$vinicola) }}" >Tipo de uvas</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('vinicolas.barricas.index',$vinicola) }}" >Barricas</a>
+						</li>
 					</ul>
 					<div class="card-body">
 						<form method="POST" action="{{ $edit ? route('vinicolas.uvas.update',[$vinicola,$uva]) : route('vinicolas.uvas.store',$vinicola) }}">
@@ -48,8 +51,11 @@
 							</div>
 							<div class="form-group row">		
 								<label for="hectareas" class="col-md-4 col-form-label text-md-right">Hectareas cosechadas:</label>
-								<div class="col-md-6">
+								<div class="input-group col-md-6">
 									<input type="number" class="form-control {{ $errors->has('hectareas') ? 'is-invalid' : '' }}" name="hectareas" min="0" step="0.01" value="{{$edit ? $uva->hectareas : old('hectareas')}}">
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>ha</strong></span>
+									</div>
 									@if ($errors->has('hectareas'))
 										{{-- expr --}}
 										<span class="invalid-feedback">

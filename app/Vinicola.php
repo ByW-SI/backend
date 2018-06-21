@@ -43,6 +43,9 @@ class Vinicola extends Model
     public function uvas(){
         return $this->hasMany('App\UvaVinicola','vinicola_id','id');
     }
+    public function barricas(){
+        return $this->hasMany('App\Barrica','vinicola_id','id');
+    }
     public function getMapLink(){
         return 'https://www.google.com.mx/maps?q=' . $this->lat . ',' . $this->long;
     }

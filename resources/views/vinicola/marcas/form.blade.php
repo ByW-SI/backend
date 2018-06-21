@@ -17,6 +17,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('vinicolas.uvas.index',$vinicola) }}" >Tipo de uvas</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('vinicolas.barricas.index',$vinicola) }}" >Barricas</a>
+						</li>
 					</ul>
 					<div class="card-body">
 						<form method="POST" action="{{ $edit == false ? route('vinicolas.marcas.store',$vinicola) : route('vinicolas.marcas.update',[$vinicola,$marca]) }}">

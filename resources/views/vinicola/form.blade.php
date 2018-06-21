@@ -33,6 +33,16 @@
 								onclick="disabled('uvas')"
 							@endif>Tipo de uvas</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link {{$edit ? '' : 'disabled'}}" @if ($edit == true)
+								{{-- true expr --}}
+								href="{{ route('vinicolas.barricas.index',['vinicola'=>$vinicola]) }}" 
+							@else
+								{{-- false expr --}}
+								href="#" 
+								onclick="disabled('barricas')"
+							@endif>Barricas</a>
+						</li>
 					</ul>
 					<div class="card-body">
 						<form method="POST" action="{{ $edit == false ? route('vinicolas.store') : route('vinicolas.update',$vinicola) }}">

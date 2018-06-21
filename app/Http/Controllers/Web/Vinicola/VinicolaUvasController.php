@@ -47,7 +47,7 @@ class VinicolaUvasController extends Controller
         $rules =[
             'vinicola_id'=>"required|integer",
             'uva_id' => "required|integer",
-            'hectareas' => "required|integer",
+            'hectareas' => "required|numeric",
         ];
         $this->validate($request, $rules);
         $uva = Uva::find($request->uva_id);

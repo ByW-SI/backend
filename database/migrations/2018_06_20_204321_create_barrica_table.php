@@ -19,9 +19,10 @@ class CreateBarricaTable extends Migration
             $table->integer('uva_vinicola_id')->unsigned();
             $table->foreign('uva_vinicola_id')->references('id')->on('uvas_vinicola');
             $table->integer('vinicola_id')->unsigned();
-            $table->integer('vinicola_id')->references('id')->on('vinicola');
+            $table->foreign('vinicola_id')->references('id')->on('vinicola');
             $table->decimal('precio_barrica',8,2);
             $table->decimal('precio_publico',8,2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,6 +18,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('vinicolas.uvas.index',$vinicola) }}" >Tipo de uvas</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('vinicolas.barricas.index',$vinicola) }}" >Barricas</a>
+						</li>
 					</ul>
 					<div class="card-body">
 						<div class="container-fluid">
