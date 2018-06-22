@@ -22,6 +22,8 @@
  * Licensed under the BSD 3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
+
+
 .file-loading input[type=file], input[type=file].file-loading {
     width: 0;
     height: 0;
@@ -781,7 +783,7 @@
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: #151515;
+   background-color: #000000;
    opacity: .95;
 }
 
@@ -830,8 +832,9 @@
 }
 
 .header__logo img {
-   width: 30%;
-   height: 100%;
+    width: 130px;
+    height: 100%;
+    margin-top: -30px;
 }
 
 
@@ -1058,10 +1061,11 @@ body.search-is-visible {
 
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:955px) {
    .header__logo img {
-      width: 30%;
-      height: 100%;
+        width: 80px;
+        height: 100%;
+        margin-top: -35px;
    }
 
 }
@@ -1080,8 +1084,9 @@ body.search-is-visible {
    }
 
    .header__logo img {
-      width: 30%;
+      width: 99px;
       height: 100%;
+      margin-top:-33px;
    }
 
    .header__social {
@@ -1120,8 +1125,9 @@ body.search-is-visible {
    }
 
    .header__logo img {
-      width: 30%;
-      height: 100%;
+        width: 90px;
+        height: 100%;
+        margin-top: -30px;
    }
 
    .header__toggle-menu {
@@ -1148,8 +1154,9 @@ body.search-is-visible {
    }
 
    .header__logo img {
-      width: 20%;
+      width: 83px;
       height: 100%;
+      margin-top: -29px;
    }
 
    .header__toggle-menu {
@@ -1167,13 +1174,14 @@ body.search-is-visible {
 }
 
 
+
 /* -------------------------------------------------------------------
  * ## main navigation
  * ------------------------------------------------------------------- */
 .header__nav-wrap {
    margin-top: 0px;
    border-top: 1px solid rgba(255, 255, 255, 0.04);
-   padding-top: 15px;
+   padding-top: 0px;
 }
 
 .header__nav-wrap a {
@@ -1255,7 +1263,7 @@ body.search-is-visible {
 
 .header__nav li ul {
    position: absolute;
-   top: 45px;
+   top: 35px;
    left: 0;
    font-size: 14px;
    margin: 0;
@@ -2288,7 +2296,7 @@ html, body {
 }
 
 body {
-   background: #19191b;
+   background: #f2f2f2;
    font-family: "metropolis-regular", sans-serif;
    font-size: 1.6rem;
    font-style: normal;

@@ -48,41 +48,9 @@
 
                 <div class="header__logo">
                     <a class="logo" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}" style="width: 6px; height: 100%;" alt="Homepage">
+                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}" class="logo" alt="Homepage">
                     </a>
-                </div> <!-- end header__logo -->
-
-                <ul class="header__social">
-                    <li>
-                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    </li>
-                    <li>
-                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    </li>
-                    <li>
-                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </li>
-                    <li>
-                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    </li>
-                </ul> <!-- end header__social -->
-
-                <a class="header__search-trigger" href="#0"></a>
-
-                <div class="header__search">
-
-                    <form role="search" method="get" class="header__search-form" action="#">
-                        <label>
-                            <span class="hide-content">Buscar:</span>
-                            <input type="search" class="search-field "  placeholder="¿Qué deseas buscar?" value="" name="s" title="Search for:" autocomplete="off">
-                        </label>
-                        <input type="submit" class="search-submit" value="Search">
-                    </form>
-        
-                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
-
-                </div>  <!-- end header__search -->
-
+                </div> 
 
                 <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
 
@@ -95,22 +63,41 @@
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
-                            <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
-                            <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
-                            <li><a href="#">Viajes</a></li>
-                            
+                                <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
+                                <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
+                            <a href="#0" title="">Viajes y cursos</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Nuevo viaje</a></li>
+                                <li><a href="#">Nuevo curso</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
                             <a href="#0" title="">Productores</a>
                             <ul class="sub-menu">
-                            <li><a href="#">¿Quieres registrar tu vinicola?</a></li>
-                            <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
-                            <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
-                            <li><a href="#">Standard Post</a></li>
+                            {{-- <li><a href="#">¿Quieres registrar tu vinicola?</a></li> --}}
+                                <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
+                                <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
                             </ul>
                         </li>
-                        @guest
+                        <li class="has-children">
+                            <a href="#0" title="">Usuarios</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Agregar usuarios</a></li>
+                                <li><a href="#">Lista de usuarios</a></li>
+                            </ul>
+                        </li>
+                         <li class="has-children">
+                            <a href="#0" title="">Reportes</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Usuarios</a></li>
+                                <li><a href="#">Ventas</a></li>
+                                <li><a href="#">Puntos Corchos</a></li>
+                            </ul>
+                        </li>
+                        {{-- @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registrate') }}</a></li>
                         @else
@@ -131,10 +118,9 @@
                                     </form>
                                 </ul>
                             </li>
-                        @endguest
+                        @endguest --}}
             
-                        <li><a href="#">Acerca de nosotros</a></li>
-                        <li><a href="#" title="">Contactanos</a></li>
+                        
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
@@ -161,91 +147,7 @@
     
 
 
-    <!-- s-footer
-    ================================================== -->
-    <footer class="s-footer">
-
-        <div class="s-footer__main">
-            <div class="row">
-                
-                <div class="col-two md-four mob-full s-footer__sitelinks">
-                        
-                    <h4>Ligas de interes</h4>
-
-                    <ul class="s-footer__linklist">
-                        <li><a href="#0">Home</a></li>
-                        <li><a href="#0">Blog</a></li>
-                        <li><a href="#0">Styles</a></li>
-                        <li><a href="#0">About</a></li>
-                        <li><a href="#0">Contact</a></li>
-                        <li><a href="#0">Privacy Policy</a></li>
-                    </ul>
-
-                </div> <!-- end s-footer__sitelinks -->
-
-
-                <div class="col-two md-four mob-full s-footer__social">
-                        
-                    <h4>Social</h4>
-
-                    <ul class="s-footer__linklist">
-                        <li><a href="#0">Facebook</a></li>
-                        <li><a href="#0">Instagram</a></li>
-                        <li><a href="#0">Twitter</a></li>
-                        <li><a href="#0">Pinterest</a></li>
-                        <li><a href="#0">Google+</a></li>
-                        <li><a href="#0">LinkedIn</a></li>
-                    </ul>
-
-                </div> <!-- end s-footer__social -->
-                <div class="col-three md-four mob-full s-footer__archives">
-                        
-                    <p>“once in a time life wine experiencie”</p>
-
-                    
-
-                </div> <!-- end s-footer__archives -->
-
-                <div class="col-four md-full end s-footer__subscribe">
-                        
-                    <h4>Our Newsletter</h4>
-
-                    <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et enim exercitationem ipsam. Culpa consequatur occaecati.</p>
-
-                    <div class="subscribe-form">
-                        <form id="mc-form" class="group" novalidate="true">
-
-                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
-                
-                            <input type="submit" name="subscribe" value="Send" style="padding: 11px 15px;">
-                
-                            <label for="mc-email" class="subscribe-message"></label>
-                
-                        </form>
-                    </div>
-
-                </div> <!-- end s-footer__subscribe -->
-
-            </div>
-        </div> <!-- end s-footer__main -->
-
-        <div class="s-footer__bottom">
-            <div class="row">
-                <div class="col-full">
-                    <div class="s-footer__copyright">
-                        <span>© Copyright B&W 2018</span> 
-                      
-                    </div>
-
-                    <div class="go-top">
-                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end s-footer__bottom -->
-
-    </footer> <!-- end s-footer -->
-
+   
 
     <!-- preloader
     ================================================== -->
