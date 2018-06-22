@@ -56,7 +56,7 @@
 
                 <nav class="header__nav-wrap">
 
-                    <h2 class="header__nav-heading h6">Site Navigation</h2>
+                    <h2 class="header__nav-heading h6">Premium Wine Makers</h2>
 
                     <ul class="header__nav">
                         <li class="current"><a href="{{ url('/') }}" title="">Principal</a></li>
@@ -123,7 +123,7 @@
                         
                     </ul> <!-- end header__nav -->
 
-                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Cerrar</a>
 
                 </nav> <!-- end header__nav-wrap -->
 
