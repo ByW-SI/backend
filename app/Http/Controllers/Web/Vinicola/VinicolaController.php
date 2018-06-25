@@ -17,7 +17,8 @@ class VinicolaController extends Controller
     public function index()
     {
         //
-        return view('vinicola.index');
+        $vinicolas = Vinicola::orderBy('nombre','asc')->paginate(5);
+        return view('vinicola.index',['vinicolas'=>$vinicolas]);
     }
 
     /**
@@ -91,6 +92,19 @@ class VinicolaController extends Controller
     public function update(Request $request, Vinicola $vinicola)
     {
         //
+        // dd($request->all());
+        // dd($vinicola);
+        $rules = [
+            'inicio'=> 'required',
+            'filosofia'=> 'required',
+            'locacion'=> 'required',
+            'enologo'=> 'required',
+            'telefono'=> 'required'
+        ];
+        $this->validate($request,$rules);
+        $vinicola->update($request->all());
+        // $vinicola->save();
+        return redirect()->route('vinicolas.show',['vinicola'=>$vinicola]);
     }
 
     /**

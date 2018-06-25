@@ -85,16 +85,16 @@
                         <li class="has-children">
                             <a href="#0" title="">Usuarios</a>
                             <ul class="sub-menu">
-                                <li><a href="#">Agregar usuarios</a></li>
-                                <li><a href="#">Lista de usuarios</a></li>
+                                <li><a href="{{ route('empleados.create') }}">Agregar empleados</a></li>
+                                <li><a href="{{ route('empleados.index') }}">Lista de empleaods</a></li>
                             </ul>
                         </li>
                          <li class="has-children">
                             <a href="#0" title="">Reportes</a>
                             <ul class="sub-menu">
-                                <li><a href="#">Usuarios</a></li>
-                                <li><a href="#">Ventas</a></li>
-                                <li><a href="#">Puntos Corchos</a></li>
+                                <li><a href="{{ route('clientes') }}">Clientes</a></li>
+                                <li><a href="{{ route('ventas') }}">Ventas</a></li>
+                                <li><a href="{{ route('puntos_corchos') }}">Puntos Corchos</a></li>
                             </ul>
                         </li>
                         {{-- @guest

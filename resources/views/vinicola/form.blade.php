@@ -45,7 +45,7 @@
 						</li>
 					</ul>
 					<div class="card-body">
-						<form method="POST" action="{{ $edit == false ? route('vinicolas.store') : route('vinicolas.update',$vinicola) }}">
+						<form method="POST" action="{{ $edit == false ? route('vinicolas.store') : route('vinicolas.update',['vinicola'=>$vinicola]) }}">
 							@csrf
 
 							@if ($edit == true)
@@ -105,8 +105,8 @@
 								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del bodega:</label>
 								<div class="col-md-6">
 									<input id="locacion" type="text" class="form-control {{ $errors->has('locacion') ? ' is-invalid' : ''  }}" name="locacion" value="{{ $edit ? $vinicola->locacion : old('locacion') }}" required>
-									<input type="hidden" name="lat" id="latitud" value="">
-									<input type="hidden" name="long" id="longitud" value="">
+									<input type="hidden" name="lat" id="latitud" value="{{$edit ? $vinicola->lat : ''}}">
+									<input type="hidden" name="long" id="longitud" value="{{$edit ? $vinicola->long : ''}}">
 									@if ($errors->has('locacion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">

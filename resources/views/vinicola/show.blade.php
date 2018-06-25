@@ -54,7 +54,7 @@
 							<div class="col-md-6">
 								<p >{{ $vinicola->locacion }}</p>
 								<br>
-								<a href="{{$vinicola->getMapLink() ? $vinicola->getMapLink() : "#"}}">Ver en mapa</a>
+								<a href="{{$vinicola->getMapLink() ? $vinicola->getMapLink() : "#"}}" target="_blank">Ver en mapa</a>
 							</div>
 						</div>
 						<div class="col-md-12">

@@ -18,7 +18,7 @@ class UvaController extends Controller
     public function index()
     {
         //
-        $uvas = Uva::paginate(5);
+        $uvas = Uva::orderBy('title','asc')->paginate(5);
         return view('uvas.index',['uvas'=>$uvas]);
     }
 
