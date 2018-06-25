@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Uva extends Model
 {
     //
+    
     protected $table = "uvas";
 
     protected $fillable=[

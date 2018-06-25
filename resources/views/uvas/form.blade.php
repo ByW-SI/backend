@@ -6,18 +6,19 @@
 			<div class="col-md-8">
 				<div class="card">
 					<div class="card-header">
-						{{$edit ? $uva->nombre : "Nueva uva"}}
+						{{$edit ? $uva->title : "Nueva uva"}}
 					</div>
 					<div class="card-body">
 						<form method="POST" enctype="multipart/form-data" action="{{ $edit ? route('uvas.update',['uva'=>$uva]) : route('uvas.store') }}">
 							@csrf
+							{{-- {{dd($uva)}} --}}
 							@if ($edit)
 								<input type="hidden" name="_method" value="PUT">
 							@endif
 							<div class="form-group row">
 								<label for="title" class="col-md-4 col-form-label text-md-right">Nombre de la uva:</label>
 								<div class="col-md-6">
-									<input class="form-control {{ $errors->has('title') ? ' is-invalid' : ''  }}" id="title" type="text" name="title" value{{ $edit ? $uva->title : old('title') }} required>
+									<input class="form-control {{ $errors->has('title') ? ' is-invalid' : ''  }}" id="title" {{$edit ? 'disabled' : ""}} type="text" name="title" value="{{ $edit ? $uva->title : old('title') }}" required>
 									@if ($errors->has('title'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -29,7 +30,7 @@
 							<div class="form-group row">
 								<label for="subtitle" class="col-md-4 col-form-label text-md-right">Otros nombres (si tiene):</label>
 								<div class="col-md-6">
-									<input class="form-control {{ $errors->has('subtitle') ? ' is-invalid' : ''  }}" id="subtitle" type="text" name="subtitle" value{{ $edit ? $uva->subtitle : old('subtitle') }}>
+									<input class="form-control {{ $errors->has('subtitle') ? ' is-invalid' : ''  }}" id="subtitle" type="text" name="subtitle" value="{{ $edit ? $uva->subtitle : old('subtitle') }}">
 									@if ($errors->has('subtitle'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -87,6 +88,14 @@
 									@endif
 								</div>
 							</div>
+							@if ($edit)
+								{{-- expr --}}
+							<div class="form-group row">
+								<div class="container">
+									<img src="{{ url($uva->image) }}" >
+								</div>
+							</div>
+							@endif
 							<div class="form-group row">
 								<label for="image" class="col-md-4 col-form-label text-md-right">Imagen de la uva:</label>
 								<input type="file" id="image" name="image" class="file">

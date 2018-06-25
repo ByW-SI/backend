@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web\Uva;
 use App\Uva;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+
 
 class UvaController extends Controller
 {
@@ -90,6 +92,9 @@ class UvaController extends Controller
     public function edit(Uva $uva)
     {
         //
+        $edit = true;
+        return view('uvas.form',['edit'=>$edit,'uva'=>$uva]);
+
     }
 
     /**
@@ -102,6 +107,39 @@ class UvaController extends Controller
     public function update(Request $request, Uva $uva)
     {
         //
+        // $rules = [
+        //     // 'title'=>'required|unique:uvas',
+        //     'image'=>'required',
+        // ];
+        // $this->validate($request, $rules);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            //
+            // dd("valido");
+
+            $path = $request->image->storeAs('images', $uva->title.".jpg", 'public');
+            // Storage::delete($uva->image);
+            $uva->update([
+                'subtitle'=>$request->subtitle,
+                'image' => "storage/$path",
+                'olfato' => $request->olfato,
+                'gusto'=>$request->gusto,
+                'vista'=>$request->vista,
+                'maridaje'=>$request->maridaje
+            ]);
+            return redirect()->route('uvas.index');
+            // dd($path);
+        }
+        else{
+            $uva->update([
+                'subtitle'=>$request->subtitle,
+                'olfato' => $request->olfato,
+                'gusto'=>$request->gusto,
+                'vista'=>$request->vista,
+                'maridaje'=>$request->maridaje
+            ]);
+            return redirect()->route('uvas.index');
+            // dd("invalid");
+        }
     }
 
     /**
@@ -113,5 +151,8 @@ class UvaController extends Controller
     public function destroy(Uva $uva)
     {
         //
+        // dd($uva);
+        $uva->delete();
+        return redirect()->route('uvas.index');
     }
 }

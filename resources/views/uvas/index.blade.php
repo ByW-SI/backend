@@ -23,6 +23,7 @@
 						<th scope="col">Al gusto</th>
 						<th scope="col">A la vista</th>
 						<th scope="col">Maridajes</th>
+						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,6 +36,15 @@
 						<th>{{$uva->gusto}}</th>
 						<th>{{$uva->vista}}</th>
 						<th>{{$uva->maridaje}}</th>
+						<th>
+							<a href="{{ route('uvas.edit',['uva'=>$uva]) }}" class="btn btn-primary">Editar</a>
+							<form method="POST" action="{{ route('uvas.destroy',['uva'=>$uva]) }}">
+								@csrf
+								<input type="hidden" name="_method" value="DELETE">
+								<button action="submit" onclick="return confirm('¿Estás seguro que desea eliminar esta uva?');" class="btn btn-danger">Borrar</button>
+								
+							</form>
+						</th>
 					</tr>
 					@empty
 						{{-- empty expr --}}
