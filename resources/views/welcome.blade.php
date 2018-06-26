@@ -80,33 +80,65 @@
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
-                            <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
-                            <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
-                            <li><a href="#">Viajes</a></li>
-                            
+                                <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
+                                <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
+                            <a href="#0" title="">Viajes y cursos</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{ route('viajes') }}">Nuevo viaje</a></li>
+                                <li><a href="{{ route('cursos') }}">Nuevo curso</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
                             <a href="#0" title="">Productores</a>
                             <ul class="sub-menu">
-                            <li><a href="{{ route('vinicolas.create') }}">¿Quieres registrar tu vinicola?</a></li>
-                            <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
-                            <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
+                            {{-- <li><a href="#">¿Quieres registrar tu vinicola?</a></li> --}}
+                                <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
+                                <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
                             </ul>
                         </li>
-                        @if (Route::has("login"))
-                            {{-- expr --}}
-                            @auth
-                            <li><a href="#">{{Auth::user()->name}}</a></li>
-                            @else
-                            <li><a href="{{ url('login') }}" title="">Iniciar Sesión</a></li>
-                            <li><a href="{{ url('register') }}" title="">Registrate</a></li>
-                            @endauth
+                        <li class="has-children">
+                            <a href="#0" title="">Usuarios</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{ route('empleados.create') }}">Agregar empleados</a></li>
+                                <li><a href="{{ route('empleados.index') }}">Lista de empleaods</a></li>
+                            </ul>
+                        </li>
+                         <li class="has-children">
+                            <a href="#0" title="">Reportes</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{ route('clientes') }}">Clientes</a></li>
+                                <li><a href="{{ route('ventas') }}">Ventas</a></li>
+                                <li><a href="{{ route('puntos_corchos') }}">Puntos Corchos</a></li>
+                            </ul>
+                        </li>
+                        {{-- @guest
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registrate') }}</a></li>
+                        @else
+                            <li class="has-children">
+                                <a href="#0">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                        @endif
-                        <li><a href="#">Acerca de nosotros</a></li>
-                        <li><a href="#" title="">Contactanos</a></li>
-                    </ul> <!-- end header__nav -->
+                                <ul class="sub-menu">
+                                    <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a></li>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </li>
+                        @endguest --}}
+            
+                        
+                    </ul>  <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 

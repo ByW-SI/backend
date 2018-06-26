@@ -20,7 +20,7 @@
 				<div class="form-group row">
 					<label for="edadMin" class="col-md-4 col-form-label text-md-right">Edad minima:</label>
 					<div class="input-group col-md-6">
-						<input type="number" step="1" min="18" value="18" name="edadMin" class="form-control">
+						<input type="number" step="1" id="minimo" onchange="document.getElementById('maximo').min=this.value;" min="18" value="18" name="edadMin" class="form-control">
 						<div class="input-group-append">
 							<span class="input-group-text"><strong>años</strong></span>
 						</div>
@@ -31,7 +31,7 @@
 				<div class="form-group row">
 					<label for="edadMin" class="col-md-4 col-form-label text-md-right">Edad maxima:</label>
 					<div class="input-group col-md-6">
-						<input type="number" step="1" min="18" name="edadMin" class="form-control">
+						<input type="number" id="maximo" step="1" min="18" name="edadMin" class="form-control">
 						<div class="input-group-append">
 							<span class="input-group-text"><strong>años</strong></span>
 						</div>

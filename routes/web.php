@@ -27,10 +27,15 @@ Route::resource('empleados','Web\Empleados\EmpleadosController');
 Route::get('clientes', function(){
 	return view('reporte.cliente');
 })->name('clientes');
-Route::get('ventas', function(){
-	return view('reporte.venta');
-})->name('ventas');
+Route::get('ventas','VentasController@index')->name('ventas');
 Route::get('puntos_corchos',function ()
 {
-	return view('reporte.pcorcho');
+	$users = App\User::get();
+	return view('reporte.pcorcho',['users'=>$users]);
 })->name('puntos_corchos');
+Route::get('viajes', function (){
+	return view('reporte.viajes');
+})->name('viajes');
+Route::get('cursos', function (){
+	return view('reporte.cursos');
+})->name('cursos');

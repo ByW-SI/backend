@@ -70,8 +70,8 @@
                         <li class="has-children">
                             <a href="#0" title="">Viajes y cursos</a>
                             <ul class="sub-menu">
-                                <li><a href="#">Nuevo viaje</a></li>
-                                <li><a href="#">Nuevo curso</a></li>
+                                <li><a href="{{ route('viajes') }}">Nuevo viaje</a></li>
+                                <li><a href="{{ route('cursos') }}">Nuevo curso</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
