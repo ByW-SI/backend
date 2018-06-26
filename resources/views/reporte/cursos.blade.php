@@ -65,7 +65,7 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de las instalación:</label>
+								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de la instalación:</label>
 								<div class="col-md-6">
 									<input id="telefono" type="text" class="form-control" name="telefono">
 								</div>

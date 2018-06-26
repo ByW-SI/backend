@@ -16,7 +16,7 @@
 					<tr>
 						<th scope="col" style="width: 190px">Nombre del viñedo</th>
 						<th scope="col">Año</th>
-						<th scope="col">Filosofía</th>
+						<th scope="col" style="width: 500px;">Filosofía</th>
 						<th scope="col">Locación</th>
 						<th scope="col">Enologo</th>
 						<th scope="col">Viñas</th>
