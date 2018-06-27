@@ -16,6 +16,8 @@ class EnologoController extends Controller
     public function index()
     {
         //
+        $enologos= Enologo::paginate(15);
+        return view('enologo.index',['enologos'=>$enologos]);
     }
 
     /**
