@@ -3,35 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 class Barrica extends Model
 {
     //
-    use SoftDeletes;
     protected $table="barrica";
-
-    protected $fillable =[
+    protected $fillable=[
     	'id',
-    	'tipo_bar',
-    	'uva_vinicola_id',
-    	'vinicola_id',
-    	'precio_barrica',
-    	'precio_publico',
+    	'producido_type',
+    	'producido_id',
+    	'barrica_bodega_id',
+    	'uva',
+    	'fecha_inicio',
+    	'fecha_embotellado',
+    	'meses_barrica',
+    	'meses_estabilizacion',
+    	'precio_uva',
+    	'precio_prod',
+    	'precio_venta',
+    	'fecha_envio'
     ];
-
-    protected $hidden =[
+    protected $hidden=[
     	'created_at',
-    	'updated_at',
+    	'updated_at'
     ];
 
-    public function vinicola(){
-    	return $this->belongsTo('App\Vinicola', 'vinicola_id');
-    }
 
-    public function uvaVin(){
-    	return $this->belongsTo('App\UvaVinicola', 'uva_vinicola_id');
+    public function producido(){
+    	return $this->morphTo();
     }
-
 }

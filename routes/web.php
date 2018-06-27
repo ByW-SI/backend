@@ -20,9 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('uvas','Web\Uva\UvaController');
 Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
-Route::resource('vinicolas.marcas','Web\Vinicola\VinicolaMarcasController');
-Route::resource('vinicolas.uvas','Web\Vinicola\VinicolaUvasController');
-Route::resource('vinicolas.barricas','Web\Vinicola\VinicolaBarricasController');
+Route::resource('enologos','Web\Enologo\EnologoController');
+Route::resource('vinicolas','Web\Vinicola\VinicolaController');
+Route::resource('bodegas','Web\Bodega\BodegaController');
+Route::resource('bodegas.barricas','Web\Bodega\BodegaBarricaController');
+Route::resource('productores','Web\Productor\ProductorController');
+Route::resource('barricas','Web\Barrica\BarricaController');
 Route::resource('empleados','Web\Empleados\EmpleadosController');
 Route::get('clientes', function(){
 	return view('reporte.cliente');

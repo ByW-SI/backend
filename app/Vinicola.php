@@ -7,46 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class Vinicola extends Model
 {
     //
-
     protected $table="vinicola";
 
     protected $fillable=[
     	'id',
+    	'tipo',
     	'nombre',
     	'distinciones',
     	'inicio',
     	'filosofia',
     	'locacion',
-    	'enologo',
-    	'wine_maker',
-    	'vinas',
+    	'lat',
+    	'long',
     	'contacto',
     	'puesto',
     	'correo',
     	'celular',
-        'long',
-        'lat',
     	'telefono',
-    	'observacion',
-        'fecha_observacion'
+    	'comentarios',
+    	'hectareas',
+    	'uvas'
     ];
-
+    
     protected $hidden=[
     	'created_at',
     	'updated_at'
     ];
-
-    public function marcas(){
-        return $this->hasMany('App\Marca', 'vinicola_id','id');
-    }
-
-    public function uvas(){
-        return $this->hasMany('App\UvaVinicola','vinicola_id','id');
-    }
-    public function barricas(){
-        return $this->hasMany('App\Barrica','vinicola_id','id');
-    }
-    public function getMapLink(){
-        return 'https://www.google.com.mx/maps?q=' . $this->lat . ',' . $this->long;
+    public function productores()
+    {
+    	return $this->hasMany('App\Productor','vinicola_id','id');
     }
 }
