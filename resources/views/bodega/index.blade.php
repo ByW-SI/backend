@@ -79,7 +79,7 @@
 								<form action="{{ route('bodegas.destroy',[$bodega]) }}" method="POST">
 									<input type="hidden" name="_method" value="DELETE">
 									@csrf
-									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar este {{$bodega->tipo}}?');">Eliminar</button>
+									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar esta bodega?');">Eliminar</button>
 								</form>
 							</th>
 						</tr>

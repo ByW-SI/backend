@@ -51,7 +51,7 @@
 								{{-- expr --}}
 							<div class="form-group row">
 								<div class="container">
-									<img src="{{ url($uva->logo) }}" >
+									<img src="{{ url($bodega->logo) }}" >
 								</div>
 							</div>
 							@endif
@@ -66,7 +66,7 @@
 								{{-- expr --}}
 							<div class="form-group row">
 								<div class="container">
-									<img src="{{ url($uva->logo) }}" >
+									<img src="{{ url($bodega->marca) }}" >
 								</div>
 							</div>
 						@endif
@@ -230,25 +230,25 @@
 					<div class="form-group row field_wrappers" >
 						<label for='barricas' class="col-md-4 col-form-label text-md-right">Barrica(s):</label>
 						<div class="input-group col-md-8">
-					        <select id="barrica" class="form-control" required name="tipo_barrica[]">
+					        <select id="barrica" class="form-control" {{ $edit ? '' : 'required'}} name="tipo_barrica[]">
 					        	<option value="">Seleccione su barrica</option>
 					        	<option value="Americana">Americana</option>
 					        	<option value="Europea">Europea</option>
 					        	<option value="Bosques de europa central">Bosques de europa central</option>
 					        </select>
-					        <select id="subtipo" class="form-control" name="subtipo_barrica[]" required>
+					        <select id="subtipo" class="form-control" name="subtipo_barrica[]" {{ $edit ? '' : 'required'}}>
 					        	<option value="">Seleccione su subtipo barrica</option>
 					        	<option value="1">1</option>
 					        	<option value="2">2</option>
 					        	<option value="3">3</option>
 					        </select>
-					        <select id="tostado" class="form-control" name="tostado_barrica[]" required>
+					        <select id="tostado" class="form-control" name="tostado_barrica[]" {{ $edit ? '' : 'required'}}>
 					        	<option value="">Seleccione su tostado de barrica</option>
 					        	<option value="Ligero">Ligero</option>
 					        	<option value="Medio">Medio</option>
 					        	<option value="Alto">Alto</option>
 					        </select>
-					        <input type="number" step="1" min="1" placeholder="Cantidad" class="form-control" name="cantidad[]" required value=""/>
+					        <input type="number" step="1" min="1" placeholder="Cantidad" class="form-control" name="cantidad[]" {{ $edit ? '' : 'required'}} value=""/>
 					        <div class="input-group-append">
 								<span class="input-group-text"><strong>barrica(s)</strong></span>
 							</div>

@@ -150,7 +150,7 @@ class BodegaController extends Controller
         $uvas= Uva::orderBy('title','asc')->get();
         $enologos=Enologo::where('tipo','Enólogo')->orderBy('nombre','asc')->get();
         $wine_makers=Enologo::where('tipo','Wine Maker')->orderBy('nombre','asc')->get();
-        return view('bodega.form',['edit'=>$edit,'uvas'=>$uvas,'enologos'=>$enologos,'wine_makers'=>$wine_makers]);
+        return view('bodega.form',['edit'=>$edit,'bodega'=>$bodega,'uvas'=>$uvas,'enologos'=>$enologos,'wine_makers'=>$wine_makers]);
         //
     }
 
