@@ -4,46 +4,11 @@
 	
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="col-md-10">
 				<div class="card">
 					<div class="card-header">
-						Vinicola/Bodega
-					</div>
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<a class="nav-link active" href="#">Nueva bodega</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link {{$edit ? '' : 'disabled'}}" @if ($edit == true)
-								{{-- true expr --}}
-								href="{{ route('vinicolas.marcas.index',['vinicola'=>$vinicola]) }}" 
-							@else
-								{{-- false expr --}}
-								href="#" 
-								onclick="disabled('marcas')"
-							@endif>Marcas de la bodega</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link {{$edit ? '' : 'disabled'}}" @if ($edit == true)
-								{{-- true expr --}}
-								href="{{ route('vinicolas.uvas.index',['vinicola'=>$vinicola]) }}" 
-							@else
-								{{-- false expr --}}
-								href="#" 
-								onclick="disabled('uvas')"
-							@endif>Tipo de uvas</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link {{$edit ? '' : 'disabled'}}" @if ($edit == true)
-								{{-- true expr --}}
-								href="{{ route('vinicolas.barricas.index',['vinicola'=>$vinicola]) }}" 
-							@else
-								{{-- false expr --}}
-								href="#" 
-								onclick="disabled('barricas')"
-							@endif>Barricas</a>
-						</li>
-					</ul>
+						Vinicola/Rancho
+					</div>						
 					<div class="card-body">
 						<form method="POST" action="{{ $edit == false ? route('vinicolas.store') : route('vinicolas.update',['vinicola'=>$vinicola]) }}">
 							@csrf
@@ -54,7 +19,7 @@
 							@endif
 
 							<div class="form-group row">
-								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre de la bodega:</label>
+								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre de la vinicola/rancho:</label>
 								<div class="col-md-6">
 									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $vinicola->nombre : old('nombre') }}" required autofocus="">
 									@if ($errors->has('nombre'))
@@ -65,6 +30,31 @@
 									@endif
 								</div>
 							</div>
+
+							<div class="form-group row">
+								<label for="tipo" class="col-md-4 col-form-label text-md-right">Tipo:</label>
+								<div class="col-md-6">
+									<select id="tipo" class="form-control {{ $errors->has('tipo') ? ' is-invalid' : ''  }}" name="tipo" required autofocus="">
+										<option value="">Seleccione el tipo</option>
+										<option value="Vinicola" @if ($edit && $vinicola->tipo == "Vinicola")
+											{{-- expr --}}
+											selected 
+										@endif>Vinicola</option>
+										<option value="Rancho" @if ($edit && $vinicola->tipo == "Rancho")
+											{{-- expr --}}
+											selected 
+										@endif>Rancho</option>
+									</select>
+									@if ($errors->has('tipo'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("tipo")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+
+
 							<div class="form-group row">
 								<label for="distinciones" class="col-md-4 col-form-label text-md-right">Distinciones:</label>
 								<div class="col-md-6">
@@ -77,6 +67,9 @@
 									@endif
 								</div>
 							</div>
+
+
+
 							<div class="form-group row">
 								<label for="inicio" class="col-md-4 col-form-label text-md-right">Año de inicio:</label>
 								<div class="col-md-6">
@@ -117,30 +110,8 @@
 								<input name="mapinput" id="pac-input" class="form-control" type="text" style="width: 85%;">
 								<div id="map" style="height: 400px;width: 90%;margin-left: 30px;"></div>
 							</div>
-							<div class="form-group row">
-								<label for="enologo" class="col-md-4 col-form-label text-md-right">Enologo:</label>
-								<div class="col-md-6">
-									<input id="enologo" type="text" class="form-control {{ $errors->has('enologo') ? ' is-invalid' : ''  }}" name="enologo" value="{{ $edit ? $vinicola->enologo : old('enologo') }}" required>
-									@if ($errors->has('enologo'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("enologo")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="wine_maker" class="col-md-4 col-form-label text-md-right">Wine Maker:</label>
-								<div class="col-md-6">
-									<input id="wine_maker" type="text" class="form-control {{ $errors->has('wine_maker') ? ' is-invalid' : ''  }}" name="wine_maker" value="{{ $edit ? $vinicola->wine_maker : old('wine_maker') }}">
-									@if ($errors->has('wine_maker'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("wine_maker")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
+							
+							
 							<div class="form-group row">
 								<label for="contacto" class="col-md-4 col-form-label text-md-right">Nombre completo del contacto:</label>
 								<div class="col-md-6">
@@ -200,30 +171,58 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="observacion" class="col-md-4 col-form-label text-md-right">Observación de la bodega:</label>
+								<label for="comentarios" class="col-md-4 col-form-label text-md-right">Comentarios de la bodega:</label>
 								<div class="col-md-6">
-									<input type="date" class="form-control {{$errors->has('fecha_observacion') ? ' is-invalid' : ''  }}" name="fecha_observacion" value="{{$edit ? $vinicola->fecha_observacion : old('fecha_observacion')}}" style="margin-bottom: 3px;">
-									@if ($errors->has('observacion'))
+									<textarea id="comentarios" class="form-control {{$errors->has('comentarios') ? ' is-invalid' : ''  }}" name="comentarios" value="{{ old('comentarios') }}">{{ $edit ? $vinicola->comentarios : old('comentarios') }}</textarea>
+									@if ($errors->has('comentarios'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
-											<strong>{{ $errors->first("observacion")}}</strong>
-										</span>
-									@endif
-									<textarea id="observaciones" class="form-control {{$errors->has('observaciones') ? ' is-invalid' : ''  }}" name="observaciones" value="{{ old('observaciones') }}">{{ $edit ? $vinicola->observaciones : old('observaciones') }}</textarea>
-									@if ($errors->has('observaciones'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("observaciones")}}</strong>
+											<strong>{{ $errors->first("comentarios")}}</strong>
 										</span>
 									@endif
 								</div>
+							</div>
+							<div class="form-group row">		
+								<label for="hectareas" class="col-md-4 col-form-label text-md-right">Hectareas totales:</label>
+								<div class="input-group col-md-6">
+									<input type="number" class="form-control {{ $errors->has('hectareas') ? 'is-invalid' : '' }}" name="hectareas" min="0" step="0.01" value="{{$edit ? $uva->hectareas : old('hectareas')}}">
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>ha</strong></span>
+									</div>
+									@if ($errors->has('hectareas'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("hectareas")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group row field_wrapper">
+								<label for='uva' class="col-md-4 col-form-label text-md-right">Uva:</label>
+								<div class="input-group col-md-6">
+							        <select id="uva" class="form-control" name="uva[]">
+							        	<option value="">Seleccione su uva</option>
+							        	@forelse ($uvas as $uva)
+							        		{{-- expr --}}
+							        		<option value="{{$uva->id}}">{{$uva->title}}</option>
+							        	@empty
+							        		{{-- empty expr --}}
+							        	@endforelse
+							        </select>
+							        <input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/>
+							        <div class="input-group-append">
+    									<span class="input-group-text"><strong>ha</strong></span>
+									</div>
+							        <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus"></i></a>
+							    </div>
 							</div>
 							
 
 						<div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Registrar bodega
+                                    Registrar vinicola/rancho
                                 </button>
                             </div>
                         </div>
@@ -237,15 +236,33 @@
 	</div>
 @endsection
 @section('script')
-	{{-- expr --}}
+
 	<script type="text/javascript">
-		function disabled(text) {
-			// body...
-			alert("Por favor registrar la bodega antes de agregar las "+text);
-		}
-	</script>
-    {{-- <script> --}}
-    <script>
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option>@foreach ($uvas as $uva)<option value="{{$uva->id}}">{{$uva->title}}</option>@endforeach</select><input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+});
+</script>	
+    {{-- <script>
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");
@@ -364,7 +381,7 @@
       });
     }
 	</script>
-
+ --}}
 
 	  {{-- function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {

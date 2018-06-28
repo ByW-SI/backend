@@ -24,7 +24,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@forelse ($enologos as $enologos)
+					@forelse ($enologos as $enologo)
 						{{-- expr --}}
 						<tr>
 							<th col="row">{{$enologo->nombre}}</th>
@@ -35,7 +35,8 @@
 								<a class="btn btn-default" href="{{ route('enologos.edit',[$enologo]) }}">Editar</a>
 								<form action="{{ route('enologos.destroy',[$enologo]) }}" method="POST">
 									<input type="hidden" name="_method" value="DELETE">
-									<button type="submit" onclick="return confirm('¿Estás seguro que desea eliminar este enologo?');"></button>
+									@csrf
+									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar este enologo?');">Eliminar</button>
 								</form>
 							</th>
 

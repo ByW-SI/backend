@@ -25,8 +25,7 @@ class Vinicola extends Model
     	'celular',
     	'telefono',
     	'comentarios',
-    	'hectareas',
-    	'uvas'
+    	'hectareas'
     ];
     
     protected $hidden=[
@@ -36,5 +35,12 @@ class Vinicola extends Model
     public function productores()
     {
     	return $this->hasMany('App\Productor','vinicola_id','id');
+    }
+    public function uvasVin()
+    {
+        return $this->hasMany('App\UvaVinicola','vinicola_id','id');
+    }
+    public function getMapLink(){
+        return 'https://www.google.com.mx/maps?q=' . $this->lat . ',' . $this->long;
     }
 }

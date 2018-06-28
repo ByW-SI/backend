@@ -28,6 +28,8 @@ class EnologoController extends Controller
     public function create()
     {
         //
+        $edit= false;
+        return view('enologo.form',['edit'=>$edit]);
     }
 
     /**
@@ -39,6 +41,15 @@ class EnologoController extends Controller
     public function store(Request $request)
     {
         //
+        $rules = [
+            'nombre'=>'required',
+            'paterno'=>"required",
+            'tipo'=>'required',
+            'cv'=>"required"
+        ];
+        $this->validate($request,$rules);
+        $enologo=Enologo::create($request->all());
+        return redirect()->route('enologos.index');
     }
 
     /**
@@ -61,6 +72,9 @@ class EnologoController extends Controller
     public function edit(Enologo $enologo)
     {
         //
+        // dd($enologo);
+         $edit= true;
+        return view('enologo.form',['edit'=>$edit,'enologo'=>$enologo]);
     }
 
     /**
@@ -73,6 +87,15 @@ class EnologoController extends Controller
     public function update(Request $request, Enologo $enologo)
     {
         //
+        $rules = [
+            'nombre'=>'required',
+            'paterno'=>"required",
+            'tipo'=>'required',
+            'cv'=>"required"
+        ];
+        $this->validate($request,$rules);
+        $enologo->update($request->all());
+        return redirect()->route('enologos.index');
     }
 
     /**
@@ -84,5 +107,7 @@ class EnologoController extends Controller
     public function destroy(Enologo $enologo)
     {
         //
+        $enologo->delete();
+        return redirect()->route('enologos.index');
     }
 }

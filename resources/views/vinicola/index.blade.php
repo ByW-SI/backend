@@ -2,24 +2,27 @@
 @section('content')
 	{{-- expr --}}
 	<div class="container-fluid">
-		<div class="col-6 input-group input-group-lg mb-3">
-		  <div class="input-group-prepend">
-		    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-		  </div>
-		  <input type="text" class="form-control" placeholder="Buscar.." aria-label="Buscar.." aria-describedby="basic-addon1">
+		<div class="container">
+			<div class="col">
+				<h1>Vinicolas/Ranchos</h1>
+			</div>
+			<div class="col-3 input-group input-group-lg mb-3">
+		  		<a href="{{ route('vinicolas.create') }}" class="btn btn-primary">Agregar Nuevo Vinicola/Rancho</a>
+			</div>
 		</div>
+		<br>
+		<br>
 		<br>
 		<br>
 		<div class="container-fluid">
 			<table class="table">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col" style="width: 190px">Nombre del viñedo</th>
-						<th scope="col">Año</th>
+						<th scope="col" style="width: 190px">Nombre</th>
+						<th scope="col">tipo</th>
 						<th scope="col" style="width: 500px;">Filosofía</th>
 						<th scope="col">Locación</th>
-						<th scope="col">Enologo</th>
-						<th scope="col">Viñas</th>
+						<th scope="col">Uvas</th>
 						<th scope="col">Telefono</th>
 						<th scope="col">Accion</th>
 					</tr>
@@ -29,28 +32,27 @@
 						{{-- expr --}}
 						<tr>
 							<th scope="row">{{$vinicola->nombre}}</th>
-							<th>{{$vinicola->inicio}}</th>
+							<th>{{$vinicola->tipo}}</th>
 							<th>{{$vinicola->filosofia}}</th>
 							<th>{{$vinicola->locacion}}
 								<br>
 								<a href="{{$vinicola->getMapLink()}}" target="_blank">Ver en Google Maps</a>
 							</th>
-							<th>{{$vinicola->enologo}}</th>
-							<th>@forelse ($vinicola->uvas as $uva)
-								{{-- expr --}}
-								{{$uva->nombre}}<br>
-								@empty
-								Sin uvas
-							@endforelse</th>
+							<th></th>
 							<th>{{$vinicola->telefono}}</th>
 							<th>
-								<a href="{{ route('vinicolas.show',['vinicola'=>$vinicola]) }}">Ver/editar</a>
-								{{-- <a href="#">Borrar</a> --}}
-
+								<a class="btn btn-default" href="{{ route('vinicolas.edit',[$vinicola]) }}">Editar</a>
+								<form action="{{ route('vinicolas.destroy',[$vinicola]) }}" method="POST">
+									<input type="hidden" name="_method" value="DELETE">
+									@csrf
+									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar este {{$vinicola->tipo}}?');">Eliminar</button>
+								</form>
 							</th>
 						</tr>
 					@empty
-						{{-- empty expr --}}
+						<div class="alert alert-danger" role="alert">
+							<span>No hay vinicolas/ranchos</span>
+						</div>
 					@endforelse
 				</tbody>
 			</table>

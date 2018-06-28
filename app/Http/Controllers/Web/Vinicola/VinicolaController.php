@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Vinicola;
 
 use App\Vinicola;
+use App\UvaVinicola;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -30,7 +31,8 @@ class VinicolaController extends Controller
     {
         //
         $edit = false;
-        return view('vinicola.form',['edit'=>$edit]);
+        $uvas= Uva::get();
+        return view('vinicola.form',['edit'=>$edit,'uvas'=>$uvas]);
     }
 
     /**
@@ -42,18 +44,27 @@ class VinicolaController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
+        // dd(sizeof($request->input('uva')));
         $rules = [
             'nombre'=> 'required|unique:vinicola',
+            'tipo' => 'required',
             'inicio'=> 'required',
             'filosofia'=> 'required',
             'locacion'=> 'required',
-            'enologo'=> 'required',
+
             'telefono'=> 'required'
         ];
         $validater = $this->validate($request,$rules);
         $vinicola = Vinicola::create($request->all());
-        return redirect()->route('vinicolas.marcas.create',['vinicola'=>$vinicola]);
+        for ($i = 0; $i < sizeof($request->input('uva')) ; $i++) {
+            UvaVinicola::create([
+                'vinicola_id'=>$vinicola->id,
+                'uva_id'=>$request->uva[$i],
+                'hectarea'=>$request->hectarea[$i]
+            ]);
+            
+        }
+        return redirect()->route('vinicolas.index');
     }
 
     /**

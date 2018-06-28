@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"> --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/fileinput.css') }}"> --}}
 
 
@@ -181,6 +182,7 @@
     <script type="text/javascript" src="{{ asset('js/plugins/sortable.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/locales/es.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('js/all.js') }}"></script>
     @yield('script')
 </body>
 
