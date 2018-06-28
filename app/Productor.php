@@ -40,4 +40,8 @@ class Productor extends Model
     public function barricas_producidas(){
     	return $this->morphMany('App\Barricas','producido');
     }
+
+    public function getMapLink(){
+        return 'https://www.google.com.mx/maps?q=' . $this->lat . ',' . $this->long;
+    }
 }

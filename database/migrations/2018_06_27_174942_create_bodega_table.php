@@ -19,9 +19,10 @@ class CreateBodegaTable extends Migration
             $table->string('marcas')->nullable();
             $table->string('logo')->nullable();
             $table->string('vista')->nullable();
+            $table->text('descripcion');
             $table->string('locacion');
-            $table->double('long',20,17)->default(0.00000);
-            $table->double('lat',20,17)->default(0.00000);
+            $table->double('long',20,17)->nullable();
+            $table->double('lat',20,17)->nullable();
             $table->integer('enologo_id')->unsigned()->nullable();
             $table->foreign('enologo_id')->references('id')->on('enologo');
             $table->integer('wine_maker_id')->unsigned()->nullable();
@@ -31,10 +32,11 @@ class CreateBodegaTable extends Migration
             $table->string('correo')->nullable();
             $table->string('celular')->nullable();
             $table->string('telefono');
-            $table->boolean('productora')->default(false);
-            $table->integer('vinicola_id')->unsigned()->nullable();
-            $table->foreign('vinicola_id')->references('id')->on('vinicola');
-            $table->text('uvas')->nullable();
+            $table->boolean('productora')->nullable();
+            $table->text('comentarios')->nullable();
+            // $table->integer('vinicola_id')->unsigned()->nullable();
+            // $table->foreign('vinicola_id')->references('id')->on('vinicola');
+            // $table->text('uvas')->nullable();
             $table->timestamps();
         });
     }

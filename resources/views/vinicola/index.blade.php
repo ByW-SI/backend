@@ -38,7 +38,20 @@
 								<br>
 								<a href="{{$vinicola->getMapLink()}}" target="_blank">Ver en Google Maps</a>
 							</th>
-							<th></th>
+							<th>
+								@forelse ($vinicola->uvasVin as $uvaVin)
+									{{-- expr --}}
+									{{$uvaVin->uva['title']}} {{$uvaVin->hectarea}} ha
+									<form action="{{ route('uvas.destroy',['uvaVin'=>$uvaVin]) }}" method="POST">
+									@csrf
+									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar esta uva?');">Eliminar</button>
+								</form>
+								
+								@empty
+									{{-- empty expr --}}
+									No tienes uvas
+								@endforelse
+							</th>
 							<th>{{$vinicola->telefono}}</th>
 							<th>
 								<a class="btn btn-default" href="{{ route('vinicolas.edit',[$vinicola]) }}">Editar</a>

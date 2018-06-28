@@ -15,6 +15,7 @@ class Bodega extends Model
     	'marcas',
     	'logo',
     	'vista',
+        'descripcion',
     	'locacion',
     	'long',
     	'lat',
@@ -26,8 +27,7 @@ class Bodega extends Model
     	'celular',
     	'telefono',
     	'productora',
-    	'vinicola_id',
-    	'uvas'
+        'comentarios'
     ];
     protected $hidden=[
     	'created_at',
@@ -42,6 +42,9 @@ class Bodega extends Model
     {
     	return $this->belongsTo('App\Enologo','wine_maker_id');
     }
+    public function uvasBod(){
+        return $this->morphMany('App\UvaProducida','producidas');
+    }
 
     public function barricas()
     {
@@ -53,5 +56,9 @@ class Bodega extends Model
     }
     public function barricas_producidas(){
     	return $this->morphMany('App\Barrica','producido');
+    }
+
+    public function getMapLink(){
+        return 'https://www.google.com.mx/maps?q=' . $this->lat . ',' . $this->long;
     }
 }

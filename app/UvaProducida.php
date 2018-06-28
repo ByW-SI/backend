@@ -4,16 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UvaVinicola extends Model
+class UvaProducida extends Model
 {
     //
-    protected $table="uvas_vinicola";
+    protected $table="uva_producida";
 
     protected $fillable=[
     	'id',
     	'uva_id',
     	'hectarea',
-    	'vinicola_id'
+    	'producidas_type',
+    	'producidas_id'
     ];
 
     protected $hidden=[
@@ -21,9 +22,9 @@ class UvaVinicola extends Model
     	'updated_at'
     ];
 
-    public function vinicola()
+    public function producidas()
     {
-    	return $this->belongsTo('App\Vinicola','vinicola_id');
+        return $this->morphTo();
     }
     public function uva()
     {

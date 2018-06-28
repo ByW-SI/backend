@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Web\Vinicola;
 
 use App\Vinicola;
-use App\UvaVinicola;
+use App\UvaProducida;
+use App\Uva;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -31,7 +32,7 @@ class VinicolaController extends Controller
     {
         //
         $edit = false;
-        $uvas= Uva::get();
+        $uvas= Uva::orderBy('title','asc')->get();
         return view('vinicola.form',['edit'=>$edit,'uvas'=>$uvas]);
     }
 
@@ -57,8 +58,9 @@ class VinicolaController extends Controller
         $validater = $this->validate($request,$rules);
         $vinicola = Vinicola::create($request->all());
         for ($i = 0; $i < sizeof($request->input('uva')) ; $i++) {
-            UvaVinicola::create([
-                'vinicola_id'=>$vinicola->id,
+            UvaProducida::create([
+                'producidas_id'=>$vinicola->id,
+                'producidas_type'=>"App\Vinicola",
                 'uva_id'=>$request->uva[$i],
                 'hectarea'=>$request->hectarea[$i]
             ]);
@@ -90,7 +92,8 @@ class VinicolaController extends Controller
     {
         //
         $edit = true;
-        return view('vinicola.form',['vinicola'=>$vinicola,'edit'=>$edit]);
+        $uvas= Uva::orderBy('title','asc')->get();
+        return view('vinicola.form',['vinicola'=>$vinicola,'edit'=>$edit,'uvas'=>$uvas]);
     }
 
     /**
@@ -105,17 +108,43 @@ class VinicolaController extends Controller
         //
         // dd($request->all());
         // dd($vinicola);
-        $rules = [
+         $rules = [
+            // 'nombre'=> 'required|unique:vinicola',
+            'tipo' => 'required',
             'inicio'=> 'required',
             'filosofia'=> 'required',
             'locacion'=> 'required',
-            'enologo'=> 'required',
+
             'telefono'=> 'required'
         ];
-        $this->validate($request,$rules);
-        $vinicola->update($request->all());
+        $validater = $this->validate($request,$rules);
+        $vinicola->update([
+            'tipo'=>$request->tipo,
+            'distinciones'=>$request->distinciones,
+            'inicio'=>$request->inicio,
+            'filosofia'=>$request->filosofia,
+            'locacion'=>$request->locacion,
+            'lat'=>$request->lat,
+            'long'=>$request->long,
+            'contacto'=>$request->contacto,
+            'puesto'=>$request->puesto,
+            'correo'=>$request->correo,
+            'celular'=>$request->celular,
+            'telefono'=>$request->telefono,
+            'comentarios'=>$request->comentarios,
+            'hectareas'=>$request->hectareas
+        ]);
+        for ($i = 0; $i < sizeof($request->input('uva')) ; $i++) {
+            UvaProducida::create([
+                'producidas_id'=>$vinicola->id,
+                'producidas_type'=>"App\Vinicola",
+                'uva_id'=>$request->uva[$i],
+                'hectarea'=>$request->hectarea[$i]
+            ]);
+            
+        }
         // $vinicola->save();
-        return redirect()->route('vinicolas.show',['vinicola'=>$vinicola]);
+        return redirect()->route('vinicolas.index');
     }
 
     /**
@@ -127,5 +156,10 @@ class VinicolaController extends Controller
     public function destroy(Vinicola $vinicola)
     {
         //
+        foreach ($vinicola->uvasVin as $uvaVin) {
+            $uvaVin->delete();
+        }
+        $vinicola->delete();
+        return redirect()->route('vinicolas.index');
     }
 }

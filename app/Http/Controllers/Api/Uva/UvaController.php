@@ -16,7 +16,7 @@ class UvaController extends Controller
     public function index()
     {
         //
-        $uvas = Uva::get();
+        $uvas = Uva::orderBy('title','asc')->get();
         
         return response()->json(['uvas'=>$uvas],202);
         

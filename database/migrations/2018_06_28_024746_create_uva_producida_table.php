@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUvasVinicolaTable extends Migration
+class CreateUvaProducidaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateUvasVinicolaTable extends Migration
      */
     public function up()
     {
-        Schema::create('uvas_vinicola', function (Blueprint $table) {
+        Schema::create('uva_producida', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('uva_id')->unsigned();
             $table->foreign('uva_id')->references('id')->on('uvas');
             $table->decimal('hectarea',5,2);
-            $table->integer('vinicola_id')->unsigned();
-            $table->foreign('vinicola_id')->references('id')->on('vinicola');
+            $table->morphs('producidas'); 
+            // $table->integer('vinicola_id')->unsigned();
+            // $table->foreign('vinicola_id')->references('id')->on('vinicola');
             $table->timestamps();
         });
     }

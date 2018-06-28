@@ -21,7 +21,7 @@
 							<div class="form-group row">
 								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre de la vinicola/rancho:</label>
 								<div class="col-md-6">
-									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $vinicola->nombre : old('nombre') }}" required autofocus="">
+									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $vinicola->nombre : old('nombre') }}" {{ $edit ? 'disabled' : "" }} required autofocus="">
 									@if ($errors->has('nombre'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -185,7 +185,7 @@
 							<div class="form-group row">		
 								<label for="hectareas" class="col-md-4 col-form-label text-md-right">Hectareas totales:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('hectareas') ? 'is-invalid' : '' }}" name="hectareas" min="0" step="0.01" value="{{$edit ? $uva->hectareas : old('hectareas')}}">
+									<input type="number" class="form-control {{ $errors->has('hectareas') ? 'is-invalid' : '' }}" name="hectareas" min="0" step="0.01" value="{{$edit ? $vinicola->hectareas : old('hectareas')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>ha</strong></span>
 									</div>
@@ -262,7 +262,7 @@ $(document).ready(function(){
     });
 });
 </script>	
-    {{-- <script>
+    <script>
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");
@@ -381,7 +381,7 @@ $(document).ready(function(){
       });
     }
 	</script>
- --}}
+
 
 	  {{-- function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
