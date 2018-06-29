@@ -16,7 +16,7 @@ class CreateProductorTable extends Migration
         Schema::create('productor', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre')->unique();
-            $table->string('locación');
+            $table->string('locacion');
             $table->double('long',20,17)->default(0.00000);
             $table->double('lat',20,17)->default(0.00000);
             $table->string('contacto')->nullable();
@@ -29,7 +29,8 @@ class CreateProductorTable extends Migration
             $table->foreign('bodega_id')->references('id')->on('bodega');
             $table->integer('vinicola_id')->unsigned();
             $table->foreign('vinicola_id')->references('id')->on('vinicola');
-            $table->text('uvas');
+            $table->text('descripcion')->nullable();
+            // $table->text('uvas');
             $table->timestamps();
         });
     }

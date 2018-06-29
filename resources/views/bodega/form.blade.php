@@ -36,7 +36,7 @@
 							<div class="form-group row">
 								<label for="marcas" class="col-md-4 col-form-label text-md-right">marcas de la bodega (enlistarlas con ,):</label>
 								<div class="col-md-6">
-									<input id="marcas" type="text" class="form-control {{ $errors->has('marcas') ? ' is-invalid' : ''  }}" name="marcas" value="{{ $edit ? $bodega->marcas : old('marcas') }}" {{ $edit ? 'disabled' : "" }} required autofocus="">
+									<input id="marcas" type="text" class="form-control {{ $errors->has('marcas') ? ' is-invalid' : ''  }}" name="marcas" value="{{ $edit ? $bodega->marcas : old('marcas') }}" required autofocus="">
 									@if ($errors->has('marcas'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -47,11 +47,11 @@
 							</div>
 
 {{-- Logo --}}
-							@if ($edit)
+							@if ($edit && $bodega->logo != null )
 								{{-- expr --}}
 							<div class="form-group row">
 								<div class="container">
-									<img src="{{ url($bodega->logo) }}" >
+									<img src="{{ url('storage/'.$bodega->logo) }}" style="height: 50px">
 								</div>
 							</div>
 							@endif
@@ -62,11 +62,11 @@
 							<br>
 
 {{-- Vista --}}
-						@if ($edit)
+						@if ($edit && $bodega->vista != null)
 								{{-- expr --}}
 							<div class="form-group row">
 								<div class="container">
-									<img src="{{ url($bodega->marca) }}" >
+									<img src="{{ url('storage/'.$bodega->vista) }}" style="height: 50px">
 								</div>
 							</div>
 						@endif
@@ -98,7 +98,10 @@
 										<option value="">Seleccione el enólogo</option>
 										@foreach ($enologos as $enologo)
 											{{-- expr --}}
-											<option value="{{$enologo->id}}">{{$enologo->nombre}} {{$enologo->paterno}} {{$enologo->materno}}</option>
+											<option value="{{$enologo->id}}" @if ($edit && $bodega->enologo_id == $enologo->id)
+												{{-- expr --}}
+												selected 
+											@endif>{{$enologo->nombre}} {{$enologo->paterno}} {{$enologo->materno}}</option>
 										@endforeach
 									</select>
 									@if ($errors->has('enologo_id'))
@@ -119,7 +122,10 @@
 										<option value="">Seleccione Wine Maker</option>
 										@foreach ($wine_makers as $wine_maker)
 											{{-- expr --}}
-											<option value="{{$wine_maker->id}}">{{$wine_maker->nombre}} {{$wine_maker->paterno}} {{$wine_maker->materno}}</option>
+											<option value="{{$wine_maker->id}}" @if ($edit && $bodega->wine_maker_id == $wine_maker->id)
+												{{-- expr --}}
+												selected 
+											@endif>{{$wine_maker->nombre}} {{$wine_maker->paterno}} {{$wine_maker->materno}}</option>
 										@endforeach
 									</select>
 									@if ($errors->has('wine_maker_id'))
@@ -262,7 +268,10 @@
 								<label for="nombre" class="col-md-4 col-form-label text-md-right">¿Es productora?:</label>
 								<div class="col-md-6">
 									<div class="custom-control custom-checkbox">
-									  <input type="checkbox" class="custom-control-input" id="customCheck1" name="productora" value="true" onchange="change(this)">
+									  <input type="checkbox" class="custom-control-input" id="customCheck1" name="productora" value="true" onchange="change(this)" @if ($edit && $bodega->productora == true)
+									  	{{-- expr --}}
+									  	checked 
+									  @endif>
 									  <label class="custom-control-label" for="customCheck1">Si</label>
 									</div>
 									@if ($errors->has('nombre'))
@@ -274,7 +283,10 @@
 								</div>
 							</div>
 {{-- uvas --}}
-					<div class="form-group row field_wrapper" style="display: none;" id="uvas">
+					<div class="form-group row field_wrapper" @if ($edit==false || $bodega->productora== false)
+						{{-- expr --}}
+						style="display: none;"
+					@endif id="uvas">
 						<label for='uva' class="col-md-4 col-form-label text-md-right">Uva:</label>
 						<div class="input-group col-md-6">
 					        <select id="uva" class="form-control" name="uva[]">
