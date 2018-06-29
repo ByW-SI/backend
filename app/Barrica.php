@@ -32,4 +32,7 @@ class Barrica extends Model
     public function producido(){
     	return $this->morphTo();
     }
+    public function barrica_bodega(){
+        return $this->belongsTo('App\BarricaBodega','barrica_bodega_id');
+    }
 }

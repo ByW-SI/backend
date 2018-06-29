@@ -16,6 +16,9 @@ class BarricaController extends Controller
     public function index()
     {
         //
+        $barricas = Barrica::orderBy('uva','asc')->paginate(5);
+
+        return view('barrica.index',['barricas'=>$barricas]);
     }
 
     /**
@@ -26,6 +29,10 @@ class BarricaController extends Controller
     public function create()
     {
         //
+        $productoras = Productor::orderBy('nombre','asc')->get();
+        $bodegas = Bodega::orderBy('nombre','asc')->get();
+        $edit = false;
+        return view('barrica.form',['productoras'=>$productoras,'bodegas'=>$bodegas,'edit'=>$edit]);
     }
 
     /**
@@ -37,6 +44,15 @@ class BarricaController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->producido_type == "App\Productor") {
+            $barrica = Barrica::create([
+                'producido_type' == 'App\Productor',
+            ]);
+        } else {
+            $barrica = Barrica::create([
+                'producido_type' == 'App\Bodega',
+            ]);
+        }
     }
 
     /**

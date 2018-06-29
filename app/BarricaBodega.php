@@ -25,4 +25,8 @@ class BarricaBodega extends Model
     {
     	return $this->belongsTo('App\Bodega','bodega_id');
     }
+
+    public function barricasProducida(){
+        return $this->hasMany('App\Barrica','barrica_bodega_id','id');
+    }
 }
