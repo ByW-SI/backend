@@ -77,6 +77,11 @@
 
                     <ul class="header__nav">
                         <li class="current"><a href="{{ url('/') }}" title="">Principal</a></li>
+                        <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
+                        <li class="current"><a href="{{ route('vinicolas.index') }}" title="">Vinicolas</a></li>
+                        <li class="current"><a href="{{ route('bodegas.index') }}" title="">Bodegas</a></li>
+                        <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a></li>
+                        <li class="current"><a href="{{ route('barricas.index') }}" title="">Barricas</a></li>
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
@@ -91,14 +96,7 @@
                                 <li><a href="{{ route('cursos') }}">Nuevo curso</a></li>
                             </ul>
                         </li>
-                        <li class="has-children">
-                            <a href="#0" title="">Productores</a>
-                            <ul class="sub-menu">
-                            {{-- <li><a href="#">¿Quieres registrar tu vinicola?</a></li> --}}
-                                <li><a href="{{ route('vinicolas.create') }}">Agregar vinicola</a></li>
-                                <li><a href="{{ route('vinicolas.index') }}">Nuestros vinicultores</a></li>
-                            </ul>
-                        </li>
+
                         <li class="has-children">
                             <a href="#0" title="">Usuarios</a>
                             <ul class="sub-menu">
