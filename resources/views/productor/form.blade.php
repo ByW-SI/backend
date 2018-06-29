@@ -1,16 +1,16 @@
 @extends('layouts.app2')
 @section('content')
 	{{-- expr --}}
-	
+
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-10">
 				<div class="card">
 					<div class="card-header">
-						Bodega
+						Productor
 					</div>						
 					<div class="card-body">
-						<form method="POST" action="{{ $edit == false ? route('bodegas.store') : route('bodegas.update',['bodega'=>$bodega]) }}">
+						<form method="POST" action="{{ $edit == false ? route('productores.store') : route('productores.update',['productor'=>$productor]) }}">
 							@csrf
 
 							@if ($edit == true)
@@ -20,9 +20,9 @@
 
 {{-- nombre --}}
 							<div class="form-group row">
-								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre de la bodega:</label>
+								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre del productor:</label>
 								<div class="col-md-6">
-									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $bodega->nombre : old('nombre') }}" {{ $edit ? 'disabled' : "" }} required autofocus="">
+									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $productor->nombre : old('nombre') }}" {{ $edit ? 'disabled' : "" }} required autofocus="">
 									@if ($errors->has('nombre'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -37,7 +37,7 @@
 							<div class="form-group row">
 								<label for="descripcion" class="col-md-4 col-form-label text-md-right">Descripción:</label>
 								<div class="col-md-6">
-									<textarea id="descripcion" type="text" class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : ''  }}" name="descripcion" value="{{ $edit ? $bodega->descripcion : old('descripcion') }}" >{{ $edit ? $bodega->descripcion : old('descripcion') }}</textarea>
+									<textarea id="descripcion" type="text" class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : ''  }}" name="descripcion" value="{{ $edit ? $productor->descripcion : old('descripcion') }}" >{{ $edit ? $productor->descripcion : old('descripcion') }}</textarea>
 									@if ($errors->has('descripcion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -55,7 +55,7 @@
 										<option value="">Seleccione la vinicola o el rancho</option>
 										@foreach ($vinicolas as $vinicola)
 											{{-- expr --}}
-											<option value="{{$vinicola->id}}" @if ($edit && $bodega->vinicola_id == $vinicola->id)
+											<option value="{{$vinicola->id}}" @if ($edit && $productor->vinicola_id == $vinicola->id)
 												{{-- expr --}}
 												selected 
 											@endif>{{$vinicola->nombre}}</option>
@@ -79,7 +79,7 @@
 										<option value="">Seleccione su bodega</option>
 										@foreach ($bodegas as $bodega)
 											{{-- expr --}}
-											<option value="{{$bodega->id}}" @if ($edit && $bodega->bodega_id == $bodega->id)
+											<option value="{{$bodega->id}}" @if ($edit && $productor->bodega_id == $bodega->id)
 												{{-- expr --}}
 												selected 
 											@endif>{{$bodega->nombre}}</option>
@@ -98,11 +98,11 @@
 
 {{-- locacion, lat,long --}}
 							<div class="form-group row">
-								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del bodega:</label>
+								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del productor:</label>
 								<div class="col-md-6">
-									<input id="locacion" type="text" class="form-control {{ $errors->has('locacion') ? ' is-invalid' : ''  }}" name="locacion" value="{{ $edit ? $bodega->locacion : old('locacion') }}" required>
-									<input type="hidden" name="lat" id="latitud" value="{{$edit ? $bodega->lat : ''}}">
-									<input type="hidden" name="long" id="longitud" value="{{$edit ? $bodega->long : ''}}">
+									<input id="locacion" type="text" class="form-control {{ $errors->has('locacion') ? ' is-invalid' : ''  }}" name="locacion" value="{{ $edit ? $productor->locacion : old('locacion') }}" required>
+									<input type="hidden" name="lat" id="latitud" value="{{$edit ? $productor->lat : ''}}">
+									<input type="hidden" name="long" id="longitud" value="{{$edit ? $productor->long : ''}}">
 									@if ($errors->has('locacion'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -118,7 +118,7 @@
 							<div class="form-group row">
 								<label for="contacto" class="col-md-4 col-form-label text-md-right">Nombre completo del contacto:</label>
 								<div class="col-md-6">
-									<input id="contacto" type="text" class="form-control {{ $errors->has('contacto') ? ' is-invalid' : ''  }}" name="contacto" value="{{ $edit ? $bodega->contacto : old('contacto') }}">
+									<input id="contacto" type="text" class="form-control {{ $errors->has('contacto') ? ' is-invalid' : ''  }}" name="contacto" value="{{ $edit ? $productor->contacto : old('contacto') }}">
 									@if ($errors->has('contacto'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -130,7 +130,7 @@
 							<div class="form-group row">
 								<label for="puesto" class="col-md-4 col-form-label text-md-right">Puesto del contacto:</label>
 								<div class="col-md-6">
-									<input id="puesto" type="text" class="form-control {{ $errors->has('puesto') ? ' is-invalid' : ''  }}" name="puesto" value="{{ $edit ? $bodega->puesto : old('puesto') }}">
+									<input id="puesto" type="text" class="form-control {{ $errors->has('puesto') ? ' is-invalid' : ''  }}" name="puesto" value="{{ $edit ? $productor->puesto : old('puesto') }}">
 									@if ($errors->has('puesto'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -142,7 +142,7 @@
 							<div class="form-group row">
 								<label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico del contacto:</label>
 								<div class="col-md-6">
-									<input id="correo" type="text" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ $edit ? $bodega->correo : old('correo') }}">
+									<input id="correo" type="text" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ $edit ? $productor->correo : old('correo') }}">
 									@if ($errors->has('correo'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -152,7 +152,7 @@
 								</div>
 								<label for="celular" class="col-md-4 col-form-label text-md-right">Telefono celular del contacto:</label>
 								<div class="col-md-6">
-									<input id="celular" type="text" class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}" name="celular" value="{{ $edit ? $bodega->celular : old('celular') }}">
+									<input id="celular" type="text" class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}" name="celular" value="{{ $edit ? $productor->celular : old('celular') }}">
 									@if ($errors->has('celular'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -164,9 +164,9 @@
 {{-- Fin Contacto --}}
 {{-- Telefono --}}
 							<div class="form-group row">
-								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de la bodega:</label>
+								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono del productor:</label>
 								<div class="col-md-6">
-									<input id="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : ''  }}" name="telefono" value="{{ $edit ? $bodega->telefono : old('telefono') }}">
+									<input id="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : ''  }}" name="telefono" value="{{ $edit ? $productor->telefono : old('telefono') }}">
 									@if ($errors->has('telefono'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -177,9 +177,9 @@
 							</div>
 {{-- Comentarios --}}
 							<div class="form-group row">
-								<label for="comentarios" class="col-md-4 col-form-label text-md-right">Comentarios de la bodega:</label>
+								<label for="comentarios" class="col-md-4 col-form-label text-md-right">Comentarios al productor:</label>
 								<div class="col-md-6">
-									<textarea id="comentarios" class="form-control {{$errors->has('comentarios') ? ' is-invalid' : ''  }}" name="comentarios" value="{{ old('comentarios') }}">{{ $edit ? $bodega->comentarios : old('comentarios') }}</textarea>
+									<textarea id="comentarios" class="form-control {{$errors->has('comentarios') ? ' is-invalid' : ''  }}" name="comentarios" value="{{ old('comentarios') }}">{{ $edit ? $productor->comentarios : old('comentarios') }}</textarea>
 									@if ($errors->has('comentarios'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -214,7 +214,7 @@
 
 
 	
-    {{-- <script>
+    <script>
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");
@@ -333,7 +333,7 @@
       });
     }
 	</script>
- --}}
+
 
 	  {{-- function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {

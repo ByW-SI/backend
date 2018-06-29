@@ -45,6 +45,19 @@ class ProductorController extends Controller
     public function store(Request $request)
     {
         //
+        $rules = [ 
+            'nombre' =>"required|unique:productor",
+            'locacion'=>"required",
+            'telefono'=>"required",
+            'bodega_id'=>"required",
+            'vinicola_id'=>"required"
+        ];
+
+        $this->validate($request,$rules);
+
+        Productor::create($request->all());
+
+        return redirect()->route('productores.index');
 
     }
 
@@ -65,9 +78,14 @@ class ProductorController extends Controller
      * @param  \App\Productor  $productor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Productor $productor)
+    public function edit(Productor $productore)
     {
         //
+        // dd($productore);
+        $bodegas = Bodega::orderBy('nombre','asc')->get();
+        $vinicolas= Vinicola::orderBy('nombre','asc')->get();
+        $edit=true;
+        return view('productor.form',['edit'=>$edit,'productor'=>$productore,'vinicolas'=>$vinicolas,'bodegas'=>$bodegas]);
     }
 
     /**
@@ -77,9 +95,21 @@ class ProductorController extends Controller
      * @param  \App\Productor  $productor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Productor $productor)
+    public function update(Request $request, Productor $productore)
     {
         //
+         $rules = [ 
+            'locacion'=>"required",
+            'telefono'=>"required",
+            'bodega_id'=>"required",
+            'vinicola_id'=>"required"
+        ];
+        // dd($productore);
+        $this->validate($request,$rules);
+
+        $productore->update($request->all());
+
+        return redirect()->route('productores.index');
     }
 
     /**
@@ -88,8 +118,11 @@ class ProductorController extends Controller
      * @param  \App\Productor  $productor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Productor $productor)
+    public function destroy(Productor $productore)
     {
         //
+        $productore->delete();
+        
+        return redirect()->route('productores.index');
     }
 }

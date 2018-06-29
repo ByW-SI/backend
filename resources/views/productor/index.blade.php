@@ -31,9 +31,9 @@
 						<tr>
 							<th scope="row">{{$productor->nombre}}</th>
 							<th>
-								{{$productor->vinicola}}
+								{{$productor->vinicola->nombre}}
 								<br>
-								{{$productor->bodega}}
+								{{$productor->bodega->nombre}}
 							</th>
 							<th>{{$productor->descripcion}}</th>
 							<th>{{$productor->locacion}}
@@ -44,6 +44,7 @@
 							<th>
 								@forelse ($productor->bodega->uvasBod as $uvaBod)
 									{{-- expr --}}
+									Uvas en bodega:
 									{{$uvaBod->uva['title']}} {{$uvaBod->hectarea}} ha
 									<form action="{{ route('uvas.destroy',['uvaBod'=>$uvaBod]) }}" method="POST">
 										@csrf
@@ -53,9 +54,11 @@
 								@empty
 									{{-- empty expr --}}
 									No tienes uvas en bodegas
+									<br>
 								@endforelse
-								@forelse ($productor->vinicola->uvasVin as $uvasVin)
+								@forelse ($productor->vinicola->uvasVin as $uvaVin)
 									{{-- expr --}}
+									Uvas en vinicola:
 									{{$uvaVin->uva['title']}} {{$uvaVin->hectarea}} ha
 									<form action="{{ route('uvas.destroy',['uvaVin'=>$uvaVin]) }}" method="POST">
 										@csrf
@@ -64,9 +67,11 @@
 								@empty
 									{{-- empty expr --}}
 									no tienes uvas en vinicola/rancho
+									<br>
 								@endforelse
 								@forelse ($productor->bodega->barricas as $barrica)
 									{{-- expr --}}
+									Barricas en bodega:
 									{{$barrica->tipo}} {{$barrica->subtipo}} tostado {{$barrica->tostado}} cantidad: {{$barrica->cantidad}}
 									<form action="{{ route('barrica.destroy',['barrica'=>$barrica]) }}" method="POST">
 										@csrf
@@ -76,6 +81,7 @@
 								@empty
 									{{-- empty expr --}}
 									No tiene barrica
+									<br>
 								@endforelse
 							</th>
 							<th>

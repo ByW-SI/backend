@@ -379,7 +379,7 @@ $(document).ready(function(){
     });
 });
 </script>	
-    {{-- <script>
+    <script>
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");
@@ -498,7 +498,7 @@ $(document).ready(function(){
       });
     }
 	</script>
- --}}
+
 
 	  {{-- function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {

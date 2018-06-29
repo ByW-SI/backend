@@ -17,8 +17,8 @@ class CreateProductorTable extends Migration
             $table->increments('id');
             $table->string('nombre')->unique();
             $table->string('locacion');
-            $table->double('long',20,17)->default(0.00000);
-            $table->double('lat',20,17)->default(0.00000);
+            $table->double('long',20,17)->nullable();
+            $table->double('lat',20,17)->nullable();
             $table->string('contacto')->nullable();
             $table->string('puesto')->nullable();
             $table->string('correo')->nullable();

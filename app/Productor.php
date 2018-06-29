@@ -23,7 +23,7 @@ class Productor extends Model
     	'bodega_id',
     	'vinicola_id',
     	'uvas',
-    	'marcas'
+        'descripcion'
     ];
     protected $hidden=[
     	'created_at',
