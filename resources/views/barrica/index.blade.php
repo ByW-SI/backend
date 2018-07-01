@@ -28,13 +28,24 @@
 						<th>Precio de la uva</th>
 						<th>Precio de producción</th>
 						<th>Precio venta</th>
+						<th>Acción</th>
 					</tr>
 				</thead>
 				<tbody>
 					@forelse ($barricas as $barrica)
 						{{-- expr --}}
 						<tr>
-							<th scope="row"></th>
+							<th scope="row">{{$barrica->barrica_bodega->tipo}}</th>
+							<th>{{$barrica->barrica_bodega->subtipo}}</th>
+							<th>{{$barrica->barrica_bodega->tostado}}</th>
+							<th>{{$barrica->uva}}</th>
+							<th>{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }} {{$barrica->producido->nombre}}</th>
+							<th>{{$barrica->fecha_inicio}}</th>
+							<th>{{$barrica->fecha_embotellado}}</th>
+							<th>${{$barrica->precio_uva}} USD</th>
+							<th>${{$barrica->precio_prod}} USD</th>
+							<th>${{$barrica->precio_venta}}</th>
+							<th></th>
 						</tr>
 					@empty
 						{{-- empty expr --}}

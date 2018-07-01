@@ -275,4 +275,15 @@ class BodegaController extends Controller
         $bodega->delete();
         return redirect()->route('bodegas.index');
     }
+
+    public function barricas(Bodega $id)
+    {
+        $barricas = $id->barricas;
+        return response()->json(['barricas'=>$barricas],201);
+    }
+    public function uvas(Bodega $id)
+    {
+        $uvas = $id->uvasBod->load('uva');
+        return response()->json(['uvas'=>$uvas],201);
+    }
 }

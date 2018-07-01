@@ -125,4 +125,30 @@ class ProductorController extends Controller
         
         return redirect()->route('productores.index');
     }
+
+    public function bodega(Productor $id)
+    {
+        $bodega = $id->bodega;
+        // dd($id->bodega);
+        return response()->json(['bodega'=>$bodega],201);
+    }
+
+    public function barricas(Productor$id)
+    {
+        $barricas = $id->bodega->barricas;
+        return response()->json(['barricas'=>$barricas],201);
+    }
+    public function vinicola(Productor $id)
+    {
+        $vinicola = $id->vinicola;
+        return response()->json(['vinicola'=>$vinicola],201);
+    }
+    public function uvas(Productor$id)
+    {
+        $uvas = $id->vinicola->uvasVin->load('uva');
+        // foreach ($uvas as $uvaVin) {
+        //     $uvaVin->uva;
+        // }
+        return response()->json(['uvas'=>$uvas],201);
+    }
 }

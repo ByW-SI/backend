@@ -22,11 +22,12 @@ class CreateBarricaTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_embotellado');
             $table->integer('meses_barrica');
-            $table->integer('meses_estabilización');
+            $table->integer('meses_estabilizacion');
             $table->decimal('precio_uva', 8, 2)->nullable();
             $table->decimal('precio_prod', 8, 2);
             $table->decimal('precio_venta', 8, 2);
-            $table->date('fecha_envio');    
+            $table->date('fecha_envio')->nullable(); 
+            $table->integer('anada')->nullable();   
             $table->timestamps();
         });
     }

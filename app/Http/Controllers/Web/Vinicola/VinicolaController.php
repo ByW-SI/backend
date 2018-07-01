@@ -52,7 +52,7 @@ class VinicolaController extends Controller
             'inicio'=> 'required',
             'filosofia'=> 'required',
             'locacion'=> 'required',
-
+            'uva' =>'required',
             'telefono'=> 'required'
         ];
         $validater = $this->validate($request,$rules);
@@ -134,15 +134,18 @@ class VinicolaController extends Controller
             'comentarios'=>$request->comentarios,
             'hectareas'=>$request->hectareas
         ]);
-        for ($i = 0; $i < sizeof($request->input('uva')) ; $i++) {
-            UvaProducida::create([
-                'producidas_id'=>$vinicola->id,
-                'producidas_type'=>"App\Vinicola",
-                'uva_id'=>$request->uva[$i],
-                'hectarea'=>$request->hectarea[$i]
-            ]);
-            
+        if ($request->uva[0] != null) {
+            for ($i = 0; $i < sizeof($request->input('uva')) ; $i++) {
+                UvaProducida::create([
+                    'producidas_id'=>$vinicola->id,
+                    'producidas_type'=>"App\Vinicola",
+                    'uva_id'=>$request->uva[$i],
+                    'hectarea'=>$request->hectarea[$i]
+                ]);
+                
+            }
         }
+        
         // $vinicola->save();
         return redirect()->route('vinicolas.index');
     }

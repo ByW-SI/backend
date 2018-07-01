@@ -24,8 +24,14 @@ Route::resource('enologos','Web\Enologo\EnologoController');
 Route::resource('vinicolas','Web\Vinicola\VinicolaController');
 Route::post('uvas/{uvaVin}/destroy','Web\Vinicola\UvaVinicolaController@destroy')->name('uvas.destroy');
 Route::resource('bodegas','Web\Bodega\BodegaController');
+Route::get('bodBarricas/{id}','Web\Bodega\BodegaController@barricas');
+Route::get('bodUvas/{id}','Web\Bodega\BodegaController@uvas');
 Route::post('barrica/{barrica}/destroy','Web\Bodega\BodegaBarricaController@destroy')->name('barrica.destroy');
 Route::resource('productores','Web\Productor\ProductorController');
+Route::get('prodBodega/{id}','Web\Productor\ProductorController@bodega');
+Route::get('prodVinicola/{id}','Web\Productor\ProductorController@vinicola');
+Route::get('prodBarricas/{id}','Web\Productor\ProductorController@barricas');
+Route::get('prodUvas/{id}','Web\Productor\ProductorController@uvas');
 Route::resource('barricas','Web\Barrica\BarricaController');
 Route::resource('empleados','Web\Empleados\EmpleadosController');
 Route::get('clientes', function(){
