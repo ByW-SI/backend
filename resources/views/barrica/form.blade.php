@@ -17,8 +17,10 @@
 								{{-- expr --}}
 								<input type="hidden" name="_method" value="PUT">
 							@endif
+@if ($edit == false)
+	{{-- true expr --}}
 
-{{-- producido --}}
+	{{-- producido --}}
 							<div class="form-group row">
 								<label for="producido" class="col-md-4 col-form-label text-md-right">Tipo de productor:</label>
 								<div class="col-md-6">
@@ -36,7 +38,7 @@
 								</div>
 							</div>
 
-{{-- if productor --}}
+							{{-- if productor --}}
 
 							<div class="form-group row productor" @if ($edit == false)
 								style="display: none;" 
@@ -114,10 +116,52 @@
 								</div>
 							</div>
 
+@else
+	{{-- false expr --}}
+							<div class="form-group row">
+								<label for="producido" class="col-md-4 col-form-label text-md-right">{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }}</label>
+								<div class="col-md-6">
+									<p> {{$barrica->producido->nombre}}</p>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="tipo_barrica" class="col-md-4 col-form-label text-md-right">Tipo de barrica:</label>
+								<div class="col-md-6">
+									<p> {{$barrica->barrica_bodega->tipo}}</p>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="subtipo_barrica" class="col-md-4 col-form-label text-md-right">Subtipo de barrica:</label>
+								<div class="col-md-6">
+									<p> {{$barrica->barrica_bodega->subtipo}}</p>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="tostado_barrica" class="col-md-4 col-form-label text-md-right">Tostado de barrica:</label>
+								<div class="col-md-6">
+									<p> {{$barrica->barrica_bodega->tostado}}</p>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="tipo_barrica" class="col-md-4 col-form-label text-md-right">Uva:</label>
+								<div class="col-md-6">
+									<p> {{$barrica->uva}}</p>
+								</div>
+							</div>
+
+
+@endif
+
+
+
 							<div class="form-group row">
 								<label for="anada" class="col-md-4 col-form-label text-md-right">Añada:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('anada') ? 'is-invalid' : '' }}" name="anada" min="{{date('Y')}}" step="1" value="{{$edit ? '' : old('anada')}}">
+									<input type="number" class="form-control {{ $errors->has('anada') ? 'is-invalid' : '' }}" name="anada" min="{{date('Y')}}" step="1" value="{{$edit ? $barrica->anada : old('anada')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>año</strong></span>
 									</div>
@@ -137,7 +181,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_uva') ? 'is-invalid' : '' }}" name="precio_uva" min="0" step="0.01" value="{{$edit ? '' : old('precio_uva')}}">
+									<input type="number" class="form-control {{ $errors->has('precio_uva') ? 'is-invalid' : '' }}" name="precio_uva" min="0" step="0.01" value="{{$edit ? $barrica->precio_uva : old('precio_uva')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
@@ -153,7 +197,7 @@
 							<div class="form-group row">
 								<label for="fecha_inicio" class="col-md-4 col-form-label text-md-right">Fecha de inicio:</label>
 								<div class="col-md-6">
-									<input type="date" id="fecha_inicio" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_inicio') ? ' is-invalid' : ''  }}" name="fecha_inicio" value="{{$edit ? '' : date('Y-m-d')}}">
+									<input type="date" id="fecha_inicio" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_inicio') ? ' is-invalid' : ''  }}" name="fecha_inicio" value="{{$edit ? $barrica->fecha_inicio : date('Y-m-d')}}">
 									@if ($errors->has('fecha_inicio'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -166,7 +210,7 @@
 							<div class="form-group row">
 								<label for="fecha_embotellado" class="col-md-4 col-form-label text-md-right">Fecha tentativa de embotellado:</label>
 								<div class="col-md-6">
-									<input type="date" id="fecha_embotellado" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_embotellado') ? ' is-invalid' : ''  }}" name="fecha_embotellado">
+									<input type="date" id="fecha_embotellado" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_embotellado') ? ' is-invalid' : ''  }}" name="fecha_embotellado" value="{{$edit ? $barrica->fecha_embotellado : old('fecha_embotellado')}}">
 									@if ($errors->has('fecha_embotellado'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -179,7 +223,7 @@
 							<div class="form-group row">
 								<label for="meses_barrica" class="col-md-4 col-form-label text-md-right">Meses tentativos en barrica:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('meses_barrica') ? 'is-invalid' : '' }}" name="meses_barrica" min="0" step="6" value="{{$edit ? '' : old('meses_barrica')}}">
+									<input type="number" class="form-control {{ $errors->has('meses_barrica') ? 'is-invalid' : '' }}" name="meses_barrica" min="0" step="6" value="{{$edit ? $barrica->meses_barrica : old('meses_barrica')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>meses</strong></span>
 									</div>
@@ -195,7 +239,7 @@
 							<div class="form-group row">
 								<label for="meses_estabilizacion" class="col-md-4 col-form-label text-md-right">Meses tentativos en estabilización:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" name="meses_estabilizacion" min="0" step="6" value="{{$edit ? '' : old('meses_estabilizacion')}}">
+									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" name="meses_estabilizacion" min="0" step="6" value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>meses</strong></span>
 									</div>
@@ -212,7 +256,7 @@
 							<div class="form-group row">
 								<label for="fecha_envio" class="col-md-4 col-form-label text-md-right">Fecha tentativa de envio:</label>
 								<div class="col-md-6">
-									<input type="date" id="fecha_envio" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_envio') ? ' is-invalid' : ''  }}" name="fecha_envio">
+									<input type="date" id="fecha_envio" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_envio') ? ' is-invalid' : ''  }}" name="fecha_envio" value="{{$edit ? $barrica->fecha_envio : old('fecha_envio')}}">
 									@if ($errors->has('fecha_envio'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -228,7 +272,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_prod') ? 'is-invalid' : '' }}" name="precio_prod" min="0" step="0.01" value="{{$edit ? '' : old('precio_prod')}}">
+									<input type="number" class="form-control {{ $errors->has('precio_prod') ? 'is-invalid' : '' }}" name="precio_prod" min="0" step="0.01" value="{{$edit ? $barrica->precio_prod : old('precio_prod')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
@@ -247,7 +291,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_venta') ? 'is-invalid' : '' }}" name="precio_venta" min="0" step="0.01" value="{{$edit ? '' : old('precio_venta')}}">
+									<input type="number" class="form-control {{ $errors->has('precio_venta') ? 'is-invalid' : '' }}" name="precio_venta" min="0" step="0.01" value="{{$edit ? $barrica->precio_venta : old('precio_venta')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>

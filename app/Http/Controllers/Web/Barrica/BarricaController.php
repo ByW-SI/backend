@@ -133,6 +133,9 @@ class BarricaController extends Controller
     public function edit(Barrica $barrica)
     {
         //
+        // dd($barrica);
+        $edit=true;
+        return view('barrica.form',['edit'=>$edit,'barrica'=>$barrica]);
     }
 
     /**
@@ -145,6 +148,29 @@ class BarricaController extends Controller
     public function update(Request $request, Barrica $barrica)
     {
         //
+        $rules=[
+            
+            'fecha_inicio'=>'required|date',
+            'fecha_embotellado'=>'required|date',
+            'precio_uva'=>'required|numeric',
+            'precio_venta'=>'required|numeric',
+            'precio_prod'=>'required|numeric',
+            'anada'=>'required|integer'
+        ];
+        $this->validate($request,$rules);
+        $barrica->update([
+
+            'fecha_inicio'=>$request->fecha_inicio,
+            'fecha_embotellado'=>$request->fecha_embotellado,
+            'meses_barrica'=>$request->meses_barrica,
+            'meses_estabilizacion'=>$request->meses_estabilizacion,
+            'precio_uva'=>$request->precio_uva,
+            'precio_prod'=>$request->precio_prod,
+            'precio_venta'=>$request->precio_venta,
+            'fecha_envio'=>$request->fecha_envio,
+            'anada'=>$request->anada
+        ]);
+        return redirect()->route('barricas.index');
     }
 
     /**
@@ -156,5 +182,7 @@ class BarricaController extends Controller
     public function destroy(Barrica $barrica)
     {
         //
+        $barrica->delete();
+        return redirect()->route('barricas.index');
     }
 }

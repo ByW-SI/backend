@@ -44,8 +44,15 @@
 							<th>{{$barrica->fecha_embotellado}}</th>
 							<th>${{$barrica->precio_uva}} USD</th>
 							<th>${{$barrica->precio_prod}} USD</th>
-							<th>${{$barrica->precio_venta}}</th>
-							<th></th>
+							<th>${{$barrica->precio_venta}} USD</th>
+							<th>
+								<a class="btn btn-default" href="{{ route('barricas.edit',[$barrica]) }}">Editar</a>
+								<form action="{{ route('barricas.destroy',[$barrica]) }}" method="POST">
+									<input type="hidden" name="_method" value="DELETE">
+									@csrf
+									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar este barrica?');">Eliminar</button>
+								</form>
+							</th>
 						</tr>
 					@empty
 						{{-- empty expr --}}
