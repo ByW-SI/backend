@@ -70,6 +70,7 @@
 											{{-- expr --}}
 											selected 
 										@endif>Wine Maker</option>
+									</select>
 									@if ($errors->has('tipo'))
 										{{-- expr --}}
 										<span class="invalid-feedback">

@@ -39,7 +39,13 @@
 							<th>{{$barrica->barrica_bodega->subtipo}}</th>
 							<th>{{$barrica->barrica_bodega->tostado}}</th>
 							<th>{{$barrica->uva}}</th>
-							<th>{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }} {{$barrica->producido->nombre}}</th>
+							<th>{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }} @if (isset($barrica->producido))
+								{{-- true expr --}}
+								 {{$barrica->producido->nombre}}
+							@else
+								{{-- false expr --}}
+								Tu productor a sido borrado
+							@endif</th>
 							<th>{{$barrica->fecha_inicio}}</th>
 							<th>{{$barrica->fecha_embotellado}}</th>
 							<th>${{$barrica->precio_uva}} USD</th>

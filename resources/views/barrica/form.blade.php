@@ -346,7 +346,7 @@
 				$( "#nombre_bodega" ).append( "Bodega: " + data.bodega.nombre );
 				$('#bodega_id').val(data.bodega.id);
 				$("#nombre_bodega").show();
-				getBarricas(data.bodega.id);
+				getBarricas(id);
 			}
 		},'json');
 		$.get("{{ url('/prodVinicola') }}/"+id,function(data){
@@ -355,7 +355,7 @@
 				$( "#nombre_vinicola" ).append( data.vinicola.tipo+": " + data.vinicola.nombre );
 				$('#vinicola_id').val(data.vinicola.id);
 				$("#nombre_vinicola").show();
-				getUvas(data.vinicola.id);
+				getUvas(id);
 			}
 		},'json');
 	}

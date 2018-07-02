@@ -185,7 +185,7 @@
 							<div class="form-group row">
 								<label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico del contacto:</label>
 								<div class="col-md-6">
-									<input id="correo" type="text" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ $edit ? $bodega->correo : old('correo') }}">
+									<input id="correo" type="email" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ $edit ? $bodega->correo : old('correo') }}">
 									@if ($errors->has('correo'))
 										{{-- expr --}}
 										<span class="invalid-feedback">

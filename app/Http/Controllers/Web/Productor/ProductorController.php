@@ -133,7 +133,7 @@ class ProductorController extends Controller
         return response()->json(['bodega'=>$bodega],201);
     }
 
-    public function barricas(Productor$id)
+    public function barricas(Productor $id)
     {
         $barricas = $id->bodega->barricas;
         return response()->json(['barricas'=>$barricas],201);
@@ -143,8 +143,9 @@ class ProductorController extends Controller
         $vinicola = $id->vinicola;
         return response()->json(['vinicola'=>$vinicola],201);
     }
-    public function uvas(Productor$id)
+    public function uvas(Productor $id)
     {
+
         $uvas = $id->vinicola->uvasVin->load('uva');
         // foreach ($uvas as $uvaVin) {
         //     $uvaVin->uva;
