@@ -49,3 +49,7 @@ Route::get('prodBarricas/{id}','Web\Productor\ProductorController@barricas');
 Route::get('prodUvas/{id}','Web\Productor\ProductorController@uvas');
 Route::get('bodBarricas/{id}','Web\Bodega\BodegaController@barricas');
 Route::get('bodUvas/{id}','Web\Bodega\BodegaController@uvas');
+
+Route::get('getEnologos','Web\Enologo\EnologoController@enologos');
+
+Route::get('getWineMaker','Web\Enologo\EnologoController@wine');

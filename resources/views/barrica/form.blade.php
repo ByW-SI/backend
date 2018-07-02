@@ -26,40 +26,25 @@
 								<div class="col-md-6">
 									<select id="producido" class="form-control {{ $errors->has('producido') ? ' is-invalid' : ''  }}" name="producido">
 										<option value="">Seleccione una opción</option>
-										<option value="productor">Productor</option>
-										<option value="bodega">Bodega</option>
+										<option value="Wine Maker">Wine Maker</option>
+										<option value="Enólogo">Enólogo</option>
 									</select>
-									@if ($errors->has('productor'))
+									@if ($errors->has('producido'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
-											<strong>{{ $errors->first("productor")}}</strong>
+											<strong>{{ $errors->first("producido")}}</strong>
 										</span>
 									@endif
 								</div>
 							</div>
-
-							{{-- if productor --}}
-
-							<div class="form-group row productor" @if ($edit == false)
-								style="display: none;" 
-							@endif>
+{{-- enologo_id --}}
+							<div class="form-group row">
 								<label for="productor" class="col-md-4 col-form-label text-md-right">Productor:</label>
 								<div class="col-md-6">
-									<select id="productor" class="form-control {{ $errors->has('productor') ? ' is-invalid' : ''  }}" name="productor"   onchange="getProductor()">
-										<option value="">Seleccione su productor</option>
-										@foreach ($productoras as $productor)
-											{{-- expr --}}
-											<option value="{{$productor->id}}">{{$productor->nombre}}</option>
-										@endforeach
+									<select id="productor" class="form-control {{ $errors->has('productor') ? ' is-invalid' : ''  }}" name="productor">
+										<option value="">Seleccione una opción</option>
+										
 									</select>
-									<label for="nombre_bodega" class="col-form-label text-md-right" id="nombre_bodega"  @if ($edit == false)
-									style="display: none;" 
-									@endif></label>
-									<input type="hidden" id="bodega_id" name="bodega_id" value="">
-									<label for="nombre_vinicola" class="col-form-label text-md-right" id="nombre_vinicola"  @if ($edit == false)
-										style="display: none;" 
-									@endif></label>
-									<input type="hidden" id="vinicola_id" name="vinicola_id" value="">
 									@if ($errors->has('productor'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
@@ -68,44 +53,92 @@
 									@endif
 								</div>
 							</div>
-{{-- if bodega --}}
 
-							<div class="form-group row bodega" @if ($edit == false)
-								style="display: none;" 
-							@endif>
-								<label for="bodega" class="col-md-4 col-form-label text-md-right">Bodega:</label>
-								<div class="col-md-6">
-									<select id="bodega" class="form-control {{ $errors->has('bodega') ? ' is-invalid' : ''  }}" name="bodega" onchange="getBodega()">
-										<option value="">Seleccione su bodega</option>
-									@foreach ($bodegas as $bodega)
-										{{-- expr --}}
-										<option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
-									@endforeach
-									</select>
-								</div>
-							</div>
-
-{{-- endif --}}
+{{-- tipo_bar --}}
 							<div class="form-group row">
-								<label for="barrica" class="col-md-4 col-form-label text-md-right">Barrica:</label>
+								<label for="tipo_bar" class="col-md-4 col-form-label text-md-right">Tipo de barrica:</label>
 								<div class="col-md-6">
-									<select id="barrica" class="form-control {{ $errors->has('barrica') ? ' is-invalid' : ''  }}" name="barrica" required >
+									<select id="tipo_bar" class="form-control {{ $errors->has('tipo_bar') ? ' is-invalid' : ''  }}" name="tipo_bar" required >
 										<option value="">Seleccione su barrica</option>
+										<option value="Europeo">Europeo</option>
+										<option value="Americana">Americana</option>
+										<option value="Bosques de europa central">Bosques de europa central</option>
 									</select>
-									@if ($errors->has('productor'))
+									@if ($errors->has('tipo_bar'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
-											<strong>{{ $errors->first("barrica")}}</strong>
+											<strong>{{ $errors->first("tipo_bar")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+{{-- tostado --}}
+							<div class="form-group row">
+								<label for="tostado" class="col-md-4 col-form-label text-md-right">Tostado de barrica:</label>
+								<div class="col-md-6">
+									<select id="tostado" class="form-control {{ $errors->has('tostado') ? ' is-invalid' : ''  }}" name="tostado" required >
+										<option value="">Seleccione su tostado</option>
+										<option value="Ligero">Ligero</option>
+										<option value="Medio">Medio</option>
+										<option value="Alto">Alto</option>
+									</select>
+									@if ($errors->has('tostado'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("tostado")}}</strong>
 										</span>
 									@endif
 								</div>
 							</div>
 
+{{-- bodega_id --}}
+							<div class="form-group row">
+								<label for="bodega_id" class="col-md-4 col-form-label text-md-right">Bodega:</label>
+								<div class="col-md-6">
+									<select id="bodega_id" class="form-control {{ $errors->has('bodega_id') ? ' is-invalid' : ''  }}" name="bodega_id" required >
+										<option value="">Seleccione su bodega</option>
+										@foreach ($bodegas as $bodega)
+											{{-- expr --}}
+											<option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
+										@endforeach
+									</select>
+									@if ($errors->has('bodega_id'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("bodega_id")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+{{-- uva --}}
 							<div class="form-group row">
 								<label for="uva" class="col-md-4 col-form-label text-md-right">Uva:</label>
 								<div class="col-md-6">
 									<select id="uva" class="form-control {{ $errors->has('uva') ? ' is-invalid' : ''  }}" name="uva" required >
 										<option value="">Seleccione su uva</option>
+										@foreach ($uvas as $uva)
+											{{-- expr --}}
+											<option value="{{$uva->title}}">{{$uva->title}}</option>
+										@endforeach
+									</select>
+									@if ($errors->has('uva'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("uva")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+{{-- vinicola_id --}}
+							<div class="form-group row">
+								<label for="vinicola_id" class="col-md-4 col-form-label text-md-right">Vinicola o rancho:</label>
+								<div class="col-md-6">
+									<select id="vinicola_id" class="form-control {{ $errors->has('vinicola_id') ? ' is-invalid' : ''  }}" name="vinicola_id" required >
+										<option value="">Seleccione su vinicola</option>
+										@foreach ($vinicolas as $vinicola)
+											{{-- expr --}}
+											<option value="{{$vinicola->id}}">{{$vinicola->tipo}} {{$vinicola->nombre}}</option>
+										@endforeach
 									</select>
 									@if ($errors->has('uva'))
 										{{-- expr --}}
@@ -119,32 +152,47 @@
 @else
 	{{-- false expr --}}
 							<div class="form-group row">
-								<label for="producido" class="col-md-4 col-form-label text-md-right">{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }}</label>
+								<label for="producido" class="col-md-4 col-form-label text-md-right">Productor</label>
 								<div class="col-md-6">
-									<p> {{$barrica->producido->nombre}}</p>
+									<p> {{$barrica->enologo->tipo}} {{$barrica->enologo->nombre}} {{$barrica->enologo->paterno}} {{$barrica->enologo->materno}}</p>
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="tipo_barrica" class="col-md-4 col-form-label text-md-right">Tipo de barrica:</label>
 								<div class="col-md-6">
-									<p> {{$barrica->barrica_bodega->tipo}}</p>
+									<p> {{$barrica->tipo_bar}}</p>
 								</div>
 							</div>
 
 							<div class="form-group row">
-								<label for="subtipo_barrica" class="col-md-4 col-form-label text-md-right">Subtipo de barrica:</label>
+								<label for="subtipo_barrica" class="col-md-4 col-form-label text-md-right">Tostado de barrica:</label>
 								<div class="col-md-6">
-									<p> {{$barrica->barrica_bodega->subtipo}}</p>
+									<p> {{$barrica->tostado}}</p>
 								</div>
 							</div>
-
+							@if ($barrica->bodega)
+								{{-- true expr --}}
 							<div class="form-group row">
-								<label for="tostado_barrica" class="col-md-4 col-form-label text-md-right">Tostado de barrica:</label>
+								<label for="tostado_barrica" class="col-md-4 col-form-label text-md-right">Bodega:</label>
 								<div class="col-md-6">
-									<p> {{$barrica->barrica_bodega->tostado}}</p>
+									<p> {{$barrica->bodega->nombre}}</p>
 								</div>
 							</div>
+							
+							@endif
+
+							@if ($barrica->vinicola)
+								{{-- true expr --}}
+							<div class="form-group row">
+								<label for="tostado_barrica" class="col-md-4 col-form-label text-md-right">Vinicola:</label>
+								<div class="col-md-6">
+									<p>{{$barrica->vinicola->tipo}} {{$barrica->vinicola->nombre}}</p>
+								</div>
+							</div>
+							
+							@endif
+							
 
 							<div class="form-group row">
 								<label for="tipo_barrica" class="col-md-4 col-form-label text-md-right">Uva:</label>
@@ -158,6 +206,66 @@
 
 
 
+
+{{-- costo uva --}}
+							<div class="form-group row">
+								<label for="costo_uva" class="col-md-4 col-form-label text-md-right">Costo de la uva:</label>
+								<div class="input-group col-md-6">
+									<div class="input-group-prepend">
+    									<span class="input-group-text">$</span>
+								  	</div>
+									<input type="number" class="form-control {{ $errors->has('costo_uva') ? 'is-invalid' : '' }}" id="costo_uva" name="costo_uva" min="0" step="0.01" value="{{$edit ? $barrica->costo_uva : old('costo_uva')}}">
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>USD</strong></span>
+									</div>
+									@if ($errors->has('costo_uva'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("costo_uva")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+{{-- costo barrica --}}
+							<div class="form-group row">
+								<label for="costo_barrica" class="col-md-4 col-form-label text-md-right">Costo de la barrica:</label>
+								<div class="input-group col-md-6">
+									<div class="input-group-prepend">
+    									<span class="input-group-text">$</span>
+								  	</div>
+									<input type="number" class="form-control {{ $errors->has('costo_barrica') ? 'is-invalid' : '' }}" id="costo_barrica" name="costo_barrica" min="0" step="0.01" value="{{$edit ? $barrica->costo_barrica : old('costo_barrica')}}">
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>USD</strong></span>
+									</div>
+									@if ($errors->has('costo_barrica'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("costo_barrica")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+{{-- costo produccion --}}
+							<div class="form-group row">
+								<label for="costo_prod" class="col-md-4 col-form-label text-md-right">Costo de producción:</label>
+								<div class="input-group col-md-6">
+									<div class="input-group-prepend">
+    									<span class="input-group-text">$</span>
+								  	</div>
+									<input type="number" class="form-control {{ $errors->has('costo_prod') ? 'is-invalid' : '' }}" id="costo_prod" name="costo_prod" min="0" step="0.01" value="{{$edit ? $barrica->costo_prod : old('costo_prod')}}">
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>USD</strong></span>
+									</div>
+									@if ($errors->has('costo_prod'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("costo_prod")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+
+{{-- añada --}}
 							<div class="form-group row">
 								<label for="anada" class="col-md-4 col-form-label text-md-right">Añada:</label>
 								<div class="input-group col-md-6">
@@ -174,26 +282,7 @@
 								</div>
 							</div>
 
-
-							<div class="form-group row">
-								<label for="precio_uva" class="col-md-4 col-form-label text-md-right">Precio de la uva:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_uva') ? 'is-invalid' : '' }}" id="precio_uva" name="precio_uva" min="0" step="0.01" value="{{$edit ? $barrica->precio_uva : old('precio_uva')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
-									</div>
-									@if ($errors->has('precio_uva'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("precio_uva")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
+{{-- fecha inicio --}}
 							<div class="form-group row">
 								<label for="fecha_inicio" class="col-md-4 col-form-label text-md-right">Fecha de inicio:</label>
 								<div class="col-md-6">
@@ -207,19 +296,7 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="fecha_embotellado" class="col-md-4 col-form-label text-md-right">Fecha tentativa de embotellado:</label>
-								<div class="col-md-6">
-									<input type="date" id="fecha_embotellado" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_embotellado') ? ' is-invalid' : ''  }}" name="fecha_embotellado" value="{{$edit ? $barrica->fecha_embotellado : old('fecha_embotellado')}}">
-									@if ($errors->has('fecha_embotellado'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("fecha_embotellado")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
+{{-- meses barricas --}}
 							<div class="form-group row">
 								<label for="meses_barrica" class="col-md-4 col-form-label text-md-right">Meses tentativos en barrica:</label>
 								<div class="input-group col-md-6">
@@ -235,11 +312,25 @@
 									@endif
 								</div>
 							</div>
+{{-- fecha embotellado --}}
+							<div class="form-group row">
+								<label for="fecha_embotellado" class="col-md-4 col-form-label text-md-right">Fecha tentativa de embotellado:</label>
+								<div class="col-md-6">
+									<input type="date" id="fecha_embotellado" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_embotellado') ? ' is-invalid' : ''  }}" name="fecha_embotellado" value="{{$edit ? $barrica->fecha_embotellado : old('fecha_embotellado')}}">
+									@if ($errors->has('fecha_embotellado'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("fecha_embotellado")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
 
+{{-- meses estabilizacion --}}
 							<div class="form-group row">
 								<label for="meses_estabilizacion" class="col-md-4 col-form-label text-md-right">Meses tentativos en estabilización:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" name="meses_estabilizacion" min="0" step="6" value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}">
+									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" name="meses_estabilizacion" min="0" step="1" value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>meses</strong></span>
 									</div>
@@ -252,7 +343,7 @@
 								</div>
 							</div>
 
-
+{{-- fecha envios --}}
 							<div class="form-group row">
 								<label for="fecha_envio" class="col-md-4 col-form-label text-md-right">Fecha tentativa de envio:</label>
 								<div class="col-md-6">
@@ -266,24 +357,8 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="precio_prod" class="col-md-4 col-form-label text-md-right">Precio de producción:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_prod') ? 'is-invalid' : '' }}" id="precio_prod" name="precio_prod" min="0" step="0.01" value="{{$edit ? $barrica->precio_prod : old('precio_prod')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
-									</div>
-									@if ($errors->has('precio_prod'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("precio_prod")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
+{{-- precio venta --}}
+
 
 							<div class="form-group row">
 								<label for="precio_venta" class="col-md-4 col-form-label text-md-right">Precio de venta:</label>
@@ -299,6 +374,23 @@
 										{{-- expr --}}
 										<span class="invalid-feedback">
 											<strong>{{ $errors->first("precio_venta")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
+
+{{-- utilidad --}}
+							<div class="form-group row">
+								<label for="utilidad" class="col-md-4 col-form-label text-md-right">Utilidad:</label>
+								<div class="input-group col-md-6">
+									<input type="number" class="form-control {{ $errors->has('utilidad') ? 'is-invalid' : '' }}" name="utilidad" min="0" step="5" value="{{$edit ? $barrica->utilidad : old('utilidad')}}">
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>%</strong></span>
+									</div>
+									@if ($errors->has('utilidad'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("utilidad")}}</strong>
 										</span>
 									@endif
 								</div>
@@ -322,13 +414,11 @@
 
 	    $("#producido").change(function(){
 	       var value= $("#producido").val();
-	       if(value == "productor"){
-	       	$('.productor').show();
-	       	$('.bodega').hide();
+	       if(value == "Enólogo"){
+	       	getEnologos();
 	       }
-	       else if(value == "bodega"){
-	       	$('.productor').hide();
-	       	$('.bodega').show()
+	       else if(value == "Wine Maker"){
+	       	getWineMaker();
 	       }
 	       else{
 
@@ -336,6 +426,32 @@
 	    });
 	});
 </script>
+
+<script>
+	function getEnologos(){
+		$.get('{{ url('/getEnologos') }}',function (data) {
+			// body...
+
+			$('#productor').empty();
+			for (var i = 0; i < data.enologos.length; i++) {
+			    $("#productor").append('<option id=' + data.enologos[i].id + ' value=' + data.enologos[i].id + '>' + data.enologos[i].nombre+' '+data.enologos[i].paterno+ '</option>');
+			}
+
+		});
+	}
+	function getWineMaker(){
+		$.get('{{ url('/getWineMaker') }}',function (data) {
+			// body...
+
+			$('#productor').empty();
+			for (var i = 0; i < data.wine_makers.length; i++) {
+			    $("#productor").append('<option id=' + data.wine_makers[i].id + ' value=' + data.wine_makers[i].id + '>'+ data.wine_makers[i].nombre+' '+data.wine_makers[i].paterno+ '</option>');
+			}
+
+		});
+	}
+</script>
+
 <script type="text/javascript">
 	function getProductor() {
 		// body...
@@ -408,6 +524,11 @@
 	}
 
 	$(document).ready(function(){
+		$("#meses_barrica").change(function() {
+			// body...
+			inicio = $('#fecha_inicio').valueAsDate;
+			$('#fecha_embotellado').val(inicio);
+		});
     $("#precio_prod").keyup(function(){
         precio = $('#precio_prod').val();
         precio_uva = $('#precio_uva').val();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web\Barrica;
 use App\Barrica;
 use App\Productor;
 use App\Bodega;
+use App\Uva;
+use App\Vinicola;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,10 +33,11 @@ class BarricaController extends Controller
     public function create()
     {
         //
-        $productoras = Productor::orderBy('nombre','asc')->get();
-        $bodegas = Bodega::where('productora','1')->orderBy('nombre','asc')->get();
+        $vinicolas = Vinicola::orderBy('nombre','asc')->get();
+        $bodegas = Bodega::orderBy('nombre','asc')->get();
+        $uvas = Uva::orderBy('title','asc')->get();
         $edit = false;
-        return view('barrica.form',['productoras'=>$productoras,'bodegas'=>$bodegas,'edit'=>$edit]);
+        return view('barrica.form',['vinicolas'=>$vinicolas,'bodegas'=>$bodegas,'edit'=>$edit, 'uvas'=>$uvas]);
     }
 
     /**
@@ -46,70 +49,47 @@ class BarricaController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
-        $rule=[
-            'producido'=>'required'
+        // 
+        $rules = [
+            'producido'=>'required',
+            'productor'=>'required|integer',
+            'tipo_bar'=>'required',
+            'tostado'=>'required',
+            'uva'=>'required',
+            "costo_uva" => "required|numeric",
+            "costo_barrica" => "required|numeric",
+            "costo_prod" => "required|numeric",
+            "anada" => "required",
+            "fecha_inicio" => "required|date",
+            "meses_barrica" => "required|integer",
+            "fecha_embotellado" => "required|date",
+            "meses_estabilizacion" => "required|integer",
+            "fecha_envio" => "required|date",
+            "precio_venta" => "required|numeric"
         ];
-        $this->validate($request,$rule);
-        if ($request->producido == "productor") {
-            // dd('aquí');
-            $rules=[
-                'productor'=>'required|integer',
-                'barrica'=>'required|integer',
-                'uva'=>'required',
-                'fecha_inicio'=>'required|date',
-                'fecha_embotellado'=>'required|date',
-                'precio_uva'=>'required|numeric',
-                'precio_venta'=>'required|numeric',
-                'precio_prod'=>'required|numeric',
-                'anada'=>'required|integer'
-            ];
-            $this->validate($request,$rules);
-            $barrica = Barrica::create([
-                'producido_type' => 'App\Productor',
-                'producido_id' => $request->productor,
-                'barrica_bodega_id'=>$request->barrica,
-                'uva'=>$request->uva,
-                'fecha_inicio'=>$request->fecha_inicio,
-                'fecha_embotellado'=>$request->fecha_embotellado,
-                'meses_barrica'=>$request->meses_barrica,
-                'meses_estabilizacion'=>$request->meses_estabilizacion,
-                'precio_uva'=>$request->precio_uva,
-                'precio_prod'=>$request->precio_prod,
-                'precio_venta'=>$request->precio_venta,
-                'fecha_envio'=>$request->fecha_envio,
-                'anada'=>$request->anada
-            ]);
 
-        } else {
-            $rules=[
-                'bodega'=>'required|integer',
-                'barrica'=>'required|integer',
-                'uva'=>'required',
-                'fecha_inicio'=>'required|date',
-                'fecha_embotellado'=>'required|date',
-                'precio_uva'=>'required|numeric',
-                'precio_venta'=>'required|numeric',
-                'precio_prod'=>'required|numeric',
-                'anada'=>'required|integer'
-            ];
-            $this->validate($request,$rules);
-            $barrica = Barrica::create([
-                'producido_type' => 'App\Bodega',
-                'producido_id' => $request->bodega,
-                'barrica_bodega_id'=>$request->barrica,
-                'uva'=>$request->uva,
-                'fecha_inicio'=>$request->fecha_inicio,
-                'fecha_embotellado'=>$request->fecha_embotellado,
-                'meses_barrica'=>$request->meses_barrica,
-                'meses_estabilizacion'=>$request->meses_estabilizacion,
-                'precio_uva'=>$request->precio_uva,
-                'precio_prod'=>$request->precio_prod,
-                'precio_venta'=>$request->precio_venta,
-                'fecha_envio'=>$request->fecha_envio,
-                'anada'=>$request->anada
-            ]);
-        }
+        $this->validate($request,$rules);
+
+        Barrica::create([
+            // 'producido'=>$request->producido,
+            'enologo_id'=>$request->productor,
+            'tipo_bar'=>$request->tipo_bar,
+            'tostado'=>$request->tostado,
+            'uva'=>$request->uva,
+            'bodega_id'=>$request->bodega_id,
+            'vinicola_id'=>$request->vinicola_id,
+            'fecha_inicio'=>$request->fecha_inicio,
+            'fecha_embotellado'=>$request->fecha_embotellado,
+            'meses_barrica'=>$request->meses_barrica,
+            'meses_estabilizacion'=>$request->meses_estabilizacion,
+            'costo_uva'=>$request->costo_uva,
+            'costo_barrica'=>$request->costo_barrica,
+            'costo_prod'=>$request->costo_prod,
+            'precio_venta'=>$request->precio_venta,
+            'fecha_envio'=>$request->fecha_envio,
+            'anada'=>$request->anada,
+            'utilidad'=>$request->utilidad
+        ]);
         return redirect()->route('barricas.index');
     }
 
@@ -148,27 +128,33 @@ class BarricaController extends Controller
     public function update(Request $request, Barrica $barrica)
     {
         //
-        $rules=[
-            
-            'fecha_inicio'=>'required|date',
-            'fecha_embotellado'=>'required|date',
-            'precio_uva'=>'required|numeric',
-            'precio_venta'=>'required|numeric',
-            'precio_prod'=>'required|numeric',
-            'anada'=>'required|integer'
+        $rules = [
+            "costo_uva" => "required|numeric",
+            "costo_barrica" => "required|numeric",
+            "costo_prod" => "required|numeric",
+            "anada" => "required",
+            "fecha_inicio" => "required|date",
+            "meses_barrica" => "required|integer",
+            "fecha_embotellado" => "required|date",
+            "meses_estabilizacion" => "required|integer",
+            "fecha_envio" => "required|date",
+            "precio_venta" => "required|numeric"
         ];
+
+        $this->validate($request,$rules);
         $this->validate($request,$rules);
         $barrica->update([
-
             'fecha_inicio'=>$request->fecha_inicio,
             'fecha_embotellado'=>$request->fecha_embotellado,
             'meses_barrica'=>$request->meses_barrica,
             'meses_estabilizacion'=>$request->meses_estabilizacion,
-            'precio_uva'=>$request->precio_uva,
-            'precio_prod'=>$request->precio_prod,
+            'costo_uva'=>$request->costo_uva,
+            'costo_barrica'=>$request->costo_barrica,
+            'costo_prod'=>$request->costo_prod,
             'precio_venta'=>$request->precio_venta,
             'fecha_envio'=>$request->fecha_envio,
-            'anada'=>$request->anada
+            'anada'=>$request->anada,
+            'utilidad'=>$request->utilidad
         ]);
         return redirect()->route('barricas.index');
     }

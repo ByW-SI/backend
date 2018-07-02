@@ -19,14 +19,15 @@
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col" style="width: 100px">Tipo</th>
-						<th scope="col">Subtipo</th>
 						<th scope="col">Tostado</th>
 						<th scope="col">Uva</th>
-						<th scope="col" style="width: 250px">Productor</th>
+						<th scope="col">Productor</th>
+						<th scope="col" style="width: 150px">Bodega/Casa</th>
 						<th scope="col">Fecha inicio</th>
 						<th scope="col">Fecha embotellado(tentativa)</th>
-						<th>Precio de la uva</th>
-						<th>Precio de producción</th>
+						<th>Costo de la uva</th>
+						<th>Costo de la barrica</th>
+						<th>Costo de producción</th>
 						<th>Precio venta</th>
 						<th>Acción</th>
 					</tr>
@@ -35,44 +36,32 @@
 					@forelse ($barricas as $barrica)
 						{{-- expr --}}
 						<tr>
-							<th scope="row">@if ($barrica->barrica_bodega)
-								{{-- true expr --}}
-								{{$barrica->barrica_bodega->tipo}}
-							@else
-								{{-- false expr --}}
-								La barrica de esta bodega ha sido eliminada
-							@endif</th>
+							<th scope="row">					{{$barrica->tipo_bar}}
+							</th>
 							<th>
-								@if ($barrica->barrica_bodega)
-								{{-- true expr --}}
-								{{$barrica->barrica_bodega->subtipo}}
-							@else
-								{{-- false expr --}}
-								La barrica de esta bodega ha sido eliminada
-							@endif
-								</th>
+								
+								{{$barrica->tostado}}
+							
+							</th>
 							<th>
-								@if ($barrica->barrica_bodega)
-								{{-- true expr --}}
-								{{$barrica->barrica_bodega->tostado}}
-							@else
-								{{-- false expr --}}
-								La barrica de esta bodega ha sido eliminada
-							@endif
-
-								</th>
-							<th>{{$barrica->uva}}</th>
-							<th>{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }} @if (isset($barrica->producido))
-								{{-- true expr --}}
-								 {{$barrica->producido->nombre}}
-							@else
-								{{-- false expr --}}
-								Tu productor a sido borrado
-							@endif</th>
+								
+								{{$barrica->uva}}
+							
+							</th>
+							<th>{{$barrica->enologo->tipo}} {{$barrica->enologo->nombre}} {{$barrica->enologo->paterno}} {{$barrica->enologo->materno}}</th>
+							<th>
+								@if (isset($barrica->bodega))
+									{{-- true expr --}}
+									{{$barrica->bodega->nombre}}
+								@else
+									{{-- false expr --}}
+								@endif
+							</th>
 							<th>{{$barrica->fecha_inicio}}</th>
 							<th>{{$barrica->fecha_embotellado}}</th>
-							<th>${{$barrica->precio_uva}} USD</th>
-							<th>${{$barrica->precio_prod}} USD</th>
+							<th>${{$barrica->costo_uva}} USD</th>
+							<th>${{$barrica->costo_barrica}} USD</th>
+							<th>${{$barrica->costo_prod}} USD</th>
 							<th>${{$barrica->precio_venta}} USD</th>
 							<th>
 								<a class="btn btn-default" href="{{ route('barricas.edit',[$barrica]) }}">Editar</a>

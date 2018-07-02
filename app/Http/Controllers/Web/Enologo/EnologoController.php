@@ -109,5 +109,18 @@ class EnologoController extends Controller
         //
         $enologo->delete();
         return redirect()->route('enologos.index');
+
+    }
+
+    public function enologos()
+    {
+        $enologos = Enologo::where('tipo','Enólogo')->get();
+        return response()->json(['enologos'=>$enologos],201);
+    }
+
+    public function wine()
+    {
+        $wine_makers = Enologo::where('tipo','Wine Maker')->get();
+        return response()->json(['wine_makers'=>$wine_makers],201);
     }
 }
