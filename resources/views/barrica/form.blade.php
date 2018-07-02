@@ -181,7 +181,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_uva') ? 'is-invalid' : '' }}" name="precio_uva" min="0" step="0.01" value="{{$edit ? $barrica->precio_uva : old('precio_uva')}}">
+									<input type="number" class="form-control {{ $errors->has('precio_uva') ? 'is-invalid' : '' }}" id="precio_uva" name="precio_uva" min="0" step="0.01" value="{{$edit ? $barrica->precio_uva : old('precio_uva')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
@@ -272,7 +272,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_prod') ? 'is-invalid' : '' }}" name="precio_prod" min="0" step="0.01" value="{{$edit ? $barrica->precio_prod : old('precio_prod')}}">
+									<input type="number" class="form-control {{ $errors->has('precio_prod') ? 'is-invalid' : '' }}" id="precio_prod" name="precio_prod" min="0" step="0.01" value="{{$edit ? $barrica->precio_prod : old('precio_prod')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
@@ -291,7 +291,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_venta') ? 'is-invalid' : '' }}" name="precio_venta" min="0" step="0.01" value="{{$edit ? $barrica->precio_venta : old('precio_venta')}}">
+									<input type="number" class="form-control {{ $errors->has('precio_venta') ? 'is-invalid' : '' }}" id="precio_venta" name="precio_venta" min="0" step="0.01" value="{{$edit ? $barrica->precio_venta : old('precio_venta')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
@@ -406,5 +406,17 @@
 			}
 		},'json');
 	}
+
+	$(document).ready(function(){
+    $("#precio_prod").keyup(function(){
+        precio = $('#precio_prod').val();
+        precio_uva = $('#precio_uva').val();
+        iva = precio*0.16;
+        ieps = precio*0.30;
+        precio_venta =+precio_uva+ +precio+ +iva+ +ieps;
+        console.log(precio_venta);
+        $('#precio_venta').val(precio_venta);
+    });
+});
 </script>
 @endsection

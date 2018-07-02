@@ -35,9 +35,32 @@
 					@forelse ($barricas as $barrica)
 						{{-- expr --}}
 						<tr>
-							<th scope="row">{{$barrica->barrica_bodega->tipo}}</th>
-							<th>{{$barrica->barrica_bodega->subtipo}}</th>
-							<th>{{$barrica->barrica_bodega->tostado}}</th>
+							<th scope="row">@if ($barrica->barrica_bodega)
+								{{-- true expr --}}
+								{{$barrica->barrica_bodega->tipo}}
+							@else
+								{{-- false expr --}}
+								La barrica de esta bodega ha sido eliminada
+							@endif</th>
+							<th>
+								@if ($barrica->barrica_bodega)
+								{{-- true expr --}}
+								{{$barrica->barrica_bodega->subtipo}}
+							@else
+								{{-- false expr --}}
+								La barrica de esta bodega ha sido eliminada
+							@endif
+								</th>
+							<th>
+								@if ($barrica->barrica_bodega)
+								{{-- true expr --}}
+								{{$barrica->barrica_bodega->tostado}}
+							@else
+								{{-- false expr --}}
+								La barrica de esta bodega ha sido eliminada
+							@endif
+
+								</th>
 							<th>{{$barrica->uva}}</th>
 							<th>{{$barrica->producido_type == 'App\Productor' ? 'Productor: ' : 'Bodega: ' }} @if (isset($barrica->producido))
 								{{-- true expr --}}
