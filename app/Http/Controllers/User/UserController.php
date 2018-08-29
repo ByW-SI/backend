@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
 
 class UserController extends Controller
 {
@@ -67,16 +69,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // return response()->json([$request->all()],200);
+        $years = Carbon::parse($request->fechanac)->age;
+        // dd(Carbon::parse($request->fechanac)->age);
         $rules =[
             'nombre' => 'required',
             'email' => 'required|email|unique:users',
             // 'username'=> 'required|unique:users',
+            'fechanac'=>"required|date",
             'password' => 'required|min:6',
         ];
 
-        $validater = $request->validate($rules);
+        // $validater = $request->validate($rules);
         // dd($validater);
-        // $this->validate($request,$rules);
+        $this->validate($request,$rules);
+        if ($years >= 18) {
         $campos = $request->all();
         $campos['password']= bcrypt($request->password);
         // $campos['verified']=User::USUARIO_NO_VERIFICADO;
@@ -97,6 +103,11 @@ class UserController extends Controller
         else{
             return response()->json(['message'=>'Error al crear usuario'], 400);
         }
+        } else {
+            return response()->json(['message'=>'Eres menor de edad'], 400);
+        }
+
+       
     }
 
     /**
