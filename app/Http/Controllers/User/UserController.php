@@ -21,10 +21,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
-        // return $usuario;
-        return response()->json([ 'usuarios'=>$usuarios], 200);
-        // return $this->showAll($usuarios);
+        // $usuarios = User::all();
+        // // return $usuario;
+        // return response()->json([ 'usuarios'=>$usuarios], 200);
+        // // return $this->showAll($usuarios);
     }
 
     // /**
