@@ -18,7 +18,7 @@ class UserPuntoController extends Controller
     {
         //
         $user= $request->user();
-        $puntos=$user->pluck('puntos_corchos');
+        $puntos=$user->puntos_corchos;
         $misCupones = $user->miCupones;
         // dd($misCupones);
         $cupones = $user->cupones;
