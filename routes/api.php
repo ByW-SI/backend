@@ -25,7 +25,7 @@ Route::middleware('auth:api')->resource('domicilios', 'Api\User\UserDomEnvioCont
 Route::middleware('auth:api')->resource('cards', 'Api\User\UserTarjetasController', ['except'=>['create','update','edit']]);
 Route::resource('uvas', 'Api\Uva\UvaController',['only'=>'index']);
 Route::resource('vinicolas','Api\Vinicola\VinicolaController',['only'=>'index']);
-Route::resource('marcas','Api\Marcas\MarcasController',['only'=>['index','show']]);
+Route::resource('barricas','Api\Barrica\BarricaController',['only'=>['index','show']]);
 Route::middleware('auth:api')->get('puntos_corchos','Api\User\UserPuntoController@index');
 Route::middleware('auth:api')->post('puntos_corchos','Api\User\UserPuntoController@store');
 Route::middleware('auth:api')->post('puntos_corchos/check', 'Api\Punto\PuntoController@canjear');
