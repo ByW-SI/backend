@@ -22,7 +22,7 @@ class UserPuntoController extends Controller
         $misCupones = $user->miCupones;
         // dd($misCupones);
         $cupones = $user->cupones;
-        return response()->json(['miscupones'=>$misCupones,'cupones'=>$cupones,'mispuntos'=>$mispuntos],201);
+        return response()->json(['miscupones'=>$misCupones,'cupones'=>$cupones,'mispuntos'=>$puntos],201);
 
     }
 
