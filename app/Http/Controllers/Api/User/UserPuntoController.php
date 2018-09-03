@@ -38,7 +38,7 @@ class UserPuntoController extends Controller
         $user=$request->user();
         $last_punto = Punto::orderBy('expira', 'desc')->first();
         // dd($last_punto->isExpired());
-        if ($last_punto->isExpired()) {
+        if (!$last_punto || $last_punto->isExpired()) {
             $punto= Punto::create([
                 'user_id'=>$user->id,
                 'expira'=> Carbon::now()->addDays(30),
