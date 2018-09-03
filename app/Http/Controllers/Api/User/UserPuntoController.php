@@ -18,10 +18,11 @@ class UserPuntoController extends Controller
     {
         //
         $user= $request->user();
+        $puntos=$user->pluck('puntos_corchos');
         $misCupones = $user->miCupones;
         // dd($misCupones);
         $cupones = $user->cupones;
-        return response()->json(['miscupones'=>$misCupones,'cupones'=>$cupones],201);
+        return response()->json(['miscupones'=>$misCupones,'cupones'=>$cupones,'mispuntos'=>$mispuntos],201);
 
     }
 
@@ -35,13 +36,20 @@ class UserPuntoController extends Controller
     {
         //
         $user=$request->user();
-        $punto= Punto::create([
-            'user_id'=>$user->id,
-            'expira'=> Carbon::now()->addDays(30),
-            'codigo'=>$this->generar(),
-            'puntos'=>10,
-        ]);
-        return response()->json(['punto'=>$punto]);
+        $last_punto = Punto::last();
+        if ($last_punto->isExpired()) {
+            $punto= Punto::create([
+                'user_id'=>$user->id,
+                'expira'=> Carbon::now()->addDays(30),
+                'codigo'=>$this->generar(),
+                'puntos'=>10,
+            ]);
+            
+            return response()->json(['punto'=>$punto],201);
+        }
+        else {
+            return response()->json(['error'=>'Tu código aun no a expirado'],401);   
+        }
 
     }
 
