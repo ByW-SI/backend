@@ -32,3 +32,4 @@ Route::middleware('auth:api')->post('puntos_corchos/check', 'Api\Punto\PuntoCont
 // Route::middleware('auth:api')->put('fiscales', 'Api\User\UserDomFiscalController@update');
 
 Route::post('login', 'User\UserController@login')->name('login');
+Route::post('mivino','Api\Barrica\BarricaController@search');
