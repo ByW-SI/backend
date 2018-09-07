@@ -15,10 +15,12 @@ class CreateUvaProducidaTable extends Migration
     {
         Schema::create('uva_producida', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uva_id')->unsigned();
-            $table->foreign('uva_id')->references('id')->on('uvas');
+            $table->string('nombre');
+            // $table->integer('uva_id')->unsigned();
+            // $table->foreign('uva_id')->references('id')->on('uvas');
             $table->decimal('hectarea',5,2);
-            $table->morphs('producidas'); 
+            $table->morphs('producidas');
+            $table->decimal('costo');
             // $table->integer('vinicola_id')->unsigned();
             // $table->foreign('vinicola_id')->references('id')->on('vinicola');
             $table->timestamps();

@@ -205,15 +205,26 @@
 							        	<option value="">Seleccione su uva</option>
 							        	@forelse ($uvas as $uva)
 							        		{{-- expr --}}
-							        		<option value="{{$uva->id}}">{{$uva->title}}</option>
+							        		<option value="{{$uva->title}}">{{$uva->title}}</option>
 							        	@empty
 							        		{{-- empty expr --}}
 							        	@endforelse
 							        </select>
-							        <input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/>
+							        <input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/>
 							        <div class="input-group-append">
     									<span class="input-group-text"><strong>ha</strong></span>
 									</div>
+									<div class="input-group">
+									  	<div class="input-group-prepend">
+									    	<span class="input-group-text" id="basic-addon1">$</span>
+									  	</div>
+									  	<input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/>
+										<div class="input-group-append">
+									    	<span class="input-group-text">USD</span>
+									  	</div>
+									</div>
+									
+							        
 							        <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus"></i></a>
 							    </div>
 							</div>
@@ -242,7 +253,7 @@ $(document).ready(function(){
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
     var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option>@foreach ($uvas as $uva)<option value="{{$uva->id}}">{{$uva->title}}</option>@endforeach</select><input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; //New input field html 
+    var fieldHTML = '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option>@foreach ($uvas as $uva)<option value="{{$uva->title}}">{{$uva->title}}</option>@endforeach</select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; //New input field html 
     var x = 1; //Initial field counter is 1
     
     //Once add button is clicked

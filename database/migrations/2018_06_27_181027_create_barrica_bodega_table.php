@@ -18,9 +18,10 @@ class CreateBarricaBodegaTable extends Migration
             $table->integer('bodega_id')->unsigned();
             $table->foreign('bodega_id')->references('id')->on('bodega');
             $table->string('tipo');
-            $table->string('subtipo');
+            // $table->string('subtipo');
             $table->string('tostado');
             $table->integer('cantidad');
+            $table->decimal('costo');
             $table->timestamps();
         });
     }

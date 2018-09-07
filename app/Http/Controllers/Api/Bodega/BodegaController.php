@@ -12,7 +12,7 @@ class BodegaController extends Controller
 
     public function index()
     {
-    	$bodega = Bodega::get();
+    	$bodegas = Bodega::get();
     	return response()->json(['bodegas'=>$bodegas],201);
     }
 }

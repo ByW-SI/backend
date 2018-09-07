@@ -16,6 +16,7 @@ class Bodega extends Model
     	'logo',
     	'vista',
         'descripcion',
+        'costo_prod',
     	'locacion',
     	'long',
     	'lat',
