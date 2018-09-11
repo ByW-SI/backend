@@ -550,7 +550,7 @@
 	        iva = precio*0.16;
 	        ieps = precio*0.30;
 	        precio_venta =+precio_bar+ +precio_uva+ +precio+ +iva+ +ieps;
-	        console.log(precio_venta);
+	        // console.log(precio_venta);
 	        $('#precio_venta').val(precio_venta.toFixed(2));
 	    });
 
@@ -559,7 +559,7 @@
 	    	precio_venta = $('#precio_venta').val();
 	    	utilidad = precio_venta*(porc_utilidad/100);
 	    	final = +precio_venta+ +utilidad;
-	    	console.log(final);
+	    	// console.log(final);
 	    	$('#precio_final').text(final.toFixed(2));
 	    });
 
@@ -568,7 +568,7 @@
 	    	fecha = new Date($('#fecha_inicio').val());
 	    	m_barrica = $('#meses_barrica').val();
 	    	fecha_emb = new Date(fecha).add(parseInt(m_barrica)).month();
-	    	console.log(fecha_emb.toString('yyyy/MM/dd'));
+	    	// console.log(fecha_emb.toString('yyyy/MM/dd'));
 
 	    	$('#fecha_embotellado').val(fecha_emb.toString('yyyy-MM-dd'));
 	    });
@@ -578,7 +578,7 @@
 	    	fecha = new Date($('#fecha_embotellado').val());
 	    	m_estabil = $('#meses_estabilizacion').val();
 	    	fecha_emb = new Date(fecha).add(parseInt(m_estabil)).month();
-	    	console.log(fecha_emb.toString('yyyy/MM/dd'));
+	    	// console.log(fecha_emb.toString('yyyy/MM/dd'));
 
 	    	$('#fecha_envio').val(fecha_emb.toString('yyyy-MM-dd'));
 	    })

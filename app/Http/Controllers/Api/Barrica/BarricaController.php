@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api\Barrica;
 
 use App\Barrica;
-use Illuminate\Http\Request;
+use App\Bodega;
 use App\Http\Controllers\Controller;
+use App\Vinicola;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BarricaController extends Controller
 {
@@ -38,6 +41,7 @@ class BarricaController extends Controller
     public function search(Request $request){
         // dd($request->uva);
         $barricas = new Barrica();
+
         if($request->uva){
             $barricas = $barricas->where('uva',$request->uva);
             // dd('aqui');
@@ -56,8 +60,29 @@ class BarricaController extends Controller
             $barricas = $barricas->where('vinicola_id',$request->vinicola_id);
         }
 
+
+        $tipo_bars = $barricas->distinct('tipo_bar')->pluck('tipo_bar');
+        $uvas = $barricas->distinct('uva')->pluck('uva');
+        $tostados = $barricas->distinct('tostado')->pluck('tostado');
+        // dd($tostado);
+        $bodegas_id = $barricas->distinct('bodega_id')->pluck('bodega_id');
+        // dd($bodegas_id);
+        $bodegas= array();
+        foreach ($bodegas_id as $id) {
+            $bodega = Bodega::find($id);
+            array_push($bodegas,$bodega);
+        }
+        $vinicolas_id = $barricas->distinct('vinicola_id')->pluck('vinicola_id');
+        // dd($vinicolas_id);
+        $vinicolas= array();
+        foreach ($vinicolas_id as $id) {
+            $vinicola = Vinicola::find($id);
+            array_push($vinicolas,$vinicola);
+        }
+        
         $barricas = $barricas->get();
-        return response()->json(['barricas'=>$barricas],201);
+
+        return response()->json(['bodegas'=>$bodegas,'vinicolas'=>$vinicolas,'tipo_bars'=>$tipo_bars,'uvas'=>$uvas,'tostados'=>$tostados,'barricas'=>$barricas],201);
 
     }
 }
