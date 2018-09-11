@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Web\Barrica;
 
 use App\Barrica;
-use App\Productor;
+use App\BarricaBodega;
 use App\Bodega;
+use App\Http\Controllers\Controller;
+use App\Productor;
 use App\Uva;
 use App\Vinicola;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class BarricaController extends Controller
 {
@@ -90,6 +91,26 @@ class BarricaController extends Controller
             'anada'=>$request->anada,
             'utilidad'=>$request->utilidad
         ]);
+        $barrica_exist=BarricaBodega::where([
+            ['bodega_id',$request->bodega_id],
+            ['tipo',$request->tipo_bar],
+            ['tostado',$request->tostado]
+        ])->get();
+
+        if($barrica_exist->count() > 0){
+            // dd($barrica_exist);
+            $barrica_exist->cantidad = $barrica_exist->cantidad == 0 ? 0 : $barrica_exist->cantidad -1;
+            $barrica_exist->save();
+        }
+        else{
+            BarricaBodega::create([
+                'bodega_id'=>$request->bodega_id,
+                'tipo'=>$request->tipo_bar,
+                'tostado'=>$request->tostado,
+                'cantidad'=>0,
+                'costo'=>$request->costo_barrica
+            ]);
+        }
         return redirect()->route('barricas.index');
     }
 

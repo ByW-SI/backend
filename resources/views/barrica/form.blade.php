@@ -300,7 +300,7 @@
 							<div class="form-group row">
 								<label for="meses_barrica" class="col-md-4 col-form-label text-md-right">Meses tentativos en barrica:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('meses_barrica') ? 'is-invalid' : '' }}" name="meses_barrica" min="0" step="6" value="{{$edit ? $barrica->meses_barrica : old('meses_barrica')}}">
+									<input type="number" id="meses_barrica" class="form-control {{ $errors->has('meses_barrica') ? 'is-invalid' : '' }}" name="meses_barrica" min="0" step="6" value="{{$edit ? $barrica->meses_barrica : old('meses_barrica')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>meses</strong></span>
 									</div>
@@ -330,7 +330,7 @@
 							<div class="form-group row">
 								<label for="meses_estabilizacion" class="col-md-4 col-form-label text-md-right">Meses tentativos en estabilización:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" name="meses_estabilizacion" min="0" step="1" value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}">
+									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" id="meses_estabilizacion" name="meses_estabilizacion" min="0" step="1" value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>meses</strong></span>
 									</div>
@@ -383,7 +383,7 @@
 							<div class="form-group row">
 								<label for="utilidad" class="col-md-4 col-form-label text-md-right">Utilidad:</label>
 								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('utilidad') ? 'is-invalid' : '' }}" name="utilidad" min="0" step="5" value="{{$edit ? $barrica->utilidad : old('utilidad')}}">
+									<input type="number" id="utilidad" class="form-control {{ $errors->has('utilidad') ? 'is-invalid' : '' }}" name="utilidad" min="0" step="5" value="{{$edit ? $barrica->utilidad : old('utilidad')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>%</strong></span>
 									</div>
@@ -393,6 +393,19 @@
 											<strong>{{ $errors->first("utilidad")}}</strong>
 										</span>
 									@endif
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="precio_final" class="col-md-4 col-form-label text-md-right">Precio de venta:</label>
+								<div class="input-group col-md-6">
+									<div class="input-group-prepend">
+    									<span class="input-group-text">$</span>
+								  	</div>
+									<span id="precio_final" class="form-control"></span>
+									<div class="input-group-append">
+    									<span class="input-group-text"><strong>USD</strong></span>
+									</div>
 								</div>
 							</div>
 							<div class="form-group row mb-0">
@@ -409,6 +422,7 @@
 	</div>
 @endsection
 @section('script')
+<script type="text/javascript" src="{{ asset('js/date.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -529,15 +543,46 @@
 			inicio = $('#fecha_inicio').valueAsDate;
 			$('#fecha_embotellado').val(inicio);
 		});
-    $("#precio_prod").keyup(function(){
-        precio = $('#precio_prod').val();
-        precio_uva = $('#precio_uva').val();
-        iva = precio*0.16;
-        ieps = precio*0.30;
-        precio_venta =+precio_uva+ +precio+ +iva+ +ieps;
-        console.log(precio_venta);
-        $('#precio_venta').val(precio_venta);
-    });
-});
+	    $("#costo_prod").keyup(function(){
+	        precio = $('#costo_prod').val();
+	        precio_uva = $('#costo_uva').val();
+	        precio_bar = $('#costo_barrica').val();
+	        iva = precio*0.16;
+	        ieps = precio*0.30;
+	        precio_venta =+precio_bar+ +precio_uva+ +precio+ +iva+ +ieps;
+	        console.log(precio_venta);
+	        $('#precio_venta').val(precio_venta.toFixed(2));
+	    });
+
+	    $('#utilidad').keyup(function(){
+	    	porc_utilidad = $('#utilidad').val();
+	    	precio_venta = $('#precio_venta').val();
+	    	utilidad = precio_venta*(porc_utilidad/100);
+	    	final = +precio_venta+ +utilidad;
+	    	console.log(final);
+	    	$('#precio_final').text(final.toFixed(2));
+	    });
+
+	    $('#meses_barrica').keyup(function() {
+	    	// body...
+	    	fecha = new Date($('#fecha_inicio').val());
+	    	m_barrica = $('#meses_barrica').val();
+	    	fecha_emb = new Date(fecha).add(parseInt(m_barrica)).month();
+	    	console.log(fecha_emb.toString('yyyy/MM/dd'));
+
+	    	$('#fecha_embotellado').val(fecha_emb.toString('yyyy-MM-dd'));
+	    });
+
+	    $('#meses_estabilizacion').keyup(function() {
+	    	// body...
+	    	fecha = new Date($('#fecha_embotellado').val());
+	    	m_estabil = $('#meses_estabilizacion').val();
+	    	fecha_emb = new Date(fecha).add(parseInt(m_estabil)).month();
+	    	console.log(fecha_emb.toString('yyyy/MM/dd'));
+
+	    	$('#fecha_envio').val(fecha_emb.toString('yyyy-MM-dd'));
+	    })
+
+	});
 </script>
 @endsection
