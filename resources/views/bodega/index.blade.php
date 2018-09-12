@@ -40,7 +40,7 @@
 							<th>
 								@forelse ($bodega->uvasBod as $uvaBod)
 									{{-- expr --}}
-									{{$uvaBod->uva['title']}} {{$uvaBod->hectarea}} ha
+									{{$uvaBod->nombre}} {{$uvaBod->hectarea}} ha
 									<form action="{{ route('uvas.destroy',['uvaBod'=>$uvaBod]) }}" method="POST">
 										@csrf
 										<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar esta uva?');">Eliminar</button>

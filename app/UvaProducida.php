@@ -11,10 +11,11 @@ class UvaProducida extends Model
 
     protected $fillable=[
     	'id',
-    	'uva_id',
+    	'nombre',
     	'hectarea',
     	'producidas_type',
-    	'producidas_id'
+    	'producidas_id',
+        'costo'
     ];
 
     protected $hidden=[

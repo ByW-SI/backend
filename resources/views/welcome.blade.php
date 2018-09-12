@@ -80,7 +80,7 @@
                         <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
                         <li class="current"><a href="{{ route('vinicolas.index') }}" title="">Vinicolas</a></li>
                         <li class="current"><a href="{{ route('bodegas.index') }}" title="">Bodegas</a></li>
-                        <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a></li>
+{{--                         <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a></li> --}}
                         <li class="current"><a href="{{ route('barricas.index') }}" title="">Barricas</a></li>
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>

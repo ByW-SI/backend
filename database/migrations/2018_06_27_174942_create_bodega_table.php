@@ -34,6 +34,7 @@ class CreateBodegaTable extends Migration
             $table->string('telefono');
             $table->boolean('productora')->nullable();
             $table->text('comentarios')->nullable();
+            $table->decimal('costo_prod');
             // $table->integer('vinicola_id')->unsigned()->nullable();
             // $table->foreign('vinicola_id')->references('id')->on('vinicola');
             // $table->text('uvas')->nullable();

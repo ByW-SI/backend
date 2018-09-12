@@ -53,6 +53,7 @@ class BodegaController extends Controller
         $rules=[
             'nombre'=>'required|unique:bodega',
             'descripcion'=>'required',
+            'costo_prod'=>'required|numeric',
             'logo'=>'image|mimes:jpg,jpeg,png',
             'vista'=>'image|mimes:jpg,jpeg,png',
             'locacion'=>'required',
@@ -74,6 +75,7 @@ class BodegaController extends Controller
                 'logo'=>(isset($path_logo) ? $path_logo : NULL),
                 'vista'=>(isset($path_vista) ? $path_vista : NULL),
                 'descripcion'=>$request->descripcion,
+                'costo_prod'=>$request->costo_prod,
                 'locacion'=>$request->locacion,
                 'long'=>$request->long,
                 'lat'=>$request->lat,
@@ -92,6 +94,7 @@ class BodegaController extends Controller
                 'nombre'=>$request->nombre,
                 'marcas'=>$request->marcas,
                 'descripcion'=>$request->descripcion,
+                'costo_prod'=>$request->costo_prod,
                 'locacion'=>$request->locacion,
                 'long'=>$request->long,
                 'lat'=>$request->lat,
@@ -111,9 +114,9 @@ class BodegaController extends Controller
             BarricaBodega::create([
                 'bodega_id'=>$bodega->id,
                 'tipo'=>$request->tipo_barrica[$i],
-                'subtipo'=>$request->subtipo_barrica[$i],
                 'tostado'=>$request->tostado_barrica[$i],
-                'cantidad'=>$request->cantidad[$i]
+                'cantidad'=>$request->cantidad[$i],
+                'costo'=>$request->costob[$i]
             ]);
         }
 
@@ -122,8 +125,9 @@ class BodegaController extends Controller
                 UvaProducida::create([
                     'producidas_id'=>$bodega->id,
                     'producidas_type'=>"App\Bodega",
-                    'uva_id'=>$request->uva[$i],
-                    'hectarea'=>$request->hectarea[$i]
+                    'nombre'=>$request->uva[$i],
+                    'hectarea'=>$request->hectarea[$i],
+                    'costo'=>$request->costou[$i]
                 ]);
                 
             }
@@ -174,6 +178,7 @@ class BodegaController extends Controller
             
             'descripcion'=>'required',
             'logo'=>'image|mimes:jpg,jpeg,png',
+            'costo_prod'=>'required|numeric',
             'vista'=>'image|mimes:jpg,jpeg,png',
             'locacion'=>'required',
             'telefono'=>'required',
@@ -194,6 +199,7 @@ class BodegaController extends Controller
                 'logo'=>(isset($path_logo) ? $path_logo : $bodega->logo),
                 'vista'=>(isset($path_vista) ? $path_vista : $bodega->vista),
                 'descripcion'=>$request->descripcion,
+                'costo_prod'=>$request->costo_prod,
                 'locacion'=>$request->locacion,
                 'long'=>$request->long,
                 'lat'=>$request->lat,
@@ -212,6 +218,7 @@ class BodegaController extends Controller
                 // 'nombre'=>$request->nombre,
                 'marcas'=>$request->marcas,
                 'descripcion'=>$request->descripcion,
+                'costo_prod'=>$request->costo_prod,
                 'locacion'=>$request->locacion,
                 'long'=>$request->long,
                 'lat'=>$request->lat,
@@ -233,9 +240,9 @@ class BodegaController extends Controller
                 BarricaBodega::create([
                     'bodega_id'=>$bodega->id,
                     'tipo'=>$request->tipo_barrica[$i],
-                    'subtipo'=>$request->subtipo_barrica[$i],
                     'tostado'=>$request->tostado_barrica[$i],
-                    'cantidad'=>$request->cantidad[$i]
+                    'cantidad'=>$request->cantidad[$i],
+                    'costo'=>$request->costob[$i]
                 ]);
             }
         }
@@ -245,8 +252,9 @@ class BodegaController extends Controller
                 UvaProducida::create([
                     'producidas_id'=>$bodega->id,
                     'producidas_type'=>"App\Bodega",
-                    'uva_id'=>$request->uva[$i],
-                    'hectarea'=>$request->hectarea[$i]
+                    'nombre'=>$request->uva[$i],
+                    'hectarea'=>$request->hectarea[$i],
+                    'costo'=>$request->costou[$i]
                 ]);
                 
             }

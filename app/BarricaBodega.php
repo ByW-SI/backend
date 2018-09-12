@@ -12,9 +12,9 @@ class BarricaBodega extends Model
     	'id',
     	'bodega_id',
     	'tipo',
-    	'subtipo',
     	'tostado',
-    	'cantidad'
+    	'cantidad',
+        'costo'
     ];
     protected $hidden=[
     	'created_at',

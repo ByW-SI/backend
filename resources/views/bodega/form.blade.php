@@ -45,6 +45,25 @@
 									@endif
 								</div>
 							</div>
+{{-- Costo producción --}}
+							<div class="form-group row">
+								<label for="costo_prod" class="col-md-4 col-form-label text-md-right">Costo de producción:</label>
+								<div class="col-md-6 input-group">
+									<div class="input-group-prepend">
+									    <span class="input-group-text">$</span>
+									</div>
+									<input id="costo_prod" type="number" step="any" min="0.00" class="form-control {{ $errors->has('costo_prod') ? ' is-invalid' : ''  }}" name="costo_prod" value="{{ $edit ? $bodega->costo_prod : old('costo_prod') }}" required autofocus="">
+									<div class="input-group-append">
+										<span class="input-group-text">USD</span>
+									</div>
+									@if ($errors->has('costo_prod'))
+										{{-- expr --}}
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first("costo_prod")}}</strong>
+										</span>
+									@endif
+								</div>
+							</div>
 
 {{-- Logo --}}
 							@if ($edit && $bodega->logo != null )
@@ -242,12 +261,6 @@
 					        	<option value="Europea">Europea</option>
 					        	<option value="Bosques de europa central">Bosques de europa central</option>
 					        </select>
-					        <select id="subtipo" class="form-control" name="subtipo_barrica[]" {{ $edit ? '' : 'required'}}>
-					        	<option value="">Seleccione su subtipo barrica</option>
-					        	<option value="1">1</option>
-					        	<option value="2">2</option>
-					        	<option value="3">3</option>
-					        </select>
 					        <select id="tostado" class="form-control" name="tostado_barrica[]" {{ $edit ? '' : 'required'}}>
 					        	<option value="">Seleccione su tostado de barrica</option>
 					        	<option value="Ligero">Ligero</option>
@@ -257,6 +270,15 @@
 					        <input type="number" step="1" min="1" placeholder="Cantidad" class="form-control" name="cantidad[]" {{ $edit ? '' : 'required'}} value=""/>
 					        <div class="input-group-append">
 								<span class="input-group-text"><strong>barrica(s)</strong></span>
+							</div>
+							<div class="input-group">
+							  	<div class="input-group-prepend">
+							    	<span class="input-group-text" id="basic-addon1">$</span>
+							  	</div>
+							  	<input type="number" step="any" min="0.00" placeholder="Costo de la(s) barrica(s)" class="form-control" name="costob[]" value=""/>
+								<div class="input-group-append">
+							    	<span class="input-group-text">USD</span>
+							  	</div>
 							</div>
 					        <a href="javascript:void(0);" class="add_button_barrica" title="Add field"><i class="fas fa-plus"></i></a>
 					    </div>
@@ -293,7 +315,7 @@
 					        	<option value="">Seleccione su uva</option>
 					        	@forelse ($uvas as $uva)
 					        		{{-- expr --}}
-					        		<option value="{{$uva->id}}">{{$uva->title}}</option>
+					        		<option value="{{$uva->title}}">{{$uva->title}}</option>
 					        	@empty
 					        		{{-- empty expr --}}
 					        	@endforelse
@@ -301,6 +323,15 @@
 					        <input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/>
 					        <div class="input-group-append">
 								<span class="input-group-text"><strong>ha</strong></span>
+							</div>
+							<div class="input-group">
+							  	<div class="input-group-prepend">
+							    	<span class="input-group-text" id="basic-addon1">$</span>
+							  	</div>
+							  	<input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costou[]" value=""/>
+								<div class="input-group-append">
+							    	<span class="input-group-text">USD</span>
+							  	</div>
 							</div>
 					        <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus"></i></a>
 					    </div>
@@ -341,12 +372,12 @@ $(document).ready(function(){
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
     var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option>@foreach ($uvas as $uva)<option value="{{$uva->id}}">{{$uva->title}}</option>@endforeach</select><input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; //New input field html 
+    var fieldHTML = '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option>@foreach ($uvas as $uva)<option value="{{$uva->title}}">{{$uva->title}}</option>@endforeach</select><input type="text" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costou[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; //New input field html 
     var x = 1; //Initial field counter is 1
 
     var addButton_bar = $('.add_button_barrica'); //Add button selector
     var wrappers = $('.field_wrappers'); //Input field
-    var barricaHTML = '<div class="input-group offset-md-4 col-md-8"><select id="barrica" class="form-control" name="tipo_barrica[]" required><option value="">Seleccione su barrica</option><option value="Americana">Americana</option><option value="Europea">Europea</option><option value="Bosques de europa central">Bosques de europa central</option></select><select id="subtipo" class="form-control" name="subtipo_barrica[]" required><option value="">Seleccione su subtipo barrica</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select><select id="tostado" class="form-control" name="tostado_barrica[]" required><option value="">Seleccione su tostado de barrica</option><option value="Ligero">Ligero</option><option value="Medio">Medio</option><option value="Alto">Alto</option></select><input type="number" step="1" min="1" placeholder="Cantidad" class="form-control" name="cantidad[]" required value=""/><div class="input-group-append"><span class="input-group-text"><strong>barrica(s)</strong></span></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; 
+    var barricaHTML = '<div class="input-group offset-md-4 col-md-8"><select id="barrica" class="form-control" name="tipo_barrica[]" required><option value="">Seleccione su barrica</option><option value="Americana">Americana</option><option value="Europea">Europea</option><option value="Bosques de europa central">Bosques de europa central</option></select><select id="tostado" class="form-control" name="tostado_barrica[]" required><option value="">Seleccione su tostado de barrica</option><option value="Ligero">Ligero</option><option value="Medio">Medio</option><option value="Alto">Alto</option></select><input type="number" step="1" min="1" placeholder="Cantidad" class="form-control" name="cantidad[]" required value=""/><div class="input-group-append"><span class="input-group-text"><strong>barrica(s)</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costob[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div><a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a></div>'; 
     
     //Once add button is clicked
     $(addButton).click(function(){

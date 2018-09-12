@@ -61,8 +61,9 @@ class VinicolaController extends Controller
             UvaProducida::create([
                 'producidas_id'=>$vinicola->id,
                 'producidas_type'=>"App\Vinicola",
-                'uva_id'=>$request->uva[$i],
-                'hectarea'=>$request->hectarea[$i]
+                'nombre'=>$request->uva[$i],
+                'hectarea'=>$request->hectarea[$i],
+                'costo'=>$request->costo[$i]
             ]);
             
         }
@@ -139,8 +140,10 @@ class VinicolaController extends Controller
                 UvaProducida::create([
                     'producidas_id'=>$vinicola->id,
                     'producidas_type'=>"App\Vinicola",
-                    'uva_id'=>$request->uva[$i],
-                    'hectarea'=>$request->hectarea[$i]
+                    'nombre'=>$request->uva[$i],
+                    'hectarea'=>$request->hectarea[$i],
+                    'costo'=>$request->costo[$i]
+
                 ]);
                 
             }
