@@ -38,7 +38,7 @@ class UserPuntoController extends Controller
         $user=$request->user();
         $last_punto = $user->miCupones()->orderBy('expira', 'desc')->first();
         // dd($last_punto->isExpired());
-        if (!$last_punto || $last_punto->isExpired()) {
+        // if (!$last_punto || $last_punto->isExpired()) {
             $punto= Punto::create([
                 'user_id'=>$user->id,
                 'expira'=> Carbon::now()->addDays(30),
@@ -47,10 +47,10 @@ class UserPuntoController extends Controller
             ]);
             
             return response()->json(['punto'=>$punto],201);
-        }
-        else {
-            return response()->json(['error'=>'Tu código aun no a expirado'],401);   
-        }
+        // }
+        // else {
+        //     return response()->json(['error'=>'Tu código aun no a expirado'],401);   
+        // }
 
     }
 
