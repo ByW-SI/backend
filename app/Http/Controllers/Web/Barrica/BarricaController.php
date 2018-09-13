@@ -89,7 +89,8 @@ class BarricaController extends Controller
             'precio_venta'=>$request->precio_venta,
             'fecha_envio'=>$request->fecha_envio,
             'anada'=>$request->anada,
-            'utilidad'=>$request->utilidad
+            'utilidad'=>$request->utilidad,
+            'precio_publico'=>$request->precio_final
         ]);
         $barrica_exist=BarricaBodega::where([
             ['bodega_id',$request->bodega_id],
@@ -175,7 +176,8 @@ class BarricaController extends Controller
             'precio_venta'=>$request->precio_venta,
             'fecha_envio'=>$request->fecha_envio,
             'anada'=>$request->anada,
-            'utilidad'=>$request->utilidad
+            'utilidad'=>$request->utilidad,
+            'precio_publico'=>$request->precio_final
         ]);
         return redirect()->route('barricas.index');
     }

@@ -402,7 +402,7 @@
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<span id="precio_final" class="form-control"></span>
+									<input type="number" id="precio_final" name="precio_final" class="form-control {{ $errors->has('precio_final') ? 'is-invalid' : '' }}" readonly min="0" step="0.01" value="{{$edit ? $barrica->precio_final : old('precio_final')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
@@ -560,7 +560,7 @@
 	    	utilidad = precio_venta*(porc_utilidad/100);
 	    	final = +precio_venta+ +utilidad;
 	    	// console.log(final);
-	    	$('#precio_final').text(final.toFixed(2));
+	    	$('#precio_final').val(final.toFixed(2));
 	    });
 
 	    $('#meses_barrica').keyup(function() {

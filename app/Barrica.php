@@ -27,7 +27,8 @@ class Barrica extends Model
         'precio_venta',
         'fecha_envio',
         'anada',
-        'utilidad'
+        'utilidad',
+        'precio_publico'
     ];
     protected $hidden=[
     	'created_at',

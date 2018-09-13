@@ -39,7 +39,8 @@ class CreateBarricaTable extends Migration
             $table->decimal('precio_venta', 8, 2);
             $table->date('fecha_envio')->nullable(); 
             $table->integer('anada')->nullable();
-            $table->decimal('utilidad')->nullable(); 
+            $table->decimal('utilidad')->nullable();
+            $table->decimal('precio_publico',8,2)->default(0);
             $table->integer('cajas')->default(22); 
             $table->timestamps();
         });
