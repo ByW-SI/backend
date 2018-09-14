@@ -15,14 +15,16 @@ class CreateShoppingCartTable extends Migration
     {
         Schema::create('shopping_cart', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status');
+            $table->string('status')->default('created');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('envio_id')->unsigned();
+            $table->integer('envio_id')->unsigned()->nullable();
             $table->foreign('envio_id')->references('id')->on('domicilio_envio');
             $table->integer('fiscal_id')->unsigned()->nullable();
             $table->foreign('fiscal_id')->references('id')->on('domicilio_fiscal');
-            $table->decimal('total',8,2)->default('0.00')
+            $table->decimal('total',8,2)->default('0.00');
+            $table->decimal('envio',8,2)->default('0.00');
+            $table->string('numero')->nullable()->unique();
             $table->timestamps();
         });
     }

@@ -59,5 +59,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Punto', 'punto_user','user_id','punto_id')->withPivot('usado');
     }
 
+    public function shoppingCarts(){
+        return $this->hasMany('App\ShoppingCart','user_id','id');
+    }
+
 
 }

@@ -41,5 +41,8 @@ class DomFiscal extends Model
 
     }
 
-
+    public function shoppingCarts()
+    {
+        return $this->hasMany('App\ShoppingCart');
+    }
 }

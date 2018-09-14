@@ -44,5 +44,8 @@ class DomEnvio extends Model
     	return $this->belongsTo('App\User', 'user_id');
 
     }
+    public function shoppingCarts(){
+        return $this->hasMany('App\ShoppingCart','envio_id','id');
+    }
 
 }
