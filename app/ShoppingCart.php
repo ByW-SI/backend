@@ -54,9 +54,13 @@ class ShoppingCart extends Model
     public function inShoppingCart(){
         return $this->belongsToMany('App\Barrica','in_shopping_cart', 'shopping_cart_id','barrica_id')
         ->using('App\InShoppingCart')
-        ->whitPivot('cantidad','precio_unit');  
+        ->withPivot('cantidad','precio_unit');  
     }
 
+    public function scopeComprados($query)
+    {
+        return $query->where('status', '<>','created');
+    }
 
 
 

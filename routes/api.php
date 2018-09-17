@@ -34,4 +34,5 @@ Route::middleware('auth:api')->post('puntos_corchos/check', 'Api\Punto\PuntoCont
 Route::post('login', 'User\UserController@login')->name('login');
 Route::post('mivino','Api\Barrica\BarricaController@search');
 Route::get('bodegas', 'Api\Bodega\BodegaController@index');
-Route::middleware('auth:api')->get('shopping_carts','Api\User\UserShoppingCart@index');
+Route::middleware('auth:api')->get('/shopping_carts','Api\User\UserShoppingCart@index');
+Route::middleware('auth:api')->post('/add_in_cart','Api\User\UserShoppingCart@addInShoppingCart');

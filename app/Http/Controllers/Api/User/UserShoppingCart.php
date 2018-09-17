@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\Barrica;
+use App\Http\Controllers\Controller;
 use App\ShoppingCart;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class UserShoppingCart extends Controller
 {
@@ -17,7 +18,7 @@ class UserShoppingCart extends Controller
             $this->user= $request->user();
             // Buscar su carrito de compra o crear uno
             $this->myShoppingCart = ShoppingCart::findOrCreateMyShoppingCart($this->user->id);
-            return $next($this->user,$request);
+            return $next($request);
         });
         // dd($this->user);
         // $this->user = $request->user();
@@ -32,73 +33,29 @@ class UserShoppingCart extends Controller
     public function index()
     {
         //
-        dd($this->user->shoppingCarts);
+        $user = $this->user;
+        $myShoppingCart = $this->myShoppingCart;
+        foreach ($myShoppingCart->inShoppingCart as $inShoppingCart) {
+            // No se por que diablos no puedo utilizar el with en myShoppingCart
+            // la unica forma de enlistar los productos en mi carrito es esta
+        }
+        // dd($myShoppingCar->toJson());
+        $compras = $this->user->shoppingCarts()->comprados()->with(['inShoppingCart'])->get();
+        return response()->json(['user'=>$user,'myShoppingCart'=>$myShoppingCart,'compras'=>$compras],201);
         // dd($request->user());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function addInShoppingCart(Request $request){
+        
+        $rules = [
+            // 'shopping_cart'=>'required|numeric',
+            'barrica'=>'required|numeric',
+            'cantidad'=>'required|numeric'
+        ];
+        $this->validate($request,$rules);
+        $barrica = Barrica::findOrFail($request['barrica']); 
+        if($barrica){
+            $this->myShoppingCart;
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ShoppingCart $shoppingCart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShoppingCart $shoppingCart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ShoppingCart $shoppingCart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ShoppingCart $shoppingCart)
-    {
-        //
-    }
 }
