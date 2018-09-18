@@ -52,9 +52,35 @@ class UserShoppingCart extends Controller
             'cantidad'=>'required|numeric'
         ];
         $this->validate($request,$rules);
-        $barrica = Barrica::findOrFail($request['barrica']); 
+        $barrica = Barrica::findOrFail($request['barrica']);
+
+         // SI LA BARRICA EXISTE 
         if($barrica){
-            $this->myShoppingCart;
+
+            // SI YA ESTA AGREGADA LA BARRICA EN EL CARRITO ACTUALIZAMOS EL PRECIO Y CANTIDAD
+            if ($this->myShoppingCart->inShoppingCart()->where('barrica_id',$barrica->id)->exists()) {
+
+                // sacamos el atributo
+                $inShoppingCart = $this->myShoppingCart->inShoppingCart()->where('barrica_id',$barrica->id)->first();
+
+                // Modificamos el pivote existente
+                $this->myShoppingCart->inShoppingCart()->updateExistingPivot($barrica->id,['cantidad'=>$inShoppingCart->pivot->cantidad + $request->cantidad,'precio_unit'=>$barrica->precio_publico ? $barrica->precio_publico : $barrica->precio_venta]);
+            }
+
+            // DE LO CONTRARIO, LO AGREGAMOS AL CARRITO
+            else{
+                $this->myShoppingCart->inShoppingCart()->attach($barrica->id,['cantidad'=>$request->cantidad,'precio_unit'=>$barrica->precio_publico ? $barrica->precio_publico : $barrica->precio_venta]);
+                
+            }
+            $this->myShoppingCart->total = $this->myShoppingCart->total();
+            $this->myShoppingCart->save();
+            // ENLISTAR LAS BARRICAS EN EL CARRITO
+            foreach ($this->myShoppingCart->inShoppingCart as $inShoppingCart) {
+                // No se por que diablos no puedo utilizar el with en myShoppingCart
+                // la unica forma de enlistar los productos en mi carrito es esta
+            }
+
+            return response()->json(['myShoppingCart'=>$this->myShoppingCart],201);
         }
     }
 

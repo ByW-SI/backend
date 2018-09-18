@@ -15,5 +15,9 @@ class InShoppingCart extends Pivot
     	'cantidad',
     	'precio_unit'
     ];
+    protected $hidden=[
+    	'created_at',
+    	'updated_at'
+    ];
 
 }

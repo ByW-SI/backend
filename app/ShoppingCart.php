@@ -62,6 +62,17 @@ class ShoppingCart extends Model
         return $query->where('status', '<>','created');
     }
 
+    public function total(){
+        $barricas = $this->inShoppingCart()->get();
+        $total=0;
+        foreach ($barricas as $barrica) {
+            $total += ($barrica->pivot->precio_unit * $barrica->pivot->cantidad);
+        }
+        // $this->total = $total;
+        // $this->save();
+        return $total;
+    }
+
 
 
 }
