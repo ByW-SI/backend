@@ -36,3 +36,4 @@ Route::post('mivino','Api\Barrica\BarricaController@search');
 Route::get('bodegas', 'Api\Bodega\BodegaController@index');
 Route::middleware('auth:api')->get('/shopping_carts','Api\User\UserShoppingCart@index');
 Route::middleware('auth:api')->post('/add_in_cart','Api\User\UserShoppingCart@addInShoppingCart');
+Route::middleware('auth:api')->delete('/remove_in_cart','Api\User\UserShoppingCart@removeInShoppingCart');

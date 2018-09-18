@@ -72,8 +72,9 @@ class UserShoppingCart extends Controller
                 $this->myShoppingCart->inShoppingCart()->attach($barrica->id,['cantidad'=>$request->cantidad,'precio_unit'=>$barrica->precio_publico ? $barrica->precio_publico : $barrica->precio_venta]);
                 
             }
-            $this->myShoppingCart->total = $this->myShoppingCart->total();
-            $this->myShoppingCart->save();
+            $this->setTotal($this->myShoppingCart);
+            // $this->myShoppingCart->total = $this->myShoppingCart->total();
+            // $this->myShoppingCart->save();
             // ENLISTAR LAS BARRICAS EN EL CARRITO
             foreach ($this->myShoppingCart->inShoppingCart as $inShoppingCart) {
                 // No se por que diablos no puedo utilizar el with en myShoppingCart
@@ -82,6 +83,33 @@ class UserShoppingCart extends Controller
 
             return response()->json(['myShoppingCart'=>$this->myShoppingCart],201);
         }
+    }
+
+    public function removeInShoppingCart(Request $request)
+    {
+        $rules = [
+            // 'shopping_cart'=>'required|numeric',
+            'barrica'=>'required|numeric',
+        ];
+        $this->validate($request,$rules);
+        $barrica = Barrica::findOrFail($request['barrica']);
+
+         // SI LA BARRICA EXISTE 
+        if($barrica){
+            $this->myShoppingCart->inShoppingCart()->detach($barrica->id);
+            $this->setTotal($this->myShoppingCart);
+        }
+        foreach ($this->myShoppingCart->inShoppingCart as $inShoppingCart) {
+            // No se por que diablos no puedo utilizar el with en myShoppingCart
+            // la unica forma de enlistar los productos en mi carrito es esta
+        }
+
+        return response()->json(['myShoppingCart'=>$this->myShoppingCart],201);
+    }
+
+    public function setTotal($shoppingCart){
+        $shoppingCart->total = $shoppingCart->total();
+        $shoppingCart->save();
     }
 
 }
