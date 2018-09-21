@@ -44,6 +44,13 @@ class UserShoppingCart extends Controller
         return response()->json(['user'=>$user,'myShoppingCart'=>$myShoppingCart,'compras'=>$compras],201);
         // dd($request->user());
     }
+
+    public function InShoppingCartCount(){
+        $inCart= $this->myShoppingCart->inShoppingCart->count();
+        // dd($inCart);
+        return response()->json(['in_shopping_cart'=>$inCart],201);
+    }
+
     public function addInShoppingCart(Request $request){
         
         $rules = [
