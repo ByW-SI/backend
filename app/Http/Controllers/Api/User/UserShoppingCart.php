@@ -47,8 +47,9 @@ class UserShoppingCart extends Controller
 
     public function InShoppingCartCount(){
         $inCart= $this->myShoppingCart->inShoppingCart->count();
+        $compras = $this->user->shoppingCarts()->comprados()->with(['inShoppingCart'])->count();
         // dd($inCart);
-        return response()->json(['in_shopping_cart'=>$inCart],201);
+        return response()->json(['in_shopping_cart'=>$inCart,'compras'=>$compras],201);
     }
 
     public function addInShoppingCart(Request $request){
