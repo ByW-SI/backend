@@ -24,7 +24,7 @@ class Barrica extends Model
         'costo_uva',
         'costo_barrica',
         'costo_prod',
-        'precio_venta',
+        'costo_total',
         'fecha_envio',
         'anada',
         'utilidad',

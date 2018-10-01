@@ -66,7 +66,7 @@ class BarricaController extends Controller
             "fecha_embotellado" => "required|date",
             "meses_estabilizacion" => "required|integer",
             "fecha_envio" => "required|date",
-            "precio_venta" => "required|numeric"
+            "costo_total" => "required|numeric"
         ];
 
         $this->validate($request,$rules);
@@ -86,7 +86,7 @@ class BarricaController extends Controller
             'costo_uva'=>$request->costo_uva,
             'costo_barrica'=>$request->costo_barrica,
             'costo_prod'=>$request->costo_prod,
-            'precio_venta'=>$request->precio_venta,
+            'costo_total'=>$request->costo_total,
             'fecha_envio'=>$request->fecha_envio,
             'anada'=>$request->anada,
             'utilidad'=>$request->utilidad,
@@ -160,7 +160,7 @@ class BarricaController extends Controller
             "fecha_embotellado" => "required|date",
             "meses_estabilizacion" => "required|integer",
             "fecha_envio" => "required|date",
-            "precio_venta" => "required|numeric"
+            "costo_total" => "required|numeric"
         ];
 
         $this->validate($request,$rules);
@@ -173,7 +173,7 @@ class BarricaController extends Controller
             'costo_uva'=>$request->costo_uva,
             'costo_barrica'=>$request->costo_barrica,
             'costo_prod'=>$request->costo_prod,
-            'precio_venta'=>$request->precio_venta,
+            'costo_total'=>$request->costo_total,
             'fecha_envio'=>$request->fecha_envio,
             'anada'=>$request->anada,
             'utilidad'=>$request->utilidad,

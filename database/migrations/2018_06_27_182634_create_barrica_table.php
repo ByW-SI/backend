@@ -36,7 +36,7 @@ class CreateBarricaTable extends Migration
             $table->decimal('costo_uva', 8, 2)->nullable();
             $table->decimal('costo_barrica',8,2)->nullable();
             $table->decimal('costo_prod', 8, 2);
-            $table->decimal('precio_venta', 8, 2);
+            $table->decimal('costo_total', 8, 2);
             $table->date('fecha_envio')->nullable(); 
             $table->integer('anada')->nullable();
             $table->decimal('utilidad')->nullable();

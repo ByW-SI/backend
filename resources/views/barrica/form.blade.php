@@ -361,19 +361,19 @@
 
 
 							<div class="form-group row">
-								<label for="precio_venta" class="col-md-4 col-form-label text-md-right">Precio de venta:</label>
+								<label for="costo_total" class="col-md-4 col-form-label text-md-right">Costo total:</label>
 								<div class="input-group col-md-6">
 									<div class="input-group-prepend">
     									<span class="input-group-text">$</span>
 								  	</div>
-									<input type="number" class="form-control {{ $errors->has('precio_venta') ? 'is-invalid' : '' }}" id="precio_venta" name="precio_venta" min="0" step="0.01" value="{{$edit ? $barrica->precio_venta : old('precio_venta')}}">
+									<input type="number" class="form-control {{ $errors->has('costo_total') ? 'is-invalid' : '' }}" id="costo_total" name="costo_total" min="0" step="0.01" value="{{$edit ? $barrica->costo_total : old('costo_total')}}">
 									<div class="input-group-append">
     									<span class="input-group-text"><strong>USD</strong></span>
 									</div>
-									@if ($errors->has('precio_venta'))
+									@if ($errors->has('costo_total'))
 										{{-- expr --}}
 										<span class="invalid-feedback">
-											<strong>{{ $errors->first("precio_venta")}}</strong>
+											<strong>{{ $errors->first("costo_total")}}</strong>
 										</span>
 									@endif
 								</div>
@@ -549,16 +549,16 @@
 	        precio_bar = $('#costo_barrica').val();
 	        iva = precio*0.16;
 	        ieps = precio*0.30;
-	        precio_venta =+precio_bar+ +precio_uva+ +precio+ +iva+ +ieps;
-	        // console.log(precio_venta);
-	        $('#precio_venta').val(precio_venta.toFixed(2));
+	        costo_total =+precio_bar+ +precio_uva+ +precio+ +iva+ +ieps;
+	        // console.log(costo_total);
+	        $('#costo_total').val(costo_total.toFixed(2));
 	    });
 
 	    $('#utilidad').keyup(function(){
 	    	porc_utilidad = $('#utilidad').val();
-	    	precio_venta = $('#precio_venta').val();
-	    	utilidad = precio_venta*(porc_utilidad/100);
-	    	final = +precio_venta+ +utilidad;
+	    	costo_total = $('#costo_total').val();
+	    	utilidad = costo_total*(porc_utilidad/100);
+	    	final = +costo_total+ +utilidad;
 	    	// console.log(final);
 	    	$('#precio_final').val(final.toFixed(2));
 	    });
