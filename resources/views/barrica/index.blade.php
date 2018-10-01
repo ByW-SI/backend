@@ -28,7 +28,7 @@
 						<th>Costo de la uva</th>
 						<th>Costo de la barrica</th>
 						<th>Costo de producción</th>
-						<th>Precio venta</th>
+						<th>Costo total:</th>
 						<th>Acción</th>
 					</tr>
 				</thead>
@@ -62,7 +62,7 @@
 							<th>${{$barrica->costo_uva}} USD</th>
 							<th>${{$barrica->costo_barrica}} USD</th>
 							<th>${{$barrica->costo_prod}} USD</th>
-							<th>${{$barrica->precio_venta}} USD</th>
+							<th>${{$barrica->costo_total}} USD</th>
 							<th>
 								<a class="btn btn-default" href="{{ route('barricas.edit',[$barrica]) }}">Editar</a>
 								<form action="{{ route('barricas.destroy',[$barrica]) }}" method="POST">
