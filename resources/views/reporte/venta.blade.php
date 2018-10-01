@@ -44,7 +44,7 @@
 							<option>Seleccione una opción</option>
 							@foreach ($usuarios as $user)
 								{{-- expr --}}
-								<option>{{$user->name+' '+$user->appaterno+' '+$user->apmaterno}}</option>
+								<option>{{$user->name.' '.$user->appaterno.' '.$user->apmaterno}}</option>
 							@endforeach
 						</select>
 					</div>
