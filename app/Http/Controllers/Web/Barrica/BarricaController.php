@@ -96,9 +96,10 @@ class BarricaController extends Controller
             ['bodega_id',$request->bodega_id],
             ['tipo',$request->tipo_bar],
             ['tostado',$request->tostado]
-        ])->get();
+        ])->first();
 
         if($barrica_exist->count() > 0){
+        // dd($barrica_exist);
             // dd($barrica_exist);
             $barrica_exist->cantidad = $barrica_exist->cantidad == 0 ? 0 : $barrica_exist->cantidad -1;
             $barrica_exist->save();

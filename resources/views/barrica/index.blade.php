@@ -80,6 +80,9 @@
 					@endforelse
 				</tbody>
 			</table>
+			<div>
+				{{$barricas->links()}}
+			</div>
 		</div>
 	</div>
 @endsection
