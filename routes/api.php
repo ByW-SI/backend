@@ -31,7 +31,6 @@ Route::middleware('auth:api')->post('puntos_corchos','Api\User\UserPuntoControll
 Route::middleware('auth:api')->post('puntos_corchos/check', 'Api\Punto\PuntoController@canjear');
 // Route::middleware('auth:api')->put('fiscales', 'Api\User\UserDomFiscalController@update');
 
-Route::post('login', 'User\UserController@login')->name('login');
 Route::post('mivino','Api\Barrica\BarricaController@search');
 Route::get('bodegas', 'Api\Bodega\BodegaController@index');
 Route::middleware('auth:api')->get('/shopping_carts','Api\User\UserShoppingCart@index');

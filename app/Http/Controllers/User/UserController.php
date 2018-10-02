@@ -12,53 +12,6 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // $usuarios = User::all();
-        // // return $usuario;
-        // return response()->json([ 'usuarios'=>$usuarios], 200);
-        // // return $this->showAll($usuarios);
-    }
-
-    // /**
-    //  * Show the form for login a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function login(Request $request)
-    // {
-    //     //
-    //     // return response()->json([$request->all()],400);
-    //     $data = $request->all();
-    //     // $data['password'] = bcrypt($data->password);
-    //     $usuario = User::where(function($query)use($data){
-    //         $query->where('email',$data['email']);
-    //     })->first();
-    //     // dd($usuario->password);
-    //     // $hashpass = Hash::make($data['password']);
-    //     if ($usuario) {
-    //         if(Hash::check($data['password'], $usuario->password))
-    //         {
-    //             return response()->json(['usuario'=>$usuario],200);
-    //         }
-    //         else{
-    //             return response()->json(['failed'=>'Contraseña invalida'], 200);
-    //         }
-    //     }
-    //     else{
-    //         return response()->json(['failed'=>'El usuario no existe'], 200);
-            
-    //     }
-    //     // dd($usuario);
-    // }
-
 
     /**
      * Store a newly created resource in storage.
@@ -127,17 +80,6 @@ class UserController extends Controller
             return response()->json(['messenger'=>'El usuario no existe'], 404);
         }
             
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -212,7 +154,8 @@ class UserController extends Controller
 
     }
     public function getUser (Request $request) {
-        return $request->user();
+        return $request->user()->tokens->first();
+
     }
 
     public function changePassword(Request $request){
