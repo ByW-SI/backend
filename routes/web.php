@@ -53,3 +53,17 @@ Route::get('bodUvas/{id}','Web\Bodega\BodegaController@uvas');
 Route::get('getEnologos','Web\Enologo\EnologoController@enologos');
 
 Route::get('getWineMaker','Web\Enologo\EnologoController@wine');
+
+// Vistas para Landing page
+Route::get('muvas', function (){
+	$uvas = App\Uva::orderBy('title','asc')->get();
+	return view('muestras.uvas',['uvas'=>$uvas]);
+});
+Route::get('mvinicolas', function (){
+	$vinicolas = App\Vinicola::orderBy('nombre','asc')->get();
+    return view('muestras.vinicolas',['vinicolas'=>$vinicolas]);
+});
+Route::get('menologos', function (){
+	$enologos= App\Enologo::get();
+    return view('muestras.enologos',['enologos'=>$enologos]);
+});
