@@ -65,6 +65,7 @@
 							<th>${{$barrica->costo_total}} USD</th>
 							<th>
 								<a class="btn btn-default" href="{{ route('barricas.edit',[$barrica]) }}">Editar</a>
+								<a class="btn btn-default" href="{{ route('barricas.procesos.index',[$barrica]) }}">Proceso</a>
 								<form action="{{ route('barricas.destroy',[$barrica]) }}" method="POST">
 									<input type="hidden" name="_method" value="DELETE">
 									@csrf

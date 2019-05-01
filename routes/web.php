@@ -27,6 +27,7 @@ Route::resource('bodegas','Web\Bodega\BodegaController');
 Route::post('barrica/{barrica}/destroy','Web\Bodega\BodegaBarricaController@destroy')->name('barrica.destroy');
 Route::resource('productores','Web\Productor\ProductorController');
 Route::resource('barricas','Web\Barrica\BarricaController');
+Route::resource('barricas.procesos','Web\Barrica\ProcesoController');
 Route::resource('empleados','Web\Empleados\EmpleadosController');
 Route::get('clientes', function(){
 	return view('reporte.cliente');

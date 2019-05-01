@@ -29,9 +29,11 @@ class PruneOldTokens
     public function handle(RefreshTokenCreated $event)
     {
         //
-        DB::table('oauth_refresh_tokens')
-            ->where('id', '<>', $event->refreshTokenId)
-            ->where('access_token_id', '<>', $event->accessTokenId)
-            ->update(['revoked' => true]);
+        $oauth_refresh_token = DB::table('oauth_refresh_tokens')
+            ->where('id','<>',$event->refreshTokenId)
+            ->where('access_token_id','<>',$event->accessTokenId);
+        if($oauth_refresh_token){
+            $oauth_refresh_token->update(['revoked'=>true]);
+        }
     }
 }
