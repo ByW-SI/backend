@@ -23,6 +23,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/fileinput.css') }}"> --}}
+    <!-- Include Editor style. -->
+     <!-- Include Editor style. -->
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -93,6 +96,13 @@
                                 <li><a href="{{ route('clientes') }}">Clientes</a></li>
                                 <li><a href="{{ route('ventas') }}">Ventas</a></li>
                                 <li><a href="{{ route('puntos_corchos') }}">Puntos Corchos</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
+                            <a href="#0" title="">Noticias</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{ route('posts.index') }}">Noticias</a></li>
+                                <li><a href="{{ route('posts.create') }}">Nueva noticia</a></li>
                             </ul>
                         </li>
                         {{-- @guest
@@ -166,7 +176,36 @@
    <!-- JavaScripts -->
    <!-- script
     ================================================== -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Include Editor JS files. -->
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/js/froala_editor.pkgd.min.js"></script>
+
+      <!-- Initialize the editor. -->
+      <script>
+        $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+        new FroalaEditor('#body', {
+          // Set the file upload URL.
+          imageUploadURL: "{{ route('posts.imageUpload') }}",
+
+          imageUploadParams: {
+            id: 'my_editor'
+          },
+
+          videoUploadURL: "{{ route('posts.videoUpload') }}",
+          videoUploadParams: {
+            id: 'my_editor'
+          },
+          fileUploadURL: "{{ route('posts.fileUpload') }}",
+
+          fileUploadParams: {
+            id: 'my_editor'
+          }
+        })
+      </script>
    <script src="{{ asset('js/modernizr.js') }}"></script>
     <script src="{{ asset('js/pace.min.js') }}"></script>
 
@@ -180,6 +219,7 @@
     <script type="text/javascript" src="{{ asset('js/locales/es.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/fileinput.min.js') }}"></script>
     <script src="{{ asset('js/all.js') }}"></script>
+    <!-- Include JS file. -->
     @yield('script')
 </body>
 

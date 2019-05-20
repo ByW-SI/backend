@@ -11,7 +11,7 @@
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">  
 
         <!--scripts-->
 
@@ -33,7 +33,7 @@
 
                 <div class="header__logo">
                     <a class="logo" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}"  alt="Homepage">
+                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}" style="max-width: 17%;height: auto;"  alt="Homepage">
                     </a>
                 </div> <!-- end header__logo -->
 
@@ -69,119 +69,80 @@
                 </div>  <!-- end header__search -->
 
 
-                <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-
-                <nav class="header__nav-wrap">
-
-                    <h2 class="header__nav-heading h6">Site Navigation</h2>
-
-                    <ul class="header__nav">
-                        <li class="current"><a href="{{ url('/') }}" title="">Principal</a></li>
-                        <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
-                        <li class="current"><a href="{{ route('vinicolas.index') }}" title="">Vinicolas</a></li>
-                        <li class="current"><a href="{{ route('bodegas.index') }}" title="">Bodegas</a></li>
-{{--                         <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a></li> --}}
-                        <li class="current"><a href="{{ route('barricas.index') }}" title="">Barricas</a></li>
-                        <li class="has-children">
-                            <a href="#0" title="">Uvas</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
-                                <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-children">
-                            <a href="#0" title="">Viajes y cursos</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('viajes') }}">Nuevo viaje</a></li>
-                                <li><a href="{{ route('cursos') }}">Nuevo curso</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-children">
-                            <a href="#0" title="">Usuarios</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('empleados.create') }}">Agregar empleados</a></li>
-                                <li><a href="{{ route('empleados.index') }}">Lista de empleaods</a></li>
-                            </ul>
-                        </li>
-                         <li class="has-children">
-                            <a href="#0" title="">Reportes</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('clientes') }}">Clientes</a></li>
-                                <li><a href="{{ route('ventas') }}">Ventas</a></li>
-                                <li><a href="{{ route('puntos_corchos') }}">Puntos Corchos</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-children">
-                            <a href="#0" title="">Noticias</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('posts.index') }}">Noticias</a></li>
-                                <li><a href="{{ route('posts.create') }}">Nueva noticia</a></li>
-                            </ul>
-                        </li>
-                        {{-- @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registrate') }}</a></li>
-                        @else
-                            <li class="has-children">
-                                <a href="#0">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="sub-menu">
-                                    <li><a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a></li>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </ul>
-                            </li>
-                        @endguest --}}
-            
-                        
-                    </ul>  <!-- end header__nav -->
-
-                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
-
-                </nav> <!-- end header__nav-wrap -->
+                
 
             </div> <!-- header-content -->
         </header> <!-- header -->
 
-{{-- 
+
         <div class="pageheader-content row">
             <div class="col-full">
 
                 <div class="featured">
 
-                    <div class="featured__column featured__column--big">
-                        <div class="entry" style="background-image:url('images/thumbs/featured/featured-guitarman.jpg');">
-                            
-                            <div class="entry__content">
-                                <span class="entry__category"><a href="#0">Music</a></span>
+                   <section class="s-content {{-- s-content--narrow s-content--no-padding-bottom --}}">
 
-                                <h1><a href="#0" title="">What Your Music Preference Says About You and Your Personality.</a></h1>
+                        <article class="row">
 
-                                <div class="entry__info">
-                                    <a href="#0" class="entry__profile-pic">
-                                        <img class="avatar" src="images/avatars/user-03.jpg" alt="">
-                                    </a>
+                            <div class="s-content__header col-full">
+                                <h1 class="s-content__header-title">
+                                    {{$post->title}}
+                                </h1>
+                                <h4 class="s-content__header-subtitle">
+                                    {{$post->subtitle}}
+                                </h4>
+                                @if ($post->image_path)
+                                    <div class="s-content__post-thumb">
+                                        <img src="{{ url('/storage/'.$post->image_path) }}" alt="">
+                                    </div>
+                                @endif
+                                <ul class="s-content__header-meta">
+                                    <li class="date">{{date('M d, Y', strtotime($post->updated_at))}}</li>
+                                    <li class="cat">
+                                        En
+                                        @foreach ($post->categorias as $categoria)
+                                            <a href="{{ route('posts.categorias.slug',['slug'=>$categoria->slug]) }}">{{$categoria->name}}</a>
+                                        @endforeach
+                                    </li>
+                                    <li class="tag">
+                                        @foreach ($post->tags as $tag)
+                                            <a href="{{ route('posts.etiquetas.slug',['slug'=>$tag->slug]) }}">#{{$tag->name}}</a>
+                                        @endforeach
+                                    </li>
+                                </ul>
+                            </div> <!-- end s-content__header -->
+                           
 
-                                    <ul class="entry__meta">
-                                        <li><a href="#0">John Doe</a></li>
-                                        <li>December 29, 2017</li>
-                                    </ul>
-                                </div>
-                            </div> <!-- end entry__content -->
-                            
-                        </div> <!-- end entry -->
-                    </div> <!-- end featured__big -->
+                            <div class="col-full s-content__main">
 
-                    <div class="featured__column featured__column--small">
+                                {!!$post->body!!}
+
+                                {{-- <div class="s-content__pagenav">
+                                    <div class="s-content__nav">
+                                        <div class="s-content__prev">
+                                            <a href="#0" rel="prev">
+                                                <span>Previous Post</span>
+                                                Tips on Minimalist Design
+                                            </a>
+                                        </div>
+                                        <div class="s-content__next">
+                                            <a href="#0" rel="next">
+                                                <span>Next Post</span>
+                                                Less Is More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div> --}} <!-- end s-content__pagenav -->
+
+                            </div> <!-- end s-content__main -->
+
+                        </article>
+
+
+                        
+
+                    </section>
+                    {{-- <div class="featured__column featured__column--small">
 
                         <div class="entry" style="background-image:url('images/thumbs/featured/featured-watch.jpg');">
                             
@@ -225,17 +186,17 @@
 
                         </div> <!-- end entry -->
 
-                    </div> <!-- end featured__small -->
+                    </div> --}} <!-- end featured__small -->
                 </div> <!-- end featured -->
 
             </div> <!-- end col-full -->
         </div> <!-- end pageheader-content row -->
- --}}
+
     </section> <!-- end s-pageheader -->
 
         <!-- s-footer
     ================================================== -->
-    <footer class="s-footer" style="color: black !important">
+    <footer class="s-footer">
 
         <div class="s-footer__main">
             <div class="row">

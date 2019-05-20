@@ -53,7 +53,7 @@ class UvaController extends Controller
             //
             // dd("valido");
 
-            $path = $request->image->storeAs('images', $request->title.".jpg", 'public');
+            $path = $request->image->storeAs('public/posts', $request->title.".jpg", 'public');
             $uva = Uva::create([
                 'title'=> $request->title,
                 'subtitle'=>$request->subtitle,

@@ -29,6 +29,13 @@ Route::resource('productores','Web\Productor\ProductorController');
 Route::resource('barricas','Web\Barrica\BarricaController');
 Route::resource('barricas.procesos','Web\Barrica\ProcesoController');
 Route::resource('empleados','Web\Empleados\EmpleadosController');
+Route::resource('posts','Web\Post\PostController');
+Route::post('/posts/imagenUpload','Web\Post\PostController@imagenUpload')->name('posts.imageUpload');
+Route::post('/posts/videoUpload','Web\Post\PostController@videoUpload')->name('posts.videoUpload');
+Route::post('/posts/fileUpload','Web\Post\PostController@fileUpload')->name('posts.fileUpload');
+Route::get('/post/{slug}','Web\Post\PostController@showPost')->name('posts.slug');
+Route::get('/posts/categorias/{slug}','Web\Post\CategoriaController@index')->name('posts.categorias.slug');
+Route::get('/posts/etiquetas/{slug}','Web\Post\TagController@index')->name('posts.etiquetas.slug');
 Route::get('clientes', function(){
 	return view('reporte.cliente');
 })->name('clientes');
@@ -54,6 +61,7 @@ Route::get('bodUvas/{id}','Web\Bodega\BodegaController@uvas');
 Route::get('getEnologos','Web\Enologo\EnologoController@enologos');
 
 Route::get('getWineMaker','Web\Enologo\EnologoController@wine');
+
 
 // Vistas para Landing page
 Route::get('muvas', function (){
