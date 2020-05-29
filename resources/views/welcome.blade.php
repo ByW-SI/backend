@@ -1,30 +1,32 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, , maximum-scale=1">
 
-        <title>Premium Wine Makers</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, , maximum-scale=1">
 
-        <!-- CSS -->
+    <title>Premium Wine Makers</title>
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <!-- CSS -->
 
-        <!--scripts-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
-        <script src="{{ asset('js/modernizr.js') }}"></script>
-        <script src="{{ asset('js/pace.min.js') }}"></script>
+    <!--scripts-->
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <script src="{{ asset('js/modernizr.js') }}"></script>
+    <script src="{{ asset('js/pace.min.js') }}"></script>
 
-        
-    </head>
-    <body id="top">
-         <!-- pageheader
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="top">
+    <!-- pageheader
     ================================================== -->
     <section class="s-pageheader s-pageheader--home">
 
@@ -33,7 +35,7 @@
 
                 <div class="header__logo">
                     <a class="logo" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}"  alt="Homepage">
+                        <img src="{{ asset('images/PWMDegradadosFondoNegro.png') }}" alt="Homepage">
                     </a>
                 </div> <!-- end header__logo -->
 
@@ -59,14 +61,15 @@
                     <form role="search" method="get" class="header__search-form" action="#">
                         <label>
                             <span class="hide-content">Buscar:</span>
-                            <input type="search" class="search-field" placeholder="¿Qué deseas buscar?" value="" name="s" title="Search for:" autocomplete="off">
+                            <input type="search" class="search-field" placeholder="¿Qué deseas buscar?" value=""
+                                name="s" title="Search for:" autocomplete="off">
                         </label>
                         <input type="submit" class="search-submit" value="Search">
                     </form>
-        
+
                     <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
 
-                </div>  <!-- end header__search -->
+                </div> <!-- end header__search -->
 
 
                 <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
@@ -80,13 +83,21 @@
                         <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
                         <li class="current"><a href="{{ route('vinicolas.index') }}" title="">Vinicolas</a></li>
                         <li class="current"><a href="{{ route('bodegas.index') }}" title="">Bodegas</a></li>
-{{--                         <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a></li> --}}
+                        {{--                         <li class="current"><a href="{{ route('productores.index') }}"
+                        title="">Productores</a></li> --}}
                         <li class="current"><a href="{{ route('barricas.index') }}" title="">Barricas</a></li>
                         <li class="has-children">
                             <a href="#0" title="">Uvas</a>
                             <ul class="sub-menu">
                                 <li><a href="{{route('uvas.create')}}">Agregar Uva</a></li>
                                 <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
+                            <a href="#0" title="">Ofertas</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{route('ofertas.create')}}">Agregar oferta</a></li>
+                                <li><a href="{{route('ofertas.index')}}">Lista de ofertas</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
@@ -104,7 +115,7 @@
                                 <li><a href="{{ route('empleados.index') }}">Lista de empleaods</a></li>
                             </ul>
                         </li>
-                         <li class="has-children">
+                        <li class="has-children">
                             <a href="#0" title="">Reportes</a>
                             <ul class="sub-menu">
                                 <li><a href="{{ route('clientes') }}">Clientes</a></li>
@@ -121,29 +132,29 @@
                         </li>
                         {{-- @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registrate') }}</a></li>
+                        <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registrate') }}</a></li>
                         @else
-                            <li class="has-children">
-                                <a href="#0">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <li class="has-children">
+                            <a href="#0">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                                <ul class="sub-menu">
-                                    <li><a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                            <ul class="sub-menu">
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a></li>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </ul>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            </ul>
+                        </li>
                         @endguest --}}
-            
-                        
-                    </ul>  <!-- end header__nav -->
+
+
+                    </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 
@@ -152,7 +163,7 @@
             </div> <!-- header-content -->
         </header> <!-- header -->
 
-{{-- 
+        {{-- 
         <div class="pageheader-content row">
             <div class="col-full">
 
@@ -233,15 +244,15 @@
  --}}
     </section> <!-- end s-pageheader -->
 
-        <!-- s-footer
+    <!-- s-footer
     ================================================== -->
     <footer class="s-footer" style="color: black !important">
 
         <div class="s-footer__main">
             <div class="row">
-                
+
                 <div class="col-two md-four mob-full s-footer__sitelinks">
-                        
+
                     <h4>Ligas de interes</h4>
 
                     <ul class="s-footer__linklist">
@@ -257,7 +268,7 @@
 
 
                 <div class="col-two md-four mob-full s-footer__social">
-                        
+
                     <h4>Social</h4>
 
                     <ul class="s-footer__linklist">
@@ -271,28 +282,30 @@
 
                 </div> <!-- end s-footer__social -->
                 <div class="col-three md-four mob-full s-footer__archives">
-                        
+
                     <p>“once in a time life wine experiencie”</p>
 
-                    
+
 
                 </div> <!-- end s-footer__archives -->
 
                 <div class="col-four md-full end s-footer__subscribe">
-                        
+
                     <h4>Our Newsletter</h4>
 
-                    <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et enim exercitationem ipsam. Culpa consequatur occaecati.</p>
+                    <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga
+                        et enim exercitationem ipsam. Culpa consequatur occaecati.</p>
 
                     <div class="subscribe-form">
                         <form id="mc-form" class="group" novalidate="true">
 
-                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
-                
+                            <input type="email" value="" name="EMAIL" class="email" id="mc-email"
+                                placeholder="Email Address" required="">
+
                             <input type="submit" name="subscribe" value="Send">
-                
+
                             <label for="mc-email" class="subscribe-message"></label>
-                
+
                         </form>
                     </div>
 
@@ -305,8 +318,8 @@
             <div class="row">
                 <div class="col-full">
                     <div class="s-footer__copyright">
-                        <span>© Copyright B&W 2018</span> 
-                      
+                        <span>© Copyright B&W 2018</span>
+
                     </div>
 
                     <div class="go-top">
@@ -335,5 +348,6 @@
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    </body>
+</body>
+
 </html>

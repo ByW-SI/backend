@@ -77,6 +77,13 @@
                             </ul>
                         </li>
                         <li class="has-children">
+                            <a href="#0" title="">Ofertas</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{route('ofertas.create')}}">Agregar Oferta</a></li>
+                                <li><a href="{{route('ofertas.index')}}">Lista de ofertas</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
                             <a href="#0" title="">Viajes y cursos</a>
                             <ul class="sub-menu">
                                 <li><a href="{{ route('viajes') }}">Nuevo viaje</a></li>
