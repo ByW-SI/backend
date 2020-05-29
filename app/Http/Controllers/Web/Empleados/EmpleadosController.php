@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web\Empleados;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Perfil;
+use App\User;
 
 class EmpleadosController extends Controller
 {
@@ -14,8 +16,8 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
-        //
-        return view('empleado.index');
+        $usuarios = User::where('id', '!=', 1)->get();
+        return view('empleados.index', compact('usuarios'));
     }
 
     /**
@@ -25,8 +27,8 @@ class EmpleadosController extends Controller
      */
     public function create()
     {
-        //
-        return view('empleado.form');
+        $perfiles = Perfil::get();
+        return view('empleados.form', compact('perfiles'));
     }
 
     /**
@@ -37,7 +39,19 @@ class EmpleadosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = User::create([
+            'name' => $request->nombre,
+            'appaterno' => $request->apellidoPaterno,
+            'apmaterno' => $request->apellidoMaterno,
+            'nacimiento' => $request->nacimiento,
+            'numero_telefono' => $request->numero_telefono,
+            'email' => $request->correo,
+            'password' => bcrypt($request->password),
+            'perfil_id' => $request->perfil_id,
+        ]);
+
+        return redirect()->route('empleados.index')->with('success', 'El usuario ha sido creado exitosamente.');
     }
 
     /**
@@ -59,7 +73,9 @@ class EmpleadosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+        $perfiles = Perfil::get();
+        return view('empleados.edit', compact('usuario', 'perfiles'));
     }
 
     /**
@@ -71,7 +87,23 @@ class EmpleadosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->update([
+            "name" => $request->nombre,
+            "email" => $request->correo,
+            "perfil_id" => $request->perfil_id,
+            "appaterno" => $request->apellido_paterno,
+            "apmaterno" => $request->apellido_materno,
+            "nacimiento" => $request->nacimiento,
+            "numero_teleono" => $request->numero_telefono, 
+        ]);
+
+        !$request->password ?: $user->update([
+            "password" => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('empleados.index');
     }
 
     /**
@@ -80,8 +112,9 @@ class EmpleadosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->back()->with('success', 'El usuario ha sido eliminado exitosamente.');
     }
 }

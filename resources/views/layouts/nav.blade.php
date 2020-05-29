@@ -33,13 +33,23 @@
 
             @auth
 
+            @if ( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','enologos')->first() )
             <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
-            {{-- <li class="current"><a href="{{ url('/') }}" title="">Principal</a></li> --}}
+            @endif
+
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','vinicolas')->first() )
             <li class="current"><a href="{{ route('vinicolas.index') }}" title="">Vinicolas</a></li>
+            @endif
+
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','bodegas')->first() )
             <li class="current"><a href="{{ route('bodegas.index') }}" title="">Bodegas</a></li>
-            {{-- <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a>
-            </li> --}}
+            @endif
+
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','barricas')->first() )
             <li class="current"><a href="{{ route('barricas.index') }}" title="">Barricas</a></li>
+            @endif
+            
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','uvas')->first() )
             <li class="has-children">
                 <a href="#0" title="">Uvas</a>
                 <ul class="sub-menu">
@@ -47,6 +57,9 @@
                     <li><a href="{{route('uvas.index')}}">Variedad de uvas</a></li>
                 </ul>
             </li>
+            @endif
+            
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','ofertas')->first() )
             <li class="has-children">
                 <a href="#0" title="">Ofertas</a>
                 <ul class="sub-menu">
@@ -54,6 +67,9 @@
                     <li><a href="{{route('ofertas.index')}}">Lista de ofertas</a></li>
                 </ul>
             </li>
+            @endif
+            
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','viajes y cursos')->first() )
             <li class="has-children">
                 <a href="#0" title="">Viajes y cursos</a>
                 <ul class="sub-menu">
@@ -61,6 +77,9 @@
                     <li><a href="{{ route('cursos') }}">Nuevo curso</a></li>
                 </ul>
             </li>
+            @endif
+
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','usuarios')->first() )
             <li class="has-children">
                 <a href="#0" title="">Usuarios</a>
                 <ul class="sub-menu">
@@ -69,6 +88,9 @@
                     <li><a href="{{ route('perfiles.index') }}">Lista de perfiles</a></li>
                 </ul>
             </li>
+            @endif
+
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','reportes')->first() )
             <li class="has-children">
                 <a href="#0" title="">Reportes</a>
                 <ul class="sub-menu">
@@ -77,6 +99,9 @@
                     <li><a href="{{ route('puntos_corchos') }}">Puntos Corchos</a></li>
                 </ul>
             </li>
+            @endif
+            
+            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','noticias')->first() )
             <li class="has-children">
                 <a href="#0" title="">Noticias</a>
                 <ul class="sub-menu">
@@ -84,6 +109,8 @@
                     <li><a href="{{ route('posts.create') }}">Nueva noticia</a></li>
                 </ul>
             </li>
+            @endif
+
             @endauth
             {{-- @guest
                 <li><a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>

@@ -15,8 +15,8 @@ class SeccionesTableSeeder extends Seeder
     {
         $secciones = array(
             array('nombre'=>'enologos'),
-            array('nombre'=>'vinicoles'),
-            array('nombre'=>'bodeas'),
+            array('nombre'=>'vinicolas'),
+            array('nombre'=>'bodegas'),
             array('nombre'=>'barricas'),
             array('nombre'=>'uvas'),
             array('nombre'=>'ofertas'),
