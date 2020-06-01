@@ -15,7 +15,7 @@
                     <h5 class="title text-uppercase">lista de usuarios</h5>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('usuarios.create')}}" class="btn btn-success rounded-0">agregar</a>
+                    <a href="{{route('empleados.create')}}" class="btn btn-success rounded-0">agregar</a>
                     <br><br>
                     <div class="row">
                         <div class="col-12">
