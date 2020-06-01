@@ -16,7 +16,7 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
-        $usuarios = User::where('id', '!=', 1)->get();
+        $usuarios = User::noAdminsitradores()->get();
         return view('empleados.index', compact('usuarios'));
     }
 

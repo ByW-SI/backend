@@ -69,4 +69,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\ShoppingCart', 'user_id', 'id');
     }
+
+    // =============
+    // SCOPE METHODS
+    // =============
+
+    public function scopeNoAdminsitradores($query)
+    {
+        return $query->where('es_admin', 0);
+    }
 }
