@@ -33,23 +33,23 @@
 
             @auth
 
-            @if ( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','enologos')->first() )
+            @if ( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','enologos')->first() )
             <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
             @endif
 
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','vinicolas')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','vinicolas')->first() )
             <li class="current"><a href="{{ route('vinicolas.index') }}" title="">Vinicolas</a></li>
             @endif
 
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','bodegas')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','bodegas')->first() )
             <li class="current"><a href="{{ route('bodegas.index') }}" title="">Bodegas</a></li>
             @endif
 
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','barricas')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','barricas')->first() )
             <li class="current"><a href="{{ route('barricas.index') }}" title="">Barricas</a></li>
             @endif
             
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','uvas')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','uvas')->first() )
             <li class="has-children">
                 <a href="#0" title="">Uvas</a>
                 <ul class="sub-menu">
@@ -59,7 +59,7 @@
             </li>
             @endif
             
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','ofertas')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','ofertas')->first() )
             <li class="has-children">
                 <a href="#0" title="">Ofertas</a>
                 <ul class="sub-menu">
@@ -69,7 +69,7 @@
             </li>
             @endif
             
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','viajes y cursos')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','viajes y cursos')->first() )
             <li class="has-children">
                 <a href="#0" title="">Viajes y cursos</a>
                 <ul class="sub-menu">
@@ -79,7 +79,7 @@
             </li>
             @endif
 
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','usuarios')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','usuarios')->first() )
             <li class="has-children">
                 <a href="#0" title="">Usuarios</a>
                 <ul class="sub-menu">
@@ -90,7 +90,7 @@
             </li>
             @endif
 
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','reportes')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','reportes')->first() )
             <li class="has-children">
                 <a href="#0" title="">Reportes</a>
                 <ul class="sub-menu">
@@ -101,7 +101,7 @@
             </li>
             @endif
             
-            @if( Auth::user()->id == 1 || Auth::user()->perfil->secciones()->where('nombre','noticias')->first() )
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','noticias')->first() )
             <li class="has-children">
                 <a href="#0" title="">Noticias</a>
                 <ul class="sub-menu">
