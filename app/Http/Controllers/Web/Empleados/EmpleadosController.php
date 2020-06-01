@@ -112,9 +112,9 @@ class EmpleadosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
+        User::find($id)->delete();
         return redirect()->back()->with('success', 'El usuario ha sido eliminado exitosamente.');
     }
 }
