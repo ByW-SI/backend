@@ -21,9 +21,9 @@ class BarricaController extends Controller
     public function index()
     {
         //
-        $barricas = Barrica::orderBy('uva','asc')->paginate(5);
+        $barricas = Barrica::orderBy('uva', 'asc')->paginate(5);
 
-        return view('barrica.index',['barricas'=>$barricas]);
+        return view('barrica.index', ['barricas' => $barricas]);
     }
 
     /**
@@ -34,11 +34,11 @@ class BarricaController extends Controller
     public function create()
     {
         //
-        $vinicolas = Vinicola::orderBy('nombre','asc')->get();
-        $bodegas = Bodega::orderBy('nombre','asc')->get();
-        $uvas = Uva::orderBy('title','asc')->get();
+        $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
+        $bodegas = Bodega::orderBy('nombre', 'asc')->get();
+        $uvas = Uva::orderBy('title', 'asc')->get();
         $edit = false;
-        return view('barrica.form',['vinicolas'=>$vinicolas,'bodegas'=>$bodegas,'edit'=>$edit, 'uvas'=>$uvas]);
+        return view('barrica.form', ['vinicolas' => $vinicolas, 'bodegas' => $bodegas, 'edit' => $edit, 'uvas' => $uvas]);
     }
 
     /**
@@ -52,50 +52,54 @@ class BarricaController extends Controller
         //
         // 
         $rules = [
-            'producido'=>'required',
-            'productor'=>'required|integer',
-            'tipo_bar'=>'required',
-            'tostado'=>'required',
-            'uva'=>'required',
+            'producido' => 'required',
+            'productor' => 'required|integer',
+            'tipo_bar' => 'required',
+            'tostado' => 'required',
+            'uva' => 'required',
             "costo_uva" => "required|numeric",
             "costo_barrica" => "required|numeric",
-            "costo_prod" => "required|numeric",
             "anada" => "required",
             "fecha_inicio" => "required|date",
             "meses_barrica" => "required|integer",
             "fecha_embotellado" => "required|date",
             "meses_estabilizacion" => "required|integer",
             "fecha_envio" => "required|date",
-            "costo_total" => "required|numeric"
         ];
 
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
+
+        // dd($request->input());
 
         Barrica::create([
             // 'producido'=>$request->producido,
-            'enologo_id'=>$request->productor,
-            'tipo_bar'=>$request->tipo_bar,
-            'tostado'=>$request->tostado,
-            'uva'=>$request->uva,
-            'bodega_id'=>$request->bodega_id,
-            'vinicola_id'=>$request->vinicola_id,
-            'fecha_inicio'=>$request->fecha_inicio,
-            'fecha_embotellado'=>$request->fecha_embotellado,
-            'meses_barrica'=>$request->meses_barrica,
-            'meses_estabilizacion'=>$request->meses_estabilizacion,
-            'costo_uva'=>$request->costo_uva,
-            'costo_barrica'=>$request->costo_barrica,
-            'costo_prod'=>$request->costo_prod,
-            'costo_total'=>$request->costo_total,
-            'fecha_envio'=>$request->fecha_envio,
-            'anada'=>$request->anada,
-            'utilidad'=>$request->utilidad,
-            'precio_publico'=>$request->precio_final
+            'enologo_id' => $request->productor,
+            'tipo_bar' => $request->tipo_bar,
+            'tostado' => $request->tostado,
+            'uva' => $request->uva,
+            'bodega_id' => $request->bodega_id,
+            'vinicola_id' => $request->vinicola_id,
+            'fecha_inicio' => $request->fecha_inicio,
+            'fecha_embotellado' => $request->fecha_embotellado,
+            'meses_barrica' => $request->meses_barrica,
+            'meses_estabilizacion' => $request->meses_estabilizacion,
+            'costo_uva' => $request->costo_uva,
+            'costo_barrica' => $request->costo_barrica,
+            'fecha_envio' => $request->fecha_envio,
+            'anada' => $request->anada,
+            'costo_levadura' => $request->costo_levadura,
+            'costo_botella' => $request->costo_botella,
+            'costo_corcho' => $request->costo_corcho,
+            'costo_etiqueta' => $request->costo_etiqueta,
+            'costo_servicios_enologicos' => $request->costo_servicios_enologicos,
+            'porcentaje_administracion' => $request->porcentaje_administracion,
+            'porcentaje_utilidad' => $request->porcentaje_utilidad,
+            'porcentaje_transporte' => $request->porcentaje_transporte,
         ]);
-        $barrica_exist=BarricaBodega::where([
-            ['bodega_id',$request->bodega_id],
-            ['tipo',$request->tipo_bar],
-            ['tostado',$request->tostado]
+        $barrica_exist = BarricaBodega::where([
+            ['bodega_id', $request->bodega_id],
+            ['tipo', $request->tipo_bar],
+            ['tostado', $request->tostado]
         ])->first();
 
         // if($barrica_exist->count() > 0){
@@ -105,13 +109,13 @@ class BarricaController extends Controller
         //     $barrica_exist->save();
         // }
         // else{
-            BarricaBodega::create([
-                'bodega_id'=>$request->bodega_id,
-                'tipo'=>$request->tipo_bar,
-                'tostado'=>$request->tostado,
-                'cantidad'=>0,
-                'costo'=>$request->costo_barrica
-            ]);
+        BarricaBodega::create([
+            'bodega_id' => $request->bodega_id,
+            'tipo' => $request->tipo_bar,
+            'tostado' => $request->tostado,
+            'cantidad' => 0,
+            'costo' => $request->costo_barrica
+        ]);
         // }
         return redirect()->route('barricas.index');
     }
@@ -137,8 +141,8 @@ class BarricaController extends Controller
     {
         //
         // dd($barrica);
-        $edit=true;
-        return view('barrica.form',['edit'=>$edit,'barrica'=>$barrica]);
+        $edit = true;
+        return view('barrica.form', ['edit' => $edit, 'barrica' => $barrica]);
     }
 
     /**
@@ -154,31 +158,25 @@ class BarricaController extends Controller
         $rules = [
             "costo_uva" => "required|numeric",
             "costo_barrica" => "required|numeric",
-            "costo_prod" => "required|numeric",
             "anada" => "required",
             "fecha_inicio" => "required|date",
             "meses_barrica" => "required|integer",
             "fecha_embotellado" => "required|date",
             "meses_estabilizacion" => "required|integer",
             "fecha_envio" => "required|date",
-            "costo_total" => "required|numeric"
         ];
 
-        $this->validate($request,$rules);
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
+        $this->validate($request, $rules);
         $barrica->update([
-            'fecha_inicio'=>$request->fecha_inicio,
-            'fecha_embotellado'=>$request->fecha_embotellado,
-            'meses_barrica'=>$request->meses_barrica,
-            'meses_estabilizacion'=>$request->meses_estabilizacion,
-            'costo_uva'=>$request->costo_uva,
-            'costo_barrica'=>$request->costo_barrica,
-            'costo_prod'=>$request->costo_prod,
-            'costo_total'=>$request->costo_total,
-            'fecha_envio'=>$request->fecha_envio,
-            'anada'=>$request->anada,
-            'utilidad'=>$request->utilidad,
-            'precio_publico'=>$request->precio_final
+            'fecha_inicio' => $request->fecha_inicio,
+            'fecha_embotellado' => $request->fecha_embotellado,
+            'meses_barrica' => $request->meses_barrica,
+            'meses_estabilizacion' => $request->meses_estabilizacion,
+            'costo_uva' => $request->costo_uva,
+            'costo_barrica' => $request->costo_barrica,
+            'fecha_envio' => $request->fecha_envio,
+            'anada' => $request->anada,
         ]);
         return redirect()->route('barricas.index');
     }

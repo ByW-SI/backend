@@ -1,430 +1,1084 @@
 @extends('layouts.app2')
 @section('content')
-	{{-- expr --}}
-	
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-10">
-				<div class="card">
-					<div class="card-header">
-						Barrica
-					</div>						
-					<div class="card-body">
-						<form method="POST" action="{{ $edit == false ? route('barricas.store') : route('barricas.update',['barrica'=>$barrica]) }}">
-							@csrf
+{{-- expr --}}
 
-							@if ($edit == true)
-								{{-- expr --}}
-								<input type="hidden" name="_method" value="PUT">
-							@endif
-@if ($edit == false)
-	{{-- true expr --}}
 
-	{{-- producido --}}
-							<div class="form-group row">
-								<label for="producido" class="col-md-4 col-form-label text-md-right">Tipo de productor:</label>
-								<div class="col-md-6">
-									<select id="producido" class="form-control {{ $errors->has('producido') ? ' is-invalid' : ''  }}" name="producido">
+<div class="container">
+
+	<form method="POST" action="{{ route('barricas.store') }}">
+		@csrf
+
+		<div class="card">
+			<div class="card-body">
+
+				{{-- DATOS GENERALES --}}
+
+				<div class="col-12">
+
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="producido" class="text-uppercase text-muted">Tipo de
+										productor:</label>
+									<select id="producido"
+										class="form-control {{ $errors->has('producido') ? ' is-invalid' : ''  }}"
+										name="producido" required>
 										<option value="">Seleccione una opción</option>
 										<option value="Wine Maker">Wine Maker</option>
 										<option value="Enólogo">Enólogo</option>
 									</select>
 									@if ($errors->has('producido'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("producido")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("producido")}}</strong>
+									</span>
 									@endif
 								</div>
-							</div>
-{{-- enologo_id --}}
-							<div class="form-group row">
-								<label for="productor" class="col-md-4 col-form-label text-md-right">Productor:</label>
-								<div class="col-md-6">
-									<select id="productor" class="form-control {{ $errors->has('productor') ? ' is-invalid' : ''  }}" name="productor">
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="productor" class="text-uppercase text-muted">Productor:</label>
+									<select id="productor"
+										class="form-control {{ $errors->has('productor') ? ' is-invalid' : ''  }}"
+										name="productor" required>
 										<option value="">Seleccione una opción</option>
-										
+
 									</select>
 									@if ($errors->has('productor'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("productor")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("productor")}}</strong>
+									</span>
 									@endif
 								</div>
-							</div>
 
-{{-- tipo_bar --}}
-							<div class="form-group row">
-								<label for="tipo_bar" class="col-md-4 col-form-label text-md-right">Tipo de barrica:</label>
-								<div class="col-md-6">
-									<select id="tipo_bar" class="form-control {{ $errors->has('tipo_bar') ? ' is-invalid' : ''  }}" name="tipo_bar" required >
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="tipo_bar" class="text-muted text-uppercase">Tipo de
+										barrica:</label>
+									<select id="tipo_bar"
+										class="form-control {{ $errors->has('tipo_bar') ? ' is-invalid' : ''  }}"
+										name="tipo_bar" required>
 										<option value="">Seleccione su barrica</option>
 										<option value="Europeo">Europeo</option>
 										<option value="Americana">Americana</option>
 										<option value="Bosques de europa central">Bosques de europa central</option>
 									</select>
 									@if ($errors->has('tipo_bar'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("tipo_bar")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("tipo_bar")}}</strong>
+									</span>
 									@endif
 								</div>
-							</div>
-{{-- tostado --}}
-							<div class="form-group row">
-								<label for="tostado" class="col-md-4 col-form-label text-md-right">Tostado de barrica:</label>
-								<div class="col-md-6">
-									<select id="tostado" class="form-control {{ $errors->has('tostado') ? ' is-invalid' : ''  }}" name="tostado" required >
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="tostado" class="text-uppercase text-muted">Tostado de
+										barrica:</label>
+									<select id="tostado"
+										class="form-control {{ $errors->has('tostado') ? ' is-invalid' : ''  }}"
+										name="tostado" required>
 										<option value="">Seleccione su tostado</option>
 										<option value="Ligero">Ligero</option>
 										<option value="Medio">Medio</option>
 										<option value="Alto">Alto</option>
 									</select>
 									@if ($errors->has('tostado'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("tostado")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("tostado")}}</strong>
+									</span>
 									@endif
 								</div>
-							</div>
 
-{{-- bodega_id --}}
-							<div class="form-group row">
-								<label for="bodega_id" class="col-md-4 col-form-label text-md-right">Bodega:</label>
-								<div class="col-md-6">
-									<select id="bodega_id" class="form-control {{ $errors->has('bodega_id') ? ' is-invalid' : ''  }}" name="bodega_id" required >
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="bodega_id" class="text-uppercase text-muted">Bodega:</label>
+									<select id="bodega_id"
+										class="form-control {{ $errors->has('bodega_id') ? ' is-invalid' : ''  }}"
+										name="bodega_id" required>
 										<option value="">Seleccione su bodega</option>
 										@foreach ($bodegas as $bodega)
-											{{-- expr --}}
-											<option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
+										{{-- expr --}}
+										<option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
 										@endforeach
 									</select>
 									@if ($errors->has('bodega_id'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("bodega_id")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("bodega_id")}}</strong>
+									</span>
 									@endif
 								</div>
-							</div>
-{{-- uva --}}
-							<div class="form-group row">
-								<label for="uva" class="col-md-4 col-form-label text-md-right">Uva:</label>
-								<div class="col-md-6">
-									<select id="uva" class="form-control {{ $errors->has('uva') ? ' is-invalid' : ''  }}" name="uva" required >
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="uva" class="text-uppercase text-muted">Uva:</label>
+									<select id="uva"
+										class="form-control {{ $errors->has('uva') ? ' is-invalid' : ''  }}" name="uva"
+										required>
 										<option value="">Seleccione su uva</option>
 										@foreach ($uvas as $uva)
-											{{-- expr --}}
-											<option value="{{$uva->title}}">{{$uva->title}}</option>
+										{{-- expr --}}
+										<option value="{{$uva->title}}">{{$uva->title}}</option>
 										@endforeach
 									</select>
 									@if ($errors->has('uva'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("uva")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("uva")}}</strong>
+									</span>
 									@endif
 								</div>
-							</div>
-{{-- vinicola_id --}}
-							<div class="form-group row">
-								<label for="vinicola_id" class="col-md-4 col-form-label text-md-right">Vinicola o rancho:</label>
-								<div class="col-md-6">
-									<select id="vinicola_id" class="form-control {{ $errors->has('vinicola_id') ? ' is-invalid' : ''  }}" name="vinicola_id" required >
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="vinicola_id" class="text-uppercase text-muted">Vinicola o
+										rancho:</label>
+									<select id="vinicola_id"
+										class="form-control {{ $errors->has('vinicola_id') ? ' is-invalid' : ''  }}"
+										name="vinicola_id" required>
 										<option value="">Seleccione su vinicola</option>
 										@foreach ($vinicolas as $vinicola)
-											{{-- expr --}}
-											<option value="{{$vinicola->id}}">{{$vinicola->tipo}} {{$vinicola->nombre}}</option>
+										{{-- expr --}}
+										<option value="{{$vinicola->id}}">{{$vinicola->tipo}} {{$vinicola->nombre}}
+										</option>
 										@endforeach
 									</select>
 									@if ($errors->has('uva'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("uva")}}</strong>
-										</span>
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("uva")}}</strong>
+									</span>
 									@endif
-								</div>
-							</div>
+								</div>								
 
-@else
-	{{-- false expr --}}
-							<div class="form-group row">
-								<label for="producido" class="col-md-4 col-form-label text-md-right">Productor</label>
-								<div class="col-md-6">
-									<p> {{$barrica->enologo->tipo}} {{$barrica->enologo->nombre}} {{$barrica->enologo->paterno}} {{$barrica->enologo->materno}}</p>
-								</div>
-							</div>
+								{{-- añada --}}
 
-							<div class="form-group row">
-								<label for="tipo_barrica" class="col-md-4 col-form-label text-md-right">Tipo de barrica:</label>
-								<div class="col-md-6">
-									<p> {{$barrica->tipo_bar}}</p>
-								</div>
-							</div>
+								<div class="col-12 col-md-4">
 
-							<div class="form-group row">
-								<label for="subtipo_barrica" class="col-md-4 col-form-label text-md-right">Tostado de barrica:</label>
-								<div class="col-md-6">
-									<p> {{$barrica->tostado}}</p>
-								</div>
-							</div>
-							@if ($barrica->bodega)
-								{{-- true expr --}}
-							<div class="form-group row">
-								<label for="tostado_barrica" class="col-md-4 col-form-label text-md-right">Bodega:</label>
-								<div class="col-md-6">
-									<p> {{$barrica->bodega->nombre}}</p>
-								</div>
-							</div>
-							
-							@endif
-
-							@if ($barrica->vinicola)
-								{{-- true expr --}}
-							<div class="form-group row">
-								<label for="tostado_barrica" class="col-md-4 col-form-label text-md-right">Vinicola:</label>
-								<div class="col-md-6">
-									<p>{{$barrica->vinicola->tipo}} {{$barrica->vinicola->nombre}}</p>
-								</div>
-							</div>
-							
-							@endif
-							
-
-							<div class="form-group row">
-								<label for="tipo_barrica" class="col-md-4 col-form-label text-md-right">Uva:</label>
-								<div class="col-md-6">
-									<p> {{$barrica->uva}}</p>
-								</div>
-							</div>
-
-
-@endif
-
-
-
-
-{{-- costo uva --}}
-							<div class="form-group row">
-								<label for="costo_uva" class="col-md-4 col-form-label text-md-right">Costo de la uva:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" class="form-control {{ $errors->has('costo_uva') ? 'is-invalid' : '' }}" id="costo_uva" name="costo_uva" min="0" step="0.01" value="{{$edit ? $barrica->costo_uva : old('costo_uva')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
-									</div>
-									@if ($errors->has('costo_uva'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("costo_uva")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-{{-- costo barrica --}}
-							<div class="form-group row">
-								<label for="costo_barrica" class="col-md-4 col-form-label text-md-right">Costo de la barrica:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" class="form-control {{ $errors->has('costo_barrica') ? 'is-invalid' : '' }}" id="costo_barrica" name="costo_barrica" min="0" step="0.01" value="{{$edit ? $barrica->costo_barrica : old('costo_barrica')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
-									</div>
-									@if ($errors->has('costo_barrica'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("costo_barrica")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-{{-- costo produccion --}}
-							<div class="form-group row">
-								<label for="costo_prod" class="col-md-4 col-form-label text-md-right">Costo de producción:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" class="form-control {{ $errors->has('costo_prod') ? 'is-invalid' : '' }}" id="costo_prod" name="costo_prod" min="0" step="0.01" value="{{$edit ? $barrica->costo_prod : old('costo_prod')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
-									</div>
-									@if ($errors->has('costo_prod'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("costo_prod")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- añada --}}
-							<div class="form-group row">
-								<label for="anada" class="col-md-4 col-form-label text-md-right">Añada:</label>
-								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('anada') ? 'is-invalid' : '' }}" name="anada" min="{{date('Y')}}" step="1" value="{{$edit ? $barrica->anada : old('anada')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>año</strong></span>
-									</div>
-									@if ($errors->has('anada'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("anada")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- fecha inicio --}}
-							<div class="form-group row">
-								<label for="fecha_inicio" class="col-md-4 col-form-label text-md-right">Fecha de inicio:</label>
-								<div class="col-md-6">
-									<input type="date" id="fecha_inicio" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_inicio') ? ' is-invalid' : ''  }}" name="fecha_inicio" value="{{$edit ? $barrica->fecha_inicio : date('Y-m-d')}}">
-									@if ($errors->has('fecha_inicio'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("fecha_inicio")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- meses barricas --}}
-							<div class="form-group row">
-								<label for="meses_barrica" class="col-md-4 col-form-label text-md-right">Meses tentativos en barrica:</label>
-								<div class="input-group col-md-6">
-									<input type="number" id="meses_barrica" class="form-control {{ $errors->has('meses_barrica') ? 'is-invalid' : '' }}" name="meses_barrica" min="0" step="6" value="{{$edit ? $barrica->meses_barrica : old('meses_barrica')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>meses</strong></span>
-									</div>
-									@if ($errors->has('meses_barrica'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("meses_barrica")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-{{-- fecha embotellado --}}
-							<div class="form-group row">
-								<label for="fecha_embotellado" class="col-md-4 col-form-label text-md-right">Fecha tentativa de embotellado:</label>
-								<div class="col-md-6">
-									<input type="date" id="fecha_embotellado" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_embotellado') ? ' is-invalid' : ''  }}" name="fecha_embotellado" value="{{$edit ? $barrica->fecha_embotellado : old('fecha_embotellado')}}">
-									@if ($errors->has('fecha_embotellado'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("fecha_embotellado")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- meses estabilizacion --}}
-							<div class="form-group row">
-								<label for="meses_estabilizacion" class="col-md-4 col-form-label text-md-right">Meses tentativos en estabilización:</label>
-								<div class="input-group col-md-6">
-									<input type="number" class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}" id="meses_estabilizacion" name="meses_estabilizacion" min="0" step="1" value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>meses</strong></span>
-									</div>
-									@if ($errors->has('meses_estabilizacion'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("meses_estabilizacion")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- fecha envios --}}
-							<div class="form-group row">
-								<label for="fecha_envio" class="col-md-4 col-form-label text-md-right">Fecha tentativa de envio:</label>
-								<div class="col-md-6">
-									<input type="date" id="fecha_envio" min="{{date('Y-m-d')}}" class="form-control {{ $errors->has('fecha_envio') ? ' is-invalid' : ''  }}" name="fecha_envio" value="{{$edit ? $barrica->fecha_envio : old('fecha_envio')}}">
-									@if ($errors->has('fecha_envio'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("fecha_envio")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- precio venta --}}
-
-
-							<div class="form-group row">
-								<label for="costo_total" class="col-md-4 col-form-label text-md-right">Costo total:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" class="form-control {{ $errors->has('costo_total') ? 'is-invalid' : '' }}" id="costo_total" name="costo_total" min="0" step="0.01" value="{{$edit ? $barrica->costo_total : old('costo_total')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
-									</div>
-									@if ($errors->has('costo_total'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("costo_total")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-{{-- utilidad --}}
-							<div class="form-group row">
-								<label for="utilidad" class="col-md-4 col-form-label text-md-right">Utilidad:</label>
-								<div class="input-group col-md-6">
-									<input type="number" id="utilidad" class="form-control {{ $errors->has('utilidad') ? 'is-invalid' : '' }}" name="utilidad" min="0" step="5" value="{{$edit ? $barrica->utilidad : old('utilidad')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>%</strong></span>
-									</div>
-									@if ($errors->has('utilidad'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("utilidad")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="precio_final" class="col-md-4 col-form-label text-md-right">Precio de venta:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-								  	</div>
-									<input type="number" id="precio_final" name="precio_final" class="form-control {{ $errors->has('precio_final') ? 'is-invalid' : '' }}" readonly min="0" step="0.01" value="{{$edit ? $barrica->precio_final : old('precio_final')}}">
-									<div class="input-group-append">
-    									<span class="input-group-text"><strong>USD</strong></span>
+									<div class="form-group">
+										<label for="anada" class="text-center text-uppercase">Añada:</label>
+										<div class="input-group">
+											<input type="number"
+												class="form-control {{ $errors->has('anada') ? 'is-invalid' : '' }}"
+												name="anada" min="{{date('Y')}}" step="1"
+												value="{{$edit ? $barrica->anada : old('anada')}}" required>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>año</strong></span>
+											</div>
+											@if ($errors->has('anada'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("anada")}}</strong>
+											</span>
+											@endif
+										</div>
 									</div>
 								</div>
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="fecha_inicio" class="text-uppercase text-muted">Fecha de
+											inicio:</label>
+										<div class="input-group">
+											<input type="date" id="fecha_inicio" min="{{date('Y-m-d')}}"
+												class="form-control {{ $errors->has('fecha_inicio') ? ' is-invalid' : ''  }}"
+												name="fecha_inicio" value="" required>
+											@if ($errors->has('fecha_inicio'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("fecha_inicio")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{--  --}}
+
+								{{-- meses barricas --}}
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="meses_barrica" class="text-uppercase text-muted">Meses en
+											barrica:</label>
+										<div class="input-group">
+											<input type="number" id="meses_barrica"
+												class="form-control {{ $errors->has('meses_barrica') ? 'is-invalid' : '' }}"
+												name="meses_barrica" min="0" step="6" value="" required>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>meses</strong></span>
+											</div>
+											@if ($errors->has('meses_barrica'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("meses_barrica")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- fecha embotellado --}}
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="fecha_embotellado" class="text-muted text-uppercase">Fecha
+											de embotellado:</label>
+										<div class="input-group">
+											<input type="date" id="fecha_embotellado" min="{{date('Y-m-d')}}"
+												class="form-control {{ $errors->has('fecha_embotellado') ? ' is-invalid' : ''  }}"
+												name="fecha_embotellado" value="" required>
+											@if ($errors->has('fecha_embotellado'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("fecha_embotellado")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- meses estabilizacion --}}
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="meses_estabilizacion" class="text-muted text-uppercase">Meses
+											en estabilización:</label>
+										<div class="input-group">
+											<input type="number"
+												class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}"
+												id="meses_estabilizacion" name="meses_estabilizacion" min="0" step="1"
+												value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}" required>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>meses</strong></span>
+											</div>
+											@if ($errors->has('meses_estabilizacion'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("meses_estabilizacion")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- fecha envios --}}
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="fecha_envio" class="text-uppercase text-muted">Fecha
+											tentativa
+											envio:</label>
+										<div class="input-group">
+											<input type="date" id="fecha_envio" min="{{date('Y-m-d')}}"
+												class="form-control {{ $errors->has('fecha_envio') ? ' is-invalid' : ''  }}"
+												name="fecha_envio" value="" required>
+											@if ($errors->has('fecha_envio'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("fecha_envio")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
 							</div>
-							<div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Registrar barrica
-                                </button>
-                            </div>
-                        </div>
-						</form>
+						</div>
+					</div>
+
+
 				</div>
+
+				{{-- SUBTOTAL VINO --}}
+
+				<div class="col-12 col-md-6">
+					<small class="text-uppercase text-muted">COSTO DEL VINO (BARRICA)</small>
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+
+								{{-- INPUT COSTO UVA --}}
+
+								<div class="col-12">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">Costo uva</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_uva') ? 'is-invalid' : '' }}"
+												id="costo_uva" name="costo_uva" min="0" step="0.01" value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_uva'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_uva")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT COSTO BARRICA --}}
+
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="costo_barrica" class="text-uppercase text-muted">Costo
+											barrica</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_barrica') ? 'is-invalid' : '' }}"
+												id="costo_barrica" name="costo_barrica" min="0" step="0.01"
+												value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_barrica'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_barrica")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT COSTO LEVADURA --}}
+
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="costo_levadura" class="text-uppercase text-muted">Costo
+											levadura</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_levadura') ? 'is-invalid' : '' }}"
+												id="costo_levadura" name="costo_levadura" min="0" step="0.01"
+												value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_barrica'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_barrica")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT COSTO BOTELLA --}}
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="" class="text-uppercase text-muted">COSTO BOTELLA</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_botella') ? 'is-invalid' : '' }}"
+												id="costo_botella" name="costo_botella" min="0" step="0.01"
+												value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_botella'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_botella")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT COSTO CORCHO --}}
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="" class="text-uppercase text-muted">COSTO CORCHO</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_corcho') ? 'is-invalid' : '' }}"
+												id="costo_corcho" name="costo_corcho" min="0" step="0.01" value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_corcho'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_corcho")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT COSTO ETIQUETA --}}
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="" class="text-uppercase text-muted">COSTO etiqueta</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_etiqueta') ? 'is-invalid' : '' }}"
+												id="costo_etiqueta" name="costo_etiqueta" min="0" step="0.01"
+												value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_etiqueta'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_etiqueta")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT COSTO SERVICIOS ENOLOGICOS --}}
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="" class="text-uppercase text-muted">SERVICIOS ENOLOGICOS</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number"
+												class="form-control {{ $errors->has('costo_servicios_enologicos') ? 'is-invalid' : '' }}"
+												id="costo_servicios_enologicos" name="costo_servicios_enologicos"
+												min="0" step="0.01" value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_servicios_enologicos'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_servicios_enologicos")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+
+								{{-- INPUT SUBTOTAL VINO --}}
+								<div class="col-12">
+									<hr>
+									<div class="form-group">
+										<label for="" class="text-uppercase text-muted">SUBTOTAL VINO</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputSubtotalVino"
+												id="costo_subtotal_vino" name="costo_subtotal_vino" min="0" step="0.01"
+												readonly value="39.223">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+											@if ($errors->has('costo_subtotal_vino'))
+											{{-- expr --}}
+											<span class="invalid-feedback">
+												<strong>{{ $errors->first("costo_subtotal_vino")}}</strong>
+											</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{{-- IEPS --}}
+
+				<div class="col-12 col-md-6">
+					<small class="text-uppercase text-muted">IEPS</small>
+					<div class="card card-body">
+						<div class="row">
+
+							{{-- SUBTOTAL VINO --}}
+
+							<div class="col-12">
+								<div class="form-group">
+									<label for="costo_uva" class="text-uppercase text-muted">SUBTOTAL VINO</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">$</span>
+										</div>
+										<input type="number" class="form-control inputSubtotalVino" min="0" step="0.01"
+											readonly>
+										<div class="input-group-append">
+											<span class="input-group-text"><strong>USD</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							{{-- INPUT PORCENTAJE IEPS --}}
+
+							<div class="col-12">
+								<i class="fa fa-times" aria-hidden="true"></i>
+								<div class="form-group">
+									<label for="costo_uva" class="text-uppercase text-muted">PORCENTAJE IEPS</label>
+									<div class="input-group">
+										<input type="number" class="form-control inputPorcentajeIEPS" min="0"
+											step="0.01" readonly value="24">
+										<div class="input-group-append">
+											<span class="input-group-text"><strong>%</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							{{-- INPUT IEPS --}}
+
+							<div class="col-12">
+								<hr>
+								<div class="form-group">
+									<label for="costo_uva" class="text-uppercase text-muted">IEPS</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">$</span>
+										</div>
+										<input type="number" class="form-control inputIEPS" min="0" step="0.01" readonly
+											value="0.00">
+										<div class="input-group-append">
+											<span class="input-group-text"><strong>USD</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				{{-- IVA --}}
+
+				<div class="col-12 col-md-6">
+					<small class="text-uppercase text-muted">IVA</small>
+					<div class="card card-body">
+						<div class="row">
+
+							{{--  --}}
+
+							<div class="col-12">
+								<div class="form-group">
+									<label for="costo_uva" class="text-uppercase text-muted">SUBTOTAL VINO</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">$</span>
+										</div>
+										<input type="number" class="form-control inputSubtotalVino" min="0" step="0.01"
+											readonly>
+										<div class="input-group-append">
+											<span class="input-group-text"><strong>USD</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							{{--  --}}
+
+							{{-- INPUT PORCENTAJE IVA --}}
+
+							<div class="col-12">
+								<i class="fa fa-times" aria-hidden="true"></i>
+								<div class="form-group">
+									<label for="costo_uva" class="text-uppercase text-muted">PORCENTAJE IVA</label>
+									<div class="input-group">
+										<input type="number" class="form-control inputPorcentajeIVA" min="0" step="0.01"
+											readonly value="16">
+										<div class="input-group-append">
+											<span class="input-group-text"><strong>%</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							{{-- INPUT IVA --}}
+
+							<div class="col-12">
+								<hr>
+								<div class="form-group">
+									<label for="costo_uva" class="text-uppercase text-muted">IVA</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">$</span>
+										</div>
+										<input type="number" class="form-control inputIVA" min="0" step="0.01" readonly
+											value="0.00">
+										<div class="input-group-append">
+											<span class="input-group-text"><strong>USD</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				{{-- IMPUESTOS --}}
+
+				<div class="col-12 col-md-6">
+					<small class="text-uppercase text-muted">IMPUESTOS</small>
+					<div class="card">
+						<div class="card-body">
+
+
+							<div class="row">
+
+								{{-- INPUT IEPS --}}
+
+								<div class="col-12">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">IEPS</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputIEPS" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT IVA --}}
+
+								<div class="col-12">
+									<i class="fa fa-plus" aria-hidden="true"></i>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">IVA</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputIVA" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT IMPUESTOS --}}
+
+								<div class="col-12">
+									<hr>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">IMPUESTOS</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputImpuestos" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{{-- ADMINISTRACION --}}
+
+				<div class="col-12 col-md-6">
+					<small class="text-uppercase text-muted">ADMINISTRACION</small>
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+
+								{{-- SUBTOTAL VINO --}}
+
+								<div class="col-6">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">SUBTOTAL VINO</label>
+										<i class="fa fa-plus float-right pt-1" aria-hidden="true"></i>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputSubtotalVino" min="0"
+												step="0.01" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT IMPUESTOS --}}
+
+								{{-- <div class="col-2 text-center">
+							</div> --}}
+
+								<div class="col-6">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">IMPUESTOS</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputImpuestos" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT PORCENTAJE ADMINISTRACION --}}
+
+								<div class="col-12">
+									<div class="text-center">
+										<i class="fa fa-times text-center" aria-hidden="true"></i>
+									</div>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">PORCENTAJE
+											ADMINISTRACION</label>
+										<div class="input-group">
+											<input type="number" name="porcentaje_administracion"
+												class="form-control inputPorcentajeAdministracion" min="0" step="0.01"
+												value="12" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>%</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT ADMINISTRACION --}}
+
+								<div class="col-12">
+									<hr>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">ADMINISTRACION</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputAdministracion" min="0"
+												step="0.01" readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{{-- CALCULO UTILIDAD --}}
+
+				<div class="col-12 col-md-6">
+					<small class="text-uppercase text-muted">UTILIDAD</small>
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+
+								{{-- SUBTOTAL VINO --}}
+
+								<div class="col-4">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">VINO</label>
+										<i class="fa fa-plus float-right pt-1" aria-hidden="true"></i>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputSubtotalVino" min="0"
+												step="0.01" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT IMPUESTOS --}}
+
+								{{-- <div class="col-2 text-center">
+							</div> --}}
+
+								<div class="col-4">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">IMPUESTOS</label>
+										<i class="fa fa-plus float-right pt-1" aria-hidden="true"></i>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputImpuestos" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT ADMINISTRACION --}}
+
+								<div class="col-4">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">ADMIN.</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputAdministracion" min="0"
+												step="0.01" readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT PORCENTAJE UTILIDAD --}}
+
+								<div class="col-12">
+									<div class="text-center">
+										<i class="fa fa-times text-center" aria-hidden="true"></i>
+									</div>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">PORCENTAJE
+											UTILIDAD</label>
+										<div class="input-group">
+											<input type="number" name="porcentaje_utilidad"
+												class="form-control inputPorcentajeUtilidad" min="0" step="0.01"
+												value="18">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>%</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT UTILIDAD --}}
+
+								<div class="col-12">
+									<hr>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">UTILIDAD</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputUtilidad" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{{-- CALCULO TRANSPORTE --}}
+
+				<div class="col-12 col-md-6 mb-5">
+					<small class="text-uppercase text-muted">TRANSPORTE</small>
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+
+								{{-- SUBTOTAL VINO --}}
+
+								<div class="col-6">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">VINO</label>
+										<i class="fa fa-plus float-right pt-1" aria-hidden="true"></i>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputSubtotalVino" min="0"
+												step="0.01" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT IMPUESTOS --}}
+
+								{{-- <div class="col-2 text-center">
+							</div> --}}
+
+								<div class="col-6">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">IMPUESTOS</label>
+										<i class="fa fa-plus float-right pt-1" aria-hidden="true"></i>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputImpuestos" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT ADMINISTRACION --}}
+
+								<div class="col-6">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">ADMIN.</label>
+										<i class="fa fa-plus float-right pt-1" aria-hidden="true"></i>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputAdministracion" min="0"
+												step="0.01" readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT UTILIDAD --}}
+
+								<div class="col-6">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">UTILIDAD</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputUtilidad" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT PORCENTAJE TRANSPORTE --}}
+
+								<div class="col-12">
+									<div class="text-center">
+										<i class="fa fa-times text-center" aria-hidden="true"></i>
+									</div>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">PORCENTAJE
+											TRANSPORTE</label>
+										<div class="input-group">
+											<input type="number" name="porcentaje_transporte"
+												class="form-control inputPorcentajeTransporte" min="0" step="0.01"
+												value="6">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>%</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT TRANSPORTE --}}
+
+								<div class="col-12">
+									<hr>
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">TRANSPORTE</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputTransporte" min="0"
+												step="0.01" readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="col-12">
+					<button type="submit" class="btn btn-primary">
+						Registrar barrica
+					</button>
+				</div>
+
 			</div>
 		</div>
-	</div>
-@endsection
-@section('script')
-<script type="text/javascript" src="{{ asset('js/date.js') }}"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
+	</form>
+
+</div>
+
+
+	@endsection
+	@section('script')
+	<script type="text/javascript" src="{{ asset('js/date.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
 
 	    $("#producido").change(function(){
 	       var value= $("#producido").val();
@@ -439,10 +1093,10 @@
 	       }
 	    });
 	});
-</script>
+	</script>
 
-<script>
-	function getEnologos(){
+	<script>
+		function getEnologos(){
 		$.get('{{ url('/getEnologos') }}',function (data) {
 			// body...
 
@@ -464,10 +1118,10 @@
 
 		});
 	}
-</script>
+	</script>
 
-<script type="text/javascript">
-	function getProductor() {
+	<script type="text/javascript">
+		function getProductor() {
 		// body...
 		var id = document.getElementById("productor").value;
 		$.get("{{ url('/prodBodega') }}/"+id,function(data){
@@ -584,5 +1238,143 @@
 	    })
 
 	});
-</script>
-@endsection
+
+
+	// ==========================
+	// 
+	// ==========================
+
+	function calcularSubtotalVino(){
+		const costo_uva = parseFloat( $('#costo_uva').val() )
+		const costo_barrica = parseFloat( $('#costo_barrica').val() )
+		const costo_levadura = parseFloat( $('#costo_levadura').val() )
+		const costo_botella = parseFloat( $('#costo_botella').val() )
+		const costo_corcho = parseFloat( $('#costo_corcho').val() )
+		const costo_etiqueta = parseFloat( $('#costo_etiqueta').val() )
+		const costo_servicios_enologicos = parseFloat( $('#costo_servicios_enologicos').val() )
+
+		const total = 
+			costo_uva + 
+			costo_barrica + 
+			costo_levadura + 
+			costo_botella + 
+			costo_corcho + 
+			costo_etiqueta + 
+			costo_servicios_enologicos;
+
+		$('.inputSubtotalVino').each( function(){
+			$(this).val( parseFloat( total ).toFixed(2) )
+		} );
+
+	}
+
+	function calcularIEPS(){
+		const subtotalVino = parseFloat( $('.inputSubtotalVino').first().val() )
+		const porcentajeIEPS = parseFloat( $('.inputPorcentajeIEPS').first().val() )
+
+		const totalIEPS = (subtotalVino * porcentajeIEPS / 100).toFixed(2)
+
+		console.log({
+			subtotalVino,
+			porcentajeIEPS,
+			totalIEPS
+		})
+
+		$('.inputIEPS').each( function(){
+			$(this).val( totalIEPS )
+		} )
+	}
+
+	function calcularIVA(){
+		const subtotalVino = parseFloat( $('.inputSubtotalVino').first().val() )
+		const porcentajeIVA = parseFloat( $('.inputPorcentajeIVA').first().val() )
+
+		const totalIVA = (subtotalVino * porcentajeIVA / 100).toFixed(2)
+
+		$('.inputIVA').each( function(){
+			$(this).val( totalIVA )
+		} )
+
+	}
+
+	function calcularImpuestos(){
+		const iva = parseFloat( $('.inputIVA').first().val() )
+		const ieps = parseFloat( $('.inputIEPS').first().val() )
+
+		const totalImpuestos = iva + ieps
+
+		$('.inputImpuestos').each( function(){
+			$(this).val( (totalImpuestos).toFixed(2) )
+		} )
+	}
+
+	function calcularAdministracion(){
+		const subtotalVino = parseFloat( $('.inputSubtotalVino').first().val() )
+		const impuestos = parseFloat( $('.inputImpuestos').first().val() )
+		const porcentajeAdministracion = parseFloat( $('.inputPorcentajeAdministracion').first().val() )
+
+		const totalAdministracion = (subtotalVino + impuestos) * porcentajeAdministracion / 100
+
+		$('.inputAdministracion').each( function(){
+			$(this).val( (totalAdministracion).toFixed(2) )
+		} )
+	}
+
+	function calcularUtilidad(){
+		const subtotalVino = parseFloat( $('.inputSubtotalVino').first().val() )
+		const impuestos = parseFloat( $('.inputImpuestos').first().val() )
+		const administracion = parseFloat( $('.inputAdministracion').first().val() )
+		const porcentajeUtilidad = parseFloat( $('.inputPorcentajeUtilidad').first().val() )
+
+		const totalUtilidad = (subtotalVino + impuestos + administracion) * porcentajeUtilidad / 100
+
+		// console.log({
+
+		// })
+
+		$('.inputUtilidad').each( function(){
+			$(this).val( (totalUtilidad).toFixed(2) )
+		} )
+	}
+
+	function calcularTransporte(){
+		const subtotalVino = parseFloat( $('.inputSubtotalVino').first().val() )
+		const impuestos = parseFloat( $('.inputImpuestos').first().val() )
+		const administracion = parseFloat( $('.inputAdministracion').first().val() )
+		const utilidad = parseFloat( $('.inputUtilidad').first().val() )
+		const porcentajeTransporte = parseFloat( $('.inputPorcentajeTransporte').first().val() )
+
+		const totalUtilidad = (subtotalVino + impuestos + administracion + utilidad) * porcentajeTransporte / 100
+
+		// console.log({
+
+		// })
+
+		$('.inputTransporte').each( function(){
+			$(this).val( (totalUtilidad).toFixed(2) )
+		} )
+	}
+
+	function calcularTodo(){
+		calcularSubtotalVino()
+		calcularIEPS()
+		calcularIVA()
+		calcularImpuestos()
+		calcularAdministracion()
+		calcularUtilidad()
+		calcularTransporte()
+	}
+
+	$(document).on('change', '#costo_uva, #costo_barrica, #costo_levadura, #costo_botella, #costo_corcho, #costo_etiqueta, #costo_servicios_enologicos, .inputPorcentajeUtilidad, .inputPorcentajeTransporte', function(){
+		calcularTodo()
+	})
+
+
+	$(document).ready( function(){
+		calcularTodo()
+	} );
+
+
+
+	</script>
+	@endsection

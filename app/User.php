@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany('App\ShoppingCart', 'user_id', 'id');
     }
 
+    public function ventas()
+    {
+        return $this->hasMany('App\Venta');
+    }
+
     // =============
     // SCOPE METHODS
     // =============
