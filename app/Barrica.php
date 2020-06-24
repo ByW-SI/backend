@@ -113,4 +113,25 @@ class Barrica extends Model
     {
         return ($this->subtotal_vino + $this->impuestos + $this->costo_administracion + $this->utilidad) * $this->porcentaje_transporte / 100;
     }
+
+    public function getPrecioVentaBarricaAttribute()
+    {
+        return
+            $this->subtotal_vino +
+            $this->impuestos +
+            $this->costo_administracion +
+            $this->costo_transporte +
+            $this->utilidad;
+    }
+
+    public function getPrecioVentaBotellaAttribute()
+    {
+        return
+            $this->precio_venta_barrica / 260;
+    }
+
+    public function getPrecioVentaCajaAttribute()
+    {
+        return $this->precio_venta_botella * 12;
+    }
 }

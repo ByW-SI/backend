@@ -1059,6 +1059,76 @@
 					</div>
 				</div>
 
+				{{-- CALCULO PRECIOS VENTA --}}
+
+				<div class="col-12 mb-5">
+					<small class="text-uppercase text-muted">PRECIOS DE VENTA</small>
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+
+								{{-- INPUT PRECIO VENTA BARRICA --}}
+
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">BARRICA</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputPrecioVentaBarrica" min="0"
+												step="0.01" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT PRECIO VENTA CAJA --}}
+
+								{{-- <div class="col-2 text-center">
+							</div> --}}
+
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">CAJA</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputPrecioVentaCaja" min="0" step="0.01"
+												readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{{-- INPUT PRECIO VENTA VINO --}}
+
+								<div class="col-12 col-md-4">
+									<div class="form-group">
+										<label for="costo_uva" class="text-uppercase text-muted">Vino</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
+											<input type="number" class="form-control inputPrecioVentaVino" min="0"
+												step="0.01" readonly value="0.00">
+											<div class="input-group-append">
+												<span class="input-group-text"><strong>USD</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<hr>
 
 				<div class="col-12">
@@ -1355,6 +1425,40 @@
 		} )
 	}
 
+	function calcularPrecioVentaBarrica(){
+		const subtotalVino = parseFloat( $('.inputSubtotalVino').first().val() )
+		const impuestos = parseFloat( $('.inputImpuestos').first().val() )
+		const administracion = parseFloat( $('.inputAdministracion').first().val() )
+		const utilidad = parseFloat( $('.inputUtilidad').first().val() )
+		const transporte = parseFloat( $('.inputTransporte').first().val() )
+
+		const totalPrecioVentaBarrica = (subtotalVino + impuestos + administracion + utilidad + transporte)
+
+		$('.inputPrecioVentaBarrica').each( function(){
+			$(this).val( (totalPrecioVentaBarrica).toFixed(2) )
+		} )
+	}
+
+	function calcularPrecioVentaVino(){
+		const precioVentaBarrcia = parseFloat( $('.inputPrecioVentaBarrica').first().val() )
+
+		const totalPrecioVentaBarrica = precioVentaBarrcia / 260
+
+		$('.inputPrecioVentaVino').each( function(){
+			$(this).val( (totalPrecioVentaBarrica).toFixed(2) )
+		} )
+	}
+	
+	function calcularPrecioVentaCaja(){
+		const precioVentaVino = parseFloat( $('.inputPrecioVentaVino').first().val() )
+
+		const totalPrecioVentaCaja = precioVentaVino * 12
+
+		$('.inputPrecioVentaCaja').each( function(){
+			$(this).val( (totalPrecioVentaCaja).toFixed(2) )
+		} )
+	}
+
 	function calcularTodo(){
 		calcularSubtotalVino()
 		calcularIEPS()
@@ -1363,6 +1467,9 @@
 		calcularAdministracion()
 		calcularUtilidad()
 		calcularTransporte()
+		calcularPrecioVentaBarrica()
+		calcularPrecioVentaVino()
+		calcularPrecioVentaCaja()
 	}
 
 	$(document).on('change', '#costo_uva, #costo_barrica, #costo_levadura, #costo_botella, #costo_corcho, #costo_etiqueta, #costo_servicios_enologicos, .inputPorcentajeUtilidad, .inputPorcentajeTransporte', function(){
