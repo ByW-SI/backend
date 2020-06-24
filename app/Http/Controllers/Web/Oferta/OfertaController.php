@@ -46,7 +46,9 @@ class OfertaController extends Controller
             'uva_id' => $request->uva_id,
             'aniada' => $request->aniada,
             'tipo_vino' => $request->tipo_vino,
-            'precio' => $request->precio,
+            'costo_botella' => $request->costo_botella,
+            'porcentaje_transporte' => $request->porcentaje_transporte,
+            'porcentaje_utilidad' => $request->porcentaje_utilidad,
         ]);
 
         $imagen = $request->file('imagen');

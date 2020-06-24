@@ -14,13 +14,14 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-    
+
                     {{-- LEFT --}}
                     <div class="col-12 col-md-6">
                         <div class="row">
                             <div class="col-12 mt-2">
                                 <label for="" class="text-uppercase text-muted">Nombre del vino</label>
-                                <input type="text" class="form-control" name="nombre_vino" placeholder="Nombre del vino">
+                                <input type="text" class="form-control" name="nombre_vino"
+                                    placeholder="Nombre del vino">
                             </div>
                             <div class="col-12 mt-2">
                                 <label for="" class="text-uppercase text-muted">Tipo de uva</label>
@@ -45,13 +46,10 @@
                                     <option value="postre">postre</option>
                                 </select>
                             </div>
-                            <div class="col-12 mt-2">
-                                <label for="" class="text-uppercase text-muted">Precio</label>
-                                <input name="precio" type="number" step="any" class="form-control" min="0" value="0">
-                            </div>
+
                         </div>
                     </div>
-    
+
                     {{-- RIGHT --}}
                     <div class="col-12 col-md-6">
                         <div class="row">
@@ -61,7 +59,58 @@
                             </div>
                         </div>
                     </div>
-    
+
+                    <div class="col-12 mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    {{-- INPUT PRECIO BOTELLA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">Costo botella</label>
+                                        <input id="inputCostoBotella" name="costo_botella" type="number" step="any"
+                                            class="form-control" min="0" value="0">
+                                    </div>
+                                    {{-- INPUT PRECIO PROVEEDOR CAJA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">% transporte</label>
+                                        <input id="inputPorcentajeTransporte" name="porcentaje_transporte" type="number"
+                                            step="any" class="form-control" min="0" value="0">
+                                    </div>
+                                    {{-- INPUT PRECIO PROVEEDOR CAJA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">% utilidad</label>
+                                        <input id="inputPorcentajeUtilidad" name="porcentaje_utilidad" type="number"
+                                            step="any" class="form-control" min="0" value="0">
+                                    </div>
+                                    {{-- INPUT PRECIO PROVEEDOR CAJA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">Costo proveedor caja</label>
+                                        <input id="inputCostoCaja" type="number" step="any"
+                                            class="form-control" min="0" value="0" readonly>
+                                    </div>
+                                    {{-- INPUT SUBTOTAL VENTA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">Subtotal venta</label>
+                                        <input id="inputSubtotalVenta" type="number" step="any"
+                                            class="form-control" min="0" value="0" readonly>
+                                    </div>
+                                    {{-- INPUT SUBTOTAL VENTA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">Costo transporte</label>
+                                        <input id="inputCostoTransporte" type="number" step="any"
+                                            class="form-control" min="0" value="0" readonly>
+                                    </div>
+                                    {{-- INPUT SUBTOTAL VENTA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">Precio público</label>
+                                        <input id="inputPrecioPublico" type="number" step="any"
+                                            class="form-control" min="0" value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
@@ -72,5 +121,31 @@
         </div>
     </div>
 </div>
+
+@section('script')
+
+<script>
+    $(document).change('#inputCostoBotella', function(){
+
+    $.ajax("/api/ofertas/cotizar", {
+        data: {
+            costo_botella: $("#inputCostoBotella").val(),
+            porcentaje_transporte: $("#inputPorcentajeTransporte").val(),
+            porcentaje_utilidad: $("#inputPorcentajeUtilidad").val()
+        },
+        success: function(response){
+            console.log(response)
+            $("#inputCostoCaja").val( response.costo_caja )
+            $("#inputSubtotalVenta").val( response.subtotal_venta )
+            $("#inputCostoTransporte").val( response.costo_transporte )
+            $("#inputPrecioPublico").val( response.precio_publico )
+        }
+    });
+
+})
+
+</script>
+
+@endsection
 
 @endsection

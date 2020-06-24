@@ -38,5 +38,6 @@ Route::middleware('auth:api')->post('/add_in_cart','Api\User\UserShoppingCart@ad
 Route::middleware('auth:api')->delete('/remove_in_cart','Api\User\UserShoppingCart@removeInShoppingCart');
 Route::middleware('auth:api')->get('/in_shopping_cart','Api\User\UserShoppingCart@InShoppingCartCount');
 
+Route::get('ofertas/cotizar', 'Api\Oferta\OfertaController@cotizar');
 Route::post('ventas', 'Api\Venta\VentaController@store');
 Route::get('users/{user}/compras', 'Api\User\VentaController@index');
