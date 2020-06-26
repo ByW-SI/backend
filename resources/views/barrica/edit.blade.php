@@ -29,8 +29,8 @@
 										class="form-control {{ $errors->has('producido') ? ' is-invalid' : ''  }}"
 										name="producido" required>
 										<option value="">Seleccione una opción</option>
-										<option value="Wine Maker">Wine Maker</option>
-										<option value="Enólogo">Enólogo</option>
+										<option value="Wine Maker" {{ $barrica->enologo->tipo == 'Wine Maker' ? 'selected' : '' }} >Wine Maker</option>
+										<option value="Enólogo" {{ $barrica->enologo->tipo == 'Enólogo' ? 'selected' : '' }} >Enólogo</option>
 									</select>
 									@if ($errors->has('producido'))
 									{{-- expr --}}

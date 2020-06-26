@@ -4,7 +4,8 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <table class="table">
+            <a href="{{ route('ofertas.create') }}" class="btn btn-primary">Añadir oferta</a>
+            <table class="table mt-4">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
