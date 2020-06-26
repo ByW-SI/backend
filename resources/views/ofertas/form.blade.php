@@ -125,7 +125,7 @@
 @section('script')
 
 <script>
-    $(document).change('#inputCostoBotella', function(){
+    $(document).change('input', function(){
 
     $.ajax("/api/ofertas/cotizar", {
         data: {

@@ -95,12 +95,17 @@ class OfertaController extends Controller
      */
     public function update(Request $request, Oferta $oferta)
     {
+
+        // dd( $request->porcentaje_transporte );
+
         $oferta->update([
             'nombre_vino' => $request->nombre_vino,
             'uva_id' => $request->uva_id,
             'aniada' => $request->aniada,
             'tipo_vino' => $request->tipo_vino,
-            'precio' => $request->precio,
+            'costo_botella' => $request->costo_botella,
+            'porcentaje_transporte' => $request->porcentaje_transporte,
+            'porcentaje_utilidad' => $request->porcentaje_utilidad,
         ]);
 
         if (!$request->hasFile('imagen')) {

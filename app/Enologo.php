@@ -6,23 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enologo extends Model
 {
-    //
+	//
 
-    protected $table="enologo";
+	protected $table = "enologo";
 
-    protected $fillable=[
-    	'id',
-    	'nombre',
-    	'paterno',
-    	'materno',
-    	'tipo',
-    	'cv'
-    ];
+	protected $fillable = [
+		'id',
+		'nombre',
+		'paterno',
+		'materno',
+		'tipo',
+		'cv'
+	];
 
-    protected $hidden=[
-    	'created_at',
-    	'updated_at'
-    ];
+	protected $hidden = [
+		'created_at',
+		'updated_at'
+	];
 
-    
+
+	// ==========
+	// ATTRIBUTES
+	// ==========
+
+	public function getNombreCompletoAttribute()
+	{
+		return $this->nombre . " " . $this->paterno . " " . $this->materno;
+	}
 }

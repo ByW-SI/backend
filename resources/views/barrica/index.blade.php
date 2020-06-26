@@ -60,10 +60,10 @@
 						<td nowrap>{{$barrica->fecha_inicio}}</td>
 						<td nowrap>{{$barrica->fecha_embotellado}}</td>
 						<td nowrap>$ {{ number_format( $barrica->precio_venta_barrica, 2, '.', ',' ) }} USD</td>
-						<td nowrap>$ {{ number_format( $barrica->precio_venta_botella, 2, '.', ',' ) }} USD</td>
 						<td nowrap>$ {{ number_format( $barrica->precio_venta_caja, 2, '.', ',' ) }} USD</td>
+						<td nowrap>$ {{ number_format( $barrica->precio_venta_botella, 2, '.', ',' ) }} USD</td>
 						<td nowrap>
-							{{-- <a class="btn btn-default" href="{{ route('barricas.edit',[$barrica]) }}">Editar</a> --}}
+							<a class="btn btn-default" href="{{ route('barricas.edit',[$barrica]) }}">Editar</a>
 							<a class="btn btn-default"
 								href="{{ route('barricas.procesos.index',[$barrica]) }}">Proceso</a>
 							<form action="{{ route('barricas.destroy',[$barrica]) }}" method="POST">

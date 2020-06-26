@@ -49,8 +49,6 @@ class BarricaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // 
         $rules = [
             'producido' => 'required',
             'productor' => 'required|integer',
@@ -96,6 +94,7 @@ class BarricaController extends Controller
             'porcentaje_utilidad' => $request->porcentaje_utilidad,
             'porcentaje_transporte' => $request->porcentaje_transporte,
         ]);
+
         $barrica_exist = BarricaBodega::where([
             ['bodega_id', $request->bodega_id],
             ['tipo', $request->tipo_bar],
@@ -139,10 +138,18 @@ class BarricaController extends Controller
      */
     public function edit(Barrica $barrica)
     {
-        //
-        // dd($barrica);
+        $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
+        $bodegas = Bodega::orderBy('nombre', 'asc')->get();
+        $uvas = Uva::orderBy('title', 'asc')->get();
         $edit = true;
-        return view('barrica.form', ['edit' => $edit, 'barrica' => $barrica]);
+
+        return view('barrica.edit', [
+            'barrica' => $barrica,
+            'bodegas' => $bodegas,
+            'uvas' => $uvas,
+            'vinicolas' => $vinicolas,
+            'edit' => $edit,
+        ]);
     }
 
     /**
@@ -154,7 +161,6 @@ class BarricaController extends Controller
      */
     public function update(Request $request, Barrica $barrica)
     {
-        //
         $rules = [
             "costo_uva" => "required|numeric",
             "costo_barrica" => "required|numeric",
@@ -169,6 +175,13 @@ class BarricaController extends Controller
         $this->validate($request, $rules);
         $this->validate($request, $rules);
         $barrica->update([
+            // 'producido'=>$request->producido,
+            'enologo_id' => $request->productor,
+            'tipo_bar' => $request->tipo_bar,
+            'tostado' => $request->tostado,
+            'uva' => $request->uva,
+            'bodega_id' => $request->bodega_id,
+            'vinicola_id' => $request->vinicola_id,
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_embotellado' => $request->fecha_embotellado,
             'meses_barrica' => $request->meses_barrica,
@@ -177,6 +190,14 @@ class BarricaController extends Controller
             'costo_barrica' => $request->costo_barrica,
             'fecha_envio' => $request->fecha_envio,
             'anada' => $request->anada,
+            'costo_levadura' => $request->costo_levadura,
+            'costo_botella' => $request->costo_botella,
+            'costo_corcho' => $request->costo_corcho,
+            'costo_etiqueta' => $request->costo_etiqueta,
+            'costo_servicios_enologicos' => $request->costo_servicios_enologicos,
+            'porcentaje_administracion' => $request->porcentaje_administracion,
+            'porcentaje_utilidad' => $request->porcentaje_utilidad,
+            'porcentaje_transporte' => $request->porcentaje_transporte,
         ]);
         return redirect()->route('barricas.index');
     }
