@@ -6,26 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Uva extends Model
 {
-    //
-    
-    protected $table = "uvas";
+	//
 
-    protected $fillable=[
-    	'title',
-    	'subtitle',
-    	'image',
-    	'olfato',
-    	'gusto',
-    	'vista',
-    	'maridaje',
-    ];
+	protected $table = "uvas";
 
-   	protected $hidden=[
-   		'created_at',
-   		'updated_at'
-   	];
+	protected $fillable = [
+		'title',
+		'subtitle',
+		'image',
+		'olfato',
+		'gusto',
+		'vista',
+		'maridaje',
+	];
 
-   	public function uvasVinicolas(){
-   		return $this->hasMany('App\UvaVinicola', 'uva_id','id');
-   	}
+	protected $hidden = [
+		'created_at',
+		'updated_at'
+	];
+
+	public function uvasVinicolas()
+	{
+		return $this->hasMany('App\UvaVinicola', 'uva_id', 'id');
+	}
+
+	public function ofertas()
+	{
+		return $this->belongsTo('App\Oferta', 'uva_id', 'id');
+	}
 }

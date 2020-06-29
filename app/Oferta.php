@@ -9,18 +9,18 @@ class Oferta extends Model
     protected $table = "ofertas";
     protected $fillable = [
         'nombre_vino',
-        'uva_id',
         'aniada',
         'tipo_vino',
         'ruta_imagen',
         'costo_botella',
         'porcentaje_transporte',
-        'porcentaje_utilidad'
+        'porcentaje_utilidad',
+        'comentario'
     ];
 
-    public function uva()
+    public function uvas()
     {
-        return $this->belongsTo('App\Uva');
+        return $this->belongsToMany('App\Uva')->withPivot('porcentaje');
     }
 
     // ==========

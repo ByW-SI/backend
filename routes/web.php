@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('usuarios','Web\Usuario\UsuarioController');
 Route::resource('perfiles','Web\Perfil\PerfilController');
 Route::resource('ofertas','Web\Oferta\OfertaController');
+Route::resource('paquetes','Web\Paquete\PaqueteController');
 Route::resource('uvas','Web\Uva\UvaController');
 Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
 Route::resource('enologos','Web\Enologo\EnologoController');

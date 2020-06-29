@@ -65,6 +65,7 @@
                 <ul class="sub-menu">
                     <li><a href="{{route('ofertas.create')}}">Agregar Oferta</a></li>
                     <li><a href="{{route('ofertas.index')}}">Lista de ofertas</a></li>
+                    <li><a href="{{route('paquetes.index')}}">Lista de paquetes</a></li>
                 </ul>
             </li>
             @endif

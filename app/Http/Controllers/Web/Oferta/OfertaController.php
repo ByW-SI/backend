@@ -41,6 +41,8 @@ class OfertaController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->input());
+
         $oferta = Oferta::create([
             'nombre_vino' => $request->nombre_vino,
             'uva_id' => $request->uva_id,
@@ -49,7 +51,16 @@ class OfertaController extends Controller
             'costo_botella' => $request->costo_botella,
             'porcentaje_transporte' => $request->porcentaje_transporte,
             'porcentaje_utilidad' => $request->porcentaje_utilidad,
+            'comentario' => $request->comentario,
         ]);
+
+        if ($request->uvas_ids != null) {
+            for ($i = 0; $i < count($request->uvas_ids); $i++) {
+                $oferta->uvas()->attach($request->uvas_ids[$i], [
+                    'porcentaje' => $request->porcentajes[$i],
+                ]);
+            }
+        }
 
         $imagen = $request->file('imagen');
         $extensionImagen = $request->file('imagen')->getClientOriginalExtension();
