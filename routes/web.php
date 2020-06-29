@@ -34,6 +34,7 @@ Route::resource('barricas','Web\Barrica\BarricaController');
 Route::resource('barricas.procesos','Web\Barrica\ProcesoController');
 Route::resource('empleados','Web\Empleados\EmpleadosController');
 Route::resource('posts','Web\Post\PostController');
+Route::resource('regiones','Web\Region\RegionController');
 Route::post('/posts/imagenUpload','Web\Post\PostController@imagenUpload')->name('posts.imageUpload');
 Route::post('/posts/videoUpload','Web\Post\PostController@videoUpload')->name('posts.videoUpload');
 Route::post('/posts/fileUpload','Web\Post\PostController@fileUpload')->name('posts.fileUpload');

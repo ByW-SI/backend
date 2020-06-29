@@ -33,6 +33,15 @@
 
             @auth
 
+            @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','enologos')->first() )
+            <li class="has-children">
+                <a href="#0" title="">Precargas</a>
+                <ul class="sub-menu">
+                    <li><a href="{{route('regiones.index')}}">Regiones</a></li>
+                </ul>
+            </li>
+            @endif
+
             @if ( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','enologos')->first() )
             <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
             @endif
