@@ -38,7 +38,7 @@
                         <label for="" class="text-uppercase text-muted"><small>COSTO</small></label>
                         <div class="card">
                             <div class="card-body">
-                                <label for="" class="text-uppercase text-muted labelSumaPrecioBotellas" style="text-decoration: line-through">9999</label>
+                                <label for="" class="text-uppercase text-muted labelSumaPrecioBotellas" style="text-decoration: line-through">$0 USD</label>
                                 <input type="text" name="precio" class="form-control" placeholder="Nuevo costo">
                             </div>
                         </div>

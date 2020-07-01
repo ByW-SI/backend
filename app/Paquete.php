@@ -13,4 +13,12 @@ class Paquete extends Model
     {
         return $this->belongsToMany('App\Oferta');
     }
+
+    // ==========
+    // ATTRIBUTES
+    // ==========
+
+    public function getPrecioOriginalAttribute(){
+        return $this->ofertas->pluck('precio_publico_botella')->flatten()->sum();
+    }
 }

@@ -45,7 +45,7 @@ class PaqueteController extends Controller
 
         $paquete->ofertas()->attach($request->vinos_ids);
 
-        return redirect()->route('ofertas.index');
+        return redirect()->route('paquetes.index');
     }
 
     /**
@@ -90,6 +90,8 @@ class PaqueteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $paquete = Paquete::find($id);
+        $paquete->delete();
+        return redirect()->back();
     }
 }
