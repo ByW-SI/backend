@@ -15,6 +15,7 @@
                         <th scope="col">#</th>
                         <th scope="col">País</th>
                         <th scope="col">Región</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +24,15 @@
                         <th scope="row">{{$region->id}}</th>
                         <td>{{$region->pais->nombre}}</td>
                         <td>{{$region->nombre}}</td>
+                        <td>
+                            <form action="{{route('regiones.destroy')}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
