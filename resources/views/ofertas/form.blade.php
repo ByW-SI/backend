@@ -2,17 +2,18 @@
 @section('content')
 
 <div class="container">
+
+    <div class="card text-white bg-dark mb-3" style="max-width: 24rem;">
+        <div class="card-header text-center">¡Aviso!</div>
+        <div class="card-body">
+            <p class="card-text">Sujeto a disponibilidad, no incluye gastos de envío.</p>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <form action="{{route('ofertas.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <p class="text-monospace pl-2">Sujeto a disponibilidad, no incluye gastos de envío.</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="row mt-2">
 
                     {{-- LEFT --}}
@@ -72,17 +73,25 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="col-12 mt-2">
+                                <label for="" class="text-center text-uppercase">Uvas</label>
 
-                                <select name="" id="inputUvas" class="form-control">
-                                    <option value="">Seleccionar</option>
-                                    @foreach ($uvas as $uva)
-                                    <option value="{{$uva->id}}">{{$uva->title}}</option>
-                                    @endforeach
-                                </select>
-                                {{-- BOTON ANADIR UVA --}}
-                                <button type="button" class="btn btn-success" id="botonAnadirUva">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
+                                <div class="input-group mb-3">
+                                    <select name="" id="inputUvas" class="form-control">
+                                        <option value="">Seleccionar</option>
+                                        @foreach ($uvas as $uva)
+                                        <option value="{{$uva->id}}">{{$uva->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group-append">
+                                        {{-- BOTON ANADIR UVA --}}
+                                        <button type="button" class="btn btn-success" id="botonAnadirUva">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+
                                 {{-- BOTON QUITAR UVA --}}
                                 {{-- <button type="button" class="btn btn-danger" id="botonQuitarUva">
                                     <i class="fa fa-minus" aria-hidden="true"></i>
@@ -154,8 +163,8 @@
                                 {{-- INPUT SUBTOTAL VENTA--}}
                                 <div class="col-12 col-md-4 mt-2">
                                     <label for="" class="text-uppercase text-muted">Precio público botella</label>
-                                    <input id="inputPrecioPublicoBotella" type="number" step="any" class="form-control" min="0"
-                                        value="0" readonly>
+                                    <input id="inputPrecioPublicoBotella" type="number" step="any" class="form-control"
+                                        min="0" value="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -165,6 +174,7 @@
         </div>
         <div class="row mt-2">
             <div class="col-12">
+                <hr>
                 <button class="btn btn-success rounded-0 p-3 float-right"><small>GUARDAR</small></button>
             </div>
         </div>
@@ -188,6 +198,10 @@
             title,
         })
 
+        if( id == "" ){
+            return;
+        }
+
         $('#contenedorInputsNuevaUva').append(`
         
         <div class="form-group">
@@ -195,12 +209,30 @@
                 <input type="hidden" class="form-control" value="${id}" name="uvas_ids[]" readonly>
                 <input type="text" class="form-control" value="${title}" readonly>
                 &nbsp;
-                <input type="text" class="form-control" name="porcentajes[]" placeholder="Porcentaje">
+                <input type="number" step="any" class="form-control" name="porcentajes[]" placeholder="Porcentaje" value="0.00">
+                <div class="input-group-append">
+                <span class="input-group-text">%</span>
+            </div>
             </div>
         </div>
 
         `);
     }
+
+    // <div class="input-group mb-3">
+    //     <select name="" id="inputUvas" class="form-control">
+    //         <option value="">Seleccionar</option>
+    //         @foreach ($uvas as $uva)
+    //         <option value="{{$uva->id}}">{{$uva->title}}</option>
+    //         @endforeach
+    //     </select>
+    //     <div class="input-group-append">
+    //         {{-- BOTON ANADIR UVA --}}
+    //         <button type="button" class="btn btn-success" id="botonAnadirUva">
+    //             <i class="fa fa-plus" aria-hidden="true"></i>
+    //         </button>
+    //     </div>
+    // </div>
 
     function quitarUva(){
         console.log('quitar uva');
