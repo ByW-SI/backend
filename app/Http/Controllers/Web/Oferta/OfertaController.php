@@ -54,6 +54,7 @@ class OfertaController extends Controller
             'porcentaje_transporte' => $request->porcentaje_transporte,
             'porcentaje_utilidad' => $request->porcentaje_utilidad,
             'comentario' => $request->comentario,
+            'productor_id' => $request->productor_id
         ]);
 
         if ($request->uvas_ids != null) {

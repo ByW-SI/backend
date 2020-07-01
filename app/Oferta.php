@@ -15,7 +15,8 @@ class Oferta extends Model
         'costo_botella',
         'porcentaje_transporte',
         'porcentaje_utilidad',
-        'comentario'
+        'comentario',
+        'productor_id'
     ];
 
     public function uvas()
