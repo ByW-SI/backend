@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Oferta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oferta;
+use App\Productor;
 use App\Uva;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,7 +30,8 @@ class OfertaController extends Controller
     public function create()
     {
         $uvas = Uva::get();
-        return view('ofertas.form', compact('uvas'));
+        $productores = Productor::get();
+        return view('ofertas.form', compact('uvas', 'productores'));
     }
 
     /**

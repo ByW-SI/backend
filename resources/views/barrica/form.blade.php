@@ -162,7 +162,46 @@
 										<strong>{{ $errors->first("uva")}}</strong>
 									</span>
 									@endif
-								</div>								
+								</div>
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="pais_id" class="text-uppercase text-muted">País:</label>
+									<select id="pais_id"
+										class="form-control {{ $errors->has('pais_id') ? ' is-invalid' : ''  }}"
+										name="pais_id" required>
+										<option value="" id="inputPais">Seleccione el país</option>
+										@foreach ($paises as $pais)
+										{{-- expr --}}
+										<option value="{{$pais->id}}">{{$pais->nombre}}
+										</option>
+										@endforeach
+									</select>
+									@if ($errors->has('uva'))
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("uva")}}</strong>
+									</span>
+									@endif
+								</div>
+
+								{{--  --}}
+
+								<div class="col-12 col-md-4">
+									<label for="region_id" class="text-uppercase text-muted">Región:</label>
+									<select id="region_id"
+										class="form-control {{ $errors->has('region_id') ? ' is-invalid' : ''  }}"
+										name="region_id" required>
+										<option value="" id="inputPais">Seleccione la región</option>
+									</select>
+									@if ($errors->has('uva'))
+									{{-- expr --}}
+									<span class="invalid-feedback">
+										<strong>{{ $errors->first("uva")}}</strong>
+									</span>
+									@endif
+								</div>
 
 								{{-- añada --}}
 
@@ -260,7 +299,8 @@
 											<input type="number"
 												class="form-control {{ $errors->has('meses_estabilizacion') ? 'is-invalid' : '' }}"
 												id="meses_estabilizacion" name="meses_estabilizacion" min="0" step="1"
-												value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}" required>
+												value="{{$edit ? $barrica->meses_estabilizacion : old('meses_estabilizacion')}}"
+												required>
 											<div class="input-group-append">
 												<span class="input-group-text"><strong>meses</strong></span>
 											</div>
@@ -786,7 +826,7 @@
 										<div class="input-group">
 											<input type="number" name="porcentaje_administracion"
 												class="form-control inputPorcentajeAdministracion" min="0" step="0.01"
-												value="12" readonly>
+												value="12">
 											<div class="input-group-append">
 												<span class="input-group-text"><strong>%</strong></span>
 											</div>
@@ -1097,8 +1137,8 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text">$</span>
 											</div>
-											<input type="number" class="form-control inputPrecioVentaCaja" min="0" step="0.01"
-												readonly value="0.00">
+											<input type="number" class="form-control inputPrecioVentaCaja" min="0"
+												step="0.01" readonly value="0.00">
 											<div class="input-group-append">
 												<span class="input-group-text"><strong>USD</strong></span>
 											</div>
@@ -1110,7 +1150,8 @@
 
 								<div class="col-12 col-md-4">
 									<div class="form-group">
-										<label for="costo_uva" class="text-uppercase text-muted">Vino</label>
+										<label for="costo_uva" class="text-uppercase text-muted">Vino <small>(costo x
+												botella)</small></label>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text">$</span>
@@ -1144,11 +1185,11 @@
 </div>
 
 
-	@endsection
-	@section('script')
-	<script type="text/javascript" src="{{ asset('js/date.js') }}"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ asset('js/date.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
 
 	    $("#producido").change(function(){
 	       var value= $("#producido").val();
@@ -1163,10 +1204,10 @@
 	       }
 	    });
 	});
-	</script>
+</script>
 
-	<script>
-		function getEnologos(){
+<script>
+	function getEnologos(){
 		$.get('{{ url('/getEnologos') }}',function (data) {
 			// body...
 
@@ -1188,10 +1229,10 @@
 
 		});
 	}
-	</script>
+</script>
 
-	<script type="text/javascript">
-		function getProductor() {
+<script type="text/javascript">
+	function getProductor() {
 		// body...
 		var id = document.getElementById("productor").value;
 		$.get("{{ url('/prodBodega') }}/"+id,function(data){
@@ -1262,6 +1303,31 @@
 	}
 
 	$(document).ready(function(){
+
+		
+
+		$(document).on('change', '#pais_id', function(){
+
+			const pais_id = $('#pais_id option:selected').val()
+			console.log( pais_id )
+
+			$.ajax(`/api/paises/${pais_id}/regiones`, {
+				success: function(response){
+
+					response.forEach(region => {
+						$('#region_id').append(`
+							<option value="${region.id}" > ${region.nombre} </option>
+						`)
+					});
+
+					console.log( response )
+				},
+				error: function( error ){
+					console.log( error )
+				}
+			});
+		});
+
 		$("#meses_barrica").change(function() {
 			// body...
 			inicio = $('#fecha_inicio').valueAsDate;
@@ -1483,5 +1549,5 @@
 
 
 
-	</script>
-	@endsection
+</script>
+@endsection

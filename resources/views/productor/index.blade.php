@@ -16,13 +16,13 @@
 			<table class="table">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col" style="width: 190px">Nombre</th>
-						<th scope="col">Vinicola y Bodega</th>
-						<th scope="col" style="width: 500px;">Descripción</th>
-						<th scope="col">Locación/Telefono</th>
-						<th scope="col">Barricas/Uvas</th>
-						<th scope="col">Enologo/Wine Maker</th>
-						<th scope="col">Accion</th>
+						<th nowrap scope="col" style="width: 190px">Nombre</th>
+						<th nowrap scope="col">Vinicola y Bodega</th>
+						<th nowrap scope="col" style="width: 500px;">Descripción</th>
+						<th nowrap scope="col">Locación/Telefono</th>
+						<th nowrap scope="col">Barricas/Uvas</th>
+						<th nowrap scope="col">Enologo/Wine Maker</th>
+						<th nowrap scope="col">Accion</th>
 					</tr>
 				</thead>
 				<tbody>

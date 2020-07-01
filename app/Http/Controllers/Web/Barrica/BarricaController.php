@@ -6,6 +6,7 @@ use App\Barrica;
 use App\BarricaBodega;
 use App\Bodega;
 use App\Http\Controllers\Controller;
+use App\Pais;
 use App\Productor;
 use App\Uva;
 use App\Vinicola;
@@ -37,8 +38,9 @@ class BarricaController extends Controller
         $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
         $bodegas = Bodega::orderBy('nombre', 'asc')->get();
         $uvas = Uva::orderBy('title', 'asc')->get();
+        $paises = Pais::get();
         $edit = false;
-        return view('barrica.form', ['vinicolas' => $vinicolas, 'bodegas' => $bodegas, 'edit' => $edit, 'uvas' => $uvas]);
+        return view('barrica.form', ['vinicolas' => $vinicolas, 'bodegas' => $bodegas, 'edit' => $edit, 'uvas' => $uvas, 'paises' => $paises]);
     }
 
     /**
@@ -93,6 +95,7 @@ class BarricaController extends Controller
             'porcentaje_administracion' => $request->porcentaje_administracion,
             'porcentaje_utilidad' => $request->porcentaje_utilidad,
             'porcentaje_transporte' => $request->porcentaje_transporte,
+            'region_id' => $request->region_id
         ]);
 
         $barrica_exist = BarricaBodega::where([

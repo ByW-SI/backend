@@ -18,7 +18,8 @@ class OfertaController extends Controller
             'costo_caja' => $oferta->costo_caja,
             'subtotal_venta' => $oferta->subtotal_venta,
             'costo_transporte' => $oferta->costo_transporte,
-            'precio_publico' => $oferta->precio_publico,
+            'precio_publico_caja' => $oferta->precio_publico_caja,
+            'precio_publico_botella' => $oferta->precio_publico_botella,
         ], 200);
     }
 }

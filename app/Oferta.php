@@ -42,8 +42,13 @@ class Oferta extends Model
         return $this->costo_caja * $this->porcentaje_transporte / 100;
     }
 
-    public function getPrecioPublicoAttribute()
+    public function getPrecioPublicoCajaAttribute()
     {
         return $this->subtotal_venta + $this->costo_transporte;
+    }
+
+    public function getPrecioPublicoBotellaAttribute()
+    {
+        return $this->precio_publico_caja / 12;
     }
 }

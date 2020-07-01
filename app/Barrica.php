@@ -34,6 +34,7 @@ class Barrica extends Model
         'porcentaje_administracion',
         'porcentaje_utilidad',
         'porcentaje_transporte',
+        'region_id'
     ];
     protected $hidden = [
         'created_at',

@@ -36,6 +36,15 @@
                                     </select>
                                 </div> --}}
                                 <div class="col-12 mt-2">
+                                    <label for="" class="text-uppercase text-muted">Productor</label>
+                                    <select name="productor_id" id="" class="form-control">
+                                        <option value="">Seleccionar</option>
+                                        @foreach ($productores as $productor)
+                                        <option value="{{$productor->id}}">{{$productor->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 mt-2">
                                     <label for="" class="text-uppercase text-muted">Añada</label>
                                     <input name="aniada" type="number" class="form-control" required value="0">
                                 </div>
@@ -138,8 +147,14 @@
                                 </div>
                                 {{-- INPUT SUBTOTAL VENTA--}}
                                 <div class="col-12 col-md-4 mt-2">
-                                    <label for="" class="text-uppercase text-muted">Precio público</label>
+                                    <label for="" class="text-uppercase text-muted">Precio público caja</label>
                                     <input id="inputPrecioPublico" type="number" step="any" class="form-control" min="0"
+                                        value="0" readonly>
+                                </div>
+                                {{-- INPUT SUBTOTAL VENTA--}}
+                                <div class="col-12 col-md-4 mt-2">
+                                    <label for="" class="text-uppercase text-muted">Precio público botella</label>
+                                    <input id="inputPrecioPublicoBotella" type="number" step="any" class="form-control" min="0"
                                         value="0" readonly>
                                 </div>
                             </div>
@@ -204,7 +219,8 @@
             $("#inputCostoCaja").val( response.costo_caja )
             $("#inputSubtotalVenta").val( response.subtotal_venta )
             $("#inputCostoTransporte").val( response.costo_transporte )
-            $("#inputPrecioPublico").val( response.precio_publico )
+            $("#inputPrecioPublico").val( response.precio_publico_caja )
+            $("#inputPrecioPublicoBotella").val( response.precio_publico_botella )
         }
     });
 

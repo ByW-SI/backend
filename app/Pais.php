@@ -8,4 +8,9 @@ class Pais extends Model
 {
     protected $table = "paises";
     protected $fillable = ['nombre'];
+
+    public function regiones()
+    {
+        return $this->hasMany('App\Region');
+    }
 }

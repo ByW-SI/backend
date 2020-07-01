@@ -41,3 +41,4 @@ Route::middleware('auth:api')->get('/in_shopping_cart','Api\User\UserShoppingCar
 Route::get('ofertas/cotizar', 'Api\Oferta\OfertaController@cotizar');
 Route::post('ventas', 'Api\Venta\VentaController@store');
 Route::get('users/{user}/compras', 'Api\User\VentaController@index');
+Route::get('paises/{pais}/regiones', 'Api\Pais\PaisController@regiones');
