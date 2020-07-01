@@ -18,7 +18,7 @@
                                     <select name="oferta_id" id="inputIdVino" class="form-control">
                                         <option value="">seleccionar</option>
                                         @foreach ($ofertas as $oferta)
-                                            <option value="{{$oferta->id}}" precio="{{$oferta->precio_publico}}">{{$oferta->nombre_vino}}</option>
+                                            <option value="{{$oferta->id}}" precio="{{$oferta->precio_publico_botella}}">{{$oferta->nombre_vino}}</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
@@ -38,7 +38,7 @@
                         <label for="" class="text-uppercase text-muted"><small>COSTO</small></label>
                         <div class="card">
                             <div class="card-body">
-                                <label for="" class="text-uppercase text-muted" style="text-decoration: line-through">9999</label>
+                                <label for="" class="text-uppercase text-muted labelSumaPrecioBotellas" style="text-decoration: line-through">9999</label>
                                 <input type="text" name="precio" class="form-control" placeholder="Nuevo costo">
                             </div>
                         </div>
@@ -64,7 +64,10 @@ function anadirBotella(){
     nombreVino = $('#inputIdVino option:selected').text()
     precio = $('#inputIdVino option:selected').attr('precio')
 
+    console.log( precio )
+
     console.table({
+        message: 'Añadir botella',
         vinoId,
         nombreVino,
         precio
@@ -75,14 +78,45 @@ function anadirBotella(){
         <label for="" class="text-uppercase text-muted">VINO</label>
         <input type="text" class="form-control mb-3" value="${nombreVino}" readonly>
         <label for="" class="text-uppercase text-muted">PRECIO</label>
-        <input type="text" class="form-control" value="${precio}" readonly>
+        <input type="text" class="form-control inputPrecioBotellaSeleccionada" value="${precio}" readonly>
         <hr>
     `)
 
 }
 
+function calcularSumaPrecioBotellas(){
+    var sumaPrecioBotellas = 0
+
+    console.log({
+        sumaPrecioBotellas
+    })
+
+    $('.inputPrecioBotellaSeleccionada').each( function(){
+        console.log( $(this).val() )
+        sumaPrecioBotellas += parseFloat( $(this).val() );
+    } );
+
+    $('.labelSumaPrecioBotellas').html( '$'+sumaPrecioBotellas.toFixed(2) + " USD" );
+
+    // $('.inputPrecioBotellaSeleccionada').each( function(index){
+    //     console.log({
+    //         $(this).val()
+    //     })
+    //     sumaPrecioBotellas += parseFloat( $(this).val() );
+    // } );
+
+    // console.log({
+    //     sumaPrecioBotellas
+    // })
+
+    // $('.labelSumaPrecioBotellas').html( sumaPrecioBotellas.toFixed(2) );
+
+
+}
+
 $(document).on('click', '#botonAnadirBotella', function(){
     anadirBotella()
+    calcularSumaPrecioBotellas()
 })
 
 </script>

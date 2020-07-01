@@ -28,7 +28,7 @@
                             <form action="{{route('regiones.destroy', ['id' => $region->id])}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit">
+                                <button type="submit" class="btn btn-danger">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </form>
