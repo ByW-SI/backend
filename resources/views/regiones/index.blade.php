@@ -42,9 +42,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <form action="{{route('regiones.store')}}" method="POST">
+            <form action="{{route('regiones.store')}}" method="POST">
+                <div class="modal-body">
+                    <div class="row">
                         @csrf
                         <div class="col-12">
                             <label for="" class="text-uppercase text-muted">
@@ -61,12 +61,12 @@
                             <label for="" class="text-uppercase text-muted">Nombre</label>
                             <input type="text" class="form-control" name="nombre">
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Save changes</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
