@@ -87,9 +87,9 @@ class RegionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Region $region)
+    public function destroy($id)
     {
-        $region->delete();
+        Region::find($id)->delete();
         return redirect()->back();
     }
 }

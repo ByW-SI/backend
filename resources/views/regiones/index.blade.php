@@ -25,7 +25,7 @@
                         <td>{{$region->pais->nombre}}</td>
                         <td>{{$region->nombre}}</td>
                         <td>
-                            <form action="{{route('regiones.destroy')}}" method="POST">
+                            <form action="{{route('regiones.destroy', ['id' => $region->id])}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
