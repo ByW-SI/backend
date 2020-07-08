@@ -10,6 +10,14 @@
                 <form action="{{route('paquetes.store')}}" method="POST">
                     @csrf
                     <div class="col-12">
+                        <label for="" class="text-uppercase text-muted"><small>NOMBRE</small></label>
+                        <div class="card">
+                            <div class="card-body">
+                                <input type="text" name="nombre" class="form-control" placeholder="Nombre del paquete">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
                         <label for="" class="text-uppercase text-muted"><small>BOTELLAS</small></label>
                         <div class="card">
                             <div class="card-body">
@@ -18,18 +26,19 @@
                                     <select name="oferta_id" id="inputIdVino" class="form-control">
                                         <option value="">seleccionar</option>
                                         @foreach ($ofertas as $oferta)
-                                            <option value="{{$oferta->id}}" precio="{{$oferta->precio_publico_botella}}">{{$oferta->nombre_vino}}</option>
+                                        <option value="{{$oferta->id}}" precio="{{$oferta->precio_publico_botella}}">
+                                            {{$oferta->nombre_vino}}</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
-                                        <a href="#" class="btn btn-success" id="botonAnadirBotella">
+                                        <a href="#" class="btn btn-primary" id="botonAnadirBotella">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                 </div>
                                 {{--  --}}
                                 <div id="contenedorInputsBotellas">
-        
+
                                 </div>
                             </div>
                         </div>
@@ -38,7 +47,8 @@
                         <label for="" class="text-uppercase text-muted"><small>COSTO</small></label>
                         <div class="card">
                             <div class="card-body">
-                                <label for="" class="text-uppercase text-muted labelSumaPrecioBotellas" style="text-decoration: line-through">$0 USD</label>
+                                <label for="" class="text-uppercase text-muted labelSumaPrecioBotellas"
+                                    style="text-decoration: line-through">$0 USD</label>
                                 <input type="text" name="precio" class="form-control" placeholder="Nuevo costo">
                             </div>
                         </div>
@@ -58,8 +68,7 @@
 @section('script')
 
 <script>
-
-function anadirBotella(){
+    function anadirBotella(){
     vinoId = $('#inputIdVino option:selected').val()
     nombreVino = $('#inputIdVino option:selected').text()
     precio = $('#inputIdVino option:selected').attr('precio')

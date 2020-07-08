@@ -41,6 +41,7 @@ class PaqueteController extends Controller
     {
         $paquete = new Paquete;
         $paquete->precio = $request->precio;
+        $paquete->nombre = $request->nombre;
         $paquete->save();
 
         $paquete->ofertas()->attach($request->vinos_ids);

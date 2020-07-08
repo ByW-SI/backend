@@ -10,6 +10,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">NOMBRE</th>
                         <th scope="col">PRECIO ORIGINAL</th>
                         <th scope="col">PRECIO PUBLICO</th>
                         <th scope="col">BORRAR</th>
@@ -19,6 +20,7 @@
                     @foreach ($paquetes as $paquete)
                     <tr>
                         <td scope="row">{{$paquete->id}}</td>
+                        <td >{{$paquete->nombre}}</td>
                         <td class="text-danger">${{$paquete->precio_original}} USD</td>
                         <td class="text-success">${{$paquete->precio}} USD</td>
                         <td>
