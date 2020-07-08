@@ -16,12 +16,17 @@ class Oferta extends Model
         'porcentaje_transporte',
         'porcentaje_utilidad',
         'comentario',
-        'productor_id'
+        'productor_id',
+        'region_id'
     ];
 
     public function uvas()
     {
         return $this->belongsToMany('App\Uva')->withPivot('porcentaje');
+    }
+
+    public function region(){
+        return $this->belongsTo('App\Region');
     }
 
     // ==========

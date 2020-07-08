@@ -1311,6 +1311,10 @@
 			const pais_id = $('#pais_id option:selected').val()
 			console.log( pais_id )
 
+			$("#region_id").html(`
+                        <option value="" >Seleccione la región</option>
+                    `);
+
 			$.ajax(`/api/paises/${pais_id}/regiones`, {
 				success: function(response){
 

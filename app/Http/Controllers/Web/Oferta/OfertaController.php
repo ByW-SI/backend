@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Oferta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oferta;
+use App\Pais;
 use App\Productor;
 use App\Uva;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,8 @@ class OfertaController extends Controller
     {
         $uvas = Uva::get();
         $productores = Productor::get();
-        return view('ofertas.form', compact('uvas', 'productores'));
+        $paises = Pais::orderBy('nombre')->get();
+        return view('ofertas.form', compact('uvas', 'productores', 'paises'));
     }
 
     /**
@@ -54,7 +56,8 @@ class OfertaController extends Controller
             'porcentaje_transporte' => $request->porcentaje_transporte,
             'porcentaje_utilidad' => $request->porcentaje_utilidad,
             'comentario' => $request->comentario,
-            'productor_id' => $request->productor_id
+            'productor_id' => $request->productor_id,
+            'region_id' => $request->region_id
         ]);
 
         if ($request->uvas_ids != null) {
@@ -97,7 +100,9 @@ class OfertaController extends Controller
     public function edit(Oferta $oferta)
     {
         $uvas = Uva::get();
-        return view('ofertas.edit', compact('oferta', 'uvas'));
+        $productores = Productor::get();
+        $paises = Pais::get();
+        return view('ofertas.edit', compact('oferta', 'uvas', 'productores', 'paises'));
     }
 
     /**

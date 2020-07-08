@@ -47,8 +47,36 @@
                                 </div>
                                 <div class="col-12 mt-2">
                                     <label for="" class="text-uppercase text-muted">Añada</label>
-                                    <input name="aniada" type="number" class="form-control" required value="0">
+                                    <input name="aniada" minlength="4" maxlength="4" type="number" class="form-control" required value="1900">
                                 </div>
+
+                                {{--  --}}
+
+                                <div class="col-12 mt-2">
+                                    <label for="pais_id" class="text-uppercase text-muted">País:</label>
+                                    <select id="pais_id"
+                                        class="form-control {{ $errors->has('pais_id') ? ' is-invalid' : ''  }}"
+                                        name="pais_id" required>
+                                        <option value="" id="inputPais">Seleccione el país</option>
+                                        @foreach ($paises as $pais)
+                                        {{-- expr --}}
+                                        <option value="{{$pais->id}}">{{$pais->nombre}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                {{--  --}}
+
+                                <div class="col-12 mt-2">
+                                    <label for="region_id" class="text-uppercase text-muted">Región:</label>
+                                    <select id="region_id"
+                                        class="form-control {{ $errors->has('region_id') ? ' is-invalid' : ''  }}"
+                                        name="region_id" required>
+                                        <option value="" id="inputPais">Seleccione la región</option>
+                                    </select>
+                                </div>
+
                                 <div class="col-12 mt-2">
                                     <label for="" class="text-uppercase text-muted">Tipo de vino</label>
                                     <select name="tipo_vino" id="" class="form-control" required>
@@ -265,6 +293,33 @@
     $(document).on('click', '#botonQuitarUva', function(){
         quitarUva()
     });
+
+    $(document).on('change', '#pais_id', function(){
+
+			const pais_id = $('#pais_id option:selected').val()
+			console.log( pais_id )
+
+            $("#region_id").html(`
+                        <option value="" >Seleccione la región</option>
+                    `);
+
+			$.ajax(`/api/paises/${pais_id}/regiones`, {
+				success: function(response){
+
+
+					response.forEach(region => {
+						$('#region_id').append(`
+							<option value="${region.id}" > ${region.nombre} </option>
+						`)
+					});
+
+					console.log( response )
+				},
+				error: function( error ){
+					console.log( error )
+				}
+			});
+		});
 
 </script>
 

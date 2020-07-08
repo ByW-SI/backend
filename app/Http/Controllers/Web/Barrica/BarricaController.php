@@ -38,7 +38,7 @@ class BarricaController extends Controller
         $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
         $bodegas = Bodega::orderBy('nombre', 'asc')->get();
         $uvas = Uva::orderBy('title', 'asc')->get();
-        $paises = Pais::get();
+        $paises = Pais::orderBy('nombre')->get();
         $edit = false;
         return view('barrica.form', ['vinicolas' => $vinicolas, 'bodegas' => $bodegas, 'edit' => $edit, 'uvas' => $uvas, 'paises' => $paises]);
     }

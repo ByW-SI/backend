@@ -25,12 +25,13 @@
                                     name="nombre_vino" placeholder="Nombre del vino">
                             </div>
                             <div class="col-12 mt-2">
-                                <label for="" class="text-uppercase text-muted">Tipo de uva</label>
-                                <select name="uva_id" id="" class="form-control" required>
+                                <label for="" class="text-uppercase text-muted">Productor</label>
+                                <select name="productor_id" id="" class="form-control">
                                     <option value="">Seleccionar</option>
-                                    @foreach ($uvas as $uva)
-                                    <option value="{{$uva->id}}" {{$oferta->uva_id == $uva->id ? 'selected' : ''}}>
-                                        {{$uva->title}}</option>
+                                    @foreach ($productores as $productor)
+                                    <option value="{{$productor->id}}"
+                                        {{ $oferta->productor_id == $productor->id ? 'selected' : '' }}>
+                                        {{$productor->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -39,6 +40,36 @@
                                 <input value="{{$oferta->aniada}}" name="aniada" type="number" class="form-control"
                                     required value="0">
                             </div>
+
+                            {{--  --}}
+
+                            <div class="col-12 mt-2">
+                                <label for="pais_id" class="text-uppercase text-muted">País:</label>
+                                <select id="pais_id"
+                                    class="form-control {{ $errors->has('pais_id') ? ' is-invalid' : ''  }}"
+                                    name="pais_id" required>
+                                    <option value="" id="inputPais">Seleccione el país</option>
+                                    @foreach ($paises as $pais)
+                                    {{-- expr --}}
+                                    <option value="{{$pais->id}}"
+                                        {{$oferta->region->pais->id == $pais->id ? 'selected' : ''}}>{{$pais->nombre}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{--  --}}
+
+                            <div class="col-12 mt-2">
+                                <label for="region_id" class="text-uppercase text-muted">Región:</label>
+                                <select id="region_id"
+                                    class="form-control {{ $errors->has('region_id') ? ' is-invalid' : ''  }}"
+                                    name="region_id" required>
+                                    <option value="{{$oferta->region->id}}" id="inputPais">{{$oferta->region->nombre}}
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="col-12 mt-2">
                                 <label for="" class="text-uppercase text-muted">Tipo de vino</label>
                                 <select name="tipo_vino" id="" class="form-control" required>
@@ -80,13 +111,15 @@
                                     <div class="col-12 col-md-4 mt-2">
                                         <label for="" class="text-uppercase text-muted">% transporte</label>
                                         <input id="inputPorcentajeTransporte" name="porcentaje_transporte" type="number"
-                                            step="any" class="form-control" min="0" value="{{$oferta->porcentaje_transporte}}">
+                                            step="any" class="form-control" min="0"
+                                            value="{{$oferta->porcentaje_transporte}}">
                                     </div>
                                     {{-- INPUT PRECIO PROVEEDOR CAJA--}}
                                     <div class="col-12 col-md-4 mt-2">
                                         <label for="" class="text-uppercase text-muted">% utilidad</label>
                                         <input id="inputPorcentajeUtilidad" name="porcentaje_utilidad" type="number"
-                                            step="any" class="form-control" min="0" value="{{$oferta->porcentaje_utilidad}}">
+                                            step="any" class="form-control" min="0"
+                                            value="{{$oferta->porcentaje_utilidad}}">
                                     </div>
                                     {{-- INPUT PRECIO PROVEEDOR CAJA--}}
                                     <div class="col-12 col-md-4 mt-2">
@@ -108,9 +141,15 @@
                                     </div>
                                     {{-- INPUT SUBTOTAL VENTA--}}
                                     <div class="col-12 col-md-4 mt-2">
-                                        <label for="" class="text-uppercase text-muted">Precio público</label>
-                                        <input id="inputPrecioPublico" type="number" step="any" class="form-control"
+                                        <label for="" class="text-uppercase text-muted">Precio público caja</label>
+                                        <input id="inputPrecioPublicoCaja" type="number" step="any" class="form-control"
                                             min="0" value="0" readonly>
+                                    </div>
+                                    {{-- INPUT SUBTOTAL VENTA--}}
+                                    <div class="col-12 col-md-4 mt-2">
+                                        <label for="" class="text-uppercase text-muted">Precio público botella</label>
+                                        <input id="inputPrecioPublicoBotella" type="number" step="any"
+                                            class="form-control" min="0" value="0" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +173,6 @@
 @section('script')
 
 <script>
-
     function actualizarCostos(){
         $.ajax("/api/ofertas/cotizar", {
         data: {
@@ -147,7 +185,8 @@
             $("#inputCostoCaja").val( response.costo_caja )
             $("#inputSubtotalVenta").val( response.subtotal_venta )
             $("#inputCostoTransporte").val( response.costo_transporte )
-            $("#inputPrecioPublico").val( response.precio_publico )
+            $("#inputPrecioPublicoCaja").val( response.precio_publico_caja )
+            $("#inputPrecioPublicoBotella").val( response.precio_publico_botella )
         }
     });
     }
@@ -159,6 +198,33 @@
     $(document).ready( function(){
         actualizarCostos()
     } );
+
+    $(document).on('change', '#pais_id', function(){
+
+			const pais_id = $('#pais_id option:selected').val()
+			console.log( pais_id )
+
+            $("#region_id").html(`
+                        <option value="" >Seleccione la región</option>
+                    `);
+
+			$.ajax(`/api/paises/${pais_id}/regiones`, {
+				success: function(response){
+
+
+					response.forEach(region => {
+						$('#region_id').append(`
+							<option value="${region.id}" > ${region.nombre} </option>
+						`)
+					});
+
+					console.log( response )
+				},
+				error: function( error ){
+					console.log( error )
+				}
+			});
+		});
 
 </script>
 
