@@ -24,12 +24,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('puntos_corchos')->default('0');
             
-            $table->unsignedInteger('perfil_id');
+            // $table->unsignedInteger('perfil_id');
             
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('perfil_id')->references('id')->on('perfiles');
+            // $table->foreign('perfil_id')->references('id')->on('perfiles');
         });
     }
 
