@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@pwm.com',
             'password' => bcrypt('123456'),
             'puntos_corchos' => 5,
+            'es_admin' => 1,
         ]);
     }
 }
