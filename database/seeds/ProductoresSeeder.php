@@ -17,8 +17,8 @@ class ProductoresSeeder extends Seeder
                 'nombre' => 'Winers',
                 'locacion' => 'Pedregal #39',
                 'telefono' => '58345678',
-                'bodega_id' => '1',
-                'vinicola_id' => '1',
+                'bodega_id' => 1,
+                'vinicola_id' => 1,
             ]
         ]);
     }
