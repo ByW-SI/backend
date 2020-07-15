@@ -28,6 +28,8 @@
     <!-- Include Editor style. -->
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/css/froala_editor.pkgd.min.css" rel="stylesheet"
         type="text/css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 
 
 
@@ -72,7 +74,7 @@
 
     <!-- s-content
     ================================================== -->
-    <section class="s-content s-content--narrow">
+    <section class="">
 
         <main class="py-4" id="app">
             @yield('content')

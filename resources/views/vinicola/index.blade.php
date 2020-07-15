@@ -1,74 +1,82 @@
 @extends('layouts.app2')
 @section('content')
-	{{-- expr --}}
-	<div class="container-fluid">
-		<div class="container">
-			<div class="col">
-				<h1>Vinicolas/Ranchos</h1>
-			</div>
-			<div class="col-3 input-group input-group-lg mb-3">
-		  		<a href="{{ route('vinicolas.create') }}" class="btn btn-primary">Agregar Nuevo Vinicola/Rancho</a>
-			</div>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<div class="container-fluid">
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col" style="width: 190px">Nombre</th>
-						<th scope="col">tipo</th>
-						<th scope="col" style="width: 500px;">Filosofía</th>
-						<th scope="col">Locación</th>
-						<th scope="col">Uvas</th>
-						<th scope="col">Telefono</th>
-						<th scope="col">Accion</th>
-					</tr>
-				</thead>
-				<tbody>
-					@forelse ($vinicolas as $vinicola)
-						{{-- expr --}}
-						<tr>
-							<th scope="row">{{$vinicola->nombre}}</th>
-							<th>{{$vinicola->tipo}}</th>
-							<th>{{$vinicola->filosofia}}</th>
-							<th>{{$vinicola->locacion}}
-								<br>
-								<a href="{{$vinicola->getMapLink()}}" target="_blank">Ver en Google Maps</a>
-							</th>
-							<th>
-								@forelse ($vinicola->uvasVin as $uvaVin)
-									{{-- expr --}}
-									{{$uvaVin->nombre}} {{$uvaVin->hectarea}} ha
-									<form action="{{ route('uvas.destroy',['uvaVin'=>$uvaVin]) }}" method="POST">
-									@csrf
-									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar esta uva?');">Eliminar</button>
-								</form>
-								
-								@empty
-									{{-- empty expr --}}
-									No tienes uvas
-								@endforelse
-							</th>
-							<th>{{$vinicola->telefono}}</th>
-							<th>
-								<a class="btn btn-default" href="{{ route('vinicolas.edit',[$vinicola]) }}">Editar</a>
-								<form action="{{ route('vinicolas.destroy',[$vinicola]) }}" method="POST">
-									<input type="hidden" name="_method" value="DELETE">
-									@csrf
-									<button type="submit" class="btn btn-link" onclick="return confirm('¿Estás seguro que desea eliminar este {{$vinicola->tipo}}?');">Eliminar</button>
-								</form>
-							</th>
-						</tr>
-					@empty
-						<div class="alert alert-danger" role="alert">
-							<span>No hay vinicolas/ranchos</span>
-						</div>
-					@endforelse
-				</tbody>
-			</table>
-		</div>
+{{-- expr --}}
+<div class="container">
+	<div class="col-6">
+		<h1>Vinicolas/Ranchos</h1>
 	</div>
+	<br>
+	<div class="col-6">
+		<a href="{{ route('vinicolas.create') }}" class="btn btn-primary float-right">
+			<i class="fa fa-plus-circle" aria-hidden="true"></i>
+			Vinicola/Rancho
+		</a>
+	</div>
+	<br>
+	<table class="table shadow-sm">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Nombre</th>
+				<th scope="col">tipo</th>
+				<th scope="col">Filosofía</th>
+				<th scope="col">Locación</th>
+				<th scope="col">Uvas</th>
+				<th scope="col">Telefono</th>
+				<th scope="col">Accion</th>
+			</tr>
+		</thead>
+		<tbody class="bg-white">
+			@forelse ($vinicolas as $vinicola)
+			{{-- expr --}}
+			<tr>
+				<th scope="row">{{$vinicola->nombre}}</th>
+				<th>{{$vinicola->tipo}}</th>
+				<th>{{$vinicola->filosofia}}</th>
+				<br>
+				<th>
+					<a href="{{$vinicola->getMapLink()}}" class="btn btn-primary" target="_blank">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+					</a>
+					{{$vinicola->locacion}}
+				</th>
+				<th>
+					@forelse ($vinicola->uvasVin as $uvaVin)
+					{{-- expr --}}
+					{{$uvaVin->nombre}} {{$uvaVin->hectarea}} ha
+					<form action="{{ route('uvas.destroy',['uvaVin'=>$uvaVin]) }}" method="POST">
+						@csrf
+						<button type="submit" class="btn btn-link"
+							onclick="return confirm('¿Estás seguro que desea eliminar esta uva?');">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>
+					</form>
+
+					@empty
+					{{-- empty expr --}}
+					No tienes uvas
+					@endforelse
+				</th>
+				<th>{{$vinicola->telefono}}</th>
+				<th>
+					<a class="btn btn-warning" href="{{ route('vinicolas.edit',[$vinicola]) }}">
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+					</a>
+					<form action="{{ route('vinicolas.destroy',[$vinicola]) }}" method="POST" style="display: inline">
+						<input type="hidden" name="_method" value="DELETE">
+						@csrf
+						<button type="submit" class="btn btn-danger"
+							onclick="return confirm('¿Estás seguro que desea eliminar este {{$vinicola->tipo}}?');">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>
+					</form>
+				</th>
+			</tr>
+			@empty
+			<div class="alert alert-danger" role="alert">
+				<span>No hay vinicolas/ranchos</span>
+			</div>
+			@endforelse
+		</tbody>
+	</table>
+</div>
 @endsection

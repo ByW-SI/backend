@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BodegasTableSeeder::class);
         $this->call(VinicolasTableSeeder::class);
         $this->call(ProductoresSeeder::class);
+        $this->call(BarricasSeeder::class);
     }
 }

@@ -8,11 +8,9 @@ use Illuminate\Http\Request;
 
 class BodegaController extends Controller
 {
-    //
-
     public function index()
     {
-    	$bodegas = Bodega::get();
-    	return response()->json(['bodegas'=>$bodegas],201);
+        $bodegas = Bodega::get();
+        return response()->json(['bodegas' => $bodegas], 201);
     }
 }
