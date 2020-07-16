@@ -7,6 +7,7 @@ use App\Bodega;
 use App\Vinicola;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProductorController extends Controller
 {
@@ -18,8 +19,8 @@ class ProductorController extends Controller
     public function index()
     {
         //
-        $productores = Productor::orderBy('nombre','asc')->paginate(5);
-        return view('productor.index',['productores'=>$productores]);
+        $productores = Productor::orderBy('nombre', 'asc')->paginate(5);
+        return view('productor.index', ['productores' => $productores]);
     }
 
     /**
@@ -30,10 +31,10 @@ class ProductorController extends Controller
     public function create()
     {
         //
-        $bodegas = Bodega::orderBy('nombre','asc')->get();
-        $vinicolas= Vinicola::orderBy('nombre','asc')->get();
-        $edit=false;
-        return view('productor.form',['edit'=>$edit,'vinicolas'=>$vinicolas,'bodegas'=>$bodegas]);
+        $bodegas = Bodega::orderBy('nombre', 'asc')->get();
+        $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
+        $edit = false;
+        return view('productor.form', ['edit' => $edit, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
     }
 
     /**
@@ -45,20 +46,44 @@ class ProductorController extends Controller
     public function store(Request $request)
     {
         //
-        $rules = [ 
-            'nombre' =>"required|unique:productor",
-            'locacion'=>"required",
-            'telefono'=>"required",
-            'bodega_id'=>"required",
-            'vinicola_id'=>"required"
-        ];
+        // $rules = [ 
+        //     'nombre' =>"required|unique:productor",
+        //     'locacion'=>"required",
+        //     'telefono'=>"required",
+        //     'bodega_id'=>"required",
+        //     'vinicola_id'=>"required"
+        // ];
+        // $this->validate($request,$rules);
 
-        $this->validate($request,$rules);
+        // dd($request->file());
 
-        Productor::create($request->all());
+
+        $productor = Productor::create($request->all());
+
+
+        if ($request->file('premios_y_reconocimientos')) {
+            $imagen = $request->file('premios_y_reconocimientos');
+            $extensionImagen = $imagen->getClientOriginalExtension();
+
+            $imagenStored = Storage::disk('public')->putFileAs('premios_y_reconocimientos/productor_' . $productor->id, $imagen, $productor->id . '.' . $extensionImagen);
+
+            $productor->update([
+                'premios_y_reconocimientos' => Storage::url($imagenStored)
+            ]);
+        }
+
+        if ($request->file('etiquetas_producidas')) {
+            $imagen = $request->file('etiquetas_producidas');
+            $extensionImagen = $imagen->getClientOriginalExtension();
+
+            $imagenStored = Storage::disk('public')->putFileAs('etiquetas_producidas/productor_' . $productor->id, $imagen, $productor->id . '.' . $extensionImagen);
+
+            $productor->update([
+                'etiquetas_producidas' => Storage::url($imagenStored)
+            ]);
+        }
 
         return redirect()->route('productores.index');
-
     }
 
     /**
@@ -82,10 +107,10 @@ class ProductorController extends Controller
     {
         //
         // dd($productore);
-        $bodegas = Bodega::orderBy('nombre','asc')->get();
-        $vinicolas= Vinicola::orderBy('nombre','asc')->get();
-        $edit=true;
-        return view('productor.form',['edit'=>$edit,'productor'=>$productore,'vinicolas'=>$vinicolas,'bodegas'=>$bodegas]);
+        $bodegas = Bodega::orderBy('nombre', 'asc')->get();
+        $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
+        $edit = true;
+        return view('productor.form', ['edit' => $edit, 'productor' => $productore, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
     }
 
     /**
@@ -98,14 +123,14 @@ class ProductorController extends Controller
     public function update(Request $request, Productor $productore)
     {
         //
-         $rules = [ 
-            'locacion'=>"required",
-            'telefono'=>"required",
-            'bodega_id'=>"required",
-            'vinicola_id'=>"required"
+        $rules = [
+            'locacion' => "required",
+            'telefono' => "required",
+            'bodega_id' => "required",
+            'vinicola_id' => "required"
         ];
         // dd($productore);
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
 
         $productore->update($request->all());
 
@@ -122,7 +147,7 @@ class ProductorController extends Controller
     {
         //
         $productore->delete();
-        
+
         return redirect()->route('productores.index');
     }
 
@@ -130,18 +155,18 @@ class ProductorController extends Controller
     {
         $bodega = $id->bodega;
         // dd($id->bodega);
-        return response()->json(['bodega'=>$bodega],201);
+        return response()->json(['bodega' => $bodega], 201);
     }
 
     public function barricas(Productor $id)
     {
         $barricas = $id->bodega->barricas;
-        return response()->json(['barricas'=>$barricas],201);
+        return response()->json(['barricas' => $barricas], 201);
     }
     public function vinicola(Productor $id)
     {
         $vinicola = $id->vinicola;
-        return response()->json(['vinicola'=>$vinicola],201);
+        return response()->json(['vinicola' => $vinicola], 201);
     }
     public function uvas(Productor $id)
     {
@@ -150,6 +175,6 @@ class ProductorController extends Controller
         // foreach ($uvas as $uvaVin) {
         //     $uvaVin->uva;
         // }
-        return response()->json(['uvas'=>$uvas],201);
+        return response()->json(['uvas' => $uvas], 201);
     }
 }

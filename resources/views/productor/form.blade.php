@@ -1,221 +1,428 @@
 @extends('layouts.app2')
 @section('content')
-	{{-- expr --}}
+{{-- expr --}}
 
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-10">
-				<div class="card">
-					<div class="card-header">
-						Productor
-					</div>						
-					<div class="card-body">
-						<form method="POST" action="{{ $edit == false ? route('productores.store') : route('productores.update',['productor'=>$productor]) }}">
-							@csrf
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-10">
+			<div class="card">
+				<div class="card-body">
+					<form method="POST" enctype="multipart/form-data"
+						action="{{ $edit == false ? route('productores.store') : route('productores.update',['productor'=>$productor]) }}">
+						@csrf
 
-							@if ($edit == true)
-								{{-- expr --}}
-								<input type="hidden" name="_method" value="PUT">
-							@endif
+						@if ($edit == true)
+						{{-- expr --}}
+						<input type="hidden" name="_method" value="PUT">
+						@endif
 
-{{-- nombre --}}
-							<div class="form-group row">
-								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre del productor:</label>
-								<div class="col-md-6">
-									<input id="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}" name="nombre" value="{{ $edit ? $productor->nombre : old('nombre') }}" {{ $edit ? 'disabled' : "" }} required autofocus="">
-									@if ($errors->has('nombre'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("nombre")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
+						<div class="row">
 
+							{{-- 
+								================
+								DATOS PERSONALES
+								================
+							--}}
 
-{{-- descripcion --}}
-							<div class="form-group row">
-								<label for="descripcion" class="col-md-4 col-form-label text-md-right">Descripción:</label>
-								<div class="col-md-6">
-									<textarea id="descripcion" type="text" class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : ''  }}" name="descripcion" value="{{ $edit ? $productor->descripcion : old('descripcion') }}" >{{ $edit ? $productor->descripcion : old('descripcion') }}</textarea>
-									@if ($errors->has('descripcion'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("descripcion")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Datos personales
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
 
-{{-- vinicola --}}
-							<div class="form-group row">
-								<label for="vinicola_id" class="col-md-4 col-form-label text-md-right">Vinicola o Rancho:</label>
-								<div class="col-md-6">
-									<select id="vinicola_id" class="form-control {{ $errors->has('vinicola_id') ? ' is-invalid' : ''  }}" name="vinicola_id">
-										<option value="">Seleccione la vinicola o el rancho</option>
-										@foreach ($vinicolas as $vinicola)
-											{{-- expr --}}
-											<option value="{{$vinicola->id}}" @if ($edit && $productor->vinicola_id == $vinicola->id)
+											{{-- Nombre --}}
+
+											<div class="col-12 col-md-4">
+												<label for="nombre" class="">Nombre:</label>
+												<input id="nombre" type="text"
+													class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}"
+													name="nombre"
+													value="{{ $edit ? $productor->nombre : old('nombre') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('nombre'))
 												{{-- expr --}}
-												selected 
-											@endif>{{$vinicola->nombre}}</option>
-										@endforeach
-									</select>
-									@if ($errors->has('vinicola_id'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("vinicola_id")}}</strong>
-										</span>
-									@endif
-									
-								</div>
-							</div>
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("nombre")}}</strong>
+												</span>
+												@endif
+											</div>
 
-{{-- Wine Maker --}}
-							<div class="form-group row">
-								<label for="bodega_id" class="col-md-4 col-form-label text-md-right">Bodega:</label>
-								<div class="col-md-6">
-									<select id="bodega_id" class="form-control {{ $errors->has('bodega_id') ? ' is-invalid' : ''  }}" name="bodega_id">
-										<option value="">Seleccione su bodega</option>
-										@foreach ($bodegas as $bodega)
-											{{-- expr --}}
-											<option value="{{$bodega->id}}" @if ($edit && $productor->bodega_id == $bodega->id)
+											{{-- Apellido paterno --}}
+
+											<div class="col-12 col-md-4">
+												<label for="apellido_paterno" class="">Apellido paterno:</label>
+												<input id="apellido_paterno" type="text"
+													class="form-control {{ $errors->has('apellido_paterno') ? ' is-invalid' : ''  }}"
+													name="apellido_paterno"
+													value="{{ $edit ? $productor->apellido_paterno : old('apellido_paterno') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('apellido_paterno'))
 												{{-- expr --}}
-												selected 
-											@endif>{{$bodega->nombre}}</option>
-										@endforeach
-									</select>
-									@if ($errors->has('bodega_id'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("bodega_id")}}</strong>
-										</span>
-									@endif
-									
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("apellido_paterno")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- Apellido materno --}}
+
+											<div class="col-12 col-md-4">
+												<label for="apellido_materno" class="">Apellido materno:</label>
+												<input id="apellido_materno" type="text"
+													class="form-control {{ $errors->has('apellido_materno') ? ' is-invalid' : ''  }}"
+													name="apellido_materno"
+													value="{{ $edit ? $productor->apellido_materno : old('apellido_materno') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('apellido_materno'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("apellido_materno")}}</strong>
+												</span>
+												@endif
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							{{-- 
+								=========
+								DIRECCIÓN
+								=========
+							--}}
+
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										dirección
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+
+											{{-- CALLE --}}
+
+											<div class="col-12 col-md-4">
+												<label for="calle" class="">Calle:</label>
+												<input id="calle" type="text"
+													class="form-control {{ $errors->has('calle') ? ' is-invalid' : ''  }}"
+													name="calle" value="{{ $edit ? $productor->calle : old('calle') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('calle'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("calle")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- NÚM. EXT --}}
+
+											<div class="col-12 col-md-4">
+												<label for="num_exterior" class="">Número exterior:</label>
+												<input id="num_exterior" type="text"
+													class="form-control {{ $errors->has('num_exterior') ? ' is-invalid' : ''  }}"
+													name="num_exterior"
+													value="{{ $edit ? $productor->num_exterior : old('num_exterior') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('num_exterior'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("num_exterior")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- NÚM. INT --}}
+
+											<div class="col-12 col-md-4">
+												<label for="num_interior" class="">Número interior:</label>
+												<input id="num_interior" type="text"
+													class="form-control {{ $errors->has('num_interior') ? ' is-invalid' : ''  }}"
+													name="num_interior"
+													value="{{ $edit ? $productor->num_interior : old('num_interior') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('num_interior'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("num_interior")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- LOCALIDAD --}}
+
+											<div class="col-12 col-md-4">
+												<label for="localidad" class="">localidad:</label>
+												<input id="localidad" type="text"
+													class="form-control {{ $errors->has('localidad') ? ' is-invalid' : ''  }}"
+													name="localidad"
+													value="{{ $edit ? $productor->localidad : old('localidad') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('localidad'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("localidad")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- CIUDAD --}}
+
+											<div class="col-12 col-md-4">
+												<label for="ciudad" class="">ciudad:</label>
+												<input id="ciudad" type="text"
+													class="form-control {{ $errors->has('ciudad') ? ' is-invalid' : ''  }}"
+													name="ciudad"
+													value="{{ $edit ? $productor->ciudad : old('ciudad') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('ciudad'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("ciudad")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- municipio --}}
+
+											<div class="col-12 col-md-4">
+												<label for="municipio" class="">municipio:</label>
+												<input id="municipio" type="text"
+													class="form-control {{ $errors->has('municipio') ? ' is-invalid' : ''  }}"
+													name="municipio"
+													value="{{ $edit ? $productor->municipio : old('municipio') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('municipio'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("municipio")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- estado --}}
+
+											<div class="col-12 col-md-4">
+												<label for="estado" class="">estado:</label>
+												<input id="estado" type="text"
+													class="form-control {{ $errors->has('estado') ? ' is-invalid' : ''  }}"
+													name="estado"
+													value="{{ $edit ? $productor->estado : old('estado') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('estado'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("estado")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- codigo_postal --}}
+
+											<div class="col-12 col-md-4">
+												<label for="codigo_postal" class="">codigo_postal:</label>
+												<input id="codigo_postal" type="number"
+													class="form-control {{ $errors->has('codigo_postal') ? ' is-invalid' : ''  }}"
+													name="codigo_postal" minlength="5" maxlength="5"
+													value="{{ $edit ? $productor->codigo_postal : old('codigo_postal') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('codigo_postal'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("codigo_postal")}}</strong>
+												</span>
+												@endif
+											</div>
+
+
+										</div>
+									</div>
 								</div>
 							</div>
 
+							{{-- 
+								=============
+								DATOS EMPRESA
+								=============
+							--}}
 
-{{-- locacion, lat,long --}}
-							<div class="form-group row">
-								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del productor:</label>
-								<div class="col-md-6">
-									<input id="locacion" type="text" class="form-control {{ $errors->has('locacion') ? ' is-invalid' : ''  }}" name="locacion" value="{{ $edit ? $productor->locacion : old('locacion') }}" required>
-									<input type="hidden" name="lat" id="latitud" value="{{$edit ? $productor->lat : ''}}">
-									<input type="hidden" name="long" id="longitud" value="{{$edit ? $productor->long : ''}}">
-									@if ($errors->has('locacion'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("locacion")}}</strong>
-										</span>
-									@endif
-								</div>
-								<input name="mapinput" id="pac-input" class="form-control" type="text" style="width: 85%;">
-								<div id="map" style="height: 400px;width: 90%;margin-left: 30px;"></div>
-							</div>
-							
-{{-- Contacto --}}
-							<div class="form-group row">
-								<label for="contacto" class="col-md-4 col-form-label text-md-right">Nombre completo del contacto:</label>
-								<div class="col-md-6">
-									<input id="contacto" type="text" class="form-control {{ $errors->has('contacto') ? ' is-invalid' : ''  }}" name="contacto" value="{{ $edit ? $productor->contacto : old('contacto') }}">
-									@if ($errors->has('contacto'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("contacto")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="puesto" class="col-md-4 col-form-label text-md-right">Puesto del contacto:</label>
-								<div class="col-md-6">
-									<input id="puesto" type="text" class="form-control {{ $errors->has('puesto') ? ' is-invalid' : ''  }}" name="puesto" value="{{ $edit ? $productor->puesto : old('puesto') }}">
-									@if ($errors->has('puesto'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("puesto")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico del contacto:</label>
-								<div class="col-md-6">
-									<input id="correo" type="text" class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}" name="correo" value="{{ $edit ? $productor->correo : old('correo') }}">
-									@if ($errors->has('correo'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("correo")}}</strong>
-										</span>
-									@endif
-								</div>
-								<label for="celular" class="col-md-4 col-form-label text-md-right">Telefono celular del contacto:</label>
-								<div class="col-md-6">
-									<input id="celular" type="text" class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}" name="celular" value="{{ $edit ? $productor->celular : old('celular') }}">
-									@if ($errors->has('celular'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("celular")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-{{-- Fin Contacto --}}
-{{-- Telefono --}}
-							<div class="form-group row">
-								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono del productor:</label>
-								<div class="col-md-6">
-									<input id="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : ''  }}" name="telefono" value="{{ $edit ? $productor->telefono : old('telefono') }}">
-									@if ($errors->has('telefono'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("telefono")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-{{-- Comentarios --}}
-							<div class="form-group row">
-								<label for="comentarios" class="col-md-4 col-form-label text-md-right">Comentarios al productor:</label>
-								<div class="col-md-6">
-									<textarea id="comentarios" class="form-control {{$errors->has('comentarios') ? ' is-invalid' : ''  }}" name="comentarios" value="{{ old('comentarios') }}">{{ $edit ? $productor->comentarios : old('comentarios') }}</textarea>
-									@if ($errors->has('comentarios'))
-										{{-- expr --}}
-										<span class="invalid-feedback">
-											<strong>{{ $errors->first("comentarios")}}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-							
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Empresa
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
 
+											{{-- NOMBRE --}}
 
-							
+											<div class="col-12 col-md-4">
+												<label for="nombre_empresa" class="">Nombre:</label>
+												<input id="nombre_empresa" type="text"
+													class="form-control {{ $errors->has('nombre_empresa') ? ' is-invalid' : ''  }}"
+													name="nombre_empresa"
+													value="{{ $edit ? $productor->nombre_empresa : old('nombre_empresa') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('nombre_empresa'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("nombre_empresa")}}</strong>
+												</span>
+												@endif
+											</div>
 
-						<div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Registrar productor
-                                </button>
-                            </div>
-                        </div>
-						</form>
+											{{-- TELEFONO --}}
 
-						
-					</div>
+											<div class="col-12 col-md-4">
+												<label for="telefono_empresa" class="">Teléfono:</label>
+												<input id="telefono_empresa" type="text"
+													class="form-control {{ $errors->has('telefono_empresa') ? ' is-invalid' : ''  }}"
+													name="telefono_empresa"
+													value="{{ $edit ? $productor->telefono_empresa : old('telefono_empresa') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('telefono_empresa'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("telefono_empresa")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- SITIO WEB --}}
+
+											<div class="col-12 col-md-4">
+												<label for="sitio_web_empresa" class="">Sitio web:</label>
+												<input id="sitio_web_empresa" type="text"
+													class="form-control {{ $errors->has('sitio_web_empresa') ? ' is-invalid' : ''  }}"
+													name="sitio_web_empresa"
+													value="{{ $edit ? $productor->sitio_web_empresa : old('sitio_web_empresa') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('sitio_web_empresa'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("sitio_web_empresa")}}</strong>
+												</span>
+												@endif
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							{{-- 
+								===================
+								DATOS PROFESIONALES
+								===================
+							--}}
+
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Datos profesionales
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+
+											{{-- TIPO PRODUCTOR --}}
+
+											{{-- Descripción --}}
+
+											<div class="col-12 col-md-4 mt-3">
+												<label for="tipo">Tipo de productor:</label>
+												<select name="tipo" id="" class="form-control">
+													<option value="">Seleccionar</option>
+													<option value="Enólogo">Enólogo</option>
+													<option value="Winemaker">Winemaker</option>
+												</select>
+											</div>
+
+											{{-- INICIO ACTIVIDADES PROFESIONALES --}}
+
+											<div class="col-12 col-md-4 mt-3">
+												<label for="anio_inicio_actividades" class="">Inicio
+													actividades:</label>
+												<input id="anio_inicio_actividades" type="text"
+													class="form-control {{ $errors->has('anio_inicio_actividades') ? ' is-invalid' : ''  }}"
+													name="anio_inicio_actividades"
+													value="{{ $edit ? $productor->anio_inicio_actividades : old('anio_inicio_actividades') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('anio_inicio_actividades'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("anio_inicio_actividades")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- Semblanza profesional --}}
+
+											<div class="col-12 col-md-4 mt-3">
+												<label for="semblanza_profesional" class="">Semblanza
+													profesional:</label>
+												<input id="semblanza_profesional" type="text"
+													class="form-control {{ $errors->has('semblanza_profesional') ? ' is-invalid' : ''  }}"
+													name="semblanza_profesional"
+													value="{{ $edit ? $productor->semblanza_profesional : old('semblanza_profesional') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('semblanza_profesional'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("semblanza_profesional")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											<div class="col-12 col-md-6 mt-3">
+												<label for="logo" class="">Premios y reconocimientos:</label>
+												<input type="file" id="logo" name="premios_y_reconocimientos" class="file">
+											</div>
+
+											<div class="col-12 col-md-6 mt-3">
+												<label for="logo" class="">Etiquetas producidas:</label>
+												<input type="file" id="logo" name="etiquetas_producidas" class="file">
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="form-group row mt-4">
+							<div class="col-12">
+								<button type="submit" class="btn btn-primary float-right">
+									Registrar productor
+								</button>
+							</div>
+						</div>
+					</form>
+
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 @endsection
 @section('script')
 
 
 
-	
-    <script>
-    var map;
+
+<script>
+	var map;
     function loadScript(src,callback){
         var script = document.createElement("script");
         script.type = "text/javascript";
@@ -332,10 +539,10 @@
           document.getElementById('locacion').value = address;
       });
     }
-	</script>
+</script>
 
 
-	  {{-- function initMap() {
+{{-- function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 6
@@ -370,8 +577,8 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
       } --}}
-	{{-- </script> --}}
-	{{-- <script async defer
+{{-- </script> --}}
+{{-- <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBkjIOXvW9lhje369JKSdGpjoJwTXlBCE&callback=initMap">
 	</script> --}}
 @endsection

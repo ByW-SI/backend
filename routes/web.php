@@ -24,7 +24,7 @@ Route::resource('ofertas','Web\Oferta\OfertaController');
 Route::resource('paquetes','Web\Paquete\PaqueteController');
 Route::resource('uvas','Web\Uva\UvaController');
 Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
-Route::resource('enologos','Web\Enologo\EnologoController');
+Route::resource('productores','Web\Productor\ProductorController');
 Route::resource('vinicolas','Web\Vinicola\VinicolaController');
 Route::post('uvas/{uvaVin}/destroy','Web\Vinicola\UvaVinicolaController@destroy')->name('uvas.destroy');
 Route::resource('bodegas','Web\Bodega\BodegaController');

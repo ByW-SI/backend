@@ -42,8 +42,8 @@
             </li>
             @endif
 
-            @if ( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','enologos')->first() )
-            <li class="current"><a href="{{ route('enologos.index') }}" title="">Enólogos</a></li>
+            @if ( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','productores')->first() )
+            <li class="current"><a href="{{ route('productores.index') }}" title="">Productores</a></li>
             @endif
 
             @if( Auth::user()->es_admin || Auth::user()->perfil->secciones()->where('nombre','vinicolas')->first() )

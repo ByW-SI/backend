@@ -12,13 +12,12 @@ class ProductoresSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('productor')->insert([
+        DB::table('productores')->insert([
             [
-                'nombre' => 'Winers',
-                'locacion' => 'Pedregal #39',
-                'telefono' => '58345678',
-                'bodega_id' => 1,
-                'vinicola_id' => 1,
+                'nombre' => 'Gabriel',
+                'apellido_paterno' => 'Téllez',
+                'apellido_materno' => 'Mendoza',
+                'tipo_productor' => 'Enólogo',
             ]
         ]);
     }

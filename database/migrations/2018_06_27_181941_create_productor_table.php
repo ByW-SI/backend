@@ -13,24 +13,34 @@ class CreateProductorTable extends Migration
      */
     public function up()
     {
-        Schema::create('productor', function (Blueprint $table) {
+        Schema::create('productores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
-            $table->string('locacion');
+            $table->string('nombre');
+            $table->string('apellido_paterno');
+            $table->string('apellido_materno')->nullable();
+
+            $table->string('estado')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('municipio')->nullable();
+            $table->string('codigo_postal',5)->nullable();
+            $table->string('calle')->nullable();
+            $table->string('num_exterior')->nullable();
+            $table->string('num_interior')->nullable();
+            $table->string('localidad')->nullable();
             $table->double('long',20,17)->nullable();
             $table->double('lat',20,17)->nullable();
-            $table->string('contacto')->nullable();
-            $table->string('puesto')->nullable();
-            $table->string('correo')->nullable();
-            $table->string('celular')->nullable();
-            $table->string('telefono');
-            $table->text('comentarios')->nullable();
-            $table->integer('bodega_id')->unsigned();
-            $table->foreign('bodega_id')->references('id')->on('bodega');
-            $table->integer('vinicola_id')->unsigned();
-            $table->foreign('vinicola_id')->references('id')->on('vinicola');
-            $table->text('descripcion')->nullable();
-            // $table->text('uvas');
+
+            $table->string('nombre_empresa')->nullable();
+            $table->string('telefono_empresa')->nullable();
+            $table->string('sitio_web_empresa')->nullable();
+
+            $table->enum('tipo_productor',['Enólogo', 'Winemaker']);
+            $table->unsignedInteger('anio_inicio_actividades')->nullable();
+            $table->string('semblanza_profesional')->nullable();
+
+            $table->string('premios_y_reconocimientos')->nullable();
+            $table->string('etiquetas_producidas')->nullable();
+
             $table->timestamps();
         });
     }
