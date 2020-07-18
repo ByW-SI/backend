@@ -35,7 +35,12 @@ Route::delete('productores/vinos','Web\Productor\ProductorVinoController@destroy
 Route::get('productores/uvas/create','Web\Productor\ProductorUvaController@create')->name('productores.uvas.create');
 Route::post('productores/uvas','Web\Productor\ProductorUvaController@store')->name('productores.uvas.store');
 
+Route::get('distribuidores','Web\Distribuidor\DistribuidorController@index')->name('distribuidores.index');
+Route::post('distribuidores','Web\Distribuidor\DistribuidorController@store')->name('distribuidores.store');
+
 Route::get('enoturistas/create','Web\Productor\EnoturistaController@create')->name('enoturistas.create');
+Route::post('enoturistas','Web\Productor\EnoturistaController@store')->name('enoturistas.store');
+Route::get('enoturistas/edit','Web\Productor\EnoturistaController@edit')->name('enoturistas.edit');
 
 Route::resource('vinicolas','Web\Vinicola\VinicolaController');
 Route::post('uvas/{uvaVin}/destroy','Web\Vinicola\UvaVinicolaController@destroy')->name('uvas.destroy');

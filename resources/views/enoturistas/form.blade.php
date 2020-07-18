@@ -458,28 +458,6 @@
                                     <div class="card-body">
                                         <div class="row">
 
-
-                                            <div class="col-12 col-lg-6 mt-3">
-                                                <label for="logo" class="">Foto de destino:</label>
-                                                <input type="file" id="logo" name="fotos_de_destino[]" class="file">
-                                            </div>
-
-                                            <div class="col-12 col-lg-6 mt-3">
-                                                <label for="logo" class="">Foto de destino:</label>
-                                                <input type="file" id="logo" multiple name="fotos_de_destino[]"
-                                                    class="file">
-                                            </div>
-
-                                            <div class="col-12 col-lg-6 mt-3">
-                                                <label for="logo" class="">Foto de destino:</label>
-                                                <input type="file" id="logo" name="fotos_de_destino[]" class="file">
-                                            </div>
-
-                                            <div class="col-12 col-lg-6 mt-3">
-                                                <label for="logo" class="">Foto de destino:</label>
-                                                <input type="file" id="logo" name="fotos_de_destino[]" class="file">
-                                            </div>
-
                                             <hr>
 
                                             {{-- 

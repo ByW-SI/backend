@@ -15,6 +15,7 @@ class CreateDireccionesTable extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('pais')->nullable();
             $table->string('calle')->nullable();
             $table->string('num_exterior', 3)->nullable();
             $table->string('num_interior', 3)->nullable();
@@ -23,7 +24,6 @@ class CreateDireccionesTable extends Migration
             $table->string('municipio')->nullable();
             $table->string('estado')->nullable();
             $table->string('codigo_postal')->nullable();
-            $table->unsignedBigInteger('persona_id');
             $table->timestamps();
         });
     }

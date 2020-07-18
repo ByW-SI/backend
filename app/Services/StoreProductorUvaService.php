@@ -27,10 +27,10 @@ class StoreProductorUvaService
         $this->productorUva = ProductorUva::create([
             'persona_id' => $this->persona->id
         ]);
-        // $this->productorUva->persona_id = $this->persona->id;
-        // $this->productorUva->save();
-        $this->direccion->persona_id = $this->persona->id;
+
         $this->direccion->save();
+        $this->persona->direcciones()->attach($this->direccion->id);
+
         $this->empresa->persona_id = $this->persona->id;
         $this->empresa->save();
 

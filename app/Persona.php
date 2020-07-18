@@ -14,4 +14,13 @@ class Persona extends Model
         "celular",
         "correo",
     ];
+
+    // =============
+    // RELATIONSHIPS
+    // =============
+
+    public function direcciones()
+    {
+        return $this->belongsToMany('App\Direccion', 'direccion_persona', 'persona_id', 'direccion_id');
+    }
 }

@@ -23,7 +23,6 @@
 					<th nowrap>Locación</th>
 					<th nowrap>Telefono</th>
 					<th nowrap>Barricas</th>
-					<th nowrap>Uvas</th>
 					<th nowrap>Enologo/Wine Maker</th>
 					<th nowrap>Acción</th>
 				</tr>
@@ -53,21 +52,6 @@
 							@csrf
 							<button type="submit" class="btn btn-danger"
 								onclick="return confirm('¿Estás seguro que desea eliminar esta barrica?');">Eliminar</button>
-						</form>
-
-						@empty
-						{{-- empty expr --}}
-						N/E
-						@endforelse
-					</th>
-					<th>
-						@forelse ($bodega->uvasBod as $uvaBod)
-						{{-- expr --}}
-						{{$uvaBod->nombre}} {{$uvaBod->hectarea}} ha
-						<form action="{{ route('uvas.destroy',['uvaBod'=>$uvaBod]) }}" method="POST">
-							@csrf
-							<button type="submit" class="btn btn-danger"
-								onclick="return confirm('¿Estás seguro que desea eliminar esta uva?');">Eliminar</button>
 						</form>
 
 						@empty

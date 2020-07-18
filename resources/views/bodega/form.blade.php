@@ -14,248 +14,264 @@
 		<div class="col-12 col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<div class="row">
+					<form action="{{route('distribuidores.store')}}" method="POST">
+						@csrf
+						<div class="row">
 
-						{{-- 
-							================
-							DATOS PERSONALES
-							================
-							 --}}
+							{{-- 
+								================
+								DATOS PERSONALES
+								================
+								 --}}
 
-						<div class="col-12">
-							<h5 class="text-uppercase text-muted mt-2">
-								<small>
-									Datos personales
-								</small>
-							</h5>
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										{{-- NOMBRE EMPRESA --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Nombre</label>
-											<input type="text" class="form-control">
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Datos personales
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											{{-- NOMBRE EMPRESA --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Nombre</label>
+												<input type="text" class="form-control" name="nombre">
+											</div>
+
+											{{-- NOMBRE FECHA INICIO OPERACIONES --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Apellido paterno</label>
+												<input type="text" class="form-control" name="apellido_paterno">
+											</div>
+
+											{{-- TELEFONO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Apellido materno</label>
+												<input type="text" class="form-control" name="apellido_materno">
+											</div>
+
+											{{-- TELEFONO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Teléfono</label>
+												<input type="text" class="form-control" name="celular">
+											</div>
+
+											{{-- TELEFONO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Correo</label>
+												<input type="text" class="form-control" name="correo">
+											</div>
+
 										</div>
-
-										{{-- NOMBRE FECHA INICIO OPERACIONES --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Apellido paterno</label>
-											<input type="date" class="form-control">
-										</div>
-
-										{{-- TELEFONO --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Apellido materno</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- TELEFONO --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Teléfono</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- TELEFONO --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Correo</label>
-											<input type="text" class="form-control">
-										</div>
-
 									</div>
 								</div>
 							</div>
-						</div>
 
-						{{-- 
-							=============
-							DATOS EMPRESA
-							=============
-							 --}}
-
-						<div class="col-12">
-							<h5 class="text-uppercase text-muted mt-2">
-								<small>
-									Datos de la empresa
-								</small>
-							</h5>
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										{{-- NOMBRE EMPRESA --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Nombre empresa</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- NOMBRE FECHA INICIO OPERACIONES --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Inicio de operaciones</label>
-											<input type="date" class="form-control">
-										</div>
-
-										{{-- TELEFONO --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Teléfono</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- SITIO WEB --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Sitio web</label>
-											<input type="text" class="form-control">
-										</div>
+							{{-- 
+								
+								--}}
 
 
-
-										<div class="col-12 mt-4">
-											<h5 class="text-uppercase text-muted mt-2">
-												<small>
-													Ubicación
-												</small>
-											</h5>
-											<div class="card">
-												<div class="card-body">
-													<div class="row">
-														{{-- CALLE --}}
-														<div class="col-12 col-lg-6">
-															<label for="">Calle</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- NÚMERO EXTERIOR --}}
-														<div class="col-12 col-lg-6">
-															<label for="">Número exterior</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- NÚMERO EXTERIOR --}}
-														<div class="col-12 col-lg-6">
-															<label for="">Número interior</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- LOCALIDAD --}}
-														<div class="col-12 col-lg-6">
-															<label for="">Localidad</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- CIUDAD --}}
-														<div class="col-12 col-lg-6">
-															<label for="">ciudad</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- MUNICIPIO --}}
-														<div class="col-12 col-lg-6">
-															<label for="">municipio</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- ESTADO --}}
-														<div class="col-12 col-lg-6">
-															<label for="">estado</label>
-															<input type="text" class="form-control">
-														</div>
-														{{-- CODIGO POSTAL --}}
-														<div class="col-12 col-lg-6">
-															<label for="">Código postal</label>
-															<input type="text" class="form-control">
-														</div>
-													</div>
-												</div>
+							<div class="col-12 mt-4">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Dirección
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											{{-- CALLE --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Calle</label>
+												<input type="text" class="form-control" name="calle">
+											</div>
+											{{-- NÚMERO EXTERIOR --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Número exterior</label>
+												<input type="text" class="form-control" name="num_exterior">
+											</div>
+											{{-- NÚMERO EXTERIOR --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Número interior</label>
+												<input type="text" class="form-control" name="num_interior">
+											</div>
+											{{-- LOCALIDAD --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Localidad</label>
+												<input type="text" class="form-control" name="localidad">
+											</div>
+											{{-- CIUDAD --}}
+											<div class="col-12 col-lg-6">
+												<label for="">ciudad</label>
+												<input type="text" class="form-control" name="ciudad">
+											</div>
+											{{-- MUNICIPIO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">municipio</label>
+												<input type="text" class="form-control" name="municipio">
+											</div>
+											{{-- ESTADO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">estado</label>
+												<input type="text" class="form-control" name="estado">
+											</div>
+											{{-- CODIGO POSTAL --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Código postal</label>
+												<input type="text" class="form-control" name="codigo_postal">
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
-						</div>
 
-						{{-- 
-							=================
-							ETIQUETAS DE VINO
-							=================
-						--}}
+							{{-- 
+								=============
+								DATOS EMPRESA
+								=============
+								 --}}
 
-						<div class="col-12">
-							<h5 class="text-uppercase text-muted mt-2">
-								<small>
-									Etiquetas de vino
-								</small>
-							</h5>
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Datos de la empresa
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											{{-- NOMBRE EMPRESA --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Nombre empresa</label>
+												<input type="text" class="form-control" name="nombre_empresa">
+											</div>
 
-										<div class="col-12">
-											<button type="button" class="btn btn-primary">
-												<i class="fa fa-plus" aria-hidden="true"></i>
-											</button>
+											{{-- NOMBRE FECHA INICIO OPERACIONES --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Inicio de operaciones</label>
+												<input type="date" class="form-control" name="fecha_inicio_operaciones_empresa">
+											</div>
+
+											{{-- TELEFONO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Teléfono</label>
+												<input type="text" class="form-control" name="telefono_empresa">
+											</div>
+
+											{{-- SITIO WEB --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Sitio web</label>
+												<input type="text" class="form-control" name="sitio_web_empresa">
+											</div>
+
 										</div>
-
-										<div class="col-12 col-lg-12 mt-3">
-											<label for="logo" class="">Etiqueta:</label>
-											<input type="file" id="logo" name="etiqueta[]" class="file">
-										</div>
-
-
 									</div>
 								</div>
 							</div>
-						</div>
 
-						{{-- 
-							=============
-							DATOS DEL VINO
-							=============
-							 --}}
+							{{-- 
+								=================
+								ETIQUETAS DE VINO
+								=================
+							--}}
 
-						<div class="col-12">
-							<h5 class="text-uppercase text-muted mt-2">
-								<small>
-									Datos del vino
-								</small>
-							</h5>
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										{{-- NOMBRE  --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Nombre</label>
-											<input type="text" class="form-control">
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Etiquetas de vino
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+
+											<div class="col-12">
+												<button type="button" class="btn btn-primary">
+													<i class="fa fa-plus" aria-hidden="true"></i>
+												</button>
+											</div>
+
+											<div class="col-12 col-lg-12 mt-3">
+												<label for="logo" class="">Etiqueta:</label>
+												<input type="file" id="logo" name="etiqueta[]" class="file">
+											</div>
+
+
 										</div>
-
-										{{-- PRODUCTOR --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Productor</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- AÑO --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Año</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- UVAS --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Uvas</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- PRECIO --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Precio</label>
-											<input type="text" class="form-control">
-										</div>
-
-										{{-- DESCRIPCION --}}
-										<div class="col-12 col-lg-6">
-											<label for="">Descripción</label>
-											<input type="text" class="form-control">
-										</div>
-
 									</div>
 								</div>
 							</div>
-						</div>
 
-					</div>
+							{{-- 
+								=============
+								DATOS DEL VINO
+								=============
+								 --}}
+
+							<div class="col-12">
+								<h5 class="text-uppercase text-muted mt-2">
+									<small>
+										Datos del vino
+									</small>
+								</h5>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											{{-- NOMBRE  --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Nombre</label>
+												<input type="text" class="form-control">
+											</div>
+
+											{{-- PRODUCTOR --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Productor</label>
+												<input type="text" class="form-control">
+											</div>
+
+											{{-- AÑO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Año</label>
+												<input type="text" class="form-control">
+											</div>
+
+											{{-- UVAS --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Uvas</label>
+												<input type="text" class="form-control">
+											</div>
+
+											{{-- PRECIO --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Precio</label>
+												<input type="text" class="form-control">
+											</div>
+
+											{{-- DESCRIPCION --}}
+											<div class="col-12 col-lg-6">
+												<label for="">Descripción</label>
+												<input type="text" class="form-control">
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<hr>
+
+							<div class="col-12 mt-4">
+								<div class="d-flex justify-content-end">
+									<button class="btn btn-primary" type="submit">
+										Guardar distribuidor
+									</button>
+								</div>
+							</div>
+
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
