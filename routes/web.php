@@ -24,12 +24,23 @@ Route::resource('ofertas','Web\Oferta\OfertaController');
 Route::resource('paquetes','Web\Paquete\PaqueteController');
 Route::resource('uvas','Web\Uva\UvaController');
 Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
-Route::resource('productores','Web\Productor\ProductorController');
+
+
+Route::get('productores/vinos','Web\Productor\ProductorVinoController@index')->name('productores.vinos.index');
+Route::get('productores/vinos/create','Web\Productor\ProductorVinoController@create')->name('productores.vinos.create');
+Route::get('productores/vinos/edit','Web\Productor\ProductorVinoController@edit')->name('productores.vinos.edit');
+Route::post('productores/vinos','Web\Productor\ProductorVinoController@store')->name('productores.vinos.store');
+Route::delete('productores/vinos','Web\Productor\ProductorVinoController@destroy')->name('productores.vinos.destroy');
+
+Route::get('productores/uvas/create','Web\Productor\ProductorUvaController@create')->name('productores.uvas.create');
+Route::post('productores/uvas','Web\Productor\ProductorUvaController@store')->name('productores.uvas.store');
+
+Route::get('enoturistas/create','Web\Productor\EnoturistaController@create')->name('enoturistas.create');
+
 Route::resource('vinicolas','Web\Vinicola\VinicolaController');
 Route::post('uvas/{uvaVin}/destroy','Web\Vinicola\UvaVinicolaController@destroy')->name('uvas.destroy');
 Route::resource('bodegas','Web\Bodega\BodegaController');
 Route::post('barrica/{barrica}/destroy','Web\Bodega\BodegaBarricaController@destroy')->name('barrica.destroy');
-Route::resource('productores','Web\Productor\ProductorController');
 Route::resource('barricas','Web\Barrica\BarricaController');
 Route::resource('barricas.procesos','Web\Barrica\ProcesoController');
 Route::resource('empleados','Web\Empleados\EmpleadosController');

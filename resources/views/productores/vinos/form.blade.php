@@ -8,7 +8,7 @@
 			<div class="card">
 				<div class="card-body">
 					<form method="POST" enctype="multipart/form-data"
-						action="{{ $edit == false ? route('productores.store') : route('productores.update',['productor'=>$productor]) }}">
+						action="{{ $edit == false ? route('productores.vinos.store') : route('productores.vinos.update',['productor'=>$productor]) }}">
 						@csrf
 
 						@if ($edit == true)
@@ -84,6 +84,41 @@
 												</span>
 												@endif
 											</div>
+
+											{{-- Teléfono movil --}}
+
+											<div class="col-12 col-md-4">
+												<label for="celular" class="">Teléfono movil:</label>
+												<input id="celular" type="number"
+													class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}"
+													name="celular"
+													value="{{ $edit ? $productor->celular : old('celular') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('celular'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("celular")}}</strong>
+												</span>
+												@endif
+											</div>
+
+											{{-- Correo --}}
+
+											<div class="col-12 col-md-4">
+												<label for="correo" class="">Correo:</label>
+												<input id="correo" type="email"
+													class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}"
+													name="correo"
+													value="{{ $edit ? $productor->correo : old('correo') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('correo'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("correo")}}</strong>
+												</span>
+												@endif
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -314,6 +349,23 @@
 												@endif
 											</div>
 
+											{{-- INICIO DE OPERACIONES --}}
+
+											<div class="col-12 col-md-4">
+												<label for="fecha_inicio_operaciones_empresa" class="">Inicio de operaciones:</label>
+												<input id="fecha_inicio_operaciones_empresa" type="date"
+													class="form-control {{ $errors->has('fecha_inicio_operaciones_empresa') ? ' is-invalid' : ''  }}"
+													name="fecha_inicio_operaciones_empresa"
+													value="{{ $edit ? $productor->fecha_inicio_operaciones_empresa : old('fecha_inicio_operaciones_empresa') }}"
+													{{ $edit ? 'disabled' : "" }} required autofocus="">
+												@if ($errors->has('fecha_inicio_operaciones_empresa'))
+												{{-- expr --}}
+												<span class="invalid-feedback">
+													<strong>{{ $errors->first("fecha_inicio_operaciones_empresa")}}</strong>
+												</span>
+												@endif
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -386,7 +438,8 @@
 
 											<div class="col-12 col-md-6 mt-3">
 												<label for="logo" class="">Premios y reconocimientos:</label>
-												<input type="file" id="logo" name="premios_y_reconocimientos" class="file">
+												<input type="file" id="logo" name="premios_y_reconocimientos"
+													class="file">
 											</div>
 
 											<div class="col-12 col-md-6 mt-3">

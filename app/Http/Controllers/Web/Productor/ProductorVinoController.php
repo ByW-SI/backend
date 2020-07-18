@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-class ProductorController extends Controller
+class ProductorVinoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class ProductorController extends Controller
     {
         //
         $productores = Productor::orderBy('nombre', 'asc')->paginate(5);
-        return view('productor.index', ['productores' => $productores]);
+        return view('productores.vinos.index', ['productores' => $productores]);
     }
 
     /**
@@ -34,7 +34,7 @@ class ProductorController extends Controller
         $bodegas = Bodega::orderBy('nombre', 'asc')->get();
         $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
         $edit = false;
-        return view('productor.form', ['edit' => $edit, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
+        return view('productores.vinos.form', ['edit' => $edit, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
     }
 
     /**
@@ -83,7 +83,7 @@ class ProductorController extends Controller
             ]);
         }
 
-        return redirect()->route('productores.index');
+        return redirect()->route('productores.vinos.index');
     }
 
     /**
@@ -110,7 +110,7 @@ class ProductorController extends Controller
         $bodegas = Bodega::orderBy('nombre', 'asc')->get();
         $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
         $edit = true;
-        return view('productor.form', ['edit' => $edit, 'productor' => $productore, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
+        return view('productores.vinos.form', ['edit' => $edit, 'productor' => $productore, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
     }
 
     /**
@@ -134,7 +134,7 @@ class ProductorController extends Controller
 
         $productore->update($request->all());
 
-        return redirect()->route('productores.index');
+        return redirect()->route('productores.vinos.index');
     }
 
     /**
@@ -148,7 +148,7 @@ class ProductorController extends Controller
         //
         $productore->delete();
 
-        return redirect()->route('productores.index');
+        return redirect()->route('productores.vinos.index');
     }
 
     public function bodega(Productor $id)

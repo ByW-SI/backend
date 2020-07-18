@@ -7,7 +7,7 @@
 			<h1>Productores</h1>
 		</div>
 		<div class="col-3 input-group input-group-lg mb-3">
-			<a href="{{ route('productores.create') }}" class="btn btn-primary">Agregar Nuevo Productor</a>
+			<a href="{{ route('productores.vinos.create') }}" class="btn btn-primary">Agregar Nuevo Productor</a>
 		</div>
 	</div>
 	<br>
@@ -32,8 +32,8 @@
 					<th>{{$productor->estado}}</th>
 					<th>{{$productor->nombre_empresa ?: 'N/E'}}</th>
 					<th>
-						<a class="btn btn-default" href="{{ route('productores.edit',[$productor]) }}">Editar</a>
-						<form action="{{ route('productores.destroy',[$productor]) }}" method="POST">
+						<a class="btn btn-default" href="{{ route('productores.vinos.edit',[$productor]) }}">Editar</a>
+						<form action="{{ route('productores.vinos.destroy',[$productor]) }}" method="POST">
 							<input type="hidden" name="_method" value="DELETE">
 							@csrf
 							<button type="submit" class="btn btn-link"

@@ -1,127 +1,286 @@
 @extends('layouts.app2')
 @section('content')
-	{{-- expr --}}
-	
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="card">
-					<div class="card-header">
-						Cursos
-					</div>
-					<div class="card-body">
-						<form>
-							@csrf
+{{-- expr --}}
 
-							<div class="form-group row">
-								<label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre/Titulo del curso:</label>
-								<div class="col-md-6">
-									<input id="nombre" type="text" class="form-control" required autofocus="">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="distinciones" class="col-md-4 col-form-label text-md-right">Descripción:</label>
-								<div class="col-md-6">
-									<textarea id="distinciones" type="text" class="form-control " name="distinciones"></textarea>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inicio" class="col-md-4 col-form-label text-md-right">Fecha de inicio:</label>
-								<div class="col-md-6">
-									<input type="date" id="minimo" min="{{date('Y-m-d')}}" onchange="document.getElementById('maximo').min=this.value;" name="edadMin" class="form-control">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del curso:</label>
-								<div class="col-md-6">
-									<input id="locacion" type="text" class="form-control" name="locacion" required>
-									<input type="hidden" name="lat" id="latitud">
-									<input type="hidden" name="long" id="longitud">
-								</div>
-								<input name="mapinput" id="pac-input" class="form-control" type="text" style="width: 85%;">
-								<div id="map" style="height: 400px;width: 90%;margin-left: 30px;"></div>
-							</div>
-							<div class="form-group row">
-								<label for="contacto" class="col-md-4 col-form-label text-md-right">Nombre completo del contacto:</label>
-								<div class="col-md-6">
-									<input id="contacto" type="text" class="form-control" name="contacto">
-									
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="puesto" class="col-md-4 col-form-label text-md-right">Puesto del contacto:</label>
-								<div class="col-md-6">
-									<input id="puesto" type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico del contacto:</label>
-								<div class="col-md-6">
-									<input id="correo" type="text" class="form-control" name="correo">
-								</div>
-								<label for="celular" class="col-md-4 col-form-label text-md-right">Telefono celular del contacto:</label>
-								<div class="col-md-6">
-									<input id="celular" type="text" class="form-control" name="celular">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de la instalación:</label>
-								<div class="col-md-6">
-									<input id="telefono" type="text" class="form-control" name="telefono">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="precio_barrica" class="col-md-4 col-form-label text-md-right">Gastos de la realización del curso:</label>
-								<div class="input-group col-md-6">
-									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-  									</div>
-  									<input type="number" name="precio_barrica" class="form-control" min="0" step="0.01">
-  									<div class="input-group-append">
-    									<span class="input-group-text">USD</span>
-  									</div>
-								</div>
-							</div>
-              <div class="form-group row">
-                <label for="precio_barrica" class="col-md-4 col-form-label text-md-right">Precio al publico del curso:</label>
-                <div class="input-group col-md-6">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                    </div>
-                    <input type="number" name="precio_barrica" class="form-control" min="0" step="0.01">
-                    <div class="input-group-append">
-                      <span class="input-group-text">USD</span>
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-body">
+
+            {{-- 
+                ================
+                DATOS PERSONALES
+                ================
+            --}}
+
+            <h5 class="text-uppercase text-muted m-0">
+                <small>
+                    Datos personales
+                </small>
+            </h5>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-12 col-lg-4">
+                                <label for="">Nombre</label>
+                                <input type="text" class="form-control" name="nombre">
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="">Apellido paterno</label>
+                                <input type="text" class="form-control" name="apellido_paterno">
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="">Apellido materno</label>
+                                <input type="text" class="form-control" name="apellido_materno">
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="">Teléfono móvil</label>
+                                <input type="text" class="form-control" name="celular">
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="">Correo electrónico</label>
+                                <input type="text" class="form-control" name="correo">
+                            </div>
+                        </div>
                     </div>
                 </div>
-              </div>
-							
+            </div>
 
-						<div class="form-group row mb-0">
+            {{-- 
+                ===================
+                DATOS PROFESIONALES
+                ===================
+            --}}
+
+            <h5 class="text-uppercase text-muted m-0">
+                <small>
+                    Datos profesionales
+                </small>
+            </h5>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <label for="">Inicio de actividades profesionales</label>
+                            <input type="text" class="form-control" name="inicio_actividades_profesionales">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label for="">Semblanza profesional</label>
+                            <input type="text" class="form-control" name="semblanza_profesional">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- 
+                =======================
+                DIPLOMAS O CERTIFICADOS
+                =======================
+            --}}
+
+            <h5 class="text-uppercase text-muted m-0">
+                <small>
+                    Diplomas o certificados
+                </small>
+            </h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mt-3">
+                                <label for="logo" class="">Diploma/Certificado:</label>
+                                <input type="file" name="diploma[]" class="file">
+                            </div>
+                            <div class="col-12 col-lg-6 mt-3">
+                                <label for="logo" class="">Diploma/Certificado:</label>
+                                <input type="file" name="diploma[]" class="file">
+                            </div>
+                            <div class="col-12 col-lg-6 mt-3">
+                                <label for="logo" class="">Diploma/Certificado:</label>
+                                <input type="file" name="diploma[]" class="file">
+                            </div>
+                            <div class="col-12 col-lg-6 mt-3">
+                                <label for="logo" class="">Diploma/Certificado:</label>
+                                <input type="file" name="diploma[]" class="file">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- 
+                =======================
+                CURSOS MÁS FRECUENTES
+                =======================
+            --}}
+
+            <h5 class="text-uppercase text-muted m-0">
+                <small>
+                    Cursos más frecuentes
+                </small>
+            </h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                            <div class="col-12 col-lg-4 mt-3">
+                                <label class="">Nombre del curso:</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-12 col-lg-4 mt-3">
+                                <label class="">Objetivo:</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-12 col-lg-4 mt-3">
+                                <label class="">Carga horaria:</label>
+                                <input type="text" class="form-control">
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Cursos
+                </div>
+                <div class="card-body">
+                    <form>
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="nombre" class="col-form-label text-md-right">
+                                Nombre/Titulo del curso:
+                            </label>
+                            <div class="col-md-6">
+                                <input id="nombre" type="text" class="form-control" required autofocus="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="distinciones" class="col-md-4 col-form-label text-md-right">Descripción:</label>
+                            <div class="col-md-6">
+                                <textarea id="distinciones" type="text" class="form-control "
+                                    name="distinciones"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inicio" class="col-md-4 col-form-label text-md-right">Fecha de inicio:</label>
+                            <div class="col-md-6">
+                                <input type="date" id="minimo" min="{{date('Y-m-d')}}"
+                                    onchange="document.getElementById('maximo').min=this.value;" name="edadMin"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="locacion" class="col-md-4 col-form-label text-md-right">Locación del
+                                curso:</label>
+                            <div class="col-md-6">
+                                <input id="locacion" type="text" class="form-control" name="locacion" required>
+                                <input type="hidden" name="lat" id="latitud">
+                                <input type="hidden" name="long" id="longitud">
+                            </div>
+                            <input name="mapinput" id="pac-input" class="form-control" type="text" style="width: 85%;">
+                            <div id="map" style="height: 400px;width: 90%;margin-left: 30px;"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="contacto" class="col-md-4 col-form-label text-md-right">Nombre completo del
+                                contacto:</label>
+                            <div class="col-md-6">
+                                <input id="contacto" type="text" class="form-control" name="contacto">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="puesto" class="col-md-4 col-form-label text-md-right">Puesto del
+                                contacto:</label>
+                            <div class="col-md-6">
+                                <input id="puesto" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico del
+                                contacto:</label>
+                            <div class="col-md-6">
+                                <input id="correo" type="text" class="form-control" name="correo">
+                            </div>
+                            <label for="celular" class="col-md-4 col-form-label text-md-right">Telefono celular del
+                                contacto:</label>
+                            <div class="col-md-6">
+                                <input id="celular" type="text" class="form-control" name="celular">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono de la
+                                instalación:</label>
+                            <div class="col-md-6">
+                                <input id="telefono" type="text" class="form-control" name="telefono">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="precio_barrica" class="col-md-4 col-form-label text-md-right">Gastos de la
+                                realización del curso:</label>
+                            <div class="input-group col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" name="precio_barrica" class="form-control" min="0" step="0.01">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">USD</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="precio_barrica" class="col-md-4 col-form-label text-md-right">Precio al publico
+                                del curso:</label>
+                            <div class="input-group col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" name="precio_barrica" class="form-control" min="0" step="0.01">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">USD</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Registrar curso
                                 </button>
                             </div>
                         </div>
-						</form>
+                    </form>
 
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
-	{{-- expr --}}
-	<script type="text/javascript">
-		function disabled(text) {
+{{-- expr --}}
+<script type="text/javascript">
+    function disabled(text) {
 			// body...
 			alert("Por favor registrar la bodega antes de agregar las "+text);
 		}
-	</script>
-    {{-- <script> --}}
-    <script>
+</script>
+{{-- <script> --}}
+<script>
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");
@@ -239,10 +398,10 @@
           document.getElementById('locacion').value = address;
       });
     }
-	</script>
+</script>
 
 
-	  {{-- function initMap() {
+{{-- function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 6
@@ -277,8 +436,8 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
       } --}}
-	{{-- </script> --}}
-	{{-- <script async defer
+{{-- </script> --}}
+{{-- <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBkjIOXvW9lhje369JKSdGpjoJwTXlBCE&callback=initMap">
 	</script> --}}
 @endsection
