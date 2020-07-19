@@ -12,5 +12,6 @@ class Empresa extends Model
         "telefono",
         "sitio_web",
         "inicio_operaciones",
+        "persona_id",
     ];
 }

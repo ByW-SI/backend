@@ -9,7 +9,7 @@
 	<div class="col-6">
 		<a href="{{ route('bodegas.create') }}" class="btn btn-primary float-right">
 			<i class="fa fa-plus-circle" aria-hidden="true"></i>
-			Nueva Bodega
+			Nueva Bodega / Distribuidor
 		</a>
 	</div>
 
@@ -84,6 +84,50 @@
 								<i class="fa fa-trash" aria-hidden="true"></i>
 							</button>
 						</form>
+					</th>
+				</tr>
+				@empty
+				<div class="alert alert-danger" role="alert">
+					<span>No hay bodegas</span>
+				</div>
+				@endforelse
+			</tbody>
+		</table>
+	</div>
+
+	{{--  --}}
+
+	<div class="col-12">
+		<h1 class="">Distribuidores</h1>
+	</div>
+	<br>
+
+	<div class="table-responsive">
+		<table class="table shadow-sm">
+			<thead class="thead-dark">
+				<tr>
+					<th nowrap>Nombre</th>
+					<th nowrap>Ciudad</th>
+					<th nowrap>Telefono</th>
+					<th nowrap>Empresa</th>
+					<th nowrap>Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				@forelse ($distribuidores as $distribuidor)
+				{{-- expr --}}
+				<tr class="bg-white">
+					<th>{{$distribuidor->persona->nombre_completo}}</th>
+					<th>{{$distribuidor->persona->direcciones()->first()->ciudad}}</th>
+					<th>{{$distribuidor->persona->celular}}</th>
+					<th>{{$distribuidor->persona->empresa->nombre}}</th>
+					<th>
+						<button class="btn btn-warning">
+							<i class="fa fa-pencil"></i>
+						</button>
+						<button class="btn btn-danger">
+							<i class="fa fa-danger"></i>
+						</button>
 					</th>
 				</tr>
 				@empty

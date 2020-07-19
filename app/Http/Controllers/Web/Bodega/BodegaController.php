@@ -6,6 +6,7 @@ use App\Bodega;
 use App\Uva;
 use App\Enologo;
 use App\BarricaBodega;
+use App\Distribuidor;
 use App\UvaProducida;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,8 +22,8 @@ class BodegaController extends Controller
     {
         //
         $bodegas= Bodega::orderBy('nombre','asc')->paginate(5);
-        
-        return view('bodega.index',['bodegas'=>$bodegas]);
+        $distribuidores = Distribuidor::get();
+        return view('bodega.index',['bodegas'=>$bodegas, 'distribuidores' => $distribuidores]);
     }
 
     /**

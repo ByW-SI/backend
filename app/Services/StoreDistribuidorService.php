@@ -2,12 +2,15 @@
 
 namespace App\Services;
 
+use App\Distribuidor;
+
 class StoreDistribuidorService
 {
 
     protected $persona;
     protected $empresa;
     protected $direccion;
+    protected $distribuidor;
 
     public function __construct($persona, $empresa, $direccion)
     {
@@ -19,6 +22,9 @@ class StoreDistribuidorService
     public function execute()
     {
         $this->persona->save();
+        $this->distribuidor = Distribuidor::create([
+            'persona_id' => $this->persona->id
+        ]);
         $this->direccion->save();
         $this->persona->direcciones()->attach($this->direccion->id);
         $this->empresa->persona_id = $this->persona->id;

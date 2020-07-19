@@ -38,6 +38,7 @@ Route::post('productores/uvas','Web\Productor\ProductorUvaController@store')->na
 Route::get('distribuidores','Web\Distribuidor\DistribuidorController@index')->name('distribuidores.index');
 Route::post('distribuidores','Web\Distribuidor\DistribuidorController@store')->name('distribuidores.store');
 
+Route::get('enoturistas','Web\Productor\EnoturistaController@index')->name('enoturistas.index');
 Route::get('enoturistas/create','Web\Productor\EnoturistaController@create')->name('enoturistas.create');
 Route::post('enoturistas','Web\Productor\EnoturistaController@store')->name('enoturistas.store');
 Route::get('enoturistas/edit','Web\Productor\EnoturistaController@edit')->name('enoturistas.edit');
@@ -72,6 +73,8 @@ Route::get('viajes', function (){
 Route::get('cursos', function (){
 	return view('reporte.cursos');
 })->name('cursos');
+Route::get('cursos/index', 'Web\Curso\CursoController@index')->name('cursos.index');
+Route::post('cursos', 'Web\Curso\CursoController@store')->name('cursos.store');
 Route::get('prodBodega/{id}','Web\Productor\ProductorController@bodega');
 Route::get('prodVinicola/{id}','Web\Productor\ProductorController@vinicola');
 Route::get('prodBarricas/{id}','Web\Productor\ProductorController@barricas');

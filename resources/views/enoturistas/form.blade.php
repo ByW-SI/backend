@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data"
-                        action="{{ $edit == false ? route('productores.vinos.store') : route('productores.vinos.update',['productor'=>$productor]) }}">
+                        action="{{ $edit == false ? route('enoturistas.store') : route('enoturistas.update',['enoturista'=>$enoturista]) }}">
                         @csrf
 
                         @if ($edit == true)
@@ -538,7 +538,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -546,7 +546,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -554,7 +554,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -562,7 +562,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -585,7 +585,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -593,7 +593,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -601,7 +601,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -609,7 +609,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -632,7 +632,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -640,7 +640,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -648,7 +648,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -656,7 +656,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -750,7 +750,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -758,7 +758,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -766,7 +766,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -774,7 +774,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -797,7 +797,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -805,7 +805,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -813,7 +813,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -821,7 +821,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -844,7 +844,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -852,7 +852,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -860,7 +860,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -868,7 +868,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -962,7 +962,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -970,7 +970,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -978,7 +978,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -986,7 +986,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1009,7 +1009,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1017,7 +1017,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1025,7 +1025,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1033,7 +1033,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1056,7 +1056,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1064,7 +1064,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1072,7 +1072,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1080,7 +1080,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1174,7 +1174,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1182,7 +1182,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1190,7 +1190,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1198,7 +1198,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1221,7 +1221,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1229,7 +1229,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1237,7 +1237,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1245,7 +1245,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1268,7 +1268,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad[]">
+                                                                                                        name="ciudad_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1276,7 +1276,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio[]">
+                                                                                                        name="municipio_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1284,7 +1284,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="estado_viaje[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -1292,7 +1292,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado[]">
+                                                                                                        name="pais_viaje[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>

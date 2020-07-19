@@ -13,6 +13,9 @@ class Persona extends Model
         "apellido_materno",
         "celular",
         "correo",
+
+        "anio_inicio_actividades",
+        "semblanza_profesional"
     ];
 
     // =============
@@ -22,5 +25,19 @@ class Persona extends Model
     public function direcciones()
     {
         return $this->belongsToMany('App\Direccion', 'direccion_persona', 'persona_id', 'direccion_id');
+    }
+
+    public function empresa()
+    {
+        return $this->hasOne('App\Empresa');
+    }
+
+    // ===============
+    // 
+    // ===============
+
+    public function getNombreCompletoAttribute()
+    {
+        return $this->nombre . " " . $this->apellido_paterno . " " . $this->apellido_materno;
     }
 }
