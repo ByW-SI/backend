@@ -103,14 +103,12 @@ class ProductorVinoController extends Controller
      * @param  \App\Productor  $productor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Productor $productore)
+    public function edit(Productor $productor)
     {
-        //
-        // dd($productore);
         $bodegas = Bodega::orderBy('nombre', 'asc')->get();
         $vinicolas = Vinicola::orderBy('nombre', 'asc')->get();
         $edit = true;
-        return view('productores.vinos.form', ['edit' => $edit, 'productor' => $productore, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
+        return view('productores.vinos.form', ['edit' => $edit, 'productor' => $productor, 'vinicolas' => $vinicolas, 'bodegas' => $bodegas]);
     }
 
     /**

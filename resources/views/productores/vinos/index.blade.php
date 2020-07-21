@@ -12,8 +12,8 @@
 	</div>
 	<br>
 	<br>
-	<div class="container-fluid">
-		<table class="table">
+	<div class="container">
+		<table class="table shadow-sm">
 			<thead class="thead-dark">
 				<tr>
 					<th nowrap scope="col" style="width: 190px">Nombre</th>
@@ -23,23 +23,29 @@
 					<th nowrap scope="col">Accion</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="bg-white">
 				@forelse ($productores as $productor)
 				{{-- expr --}}
 				<tr>
-					<th>{{$productor->nombre_completo}}</th>
-					<th>{{$productor->tipo_productor}}</th>
-					<th>{{$productor->estado}}</th>
-					<th>{{$productor->nombre_empresa ?: 'N/E'}}</th>
-					<th>
-						<a class="btn btn-default" href="{{ route('productores.vinos.edit',[$productor]) }}">Editar</a>
-						<form action="{{ route('productores.vinos.destroy',[$productor]) }}" method="POST">
-							<input type="hidden" name="_method" value="DELETE">
-							@csrf
-							<button type="submit" class="btn btn-link"
-								onclick="return confirm('¿Estás seguro que desea eliminar este productor?');">Eliminar</button>
-						</form>
-					</th>
+					<td nowrap>{{$productor->nombre_completo}}</td>
+					<td nowrap>{{$productor->tipo_productor}}</td>
+					<td nowrap>{{$productor->estado}}</td>
+					<td nowrap>{{$productor->nombre_empresa ?: 'N/E'}}</td>
+					<td nowrap>
+						<div class="d-flex justify-content-center">
+							<a class="btn btn-warning" href="{{ route('productores.vinos.edit',[$productor]) }}">
+								<i class="fa fa-pencil"></i>
+							</a>
+							<form action="{{ route('productores.vinos.destroy',[$productor]) }}" method="POST">
+								<input type="hidden" name="_method" value="DELETE">
+								@csrf
+								<button type="submit" class="btn btn-danger ml-3"
+									onclick="return confirm('¿Estás seguro que desea eliminar este productor?');">
+									<i class="fa fa-danger"></i>
+								</button>
+							</form>
+						</div>
+					</td>
 				</tr>
 				@empty
 				<div class="alert alert-danger" role="alert">

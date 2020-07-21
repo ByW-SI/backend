@@ -476,7 +476,7 @@
                                                                 <button class="btn btn-link" type="button"
                                                                     data-toggle="collapse" data-target="#collapseOne"
                                                                     aria-expanded="true" aria-controls="collapseOne">
-                                                                    Viaje frecuente #1
+                                                                    Datos del viaje
                                                                 </button>
                                                             </h5>
                                                         </div>
@@ -494,7 +494,7 @@
                                                                     <div class="col-12">
                                                                         <h5 class="text-uppercase text-muted mt-2">
                                                                             <small>
-                                                                                Viajes frecuentes
+                                                                                Viaje
                                                                             </small>
                                                                         </h5>
                                                                         <div class="card">
@@ -585,7 +585,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad_viaje[]">
+                                                                                                        name="ciudad_viaje_inicio[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -593,7 +593,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio_viaje[]">
+                                                                                                        name="municipio_viaje_inicio[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -601,7 +601,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado_viaje[]">
+                                                                                                        name="estado_viaje_inicio[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -609,7 +609,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="pais[]">
+                                                                                                        name="pais_viaje_inicio[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -632,7 +632,7 @@
                                                                                                         for="">Ciudad/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="ciudad_viaje[]">
+                                                                                                        name="ciudad_viaje_termino[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -640,7 +640,7 @@
                                                                                                         for="">Municipio/Población</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="municipio_viaje[]">
+                                                                                                        name="municipio_viaje_termino[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -648,7 +648,7 @@
                                                                                                         for="">Estado</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="estado_viaje[]">
+                                                                                                        name="estado_viaje_termino[]">
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="col-12 col-lg-6">
@@ -656,7 +656,7 @@
                                                                                                         for="">País</label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="pais_viaje[]">
+                                                                                                        name="pais_viaje_termino[]">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -666,646 +666,9 @@
 
                                                                                     <div class="col-12 col-md-6 mt-3">
                                                                                         <label for="logo"
-                                                                                            class="">Premios y
-                                                                                            reconocimientos:</label>
+                                                                                            class="">Foto:</label>
                                                                                         <input type="file" id="logo"
-                                                                                            name="premios_y_reconocimientos"
-                                                                                            class="file">
-                                                                                    </div>
-
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- VIAJE 2 --}}
-                                                    <div class="card mt-4 rounded-0">
-                                                        <div class="card-header" id="headingTwo">
-                                                            <h5 class="m-0 text-uppercase">
-                                                                <button class="btn btn-link collapsed" type="button"
-                                                                    data-toggle="collapse" data-target="#collapseTwo"
-                                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                                    Viaje frecuente #2
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="collapseTwo" class="collapse"
-                                                            aria-labelledby="headingTwo" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    {{-- 
-                                                                        ===================
-                                                                        VIAJES FRECUENTES 1
-                                                                        ===================
-                                                                    --}}
-
-                                                                    <div class="col-12">
-                                                                        <h5 class="text-uppercase text-muted mt-2">
-                                                                            <small>
-                                                                                Viajes frecuentes
-                                                                            </small>
-                                                                        </h5>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <div class="row">
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Nombre lugar a
-                                                                                            visitar</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="lugares_a_visitar[]">
-                                                                                    </div>
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Puntos de interés
-                                                                                            a conocer</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="puntos_de_interes[]">
-                                                                                    </div>
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Duración</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="duracion[]">
-                                                                                    </div>
-
-                                                                                    {{-- UBICACION --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Ubicación
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- LUGAR INICIO --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Lugar de inicio
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- LUGAR TERMINO --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Lugar de termino
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- Foto --}}
-
-                                                                                    <div class="col-12 col-md-6 mt-3">
-                                                                                        <label for="logo"
-                                                                                            class="">Premios y
-                                                                                            reconocimientos:</label>
-                                                                                        <input type="file" id="logo"
-                                                                                            name="premios_y_reconocimientos"
-                                                                                            class="file">
-                                                                                    </div>
-
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- VIAJE 3 --}}
-                                                    <div class="card mt-4 rounded-0">
-                                                        <div class="card-header" id="headingThree">
-                                                            <h5 class="m-0 text-uppercase">
-                                                                <button class="btn btn-link collapsed" type="button"
-                                                                    data-toggle="collapse" data-target="#collapseThree"
-                                                                    aria-expanded="false" aria-controls="collapseThree">
-                                                                    Viaje frecuente #3
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="collapseThree" class="collapse"
-                                                            aria-labelledby="headingThree" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    {{-- 
-                                                                        ===================
-                                                                        VIAJES FRECUENTES 1
-                                                                        ===================
-                                                                    --}}
-
-                                                                    <div class="col-12">
-                                                                        <h5 class="text-uppercase text-muted mt-2">
-                                                                            <small>
-                                                                                Viajes frecuentes
-                                                                            </small>
-                                                                        </h5>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <div class="row">
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Nombre lugar a
-                                                                                            visitar</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="lugares_a_visitar[]">
-                                                                                    </div>
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Puntos de interés
-                                                                                            a conocer</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="puntos_de_interes[]">
-                                                                                    </div>
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Duración</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="duracion[]">
-                                                                                    </div>
-
-                                                                                    {{-- UBICACION --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Ubicación
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- LUGAR INICIO --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Lugar de inicio
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- LUGAR TERMINO --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Lugar de termino
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- Foto --}}
-
-                                                                                    <div class="col-12 col-md-6 mt-3">
-                                                                                        <label for="logo"
-                                                                                            class="">Premios y
-                                                                                            reconocimientos:</label>
-                                                                                        <input type="file" id="logo"
-                                                                                            name="premios_y_reconocimientos"
-                                                                                            class="file">
-                                                                                    </div>
-
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- VIAJE 4 --}}
-                                                    <div class="card mt-4 rounded-0">
-                                                        <div class="card-header" id="headingThree">
-                                                            <h5 class="m-0 text-uppercase">
-                                                                <button class="btn btn-link collapsed" type="button"
-                                                                    data-toggle="collapse" data-target="#collapseFour"
-                                                                    aria-expanded="false" aria-controls="collapseFour">
-                                                                    Viaje frecuente #4
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="collapseFour" class="collapse"
-                                                            aria-labelledby="headingThree" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    {{-- 
-                                                                        ===================
-                                                                        VIAJES FRECUENTES 1
-                                                                        ===================
-                                                                    --}}
-
-                                                                    <div class="col-12">
-                                                                        <h5 class="text-uppercase text-muted mt-2">
-                                                                            <small>
-                                                                                Viajes frecuentes
-                                                                            </small>
-                                                                        </h5>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <div class="row">
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Nombre lugar a
-                                                                                            visitar</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="lugares_a_visitar[]">
-                                                                                    </div>
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Puntos de interés
-                                                                                            a conocer</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="puntos_de_interes[]">
-                                                                                    </div>
-                                                                                    <div class="col-12 col-lg-4">
-                                                                                        <label for="">Duración</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="duracion[]">
-                                                                                    </div>
-
-                                                                                    {{-- UBICACION --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Ubicación
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- LUGAR INICIO --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Lugar de inicio
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- LUGAR TERMINO --}}
-
-                                                                                    <div class="col-12">
-                                                                                        <h5
-                                                                                            class="text-uppercase text-muted mt-2">
-                                                                                            <small>
-                                                                                                Lugar de termino
-                                                                                            </small>
-                                                                                        </h5>
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Ciudad/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="ciudad_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Municipio/Población</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="municipio_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">Estado</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="estado_viaje[]">
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="col-12 col-lg-6">
-                                                                                                    <label
-                                                                                                        for="">País</label>
-                                                                                                    <input type="text"
-                                                                                                        class="form-control"
-                                                                                                        name="pais_viaje[]">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- Foto --}}
-
-                                                                                    <div class="col-12 col-md-6 mt-3">
-                                                                                        <label for="logo"
-                                                                                            class="">Premios y
-                                                                                            reconocimientos:</label>
-                                                                                        <input type="file" id="logo"
-                                                                                            name="premios_y_reconocimientos"
+                                                                                            name="foto_viaje[]"
                                                                                             class="file">
                                                                                     </div>
 

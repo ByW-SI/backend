@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data"
-                        action="{{ $edit == false ? route('productores.uvas.store') : route('productores.uvas.update',['productor'=>$productor]) }}">
+                        action="{{ $edit == false ? route('productores.uvas.store') : route('productores.uvas.update',['productorUva'=>$productor]) }}">
                         @csrf
 
                         @if ($edit == true)
@@ -36,13 +36,13 @@
 
                                             {{-- Nombre --}}
 
+
                                             <div class="col-12 col-md-4">
                                                 <label for="nombre" class="">Nombre:</label>
                                                 <input id="nombre" type="text"
                                                     class="form-control {{ $errors->has('nombre') ? ' is-invalid' : ''  }}"
                                                     name="nombre"
-                                                    value="{{ $edit ? $productor->nombre : old('nombre') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->nombre : old('nombre') }}" required autofocus="">
                                                 @if ($errors->has('nombre'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -58,8 +58,7 @@
                                                 <input id="apellido_paterno" type="text"
                                                     class="form-control {{ $errors->has('apellido_paterno') ? ' is-invalid' : ''  }}"
                                                     name="apellido_paterno"
-                                                    value="{{ $edit ? $productor->apellido_paterno : old('apellido_paterno') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->apellido_paterno : old('apellido_paterno') }}" autofocus="">
                                                 @if ($errors->has('apellido_paterno'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -75,8 +74,7 @@
                                                 <input id="apellido_materno" type="text"
                                                     class="form-control {{ $errors->has('apellido_materno') ? ' is-invalid' : ''  }}"
                                                     name="apellido_materno"
-                                                    value="{{ $edit ? $productor->apellido_materno : old('apellido_materno') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->apellido_materno : old('apellido_materno') }}" required autofocus="">
                                                 @if ($errors->has('apellido_materno'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -92,8 +90,7 @@
                                                 <input id="celular" type="number"
                                                     class="form-control {{ $errors->has('celular') ? ' is-invalid' : ''  }}"
                                                     name="celular"
-                                                    value="{{ $edit ? $productor->celular : old('celular') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->celular : old('celular') }}" required autofocus="">
                                                 @if ($errors->has('celular'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -109,8 +106,7 @@
                                                 <input id="correo" type="email"
                                                     class="form-control {{ $errors->has('correo') ? ' is-invalid' : ''  }}"
                                                     name="correo"
-                                                    value="{{ $edit ? $productor->correo : old('correo') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->correo : old('correo') }}" required autofocus="">
                                                 @if ($errors->has('correo'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -457,17 +453,17 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <button class="btn btn-primary" type="button">
+                                        <button class="btn btn-primary" type="button" id="botonAnadirUva">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
 
-                                        <div class="row">
+                                        <div class="row" id="contenedorUvas">
 
                                             {{-- Descripción --}}
 
                                             <div class="col-12 col-md-4 mt-3">
                                                 <label for="tipo">Tipo de uva:</label>
-                                                <select name="uvas_ids[]" id="" class="form-control">
+                                                <select id="inputTipoUva" class="form-control">
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($uvas as $uva)
                                                     <option value="{{$uva->id}}">{{$uva->title}}</option>
@@ -479,9 +475,8 @@
 
                                             <div class="col-12 col-md-4 mt-3">
                                                 <label for="hectareas" class="">Hectáreas</label>
-                                                <input id="hectareas" type="text"
+                                                <input id="inputHectareas" type="text"
                                                     class="form-control {{ $errors->has('hectareas') ? ' is-invalid' : ''  }}"
-                                                    name="hectareas[]"
                                                     value="{{ $edit ? $productor->hectareas : old('hectareas') }}"
                                                     {{ $edit ? 'disabled' : "" }} required autofocus="">
                                                 @if ($errors->has('hectareas'))
@@ -496,9 +491,8 @@
 
                                             <div class="col-12 col-md-4 mt-3">
                                                 <label for="ubicacion_plantio" class="">Ubicación del plantío:</label>
-                                                <input id="ubicacion_plantio" type="text"
+                                                <input id="inputUbicacionPlantio" type="text"
                                                     class="form-control {{ $errors->has('ubicacion_plantio') ? ' is-invalid' : ''  }}"
-                                                    name="ubicacion_plantio[]"
                                                     value="{{ $edit ? $productor->ubicacion_plantio : old('ubicacion_plantio') }}"
                                                     {{ $edit ? 'disabled' : "" }} required autofocus="">
                                                 @if ($errors->has('ubicacion_plantio'))
@@ -508,6 +502,7 @@
                                                 </span>
                                                 @endif
                                             </div>
+
 
                                         </div>
                                     </div>
@@ -537,6 +532,41 @@
 
 
 <script>
+
+
+    $(document).on('click', '#botonAnadirUva', function(){
+        tipoUva = $('#inputTipoUva option:selected').text();
+        hectareas = $('#inputHectareas').val()
+        ubicacionPlantio = $('#inputUbicacionPlantio').val()
+
+        $('#contenedorUvas').append(`
+
+            <div class="col-12 col-md-4 mt-3">
+                <label for="tipo">Uva:</label>
+                <input type="text" class="form-control" value="${tipoUva}" name="uvas_ids[]" readonly>
+            </div>
+
+            <div class="col-12 col-md-4 mt-3">
+                <label for="tipo">Hectáreas:</label>
+                <input type="text" class="form-control" value="${hectareas}" name="hectareas[]" readonly>
+            </div>
+            
+            <div class="col-12 col-md-4 mt-3">
+                <label for="tipo">Ubicación plantio:</label>
+                <input type="text" class="form-control" value="${ubicacionPlantio}" name="ubicaciones_plantios[]" readonly>
+            </div>
+
+
+        `);
+
+        console.table({
+            tipoUva,
+            hectareas,
+            ubicacionPlantio
+        })
+
+    });
+
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");

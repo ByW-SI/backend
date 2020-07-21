@@ -17,11 +17,11 @@ class CreateViajesTable extends Migration
             $table->increments('id');
             $table->string('lugar')->nullable();
             $table->string('puntos_interes')->nullable();
+            $table->string('duracion')->nullable();
+            $table->string('foto')->nullable();
             $table->unsignedBigInteger('direccion_id')->nullable();
             $table->unsignedBigInteger('direccion_inicio_id')->nullable();
             $table->unsignedBigInteger('direccion_termino_id')->nullable();
-            $table->string('duracion')->nullable();
-            $table->string('foto')->nullable();
             $table->unsignedBigInteger('enoturista_id');
             $table->timestamps();
         });

@@ -185,10 +185,10 @@
 								</h5>
 								<div class="card">
 									<div class="card-body">
-										<div class="row">
+										<div class="row" id="contenedorEtiquetas">
 
 											<div class="col-12">
-												<button type="button" class="btn btn-primary">
+												<button type="button" class="btn btn-primary" id="botonAnadirEtiqueta">
 													<i class="fa fa-plus" aria-hidden="true"></i>
 												</button>
 											</div>
@@ -197,7 +197,6 @@
 												<label for="logo" class="">Etiqueta:</label>
 												<input type="file" id="logo" name="etiqueta[]" class="file">
 											</div>
-
 
 										</div>
 									</div>
@@ -706,6 +705,16 @@
 @section('script')
 
 <script type="text/javascript">
+
+	$(document).on('click', '#botonAnadirEtiqueta', function(){
+		$('#contenedorEtiquetas').append(`
+			<div class="col-12 col-lg-12 mt-3">
+				<label for="logo" class="">Etiqueta:</label>
+				<input type="file" id="logo" name="etiqueta[]" class="file">
+			</div>
+		`)
+	});
+
 	function change(el){
 		if(el.checked){
 		  	 $("#uvas").show();

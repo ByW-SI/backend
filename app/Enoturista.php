@@ -19,4 +19,8 @@ class Enoturista extends Model
         return $this->belongsTo('App\Persona');
     }
 
+    public function viaje(){
+        return $this->hasOne('App\Viaje');
+    }
+
 }

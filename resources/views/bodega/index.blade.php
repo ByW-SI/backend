@@ -132,7 +132,7 @@
 				</tr>
 				@empty
 				<div class="alert alert-danger" role="alert">
-					<span>No hay bodegas</span>
+					<span>No hay distribuidores</span>
 				</div>
 				@endforelse
 			</tbody>

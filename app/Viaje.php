@@ -16,4 +16,20 @@ class Viaje extends Model
         "duracion",
         "foto",
     ];
+
+    // 
+    // 
+    // 
+
+    public function direccion(){
+        return $this->belongsTo('App\Direccion');
+    }
+
+    public function direccionInicio(){
+        return $this->belongsTo('App\Direccion','direccion_inicio_id');
+    }
+
+    public function direccionTermino(){
+        return $this->belongsTo('App\Direccion','direccion_termino_id');
+    }
 }

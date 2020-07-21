@@ -38,6 +38,9 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('bodegas', 'Api\Bodega\BodegaController@index');
     Route::resource('uvas', 'Api\Uva\UvaController',['only'=>'index']);
     Route::get('enologos', 'Api\Enologo\EnologoController@index');
+    Route::get('ofertas', 'Api\Oferta\OfertaController@index');
+    Route::get('cursos', 'Api\Curso\CursoController@index');
+    Route::get('enoturistas', 'Api\Enoturista\EnoturistaController@index');
 });
 
 

@@ -20,6 +20,14 @@ class Oferta extends Model
         'region_id'
     ];
 
+    protected $appends = [
+        'costo_caja',
+        'subtotal_venta',
+        'costo_transporte',
+        'precio_publico_caja',
+        'precio_publico_botella',
+    ];
+
     public function uvas()
     {
         return $this->belongsToMany('App\Uva')->withPivot('porcentaje');

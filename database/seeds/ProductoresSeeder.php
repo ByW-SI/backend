@@ -18,6 +18,8 @@ class ProductoresSeeder extends Seeder
                 'apellido_paterno' => 'Téllez',
                 'apellido_materno' => 'Mendoza',
                 'tipo_productor' => 'Enólogo',
+                'estado' => 'CDMX',
+                'nombre_empresa' => 'Zwinker'
             ]
         ]);
     }

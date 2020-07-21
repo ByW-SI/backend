@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(VinicolasTableSeeder::class);
         $this->call(ProductoresSeeder::class);
         $this->call(BarricasSeeder::class);
+        $this->call(OfertasSeeder::class);
+        $this->call(PersonasSeeder::class);
+        $this->call(CursosSeeder::class);
     }
 }

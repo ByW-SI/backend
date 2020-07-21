@@ -28,12 +28,17 @@ Route::resource('vinicolas', 'Web\Vinicola\VinicolaController');
 
 Route::get('productores/vinos','Web\Productor\ProductorVinoController@index')->name('productores.vinos.index');
 Route::get('productores/vinos/create','Web\Productor\ProductorVinoController@create')->name('productores.vinos.create');
-Route::get('productores/vinos/edit','Web\Productor\ProductorVinoController@edit')->name('productores.vinos.edit');
+Route::get('productores/vinos/{productor}/edit','Web\Productor\ProductorVinoController@edit')->name('productores.vinos.edit');
+Route::put('productores/vinos/{productor}','Web\Productor\ProductorVinoController@update')->name('productores.vinos.update');
 Route::post('productores/vinos','Web\Productor\ProductorVinoController@store')->name('productores.vinos.store');
 Route::delete('productores/vinos','Web\Productor\ProductorVinoController@destroy')->name('productores.vinos.destroy');
 
+Route::get('productores/uvas','Web\Productor\ProductorUvaController@index')->name('productores.uvas.index');
+Route::get('productores/uvas/{productorUva}/edit','Web\Productor\ProductorUvaController@edit')->name('productores.uvas.edit');
+Route::put('productores/uvas/{productorUva}','Web\Productor\ProductorUvaController@update')->name('productores.uvas.update');
 Route::get('productores/uvas/create','Web\Productor\ProductorUvaController@create')->name('productores.uvas.create');
 Route::post('productores/uvas','Web\Productor\ProductorUvaController@store')->name('productores.uvas.store');
+Route::delete('productores/uvas','Web\Productor\ProductorUvaController@destroy')->name('productores.uvas.destroy');
 
 Route::get('distribuidores','Web\Distribuidor\DistribuidorController@index')->name('distribuidores.index');
 Route::post('distribuidores','Web\Distribuidor\DistribuidorController@store')->name('distribuidores.store');

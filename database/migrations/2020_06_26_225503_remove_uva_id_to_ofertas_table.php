@@ -15,7 +15,7 @@ class RemoveUvaIdToOfertasTable extends Migration
     {
         Schema::table('ofertas', function (Blueprint $table) {
             $table->dropColumn('uva_id');
-            $table->text('comentario');
+            $table->text('comentario')->nullable();
         });
     }
 

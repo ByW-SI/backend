@@ -22,4 +22,17 @@ class OfertaController extends Controller
             'precio_publico_botella' => $oferta->precio_publico_botella,
         ], 200);
     }
+
+    public function index()
+    {
+
+        $oferta = Oferta::get();
+
+        return $oferta;
+
+        return response()->json(
+            $oferta,
+            200
+        );
+    }
 }

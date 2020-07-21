@@ -123,23 +123,23 @@
                 </h5>
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row" id="contenedorCursos">
                             <div class="col-12">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" id="botonAnadirCurso">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                             </div>
                             <div class="col-12 col-lg-4 mt-3">
                                 <label class="">Nombre del curso:</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="inputNombreCurso">
                             </div>
                             <div class="col-12 col-lg-4 mt-3">
                                 <label class="">Objetivo:</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="inputObjetivoCurso">
                             </div>
                             <div class="col-12 col-lg-4 mt-3">
                                 <label class="">Carga horaria:</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="inputCargaHoraria">
                             </div>
                         </div>
                     </div>
@@ -290,6 +290,34 @@ class="form-control">
 </script>
 {{-- <script> --}}
 <script>
+    $(document).on('click','#botonAnadirCurso', function(){
+        nombreCurso = $('#inputNombreCurso').val();
+        objetivo = $('#inputObjetivoCurso').val();
+        cargaHoraria = $('#inputCargaHoraria').val();
+
+        console.table({
+            nombreCurso,
+            objetivo,
+            cargaHoraria
+        });
+
+        $('#contenedorCursos').append(`
+            <div class="col-12 col-lg-4 mt-3">
+                <label class="">Nombre del curso:</label>
+                <input type="text" class="form-control" readonly name="cursos[]" value="${nombreCurso}">
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label class="">Objetivo:</label>
+                <input type="text" class="form-control" readonly name="objetivos[]" value="${objetivo}">
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label class="">Carga horaria:</label>
+                <input type="text" class="form-control" readonly name="cargas_horarias[]" value="${cargaHoraria}">
+            </div>
+        `);
+
+    });
+
     var map;
     function loadScript(src,callback){
         var script = document.createElement("script");

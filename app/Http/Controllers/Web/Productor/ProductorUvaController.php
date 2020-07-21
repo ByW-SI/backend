@@ -8,12 +8,20 @@ use App\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Persona;
+use App\ProductorUva;
 use App\Services\StoreProductorUvaService;
 use App\Uva;
 use App\UvaProducida;
 
 class ProductorUvaController extends Controller
 {
+
+    public function index()
+    {
+        $productoresUvas = ProductorUva::get();
+        return view('productores.uvas.index', compact('productoresUvas'));
+    }
+
     public function create()
     {
         $edit = false;
@@ -50,17 +58,37 @@ class ProductorUvaController extends Controller
 
         $uvasProducidas = collect();
 
+        // dd($request->uvas_ids);
+
         for ($i = 0; $i < count($request->uvas_ids); $i++) {
             $uvaProducida = new UvaProducida;
-            $uvaProducida->uva_id = $request->uvas_ids[$i];
+            $uvaProducida->uva_id = Uva::where('title', $request->uvas_ids[$i])->first()->id;
             $uvaProducida->hectareas = $request->hectareas[$i];
-            $uvaProducida->ubicacion_plantio = $request->ubicacion_plantio[$i];
+            $uvaProducida->ubicacion_plantio = $request->ubicaciones_plantios[$i];
             $uvasProducidas->push($uvaProducida);
         }
+
+        // dd($uvasProducidas);
 
         $storeProductorUvaService = new StoreProductorUvaService($persona, $direccion, $empresa, $uvasProducidas);
         $storeProductorUvaService->execute();
 
-        return redirect()->back();
+        return redirect()->route('productores.uvas.index');
+    }
+
+    public function edit(ProductorUva $productorUva)
+    {
+        $productor = $productorUva;
+        $edit = true;
+        $uvas = Uva::get();
+        return view('productores.uvas.form', compact('edit', 'uvas', 'productor'));
+    }
+
+    public function update(ProductorUva $productorUva){
+
+    }
+
+    public function destroy()
+    {
     }
 }

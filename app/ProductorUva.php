@@ -10,4 +10,13 @@ class ProductorUva extends Model
     protected $fillable = [
         "persona_id"
     ];
+
+    // =============
+    // RELATIONSHIPS
+    // =============
+
+    public function persona()
+    {
+        return $this->belongsTo('App\Persona');
+    }
 }

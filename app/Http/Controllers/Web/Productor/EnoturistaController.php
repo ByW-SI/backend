@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Persona;
 use App\Services\StoreEnoturistaService;
+use App\Viaje;
 
 class EnoturistaController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         $enoturistas = Enoturista::get();
         return view('enoturistas.index', compact('enoturistas'));
     }
@@ -51,13 +53,51 @@ class EnoturistaController extends Controller
         $empresa->sitio_web = $request->sitio_web_empresa;
         $empresa->inicio_operaciones = $request->fecha_inicio_operaciones_empresa;
 
-        $storeEnoturistaService = new StoreEnoturistaService($persona, $direccion, $empresa);
+        $viajes = collect();
+        $direccionesViajes = collect();
+
+        $viaje = new Viaje;
+        $viaje->lugar = $request->lugares_a_visitar[0];
+        $viaje->puntos_interes = $request->puntos_de_interes[0];
+        $viaje->duracion = $request->duracion[0];
+        $viajes->push($viaje);
+
+        $direccionViaje = new Direccion;
+        $direccionViaje->ciudad = $request->ciudad_viaje[0];
+        $direccionViaje->municipio = $request->municipio_viaje[0];
+        $direccionViaje->estado = $request->estado_viaje[0];
+        
+        $direccionInicioViaje = new Direccion;
+        $direccionInicioViaje->ciudad = $request->ciudad_viaje_inicio[0];
+        $direccionInicioViaje->municipio = $request->municipio_viaje_inicio[0];
+        $direccionInicioViaje->estado = $request->estado_viaje_inicio[0];
+        
+        $direccionTerminoViaje = new Direccion;
+        $direccionTerminoViaje->ciudad = $request->ciudad_viaje_inicio_termino[0];
+        $direccionTerminoViaje->municipio = $request->municipio_viaje_inicio_termino[0];
+        $direccionTerminoViaje->estado = $request->estado_viaje_inicio_termino[0];
+
+        $foto = $request->foto_viaje[0];
+
+        $storeEnoturistaService = new StoreEnoturistaService(
+            $persona, 
+            $direccion, 
+            $empresa, 
+            $viaje, 
+            $direccionViaje, 
+            $direccionInicioViaje, 
+            $direccionTerminoViaje,
+            $foto
+        );
+
         $storeEnoturistaService->execute();
+
+        // dd('TODO OK, REVISA QUE SE HAYA GUARDADO TODO BIEN');
 
         return redirect()->route('enoturistas.index');
     }
 
-    public function edit(){
-        
+    public function edit()
+    {
     }
 }

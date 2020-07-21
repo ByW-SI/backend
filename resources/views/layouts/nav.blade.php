@@ -48,8 +48,7 @@
             <a href="#0" title="">Productores</a>
             <ul class="sub-menu">
                 <li><a href="{{ route('productores.vinos.index') }}">Productores de vino</a></li>
-                <li><a href="{{ route('productores.uvas.create') }}">Crear productor de uva</a></li>
-                <li><a href="{{ route('enoturistas.index') }}">enoturistas</a></li>
+                <li><a href="{{ route('productores.uvas.index') }}">Productores de uva</a></li>
                 {{-- <li><a href="{{ route('productores.uvas.index') }}">Productores de uva</a></li> --}}
             </ul>
         </li>
@@ -93,7 +92,8 @@
         <li class="has-children">
             <a href="#0" title="">Viajes y cursos</a>
             <ul class="sub-menu">
-                <li><a href="{{ route('viajes') }}">Nuevo viaje</a></li>
+                {{-- <li><a href="{{ route('viajes') }}">Nuevo viaje</a></li> --}}
+                <li><a href="{{ route('enoturistas.index') }}">enoturismo</a></li>
                 <li><a href="{{ route('cursos.index') }}">Cursos</a></li>
             </ul>
         </li>
