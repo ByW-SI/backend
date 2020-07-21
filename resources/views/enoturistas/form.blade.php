@@ -378,7 +378,7 @@
 								===================
 							--}}
 
-                            <div class="col-12">
+                            <div class="col-12 col-lg-6">
                                 <h5 class="text-uppercase text-muted mt-2">
                                     <small>
                                         Datos profesionales
@@ -390,20 +390,9 @@
 
                                             {{-- TIPO PRODUCTOR --}}
 
-                                            {{-- Descripción --}}
-
-                                            <div class="col-12 col-md-4 mt-3">
-                                                <label for="tipo">Tipo de productor:</label>
-                                                <select name="tipo" id="" class="form-control">
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="Enólogo">Enólogo</option>
-                                                    <option value="Winemaker">Winemaker</option>
-                                                </select>
-                                            </div>
-
                                             {{-- INICIO ACTIVIDADES PROFESIONALES --}}
 
-                                            <div class="col-12 col-md-4 mt-3">
+                                            <div class="col-12 mt-3">
                                                 <label for="anio_inicio_actividades" class="">Inicio
                                                     actividades:</label>
                                                 <input id="anio_inicio_actividades" type="text"
@@ -421,7 +410,7 @@
 
                                             {{-- Semblanza profesional --}}
 
-                                            <div class="col-12 col-md-4 mt-3">
+                                            <div class="col-12 mt-3">
                                                 <label for="semblanza_profesional" class="">Semblanza
                                                     profesional:</label>
                                                 <input id="semblanza_profesional" type="text"
@@ -437,6 +426,27 @@
                                                 @endif
                                             </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6">
+                                <h5 class="text-uppercase text-muted mt-2">
+                                    <small>
+                                        Fotos de destino
+                                    </small>
+                                </h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12mt-3">
+                                                <label for="logo"
+                                                    class="">Foto:</label>
+                                                <input type="file" id="logo"
+                                                    name="foto_destino[]" multiple
+                                                    class="file">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

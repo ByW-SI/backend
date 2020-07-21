@@ -19,6 +19,7 @@
 				<th scope="col">Apellidos</th>
 				<th scope="col">Telefono</th>
 				<th scope="col">Correo</th>
+				<th scope="col">Diploma</th>
 				<th scope="col">Acción</th>
 			</tr>
 		</thead>
@@ -30,10 +31,15 @@
 				<th>{{$curso->persona->apellido_paterno}} {{$curso->persona->apellido_materno}}</th>
 				<th>{{$curso->persona->celular}}</th>
 				<th>{{$curso->persona->correo}}</th>
+				<th>
+					@if ($curso->diplomas()->first())
+					<img class="img-responsive" width="50px" src="{{asset($curso->diplomas()->first()->imagen)}}" alt="">
+					@endif
+				</th>
                 <th>
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                    <a class="btn btn-warning" href="{{route('cursos.edit', ['curso'=>$curso])}}"><i class="fa fa-pencil"></i></a>
                     <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                </th>
+				</th>
 			</tr>
 			@empty
 			{{-- empty expr --}}

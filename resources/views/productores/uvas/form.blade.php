@@ -139,12 +139,12 @@
 
                                             {{-- CALLE --}}
 
+
                                             <div class="col-12 col-md-4">
                                                 <label for="calle" class="">Calle:</label>
                                                 <input id="calle" type="text"
                                                     class="form-control {{ $errors->has('calle') ? ' is-invalid' : ''  }}"
-                                                    name="calle" value="{{ $edit ? $productor->calle : old('calle') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    name="calle" value="{{ $edit ? $productor->persona->direcciones()->first()->calle : old('calle') }}" required autofocus="">
                                                 @if ($errors->has('calle'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -160,8 +160,7 @@
                                                 <input id="num_exterior" type="text"
                                                     class="form-control {{ $errors->has('num_exterior') ? ' is-invalid' : ''  }}"
                                                     name="num_exterior"
-                                                    value="{{ $edit ? $productor->num_exterior : old('num_exterior') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->num_exterior : old('num_exterior') }}" required autofocus="">
                                                 @if ($errors->has('num_exterior'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -177,8 +176,8 @@
                                                 <input id="num_interior" type="text"
                                                     class="form-control {{ $errors->has('num_interior') ? ' is-invalid' : ''  }}"
                                                     name="num_interior"
-                                                    value="{{ $edit ? $productor->num_interior : old('num_interior') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->num_interior : old('num_interior') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('num_interior'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -194,8 +193,8 @@
                                                 <input id="localidad" type="text"
                                                     class="form-control {{ $errors->has('localidad') ? ' is-invalid' : ''  }}"
                                                     name="localidad"
-                                                    value="{{ $edit ? $productor->localidad : old('localidad') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->localidad : old('localidad') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('localidad'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -211,8 +210,8 @@
                                                 <input id="ciudad" type="text"
                                                     class="form-control {{ $errors->has('ciudad') ? ' is-invalid' : ''  }}"
                                                     name="ciudad"
-                                                    value="{{ $edit ? $productor->ciudad : old('ciudad') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->ciudad : old('ciudad') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('ciudad'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -228,8 +227,8 @@
                                                 <input id="municipio" type="text"
                                                     class="form-control {{ $errors->has('municipio') ? ' is-invalid' : ''  }}"
                                                     name="municipio"
-                                                    value="{{ $edit ? $productor->municipio : old('municipio') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->municipio : old('municipio') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('municipio'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -245,8 +244,8 @@
                                                 <input id="estado" type="text"
                                                     class="form-control {{ $errors->has('estado') ? ' is-invalid' : ''  }}"
                                                     name="estado"
-                                                    value="{{ $edit ? $productor->estado : old('estado') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->estado : old('estado') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('estado'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -262,8 +261,8 @@
                                                 <input id="codigo_postal" type="number"
                                                     class="form-control {{ $errors->has('codigo_postal') ? ' is-invalid' : ''  }}"
                                                     name="codigo_postal" minlength="5" maxlength="5"
-                                                    value="{{ $edit ? $productor->codigo_postal : old('codigo_postal') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->direcciones()->first()->codigo_postal : old('codigo_postal') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('codigo_postal'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -301,8 +300,8 @@
                                                 <input id="nombre_empresa" type="text"
                                                     class="form-control {{ $errors->has('nombre_empresa') ? ' is-invalid' : ''  }}"
                                                     name="nombre_empresa"
-                                                    value="{{ $edit ? $productor->nombre_empresa : old('nombre_empresa') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->empresa->nombre : old('nombre_empresa') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('nombre_empresa'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -318,8 +317,8 @@
                                                 <input id="telefono_empresa" type="text"
                                                     class="form-control {{ $errors->has('telefono_empresa') ? ' is-invalid' : ''  }}"
                                                     name="telefono_empresa"
-                                                    value="{{ $edit ? $productor->telefono_empresa : old('telefono_empresa') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->empresa->telefono : old('telefono_empresa') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('telefono_empresa'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -335,8 +334,8 @@
                                                 <input id="sitio_web_empresa" type="text"
                                                     class="form-control {{ $errors->has('sitio_web_empresa') ? ' is-invalid' : ''  }}"
                                                     name="sitio_web_empresa"
-                                                    value="{{ $edit ? $productor->sitio_web_empresa : old('sitio_web_empresa') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->empresa->sitio_web : old('sitio_web_empresa') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('sitio_web_empresa'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -353,8 +352,8 @@
                                                 <input id="fecha_inicio_operaciones_empresa" type="date"
                                                     class="form-control {{ $errors->has('fecha_inicio_operaciones_empresa') ? ' is-invalid' : ''  }}"
                                                     name="fecha_inicio_operaciones_empresa"
-                                                    value="{{ $edit ? $productor->fecha_inicio_operaciones_empresa : old('fecha_inicio_operaciones_empresa') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->empresa->inicio_operaciones : old('fecha_inicio_operaciones_empresa') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('fecha_inicio_operaciones_empresa'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -384,29 +383,18 @@
                                     <div class="card-body">
                                         <div class="row">
 
-                                            {{-- TIPO PRODUCTOR --}}
-
-                                            {{-- Descripción --}}
-
-                                            <div class="col-12 col-md-4 mt-3">
-                                                <label for="tipo">Tipo de productor:</label>
-                                                <select name="tipo" id="" class="form-control">
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="Enólogo">Enólogo</option>
-                                                    <option value="Winemaker">Winemaker</option>
-                                                </select>
-                                            </div>
+                                            
 
                                             {{-- INICIO ACTIVIDADES PROFESIONALES --}}
 
-                                            <div class="col-12 col-md-4 mt-3">
+                                            <div class="col-12 col-md-6 mt-3">
                                                 <label for="anio_inicio_actividades" class="">Inicio
                                                     actividades:</label>
                                                 <input id="anio_inicio_actividades" type="text"
                                                     class="form-control {{ $errors->has('anio_inicio_actividades') ? ' is-invalid' : ''  }}"
                                                     name="anio_inicio_actividades"
-                                                    value="{{ $edit ? $productor->anio_inicio_actividades : old('anio_inicio_actividades') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->anio_inicio_actividades : old('anio_inicio_actividades') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('anio_inicio_actividades'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -417,14 +405,14 @@
 
                                             {{-- Semblanza profesional --}}
 
-                                            <div class="col-12 col-md-4 mt-3">
+                                            <div class="col-12 col-md-6 mt-3">
                                                 <label for="semblanza_profesional" class="">Semblanza
                                                     profesional:</label>
                                                 <input id="semblanza_profesional" type="text"
                                                     class="form-control {{ $errors->has('semblanza_profesional') ? ' is-invalid' : ''  }}"
                                                     name="semblanza_profesional"
-                                                    value="{{ $edit ? $productor->semblanza_profesional : old('semblanza_profesional') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    value="{{ $edit ? $productor->persona->semblanza_profesional : old('semblanza_profesional') }}"
+                                                    required autofocus="">
                                                 @if ($errors->has('semblanza_profesional'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -478,7 +466,7 @@
                                                 <input id="inputHectareas" type="text"
                                                     class="form-control {{ $errors->has('hectareas') ? ' is-invalid' : ''  }}"
                                                     value="{{ $edit ? $productor->hectareas : old('hectareas') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    required autofocus="">
                                                 @if ($errors->has('hectareas'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -494,7 +482,7 @@
                                                 <input id="inputUbicacionPlantio" type="text"
                                                     class="form-control {{ $errors->has('ubicacion_plantio') ? ' is-invalid' : ''  }}"
                                                     value="{{ $edit ? $productor->ubicacion_plantio : old('ubicacion_plantio') }}"
-                                                    {{ $edit ? 'disabled' : "" }} required autofocus="">
+                                                    required autofocus="">
                                                 @if ($errors->has('ubicacion_plantio'))
                                                 {{-- expr --}}
                                                 <span class="invalid-feedback">
@@ -502,6 +490,21 @@
                                                 </span>
                                                 @endif
                                             </div>
+
+                                            @foreach ($productor->uvasProducidas as $uvaProducida)
+                                                <div class="col-12 col-md-4 mt-3">
+                                                    <label for="">Uva</label>
+                                                    <input type="text" class="form-control" readonly value="{{$uvaProducida->uva->title}}">
+                                                </div>
+                                                <div class="col-12 col-md-4 mt-3">
+                                                    <label for="">Hectareas</label>
+                                                    <input type="text" class="form-control" readonly value="{{$uvaProducida->hectareas}}">
+                                                </div>
+                                                <div class="col-12 col-md-4 mt-3">
+                                                    <label for="">Ubicación plantío</label>
+                                                    <input type="text" class="form-control" readonly value="{{$uvaProducida->ubicacion_plantio}}">
+                                                </div>
+                                            @endforeach
 
 
                                         </div>

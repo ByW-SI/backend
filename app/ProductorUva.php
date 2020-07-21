@@ -19,4 +19,9 @@ class ProductorUva extends Model
     {
         return $this->belongsTo('App\Persona');
     }
+
+    public function uvasProducidas()
+    {
+        return $this->hasMany('App\UvaProducida');
+    }
 }

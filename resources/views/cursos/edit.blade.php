@@ -25,23 +25,23 @@
                             <div class="row">
                                 <div class="col-12 col-lg-4">
                                     <label for="">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre">
+                                    <input type="text" class="form-control" name="nombre" value="{{$curso->persona->nombre}}">
                                 </div>
                                 <div class="col-12 col-lg-4">
                                     <label for="">Apellido paterno</label>
-                                    <input type="text" class="form-control" name="apellido_paterno">
+                                    <input type="text" class="form-control" name="apellido_paterno" value="{{$curso->persona->apellido_paterno}}">
                                 </div>
                                 <div class="col-12 col-lg-4">
                                     <label for="">Apellido materno</label>
-                                    <input type="text" class="form-control" name="apellido_materno">
+                                    <input type="text" class="form-control" name="apellido_materno" value="{{$curso->persona->apellido_materno}}">
                                 </div>
                                 <div class="col-12 col-lg-4">
                                     <label for="">Teléfono móvil</label>
-                                    <input type="text" class="form-control" name="celular">
+                                    <input type="text" class="form-control" name="celular" value="{{$curso->persona->celular}}">
                                 </div>
                                 <div class="col-12 col-lg-4">
                                     <label for="">Correo electrónico</label>
-                                    <input type="text" class="form-control" name="correo">
+                                    <input type="text" class="form-control" name="correo" value="{{$curso->persona->correo}}">
                                 </div>
                             </div>
                         </div>
@@ -64,11 +64,11 @@
                         <div class="row">
                             <div class="col-12 col-lg-6">
                                 <label for="">Inicio de actividades profesionales</label>
-                                <input type="text" class="form-control" name="inicio_actividades_profesionales">
+                                <input type="text" class="form-control" name="inicio_actividades_profesionales" value="{{$curso->persona->anio_inicio_actividades}}">
                             </div>
                             <div class="col-12 col-lg-6">
                                 <label for="">Semblanza profesional</label>
-                                <input type="text" class="form-control" name="semblanza_profesional">
+                                <input type="text" class="form-control" name="semblanza_profesional" value="{{$curso->persona->semblanza_profesional}}">
                             </div>
                         </div>
                     </div>
@@ -141,6 +141,24 @@
                                 <label class="">Carga horaria:</label>
                                 <input type="text" class="form-control" id="inputCargaHoraria" name="cargaHorariaCursoMasFrecuente[]">
                             </div>
+
+                            @foreach ($curso->cursosMasFrecuentes as $cursoMasFrecuente)
+                                
+                                <div class="col-12 col-lg-4 mt-3">
+                                    <label class="">Nombre del curso:</label>
+                                    <input type="text" class="form-control" readonly value="{{$cursoMasFrecuente->nombre_curso}}">
+                                </div>
+                                <div class="col-12 col-lg-4 mt-3">
+                                    <label class="">Objetivo:</label>
+                                    <input type="text" class="form-control" readonly value="{{$cursoMasFrecuente->objetivo}}">
+                                </div>
+                                <div class="col-12 col-lg-4 mt-3">
+                                    <label class="">Carga horaria:</label>
+                                    <input type="text" class="form-control" readonly value="{{$cursoMasFrecuente->carga_horaria}}">
+                                </div>
+
+                            @endforeach
+
                         </div>
                     </div>
                 </div>

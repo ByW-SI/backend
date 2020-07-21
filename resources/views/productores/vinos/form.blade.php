@@ -73,8 +73,7 @@
 												<input id="apellido_materno" type="text"
 													class="form-control {{ $errors->has('apellido_materno') ? ' is-invalid' : ''  }}"
 													name="apellido_materno"
-													value="{{ $edit ? $productor->apellido_materno : old('apellido_materno') }}"
-													{{ $edit ? 'disabled' : "" }} required autofocus="">
+													value="{{ $edit ? $productor->apellido_materno : old('apellido_materno') }}" required autofocus="">
 												@if ($errors->has('apellido_materno'))
 												{{-- expr --}}
 												<span class="invalid-feedback">

@@ -80,6 +80,7 @@ Route::get('cursos', function (){
 })->name('cursos');
 Route::get('cursos/index', 'Web\Curso\CursoController@index')->name('cursos.index');
 Route::post('cursos', 'Web\Curso\CursoController@store')->name('cursos.store');
+Route::get('cursos/{curso}/edit', 'Web\Curso\CursoController@edit')->name('cursos.edit');
 Route::get('prodBodega/{id}','Web\Productor\ProductorController@bodega');
 Route::get('prodVinicola/{id}','Web\Productor\ProductorController@vinicola');
 Route::get('prodBarricas/{id}','Web\Productor\ProductorController@barricas');
