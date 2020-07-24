@@ -97,7 +97,13 @@ class EnoturistaController extends Controller
         return redirect()->route('enoturistas.index');
     }
 
-    public function edit()
+    public function edit(Enoturista $enoturista)
     {
+        $edit = true;
+        return view('enoturistas.form', compact('edit', 'enoturista'));
+    }
+
+    public function update(Request $request, Enoturista $enoturista){
+
     }
 }

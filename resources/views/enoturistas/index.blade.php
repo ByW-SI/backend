@@ -29,9 +29,9 @@
                 <th>{{$enoturista->persona->apellido_paterno}} {{$enoturista->persona->apellido_materno}}</th>
                 <th>{{$enoturista->persona->celular}}</th>
 				<th>
-                    <button class="btn btn-warning">
+                    <a href="{{route('enoturistas.edit', ['enoturista'=>$enoturista])}}" class="btn btn-warning">
                         <i class="fa fa-pencil"></i>
-                    </button>
+                    </a>
                     <button class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                     </button>

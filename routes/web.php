@@ -46,7 +46,8 @@ Route::post('distribuidores','Web\Distribuidor\DistribuidorController@store')->n
 Route::get('enoturistas','Web\Productor\EnoturistaController@index')->name('enoturistas.index');
 Route::get('enoturistas/create','Web\Productor\EnoturistaController@create')->name('enoturistas.create');
 Route::post('enoturistas','Web\Productor\EnoturistaController@store')->name('enoturistas.store');
-Route::get('enoturistas/edit','Web\Productor\EnoturistaController@edit')->name('enoturistas.edit');
+Route::get('enoturistas/{enoturista}/edit','Web\Productor\EnoturistaController@edit')->name('enoturistas.edit');
+Route::put('enoturistas/{enoturista}','Web\Productor\EnoturistaController@update')->name('enoturistas.update');
 
 Route::resource('vinicolas','Web\Vinicola\VinicolaController');
 Route::post('uvas/{uvaVin}/destroy','Web\Vinicola\UvaVinicolaController@destroy')->name('uvas.destroy');

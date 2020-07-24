@@ -120,7 +120,7 @@
 					<th>{{$distribuidor->persona->nombre_completo}}</th>
 					<th>{{$distribuidor->persona->direcciones()->first()->ciudad}}</th>
 					<th>{{$distribuidor->persona->celular}}</th>
-					<th>{{$distribuidor->persona->empresa->nombre}}</th>
+					<th>{{$distribuidor->persona->empresa ? $distribuidor->persona->empresa->nombre : 'N/E'}}</th>
 					<th>
 						<button class="btn btn-warning">
 							<i class="fa fa-pencil"></i>
